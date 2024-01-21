@@ -191,7 +191,12 @@ $routes->post('/auth/loginProcess', 'Auth::loginProcess');
     // digunakan untuk input nilai ujian skripsi oleh penguji dan pembimbing
     $routes->get('/ujian-skripsi/berita-acara/(:any)', 'UjianSkripsi::berita_acara/$1', ['filter' => 'dosenFilter']);
     // digunakan untuk simpan berita acara ujian skripsi oleh penguji dan pembimbing
-    $routes->post('ujian-skripsi/simpan-berita-acara', 'UjianSkripsi::simpan_berita_acara', ['filter' => 'dosenFilter']);
+    $routes->post('/ujian-skripsi/simpan-berita-acara', 'UjianSkripsi::simpan_berita_acara', ['filter' => 'dosenFilter']);
+    // digunakan untuk cetak surat ujian skripsi
+    $routes->get('/ujian-skripsi/print-surat/(:any)', 'UjianSkripsi::print_surat/$1');
+
+    // digunakan untuk cetak surat ujian skripsi
+    $routes->get('/ujian-skripsi/detail-ujian/(:any)', 'UjianSkripsi::detail_ujian/$1');
 // akhir dari route untuk seminar proposal
 
 

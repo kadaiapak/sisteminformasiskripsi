@@ -254,7 +254,7 @@
                                                                                     <?php if($ssr['smr_status'] == 5 || $ssr['smr_status'] == 6) { ?>
                                                                                         <button class="btn btn-success" onclick="window.open('<?= base_url('seminar/print-surat/'.$ssr['smr_uuid']) ?>', 'blank')"><i class="fa fa-print" style="margin-right: 5px;"></i>Cetak Surat</button>
                                                                                     <?php }  ?>
-                                                                                    <!-- <a href="<?= base_url('seminar/'.$ssr['smr_uuid'].'/edit'); ?>" class="btn btn-warning">Edit</a> -->
+                                                                                    <!-- <a href="< ?= base_url('seminar/'.$ssr['smr_uuid'].'/edit'); ?>" class="btn btn-warning">Edit</a> -->
                                                                                 </td>
                                                                             </tr>
                                                                             <?php endforeach; ?>
@@ -292,6 +292,7 @@
                                                                                 <th>Ruangan</th>
                                                                                 <th>Sesi</th>
                                                                                 <th>Status</th>
+                                                                                <th>Pesan</th>
                                                                                 <th>Aksi</th>
                                                                             </tr>
                                                                         </thead>
@@ -306,8 +307,12 @@
                                                                                 <td><?= $su['ujian_ruangan_alias']; ?></td>
                                                                                 <td><?= $su['ujian_sesi_alias']; ?></td>
                                                                                 <td><?= $su['us_status'] == 1 ? "<span class='badge badge-warning'>Menunggu diproses</span>" : ($su['us_status'] == 2 ? "<span class='badge badge-danger'>Pengajuan ditolak Admin</span>" : ($su['us_status'] == 3 ? "<span class='badge badge-success'>Pengajuan diverifikasi Admin</span>" : ($su['us_status'] == 4 ? "<span class='badge badge-danger'>Pengajuan ditolak Kadep</span>" : ($su['us_status'] == 5 ? "<span class='badge badge-success'>Pengajuan disetujui Kadep</span>" : "")))); ?> </td>
+                                                                                <td><?= $su['us_pesan_admin']; ?><?= $su['us_pesan_kadep']; ?></td>
                                                                                 <td>
-                                                                                    <a href="<?= base_url('ujian-skripsi/detail/'.$su['us_uuid']); ?>" class="btn btn-primary btn-sm"><i class="fa fa-file-text-o" style="margin-right: 5px;"></i>Detail</a>
+                                                                                    <a href="<?= base_url('ujian-skripsi/detail/'.$su['us_uuid']); ?>" class="btn btn-primary btn-sm" style="font-size: 10px;"><i class="fa fa-file-text-o" style="margin-right: 5px;"></i>Detail</a>
+                                                                                    <?php if($su['us_status'] == 5 || $su['us_status'] == 6) { ?>
+                                                                                        <button style="font-size: 10px;" class="btn btn-success" onclick="window.open('<?= base_url('ujian-skripsi/print-surat/'.$su['us_uuid']) ?>', 'blank')"><i class="fa fa-print" style="margin-right: 5px;"></i>Cetak Surat</button>
+                                                                                    <?php }  ?>
                                                                                 </td>
                                                                             </tr>
                                                                             <?php $no++ ?>

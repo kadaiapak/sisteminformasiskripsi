@@ -32,7 +32,7 @@
                                                 <th>Nama Pembimbing</th>
                                                 <th>Nama Ruangan</th>
                                                 <th>Sesi Ruangan</th>
-                                                <th>Tanggal Seminar</th>
+                                                <th>Tanggal Ujian</th>
                                                 <th>Status</th>
                                                 <th>Aksi</th>
                                             </tr>

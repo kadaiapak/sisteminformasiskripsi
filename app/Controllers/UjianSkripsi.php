@@ -13,6 +13,19 @@ use App\Models\FilePersyaratanUjianModel;
 use App\Models\DosenModel;
 use App\Models\NilaiSkripsiModel;
 
+use Endroid\QrCode\Color\Color;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Label\Label;
+use Endroid\QrCode\Logo\Logo;
+use Endroid\QrCode\RoundBlockSizeMode;
+use Endroid\QrCode\Writer\PngWriter;
+use Endroid\QrCode\Writer\ValidationException;
+
+
+use Dompdf\Dompdf;
+use Dompdf\Options;
 class UjianSkripsi extends BaseController
 {
     protected $skripsiModel;
@@ -325,15 +338,98 @@ class UjianSkripsi extends BaseController
             if (!$satu_ujian) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             } else {
+                $generate_qrcode = $this->generate_qrcode($UUIDUjian);
                 date_default_timezone_set('ASIA/JAKARTA');
                 $tanggal_diproses_kadep = date('Y-m-d H:i:s');
                 $data = array(
                     'us_status' => '5',
                     'tanggal_diproses_kadep' => $tanggal_diproses_kadep,
                     'kadep_verifikator' => session()->get('user_id'),
+                    'qr_code' => $generate_qrcode 
                 );
                 $this->ujianSkripsiModel->where('us_uuid', $UUIDUjian)->set($data)->update();
                 return redirect()->to('/ujian-skripsi/semua-ujian')->with('sukses','Pengajuan seminar diterima oleh Kadep!');
+            }   
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    }
+
+    public function print_surat($UUIDUjian)
+    {
+        if($UUIDUjian != null) {
+            $satu_ujian = $this->ujianSkripsiModel->getDetailSurat($UUIDUjian);
+            if (!$satu_ujian) {
+                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            } else {
+            $options = new Options();
+            $dompdf = new Dompdf($options);
+            $tanggal_ujian = tanggal_indo($satu_ujian['us_tanggal']);
+            $tanggal_surat = tanggal_indo($satu_ujian['tanggal_diproses_kadep']);
+            $data = array(
+                'title_pdf' => 'Surat Izin Seminar',
+                'satu_ujian' => $satu_ujian,
+                'tanggal_ujian' => $tanggal_ujian,
+                'tanggal_surat' => $tanggal_surat,
+            );
+            $filename = 'surat_udangan_ujian_skripsi_'.$satu_ujian['nama_mahasiswa'];
+            $html = view('ujian_skripsi/v_cetak_surat_ujian_skripsi', $data);
+            $dompdf->loadHtml($html);
+            $dompdf->setPaper('A4','portrait');
+            $dompdf->render();
+            $dompdf->stream($filename, array("Attachment" => false));
+            exit();
+            }   
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    }
+
+
+    public function generate_qrcode($UUIDUjian)
+    {
+        $writer = new PngWriter();
+        $qrCode = QrCode::create(base_url('ujian-skripsi/detail-ujian/'.$UUIDUjian))
+            ->setEncoding(new Encoding('UTF-8'))
+            ->setErrorCorrectionLevel(ErrorCorrectionLevel::Low)
+            ->setSize(300)
+            ->setMargin(10)
+            ->setRoundBlockSizeMode(RoundBlockSizeMode::Margin)
+            ->setForegroundColor(new Color(0, 0, 0))
+            ->setBackgroundColor(new Color(255, 255, 255));
+
+            // Create generic logo
+            $logo = Logo::create('logo_untuk_barcode.png')
+            ->setResizeToWidth(50)
+            ->setPunchoutBackground(true)
+            ;
+
+            // Create generic label
+            $label = Label::create('')
+            ->setTextColor(new Color(255, 0, 0));
+
+            $result = $writer->write($qrCode, $logo, $label);
+
+            // Generate a data URI to include image data inline (i.e. inside an <img> tag)
+            $qr = $result->getDataUri();
+
+            return $qr;
+
+    }
+
+    // digunakan untuk menampilkan detail ujian saat barcode di scan
+    public function detail_ujian($UUIDUjian)
+    {
+        if($UUIDUjian != null) {
+            $satu_ujian = $this->ujianSkripsiModel->getDetail($UUIDUjian);
+            if (!$satu_ujian) {
+                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            } else {
+                $data = [
+                    'judul' => 'Detail Seminar',
+                    'satu_ujian' => $satu_ujian,
+                ];
+                return view('ujian_skripsi/v_detail_ujian_skripsi_barcode', $data);
             }   
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
