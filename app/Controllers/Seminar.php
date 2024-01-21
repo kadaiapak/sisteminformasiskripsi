@@ -445,7 +445,6 @@ class Seminar extends BaseController
             $tanggal_seminar = tanggal_indo($satu_seminar['smr_tanggal']);
             $tanggal_surat = tanggal_indo($satu_seminar['tanggal_diproses_kadep']);
             $data = array(
-                'test' => 'test',
                 'title_pdf' => 'Surat Izin Seminar',
                 'satu_seminar' => $satu_seminar,
                 'tanggal_seminar' => $tanggal_seminar,
@@ -465,7 +464,7 @@ class Seminar extends BaseController
         }
     }
 
-    public function generate_qrcode($data = null , $UUIDSeminar = null)
+    public function generate_qrcode($UUIDSeminar)
     {
         $writer = new PngWriter();
         $qrCode = QrCode::create(base_url('seminar/detail-seminar/'.$UUIDSeminar))
@@ -504,7 +503,7 @@ class Seminar extends BaseController
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             } else {
                 $data = [
-                    'judul' => 'Edit Skripsi',
+                    'judul' => 'Detail Seminar',
                     'satu_seminar' => $satu_seminar,
                 ];
                 return view('seminar/v_detail_seminar_barcode', $data);

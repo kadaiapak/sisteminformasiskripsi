@@ -203,9 +203,9 @@ hr{
 						<td><?= $satu_seminar['smr_nim_m']; ?></td>	
 					</tr>
 					<tr>
-						<td>Judul Skripsi</td>
-						<td>:</td>
-						<td><?= $satu_seminar['judul_skripsi']; ?></td>	
+						<td style="vertical-align: top;">Judul Skripsi</td>
+						<td style="vertical-align: top;">:</td>
+						<td style="vertical-align: top;"><?= $satu_seminar['judul_skripsi']; ?></td>	
 					</tr>
 					<tr>
 						<td>Pembimbing</td>

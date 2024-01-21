@@ -48,7 +48,7 @@ class Filters extends BaseConfig
             // 'honeypot',
             'csrf',
             'authFilter' => [
-                'except' => ['/auth/*','surat/*','izin-observasi-penelitian/detail-izin-observasi/*']
+                'except' => ['/auth/*','surat/*','izin-observasi-penelitian/detail-izin-observasi/*','seminar/detail-seminar/*']
             ],
             // 'invalidchars',
         ],
