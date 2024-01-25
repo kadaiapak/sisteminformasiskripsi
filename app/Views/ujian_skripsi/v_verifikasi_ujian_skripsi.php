@@ -147,13 +147,13 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3" for="us_sesi">Sesi</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input readonly type="text" value="<?= $satu_ujian['ujian_sesi_alias']; ?>" name="nim_mahasiswa" class="form-control" id="nim_mahasiswa" placeholder="Tuliskan NIM">
+                                    <input readonly type="text" value="<?= $satu_ujian['ujian_skripsi_sesi_alias']; ?>" name="nim_mahasiswa" class="form-control" id="nim_mahasiswa" placeholder="Tuliskan NIM">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3" for="us_hari">Ruangan</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input readonly type="text" value="<?= $satu_ujian['ujian_ruangan_alias']; ?>" name="nim_mahasiswa" class="form-control" id="nim_mahasiswa" placeholder="Tuliskan NIM">
+                                    <input readonly type="text" value="<?= $satu_ujian['ujian_skripsi_ruangan_alias']; ?>" name="nim_mahasiswa" class="form-control" id="nim_mahasiswa" placeholder="Tuliskan NIM">
                                 </div>
                             </div>
                             <div class="form-group row">

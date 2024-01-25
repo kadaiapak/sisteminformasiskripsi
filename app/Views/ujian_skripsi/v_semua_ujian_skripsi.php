@@ -62,22 +62,16 @@
                                         <?php endforeach; ?>
                                         </tbody>
                                     </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
-    </div>
-
-
-
-        
-
-
         </div>
     </div>
 </div>
-        <!-- /page content -->
+<!-- /page content -->
 
 
 <?= $this->endSection(); ?>
