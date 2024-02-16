@@ -41,7 +41,10 @@
         <?php endif; ?>
             <form method="POST" action="<?= base_url('/auth/loginProcess'); ?>">
             <?= csrf_field(); ?>
-              <h1>Silahkan Login</h1>
+            <div>
+              <img src="<?=base_url('template/');?>src/img/unpkopsuratm.jpg" alt="logo" width="50" class="shadow-light rounded-circle mb-1 mt-2" >
+            </div>
+            <h1>Login E-Office FIP</h1>
               <div>
                 <input type="text" class="form-control <?= validation_show_error('username') ?  'is-invalid' : null; ?>"  <?= validation_show_error("username") ? "style=border-color:red;margin-bottom:0;" : null; ?>  placeholder="Username/ NIM"  name="username"/>
                 <div class="invalid-feedback" style="text-align: left;">
@@ -76,10 +79,7 @@
                 <div class="clearfix"></div>
                 <br />
 
-                <div>
-                  <img src="<?=base_url('template/');?>src/img/unpkopsuratm.jpg" alt="logo" width="50" class="shadow-light rounded-circle mb-1 mt-2" >
-                  <h1>Sistem Informasi Pendaftaran Skripsi</h1>
-                </div>
+               
               </div>
             </form>
           </section>
