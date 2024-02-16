@@ -9,7 +9,6 @@
 	<link rel="icon" href="images/favicon.ico" type="image/ico" />
 	
     <title>SIPS | <?= $judul; ?></title>
-    <script src="<?= base_url()?>template/vendors/jquery/dist/jquery.min.js"></script>
     <link href="<?= base_url()?>template/src/css/customsendiri.css" rel="stylesheet" />
 
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -34,6 +33,7 @@
     <link href="<?= base_url()?>template/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
     <link href="<?= base_url()?>template/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+	<link rel="stylesheet" href="<?= base_url(); ?>template/assets/datepicker/css/bootstrap-datepicker.min.css">
 
     <!-- Custom Theme Style -->
     <link href="<?= base_url()?>template/build/css/custom.min.css" rel="stylesheet">
@@ -41,7 +41,8 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  
+    <script src="<?= base_url()?>template/vendors/jquery/dist/jquery.min.js"></script>
+	
 	<style>
 		body {
 			font-family: 'Poppins', sans-serif;
@@ -272,6 +273,6 @@
 		<script src="<?= base_url()?>template/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 		<script src="<?= base_url()?>template/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
 		<script src="<?= base_url()?>template/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-		
+		<script type="text/javascript" src="<?= base_url(); ?>template/assets/datepicker/js/bootstrap-datepicker.min.js"></script>
 	</body>
 </html>
