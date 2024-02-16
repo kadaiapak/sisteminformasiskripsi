@@ -376,7 +376,60 @@ $routes->post('/auth/loginProcess', 'Auth::loginProcess');
     // routes untuk print surat oleh mahasiswa mahasiswa
     $routes->get('/validator-instrumen/detail-validator-instrumen/(:any)', 'ValidatorInstrumen::detail_validator_instrumen/$1');
 
+// ROUTES IZIN OBSERVASI MATAKULIAH
+    // AKSES OLEH MAHASISWA
+    // bisa di akses oleh mahasiswa untuk menampilkan pengajuan surat yang telah mereka buat
+    $routes->get('/izin-observasi-matakuliah', 'IzinObservasiMatakuliah::index', ['filter' => 'mahasiswaFilter']);
+    // bisa di akses oleh mahasiswa untuk membuat surat validator instrumen
+    $routes->get('/izin-observasi-matakuliah/tambah', 'IzinObservasiMatakuliah::tambah', ['filter' => 'mahasiswaFilter']);
+    // bisa di akses oleh mahasiswa untuk menyimpan surat validator instrumen
+    $routes->post('/izin-observasi-matakuliah/simpan', 'IzinObservasiMatakuliah::simpan', ['filter' => 'mahasiswaFilter']);
+    // bisa di akses oleh mahasiswa untuk menampilkan detail pengajuan surat izin observasi matakuliah yang akan di edit
+    $routes->get('/izin-observasi-matakuliah/edit/(:any)', 'IzinObservasiMatakuliah::edit/$1', ['filter' => 'mahasiswaFilter']);
+    // bisa di akses oleh mahasiswa untuk menampilkan form edit data izin observasi matakuliah
+    $routes->get('/izin-observasi-matakuliah/edit-pengajuan/(:any)', 'IzinObservasiMatakuliah::edit_pengajuan/$1', ['filter' => 'mahasiswaFilter']);
+    // bisa di akses oleh mahasiswa untuk memperbarui surat validator instrumen
+    $routes->post('/izin-observasi-matakuliah/simpan-pembaruan-pengajuan', 'IzinObservasiMatakuliah::simpan_pembaruan_pengajuan', ['filter' => 'mahasiswaFilter']);
+    // bisa di akses oleh mahasiswa untuk memperbarui anggota
+    $routes->post('/izin-observasi-matakuliah/simpan-pembaruan-anggota', 'IzinObservasiMatakuliah::simpan_pembaruan_anggota', ['filter' => 'mahasiswaFilter']);
+    //  bisa di akses oleh mahasiswa untuk menghapus anggota
+    $routes->delete('/izin-observasi-matakuliah/hapus-anggota/(:num)', 'IzinObservasiMatakuliah::hapus_anggota/$1', ['filter' => 'mahasiswaFilter']);
+    // menambahkan anggota izin observasi matakulia oleh mahasiswa
+    $routes->post('/izin-observasi-matakuliah/tambah-anggota', 'IzinObservasiMatakuliah::tambah_anggota', ['filter' => 'mahasiswaFilter']);
+    // routes untuk print surat oleh mahasiswa mahasiswa
+    $routes->get('/izin-observasi-matakuliah/print-surat/(:any)', 'IzinObservasiMatakuliah::print_surat/$1');
+    // routes untuk scan barcode
+    $routes->get('/izin-observasi-matakuliah/detail/(:any)', 'IzinObservasiMatakuliah::detail/$1', ['filter' => 'mahasiswaFilter']);
+     // routes untuk cetak surat oleh mahasiswa versi 2
+     $routes->post('/izin-observasi-matakuliah/cetak', 'IzinObservasiMatakuliah::cetak');
 
+    // AKSES OLEH ADMIN
+    // bisa di akses oleh admin departemen dan kepala departemen untuk melihat semua pengajuan validator instrumen yang digunakan untuk verifikasi
+    $routes->get('/izin-observasi-matakuliah/semua', 'IzinObservasiMatakuliah::semua', ['filter' => 'adminDepartemenDanKadepFilter']);
+    // bisa di akses oleh admin untuk edit validator instrumen
+    $routes->get('/izin-observasi-matakuliah/edit-admin/(:any)', 'IzinObservasiMatakuliah::edit_admin/$1', ['filter' => 'adminDepartemenFilter']);
+    // bisa di akses oleh mahasiswa untuk menampilkan form edit data izin observasi matakuliah
+    $routes->get('/izin-observasi-matakuliah/admin-edit-pengajuan/(:any)', 'IzinObservasiMatakuliah::admin_edit_pengajuan/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
+    // bisa di akses oleh mahasiswa untuk memperbarui surat validator instrumen
+    $routes->post('/izin-observasi-matakuliah/admin-simpan-pembaruan-pengajuan', 'IzinObservasiMatakuliah::admin_simpan_pembaruan_pengajuan', ['filter' => 'adminDepartemenDanKadepFilter']);
+    // bisa di akses oleh mahasiswa untuk memperbarui anggota
+    $routes->post('/izin-observasi-matakuliah/admin-simpan-pembaruan-anggota', 'IzinObservasiMatakuliah::admin_simpan_pembaruan_anggota', ['filter' => 'adminDepartemenDanKadepFilter']);
+    // bisa di akses oleh admin departemen dan kepala departemen untuk melihat semua pengajuan surat izin validator yang disetujui digunakan untuk verifikasi
+    $routes->get('/izin-observasi-matakuliah/disetujui', 'IzinObservasiMatakuliah::disetujui', ['filter' => 'adminDepartemenDanKadepFilter']);
+    // bisa di akses oleh admin departemen dan kepala departemen untuk melihat semua pengajuan surat izin validator yang ditolak digunakan untuk verifikasi
+    $routes->get('/izin-observasi-matakuliah/ditolak', 'IzinObservasiMatakuliah::ditolak', ['filter' => 'adminDepartemenDanKadepFilter']);
+    // bisa di akses oleh admin departemen dan kepala departemen untuk melihat detail pengajuan surat izin validator instrumen yang akan digunakan untuk verifikasi
+    $routes->get('/izin-observasi-matakuliah/detail-verifikasi/(:any)', 'IzinObservasiMatakuliah::detail_verifikasi/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
+    // bisa di akses oleh admin departemen dan kadep untuk menolak semua pengajuan surat validator instrumen
+    $routes->post('/izin-observasi-matakuliah/tolak-admin/(:any)', 'IzinObservasiMatakuliah::tolak_admin/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
+    // bisa di akses oleh admin departemen dan kadep untuk menyetujui semua pengajuan surat validator instrumen
+    $routes->post('/izin-observasi-matakuliah/setujui-admin/(:any)', 'IzinObservasiMatakuliah::setujui_admin/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
+    // bisa di akses oleh admin departemen dan kepala departemen untuk menolak semua pengajuan surat validator instrumen
+    $routes->post('/izin-observasi-matakuliah/tolak-kadep/(:any)', 'IzinObservasiMatakuliah::tolak_kadep/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
+    // bisa di akses oleh admin departemen dan kepala departemen untuk menyetujui semua pengajuan surat izin observasi matakuliah
+    $routes->post('/izin-observasi-matakuliah/setujui-kadep/(:any)', 'IzinObservasiMatakuliah::setujui_kadep/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
+    // routes untuk scan barcode
+    $routes->get('/izin-observasi-matakuliah/scan-barcode/(:any)', 'IzinObservasiMatakuliah::scan_barcode/$1');
 
     
 

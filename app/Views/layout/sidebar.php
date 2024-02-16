@@ -117,6 +117,19 @@
                             </li>
                         </ul>
                     </li>
+                    <li><a>Observasi Matakuliah<span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li class="sub_menu">
+                                <a href="<?= base_url('/izin-observasi-matakuliah/semua'); ?>">Belum verfal</a>
+                            </li>
+                            <li>
+                                <a href="<?= base_url('/izin-observasi-matakuliah/disetujui'); ?>">Observasi Diterima</a>
+                            </li>
+                            <li>
+                                <a href="<?= base_url('/izin-observasi-matakuliah/ditolak'); ?>">Observasi Ditolak</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -154,6 +167,7 @@
                 <ul class="nav child_menu">
                     <li><a href="<?= base_url('/izin-observasi-penelitian'); ?>">Izin Observasi Penelitian</a></li>
                     <li><a href="<?= base_url('/validator-instrumen'); ?>">Validator Instrumen</a></li>
+                    <li><a href="<?= base_url('/izin-observasi-matakuliah'); ?>">Izin Observasi Matakuliah</a></li>
                 </ul>
             </li>
         </ul>
@@ -175,7 +189,7 @@
                     <li><a>Observasi Penelitian<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li class="sub_menu">
-                                <a href="<?= base_url('/izin-observasi-penelitian/semua'); ?>">Belum diverifikasi</a>
+                                <a href="<?= base_url('/izin-observasi-penelitian/semua'); ?>">Belum verfal</a>
                             </li>
                             <li>
                                 <a href="<?= base_url('/izin-observasi-penelitian/disetujui'); ?>">Observasi Diterima</a>
@@ -188,13 +202,26 @@
                     <li><a>Validator Instrumen<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li class="sub_menu">
-                                <a href="<?= base_url('/validator-instrumen/semua'); ?>">Belum diverifikasi</a>
+                                <a href="<?= base_url('/validator-instrumen/semua'); ?>">Belum verfal</a>
                             </li>
                             <li>
                                 <a href="<?= base_url('/validator-instrumen/disetujui'); ?>">Instrumen Diterima</a>
                             </li>
                             <li>
                                 <a href="<?= base_url('/validator-instrumen/ditolak'); ?>">Instrumen Ditolak</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a>Observasi Matakuliah<span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li class="sub_menu">
+                                <a href="<?= base_url('/izin-observasi-matakuliah/semua'); ?>">Belum verfal</a>
+                            </li>
+                            <li>
+                                <a href="<?= base_url('/izin-observasi-matakuliah/disetujui'); ?>">Observasi Diterima</a>
+                            </li>
+                            <li>
+                                <a href="<?= base_url('/izin-observasi-matakuliah/ditolak'); ?>">Observasi Ditolak</a>
                             </li>
                         </ul>
                     </li>
