@@ -472,13 +472,10 @@ class ValidatorInstrumen extends BaseController
         }
     }
 
-   
-
-
     public function generate_qrcode($UUIDInstrumen = null)
     {
         $writer = new PngWriter();
-        $qrCode = QrCode::create(base_url('validator-instrumen/detail-izin-observasi/'.$UUIDInstrumen))
+        $qrCode = QrCode::create(base_url('validator-instrumen/detail-validator-instrumen/'.$UUIDInstrumen))
             ->setEncoding(new Encoding('UTF-8'))
             ->setErrorCorrectionLevel(ErrorCorrectionLevel::Low)
             ->setSize(300)
