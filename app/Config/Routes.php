@@ -400,8 +400,8 @@ $routes->post('/auth/loginProcess', 'Auth::loginProcess');
     $routes->get('/izin-observasi-matakuliah/print-surat/(:any)', 'IzinObservasiMatakuliah::print_surat/$1');
     // routes untuk scan barcode
     $routes->get('/izin-observasi-matakuliah/detail/(:any)', 'IzinObservasiMatakuliah::detail/$1', ['filter' => 'mahasiswaFilter']);
-     // routes untuk cetak surat oleh mahasiswa versi 2
-     $routes->post('/izin-observasi-matakuliah/cetak', 'IzinObservasiMatakuliah::cetak');
+    // routes untuk cetak surat oleh mahasiswa versi 2
+    $routes->post('/izin-observasi-matakuliah/cetak', 'IzinObservasiMatakuliah::cetak');
 
     // AKSES OLEH ADMIN
     // bisa di akses oleh admin departemen dan kepala departemen untuk melihat semua pengajuan validator instrumen yang digunakan untuk verifikasi
@@ -431,6 +431,47 @@ $routes->post('/auth/loginProcess', 'Auth::loginProcess');
     // routes untuk scan barcode
     $routes->get('/izin-observasi-matakuliah/scan-barcode/(:any)', 'IzinObservasiMatakuliah::scan_barcode/$1');
 
+
+// ROUTES UNTUK IZIN PENELITIAN
+    // AKSES OLEH MAHASISWA
+    // bisa di akses oleh mahasiswa untuk menampilkan pengajuan surat yang telah mereka buat
+    $routes->get('/izin-penelitian', 'IzinPenelitian::index', ['filter' => 'mahasiswaFilter']);
+    // bisa di akses oleh mahasiswa untuk membuat surat validator instrumen
+    $routes->get('/izin-penelitian/tambah', 'IzinPenelitian::tambah', ['filter' => 'mahasiswaFilter']);
+    // bisa di akses oleh mahasiswa untuk menyimpan surat validator instrumen
+    $routes->post('/izin-penelitian/simpan', 'IzinPenelitian::simpan', ['filter' => 'mahasiswaFilter']);
+    // routes untuk scan barcode
+    $routes->get('/izin-penelitian/detail/(:any)', 'IzinPenelitian::detail/$1', ['filter' => 'mahasiswaFilter']);
+    // bisa di akses oleh mahasiswa untuk menampilkan detail pengajuan surat izin observasi matakuliah yang akan di edit
+    $routes->get('/izin-penelitian/edit/(:any)', 'IzinPenelitian::edit/$1', ['filter' => 'mahasiswaFilter']);
+    // bisa di akses oleh mahasiswa untuk memperbarui surat validator instrumen
+    $routes->post('/izin-penelitian/simpan-pembaruan', 'IzinPenelitian::simpan_pembaruan', ['filter' => 'mahasiswaFilter']);
+    // routes untuk cetak surat oleh mahasiswa versi 2
+    $routes->post('/izin-penelitian/cetak', 'IzinPenelitian::cetak');
+    // routes untuk scan barcode
+    $routes->get('/izin-penelitian/scan-barcode/(:any)', 'IzinPenelitian::scan_barcode/$1');
+    // AKHIR ROUTE USER
+    // AKSES OLEH ADMIN
+    // bisa di akses oleh admin departemen dan kepala departemen untuk melihat semua pengajuan
+    $routes->get('/izin-penelitian/semua', 'IzinPenelitian::semua', ['filter' => 'adminDepartemenDanKadepFilter']);
+    // bisa di akses oleh admin departemen dan kepala departemen untuk melihat semua pengajuan surat izin penelitian yang disetujui digunakan untuk verifikasi
+    $routes->get('/izin-penelitian/disetujui', 'IzinPenelitian::disetujui', ['filter' => 'adminDepartemenDanKadepFilter']);
+    // bisa di akses oleh admin departemen dan kepala departemen untuk melihat semua pengajuan surat izin penelitian yang ditolak digunakan untuk verifikasi
+    $routes->get('/izin-penelitian/ditolak', 'izinPenelitian::ditolak', ['filter' => 'adminDepartemenDanKadepFilter']);
+    // bisa di akses oleh admin untuk edit validator instrumen
+    $routes->get('/izin-penelitian/edit-admin/(:any)', 'IzinPenelitian::edit_admin/$1', ['filter' => 'adminDepartemenFilter']);
+    // bisa di akses oleh admin untuk edit pengajuan surat izin penelitian
+    $routes->post('/izin-penelitian/admin-simpan-pembaruan', 'IzinPenelitian::simpan_pembaruan_admin', ['filter' => 'adminDepartemenDanKadepFilter']);
+    // bisa di akses oleh admin departemen dan kepala departemen untuk melihat detail pengajuan surat izin validator instrumen yang akan digunakan untuk verifikasi
+    $routes->get('/izin-penelitian/detail-verifikasi/(:any)', 'IzinPenelitian::detail_verifikasi/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
     
-
-
+     // bisa di akses oleh admin departemen dan kadep untuk menolak semua pengajuan surat validator instrumen
+     $routes->post('/izin-penelitian/tolak-admin/(:any)', 'IzinPenelitian::tolak_admin/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
+     // bisa di akses oleh admin departemen dan kadep untuk menyetujui semua pengajuan surat validator instrumen
+     $routes->post('/izin-penelitian/setujui-admin/(:any)', 'IzinPenelitian::setujui_admin/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
+     // bisa di akses oleh admin departemen dan kepala departemen untuk menolak semua pengajuan surat validator instrumen
+     $routes->post('/izin-penelitian/tolak-kadep/(:any)', 'IzinPenelitian::tolak_kadep/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
+     // bisa di akses oleh admin departemen dan kepala departemen untuk menyetujui semua pengajuan surat izin observasi matakuliah
+     $routes->post('/izin-penelitian/setujui-kadep/(:any)', 'IzinPenelitian::setujui_kadep/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
+    // AKHIR ROUTE UNTUK ADMIN
+// AKHIR ROUTE IZIN PENELITIAN
