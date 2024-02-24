@@ -457,7 +457,7 @@ $routes->post('/auth/loginProcess', 'Auth::loginProcess');
     // bisa di akses oleh admin departemen dan kepala departemen untuk melihat semua pengajuan surat izin penelitian yang disetujui digunakan untuk verifikasi
     $routes->get('/izin-penelitian/disetujui', 'IzinPenelitian::disetujui', ['filter' => 'adminDepartemenDanKadepFilter']);
     // bisa di akses oleh admin departemen dan kepala departemen untuk melihat semua pengajuan surat izin penelitian yang ditolak digunakan untuk verifikasi
-    $routes->get('/izin-penelitian/ditolak', 'izinPenelitian::ditolak', ['filter' => 'adminDepartemenDanKadepFilter']);
+    $routes->get('/izin-penelitian/ditolak', 'IzinPenelitian::ditolak', ['filter' => 'adminDepartemenDanKadepFilter']);
     // bisa di akses oleh admin untuk edit validator instrumen
     $routes->get('/izin-penelitian/edit-admin/(:any)', 'IzinPenelitian::edit_admin/$1', ['filter' => 'adminDepartemenFilter']);
     // bisa di akses oleh admin untuk edit pengajuan surat izin penelitian
@@ -475,3 +475,47 @@ $routes->post('/auth/loginProcess', 'Auth::loginProcess');
      $routes->post('/izin-penelitian/setujui-kadep/(:any)', 'IzinPenelitian::setujui_kadep/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
     // AKHIR ROUTE UNTUK ADMIN
 // AKHIR ROUTE IZIN PENELITIAN
+
+// ROUTES UNTUK VALIDASI INSTRUMEN
+    // AKSES OLEH MAHASISWA
+    // bisa di akses oleh mahasiswa untuk menampilkan pengajuan surat yang telah mereka buat
+    $routes->get('/validasi-instrumen', 'ValidasiInstrumen::index', ['filter' => 'mahasiswaFilter']);
+    // bisa di akses oleh mahasiswa untuk membuat surat validator instrumen
+    $routes->get('/validasi-instrumen/tambah', 'ValidasiInstrumen::tambah', ['filter' => 'mahasiswaFilter']);
+    // bisa di akses oleh mahasiswa untuk menyimpan surat validator instrumen
+    $routes->post('/validasi-instrumen/simpan', 'ValidasiInstrumen::simpan', ['filter' => 'mahasiswaFilter']);
+    // routes untuk scan barcode
+    $routes->get('/validasi-instrumen/detail/(:any)', 'ValidasiInstrumen::detail/$1', ['filter' => 'mahasiswaFilter']);
+    // bisa di akses oleh mahasiswa untuk menampilkan detail pengajuan surat izin observasi matakuliah yang akan di edit
+    $routes->get('/validasi-instrumen/edit/(:any)', 'ValidasiInstrumen::edit/$1', ['filter' => 'mahasiswaFilter']);
+    // bisa di akses oleh mahasiswa untuk memperbarui surat validator instrumen
+    $routes->post('/validasi-instrumen/simpan-pembaruan', 'ValidasiInstrumen::simpan_pembaruan', ['filter' => 'mahasiswaFilter']);
+    // routes untuk cetak surat oleh mahasiswa versi 2
+    $routes->post('/validasi-instrumen/cetak', 'ValidasiInstrumen::cetak');
+    // routes untuk scan barcode
+    $routes->get('/validasi-instrumen/scan-barcode/(:any)', 'ValidasiInstrumen::scan_barcode/$1');
+    // AKHIR ROUTE USER
+    // AKSES OLEH ADMIN
+    // bisa di akses oleh admin departemen dan kepala departemen untuk melihat semua pengajuan
+    $routes->get('/validasi-instrumen/semua', 'ValidasiInstrumen::semua', ['filter' => 'adminDepartemenDanKadepFilter']);
+    // bisa di akses oleh admin departemen dan kepala departemen untuk melihat semua pengajuan surat izin penelitian yang disetujui digunakan untuk verifikasi
+    $routes->get('/validasi-instrumen/disetujui', 'ValidasiInstrumen::disetujui', ['filter' => 'adminDepartemenDanKadepFilter']);
+    // bisa di akses oleh admin departemen dan kepala departemen untuk melihat semua pengajuan surat izin penelitian yang ditolak digunakan untuk verifikasi
+    $routes->get('/validasi-instrumen/ditolak', 'ValidasiInstrumen::ditolak', ['filter' => 'adminDepartemenDanKadepFilter']);
+    // bisa di akses oleh admin untuk edit validator instrumen
+    $routes->get('/validasi-instrumen/edit-admin/(:any)', 'ValidasiInstrumen::edit_admin/$1', ['filter' => 'adminDepartemenFilter']);
+    // bisa di akses oleh admin untuk edit pengajuan surat izin penelitian
+    $routes->post('/validasi-instrumen/admin-simpan-pembaruan', 'ValidasiInstrumen::simpan_pembaruan_admin', ['filter' => 'adminDepartemenDanKadepFilter']);
+    // bisa di akses oleh admin departemen dan kepala departemen untuk melihat detail pengajuan surat izin validator instrumen yang akan digunakan untuk verifikasi
+    $routes->get('/validasi-instrumen/detail-verifikasi/(:any)', 'ValidasiInstrumen::detail_verifikasi/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
+    
+     // bisa di akses oleh admin departemen dan kadep untuk menolak semua pengajuan surat validator instrumen
+     $routes->post('/validasi-instrumen/tolak-admin/(:any)', 'ValidasiInstrumen::tolak_admin/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
+     // bisa di akses oleh admin departemen dan kadep untuk menyetujui semua pengajuan surat validator instrumen
+     $routes->post('/validasi-instrumen/setujui-admin/(:any)', 'ValidasiInstrumen::setujui_admin/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
+     // bisa di akses oleh admin departemen dan kepala departemen untuk menolak semua pengajuan surat validator instrumen
+     $routes->post('/validasi-instrumen/tolak-kadep/(:any)', 'ValidasiInstrumen::tolak_kadep/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
+     // bisa di akses oleh admin departemen dan kepala departemen untuk menyetujui semua pengajuan surat izin observasi matakuliah
+     $routes->post('/validasi-instrumen/setujui-kadep/(:any)', 'ValidasiInstrumen::setujui_kadep/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
+    // AKHIR ROUTE UNTUK ADMIN
+// AKHIR ROUTE VALIDASI INSTRUMEN

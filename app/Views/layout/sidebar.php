@@ -143,6 +143,19 @@
                             </li>
                         </ul>
                     </li>
+                    <li><a>Validasi Instrumen<span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li class="sub_menu">
+                                <a href="<?= base_url('/validasi-instrumen/semua'); ?>">Surat Masuk</a>
+                            </li>
+                            <li>
+                                <a href="<?= base_url('/validasi-instrumen/disetujui'); ?>">Diterima</a>
+                            </li>
+                            <li>
+                                <a href="<?= base_url('/validasi-instrumen/ditolak'); ?>">Ditolak</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -182,6 +195,7 @@
                     <li><a href="<?= base_url('/validator-instrumen'); ?>">Validator Instrumen</a></li>
                     <li><a href="<?= base_url('/izin-observasi-matakuliah'); ?>">Izin Observasi Matakuliah</a></li>
                     <li><a href="<?= base_url('/izin-penelitian'); ?>">Izin Penelitian</a></li>
+                    <li><a href="<?= base_url('/validasi-instrumen'); ?>">Validasi Instrumen</a></li>
                 </ul>
             </li>
         </ul>
@@ -249,6 +263,19 @@
                             </li>
                             <li>
                                 <a href="<?= base_url('/izin-penelitian/ditolak'); ?>">Ditolak</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a>Validasi Instrumen<span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li class="sub_menu">
+                                <a href="<?= base_url('/validasi-instrumen/semua'); ?>">Surat Masuk</a>
+                            </li>
+                            <li>
+                                <a href="<?= base_url('/validasi-instrumen/disetujui'); ?>">Diterima</a>
+                            </li>
+                            <li>
+                                <a href="<?= base_url('/validasi-instrumen/ditolak'); ?>">Ditolak</a>
                             </li>
                         </ul>
                     </li>

@@ -431,7 +431,7 @@ class IzinObservasiMatakuliah extends BaseController
                 'tanggal_surat' => $tanggal_surat,
                 'tanggal_seminar' => $tanggal_seminar
             ];
-            return view('izin_observasi_matakuliah/v_cetak_observasi_matakuliah', $data);
+            return view('izin_observasi_matakuliah/user/v_cetak_observasi_matakuliah', $data);
             }
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
@@ -881,7 +881,7 @@ class IzinObservasiMatakuliah extends BaseController
                 'anggota' => $data_anggota
             );
             $filename = 'surat_izin_observasi_matakuliah'.$satu_observasi['nama_pengajuan'];
-            $html = view('izin_observasi_matakuliah/v_cetak_surat_izin_observasi_matakuliah', $data);
+            $html = view('izin_observasi_matakuliah/user/v_cetak_surat_izin_observasi_matakuliah', $data);
             $dompdf->loadHtml($html);
             $dompdf->setPaper('A4','portrait');
             $dompdf->render();
