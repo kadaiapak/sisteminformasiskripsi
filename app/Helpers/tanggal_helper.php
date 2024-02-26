@@ -44,4 +44,8 @@
         }
         return date('d', strtotime($tanggal)).' '.$bulan.' '.date('Y', strtotime($tanggal));
     }
+    function countData($table){
+            $db =  \Config\Database::connect();
+            return $db->table($table)->countAllResults();
+    }
 ?>

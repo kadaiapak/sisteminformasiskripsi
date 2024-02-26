@@ -1,16 +1,21 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\DashboardModel;
 
 class Dashboard extends BaseController
 {
-
+    protected $dashboardModel;
     public function __construct()
     {
+        $this->dashboardModel = new DashboardModel();
     }
 
     public function index()
     {
+        $totalSuratBelumDiproses = $this->dashboardModel->totalSuratBelumDiproses();
+        $totalSuratMasukHariIni = $this->dashboardModel->totalSuratMasukHariIni();
+        // dd($totalSuratMasukHariIni);
         if(session()->get('verifikasi') == '0' && session()->get('level') == '5') 
         {
             return redirect()->to('/profil-dosen/verifikasi')->with('sukses','Login berhasil!, silahkan edit profil');
@@ -40,7 +45,9 @@ class Dashboard extends BaseController
         if(session()->get('level') == '4'){
             $view = 'dashboard/v_kadep_dashboard';
             $data = [
-                'judul' => 'Dashboard Kepala Departemen'
+                'judul' => 'Dashboard Kepala Departemen',
+                'total_surat_belum_diproses' => $totalSuratBelumDiproses,
+                'total_surat_masuk_hari_ini' => $totalSuratMasukHariIni
             ];
         }
         if(session()->get('level') == '5'){
@@ -58,7 +65,9 @@ class Dashboard extends BaseController
         if(session()->get('level') == '7'){
             $view = 'dashboard/v_admindepartemen_dashboard';
             $data = [
-                'judul' => 'Dashboard Admin Departemen'
+                'judul' => 'Dashboard Admin Departemen',
+                'total_surat_belum_diproses' => $totalSuratBelumDiproses,
+                'total_surat_masuk_hari_ini' => $totalSuratMasukHariIni
             ];
         }
         return view($view, $data);
