@@ -127,68 +127,52 @@
 								</li>
 
 								<li role="presentation" class="nav-item dropdown open">
-								<a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
-									<i class="fa fa-envelope-o"></i>
-									<span class="badge bg-green">6</span>
-								</a>
-								<ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
-									<li class="nav-item">
-									<a class="dropdown-item">
-										<span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-										<span>
-										<span>John Smith</span>
-										<span class="time">3 mins ago</span>
-										</span>
-										<span class="message">
-										Film festivals used to be do-or-die moments for movie makers. They were where<?= base_url()?>template.
-										</span>
+									<a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
+										<i class="fa fa-envelope-o"></i>
+										<span class="badge bg-green"><?= countTotal(); ?></span>
 									</a>
-									</li>
-									<li class="nav-item">
-									<a class="dropdown-item">
-										<span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-										<span>
-										<span>John Smith</span>
-										<span class="time">3 mins ago</span>
-										</span>
-										<span class="message">
-										Film festivals used to be do-or-die moments for movie makers. They were where<?= base_url()?>template.
-										</span>
-									</a>
-									</li>
-									<li class="nav-item">
-									<a class="dropdown-item">
-										<span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-										<span>
-										<span>John Smith</span>
-										<span class="time">3 mins ago</span>
-										</span>
-										<span class="message">
-										Film festivals used to be do-or-die moments for movie makers. They were where<?= base_url()?>template.
-										</span>
-									</a>
-									</li>
-									<li class="nav-item">
-									<a class="dropdown-item">
-										<span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-										<span>
-										<span>John Smith</span>
-										<span class="time">3 mins ago</span>
-										</span>
-										<span class="message">
-										Film festivals used to be do-or-die moments for movie makers. They were where<?= base_url()?>template.
-										</span>
-									</a>
-									</li>
-									<li class="nav-item">
-									<div class="text-center">
-										<a class="dropdown-item">
-										<strong>See All Alerts</strong>
-										<i class="fa fa-angle-right"></i>
-										</a>
-									</div>
-									</li>
-								</ul>
+									<ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
+										<li class="nav-item">
+											<a class="dropdown-item" href="<?= base_url('/izin-observasi-penelitian/semua'); ?>">
+												<span>
+													<span>Observasi Penelitian</span>
+													<span class="time"><?= countObservasiPenelitian(); ?></span>
+												</span>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a class="dropdown-item" href="<?= base_url('/validator-instrumen/semua'); ?>">
+												<span>
+													<span>Validator Instrumen</span>
+													<span class="time"><?= countValidatorInstrumen(); ?></span>
+												</span>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a class="dropdown-item" href="<?= base_url('/izin-observasi-matakuliah/semua'); ?>">
+												<span>
+													<span>Observasi Matakuliah</span>
+													<span class="time"><?= countObservasiMatakuliah(); ?></span>
+												</span>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a class="dropdown-item" href="<?= base_url('/izin-penelitian/semua'); ?>">
+												<span>
+													<span>Izin Penelitian</span>
+													<span class="time"><?= countPenelitian(); ?></span>
+												</span>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a class="dropdown-item" href="<?= base_url('/validasi-instrumen/semua'); ?>">
+												<span>
+													<span>Validasi Instrumen</span>
+													<span class="time"><?= countValidasiInstrumen(); ?></span>
+												</span>
+											</a>
+										</li>
+									</ul>
 								</li>
 							</ul>
 						</nav>
