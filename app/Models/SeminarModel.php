@@ -226,6 +226,7 @@ class SeminarModel extends Model
         $builderdua = $this->db->table('seminar');
         $builderdua->select('smr_id');
         $builderdua->where('smr_status', '3');
+        $builderdua->where('smr_nim_m', $nim);
         $builderdua->where('smr_uuid !=', $UUIDSeminar);
         $querydua = $builderdua->get();
         $hasil = $querydua->getResultArray();
