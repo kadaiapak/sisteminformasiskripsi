@@ -171,12 +171,7 @@
                     <ul class="nav child_menu">
                         <li><a href="<?= base_url('/bimbingan'); ?>">Bimbingan</a></li>
                         <li><a href="<?= base_url('/seminar'); ?>">Seminar</a></li>
-                        <li><a>Ujian Skripsi<span class="fa fa-chevron-down"></span></a>
-                            <ul class="nav child_menu">
-                                <li class="sub_menu"><a href="<?= base_url('/ujian-skripsi/penguji'); ?>">Penguji 1 dan 2</a></li>
-                                <li><a href="<?= base_url('/ujian-skripsi/pembimbing'); ?>">Bimbingan</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="<?= base_url('/ujian-skripsi/pembimbing'); ?>">Ujian Skripsi</a></li>
                     </ul>
                 </li>
         </ul>

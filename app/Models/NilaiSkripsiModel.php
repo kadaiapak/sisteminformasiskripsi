@@ -51,10 +51,11 @@ class NilaiSkripsiModel extends Model
     'status_nilai',
 ];
 
-    public function getNilaiByUjianId($UUIDUjian = null)
+public function getNilaiByUjianId($UUIDUjian = null)
     {
         $builder = $this->db->table('nilai_ujian_skripsi');
-        $builder->select('*');
+        $builder->select('nilai_ujian_skripsi.*, fip_dosen_pa.nidn as d_nidn, fip_dosen_pa.peg_gel_dep as d_peg_gel_dep, fip_dosen_pa.peg_nama as d_peg_nama, fip_dosen_pa.peg_gel_bel as d_peg_gel_bel,');
+        $builder->join('fip_dosen as fip_dosen_pa', 'fip_dosen_pa.nidn = nilai_ujian_skripsi.user_penilai');
         $builder->where('ujian_skripsi_uuid', $UUIDUjian);
         $builder->orderBy('urutan', 'asc');
         $hasil = $builder->get();

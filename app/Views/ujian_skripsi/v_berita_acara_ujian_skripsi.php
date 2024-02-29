@@ -57,7 +57,7 @@
                                     <div class="form-group row ">
                                         <label class="control-label col-md-3 col-sm-3" for="ujian_sesi_alias">Pukul</label>
                                         <div class="col-md-9 col-sm-9 ">
-                                            <input readonly type="text" value="<?= $satu_ujian['ujian_sesi_alias']; ?>" name="ujian_sesi_alias" class="form-control" id="ujian_sesi_alias">
+                                            <input readonly type="text" value="<?= $satu_ujian['ujian_skripsi_sesi_alias']; ?>" name="ujian_sesi_alias" class="form-control" id="ujian_sesi_alias">
                                         </div>
                                     </div>
                                     <br />
@@ -151,7 +151,7 @@
                                     <div class="form-group row ">
                                         <label class="control-label col-md-3 col-sm-3" for="ujian_ruangan_alias">Ruangan</label>
                                         <div class="col-md-9 col-sm-9 ">
-                                            <input readonly type="text" value="<?= $satu_ujian['ujian_ruangan_alias']; ?>" name="ujian_ruangan_alias" class="form-control" id="ujian_ruangan_alias">
+                                            <input readonly type="text" value="<?= $satu_ujian['ujian_skripsi_ruangan_alias']; ?>" name="ujian_ruangan_alias" class="form-control" id="ujian_ruangan_alias">
                                         </div>
                                     </div>
                                 </div>
@@ -180,7 +180,7 @@
                                             <h6><?= $no; ?></h6>
                                         </div>
                                         <div class="col-lg-5 col-md-5">
-                                            <h6><?= $satu_ujian['d_pembimbing_peg_gel_dep']; ?><?= ($satu_ujian['d_pembimbing_peg_gel_dep'] != '' ? '. ' : '' ); ?><?= $satu_ujian['d_pembimbing_peg_nama']; ?>, <?= $satu_ujian['d_pembimbing_peg_gel_bel']; ?></h6>
+                                            <h6><?= $sn['d_peg_gel_dep']; ?><?= ($sn['d_peg_gel_dep'] != '' ? '. ' : '' ); ?><?= $sn['d_peg_nama']; ?>, <?= $sn['d_peg_gel_bel']; ?></h6>
                                         </div>
                                         <div class="col-lg-4 col-md-4">
                                             <h6><?= $sn['role_user_penilai']; ?></h6>
