@@ -12,6 +12,7 @@ use App\Models\PersyaratanSeminarModel;
 use App\Models\FilePersyaratanSeminarModel;
 use App\Models\HariModel;
 use App\Models\MahasiswaStatusSkripsiModel;
+use App\Models\MengikutiSeminarModel;
 
 use Endroid\QrCode\Color\Color;
 use Endroid\QrCode\Encoding\Encoding;
@@ -38,6 +39,7 @@ class Seminar extends BaseController
     protected $filePersyaratanSeminarModel;
     protected $hariModel;
     protected $mahasiswaStatusSkripsiModel;
+    protected $mengikutiSeminarModel;
 
     public function __construct()
     {
@@ -52,6 +54,7 @@ class Seminar extends BaseController
         $this->filePersyaratanSeminarModel = new FilePersyaratanSeminarModel();
         $this->hariModel = new HariModel();
         $this->mahasiswaStatusSkripsiModel = new MahasiswaStatusSkripsiModel();
+        $this->mengikutiSeminarModel = new MengikutiSeminarModel();
     }
 
    // menampilkan semua seminar mahasiswa pembimbing penguji satu penguji dua dengan dosen bersangkutan
@@ -106,6 +109,8 @@ class Seminar extends BaseController
         ];
         return view('seminar/v_tambah_seminar', $data);
     }
+
+
 
     public function simpan($UUIDSkripsi)
     {
@@ -195,6 +200,100 @@ class Seminar extends BaseController
         return redirect()->to('/skripsi')->with('sukses','Data berhasil disimpan!');
     }
 
+
+    public function mengikuti_seminar()
+    {
+      
+        $ruangan = $this->ruanganModel->getAllRuangan();
+        $hari = $this->hariModel->getAllHari();
+        $data = [
+            'judul' => 'Seminar Proposal',
+            'hari' => $hari,
+            'ruangan' => $ruangan,
+        ];
+        return view('seminar/v_mengikuti_seminar', $data);
+    }
+
+    public function simpan_mengikuti_seminar()
+    {
+        if(!$this->validate([
+            'nim_pengikut' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Tuliskan nim saudara'
+                ]
+            ],
+            'nim_diikuti' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Tuliskan nim mahasiswa yang saudara ikuti seminarnya'
+                ]
+            ],
+            'nama_diikuti' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Tuliskan nama mahasiswa yang saudara ikuti seminarnya'
+                ]
+            ],
+            'dosen_pembimbing_diikuti' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Tuliskan nama dosen pembimbing yang saudara ikuti seminarnya'
+                ]
+            ],
+            'judul_skripsi_diikuti' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Isikan judul skripsi mahasiswa yang saudara ikuti seminarnya'
+                ]
+            ],
+            'hari_mengikuti' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Pilih hari saudara mengikuti seminar'
+                ]
+            ],
+            'tanggal_mengikuti' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Pilih tanggal saudara mengikuti seminar'
+                ]
+            ],
+            'ruangan' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Pilih ruangan tempat saudara mengikuti seminar'
+                ]
+            ],
+            'foto_selfi' => [
+                'rules' => 'uploaded[foto_selfi]|max_size[foto_selfi,1024]|is_image[foto_selfi]',
+                'errors' => [
+                    'uploaded' => 'masukkan data dukung',
+                    'max_size' => 'ukuran file terlalu besar',
+                    'is_image' => 'file yang anda pilih bukan gambar'
+                ]
+            ]
+        ])){
+            return redirect()->to(base_url('/skripsi'))->withInput();
+        }
+        $foto_selfi = $this->request->getFile('foto_selfi');
+        $nama_foto = $foto_selfi->getRandomName();
+        $foto_selfi->move('./upload/mengikuti_seminar', $nama_foto);
+        $data = array(
+            'nim_pengikut' => $this->request->getVar('nim_pengikut'),
+            'nim_diikuti' => $this->request->getVar('nim_diikuti'),
+            'nama_diikuti' => $this->request->getVar('nama_diikuti'),
+            'dosen_pembimbing_diikuti' => $this->request->getVar('dosen_pembimbing_diikuti'),
+            'judul_skripsi_diikuti' => $this->request->getVar('judul_skripsi_diikuti'),
+            'hari_mengikuti' => $this->request->getVar('hari_mengikuti'),
+            'tanggal_mengikuti' => $this->request->getVar('tanggal_mengikuti'),
+            'ruangan' => $this->request->getVar('ruangan'),
+            'status' => 1,
+            'foto_selfi' => $nama_foto,
+        );
+        $this->mengikutiSeminarModel->simpanMengikutiSeminar($data);
+        return redirect()->to('/skripsi')->with('sukses','Data berhasil disimpan!');
+    }
 
     public function detail($UUIDSeminar, $idSeminar)
     {

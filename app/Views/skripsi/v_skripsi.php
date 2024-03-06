@@ -144,6 +144,7 @@
                                                     <?php if($bisaTambahBimbingan) { ?>
                                                         <a href="<?= base_url("bimbingan/tambah-bimbingan"); ?>" class="btn btn-success btn-sm"><i class="fa fa-plus-square" style="margin-right: 5px;"></i>Ajukan Bimbingan</a>
                                                     <?php } ?>
+                                                        <a href="<?= base_url("seminar/mengikuti-seminar"); ?>" class="btn btn-success btn-sm"><i class="fa fa-plus-square" style="margin-right: 5px;"></i>Mengikuti Seminar Proposal</a>
                                                     </div>
                                                     <div class="x_content">
                                                         <div class="row">
@@ -178,7 +179,7 @@
                                                 </div>
                                             </div>
                                             <!-- timeline -->
-                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="col-lg-4 col-md-4 col-sm-4">
                                                 <div class="x_panel">
                                                     <div class="x_title">
                                                         <h2>Timeline Bimbingan</h2>
@@ -207,6 +208,48 @@
                                                 </div>
                                             </div>
                                             <!-- akhir dari timeline -->
+                                             <!-- timeline -->
+                                             <div class="col-lg-8 col-md-8 col-sm-8">
+                                                <div class="x_panel">
+                                                    <div class="x_title">
+                                                        <h2>Daftar Seminar Yang Diikuti</h2>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                    <div class="x_content">
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="card-box table-responsive">
+                                                                    <table class="table table-striped table-bordered" style="width:100%">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Tanggal Mengikuti</th>
+                                                                                <th>Nim yang diikuti</th>
+                                                                                <th>Nama yang diikuti</th>
+                                                                                <th>Data Dukung</th>
+                                                                                <th>Status</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <?php foreach($mengikuti_seminar as $ms): ?>
+                                                                            <tr>
+                                                                                <td><?= date('d-m-Y', strtotime($ms['tanggal_mengikuti'])) ; ?></td>
+                                                                                <td><?= $ms['nim_diikuti'] ?></td>
+                                                                                <td><?= $ms['nama_diikuti']; ?></td>
+												                                <td class=" "><img style="width: 50px; height: 50px;" src="<?= base_url('/upload/mengikuti_seminar/'.$ms['foto_selfi']); ?>" alt=""></td>
+                                                                                <td><?= ($ms['status'] == 1 ? "<span class='badge badge-warning'>Menunggu diproses</span>" : ($ms['status'] == 2 ? "<span class='badge badge-danger'>Ditolak</span>" : ($ms['status'] == 3 ? "<span class='badge badge-success'>Judul diterima</span>" : null))); ?></td>
+                                                                            </tr>
+                                                                            <?php endforeach; ?>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- akhir dari timeline -->
+                                            
+                                           
                                         </div>
                                     </div>
                                     <!-- akhir dari tab untuk tambah bimbingan -->

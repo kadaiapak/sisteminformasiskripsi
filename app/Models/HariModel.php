@@ -14,6 +14,15 @@ class HariModel extends Model
     'hari_nama',
 ];
 
+  public function getAllHari()
+  {
+    $builder = $this->db->table('hari');
+    $builder->select('hari.*');
+    $builder->orderBy('hari_id','ASC');
+    $result = $builder->get();
+    return $result->getResultArray();
+  }
+
   public function getHariDepartemen($idDepartemen = null)
   {
     $builder = $this->db->table('hari');

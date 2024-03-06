@@ -124,6 +124,9 @@ $routes->post('/auth/loginProcess', 'Auth::loginProcess');
 // route untuk seminar proposal
     // diakses olej mahasiswa untuk menambah seminar
     $routes->get('/seminar/ajukan-seminar', 'Seminar::tambah', ['filter' => 'mahasiswaFilter']);
+    // diakses olej mahasiswa untuk mengikuti seminar
+    $routes->get('/seminar/mengikuti-seminar', 'Seminar::mengikuti_seminar', ['filter' => 'mahasiswaFilter']);
+
     // diakses oleh dosen untuk melihat semua seminar yang akan ia hadiri
     $routes->get('/seminar', 'Seminar::index', ['filter' => 'dosenFilter'] );// sudah di filter dengan filter dosen
 
@@ -132,6 +135,10 @@ $routes->post('/auth/loginProcess', 'Auth::loginProcess');
    
     // diakses oleh mahasiswa untuk menyimpan seminar yang ditambah
     $routes->post('/seminar/(:any)/simpan', 'Seminar::simpan/$1' , ['filter' => 'mahasiswaFilter']);
+
+    // diakses oleh mahasiswa untuk menyimpan mengikuti seminar yang ditambah
+    $routes->post('/seminar/simpan-mengikuti-seminar', 'Seminar::simpan_mengikuti_seminar' , ['filter' => 'mahasiswaFilter']);
+
     $routes->get('/seminar/detail/(:any)/(:any)', 'Seminar::detail/$1/$2'); // masih belum tau siapa saja yang bisa melihat detail seminar
     // digunakan untuk melihat detail seminar lewat scan barcode
     $routes->get('/seminar/detail-seminar/(:any)', 'Seminar::detail_seminar/$1');
@@ -151,6 +158,8 @@ $routes->post('/auth/loginProcess', 'Auth::loginProcess');
     $routes->post('/seminar/(:any)/verifikasi_kadep', 'Seminar::verifikasi_kadep/$1', ['filter' => 'kadepFilter']);
     // routes untuk print surat oleh mahasiswa mahasiswa
     $routes->get('/seminar/print-surat/(:any)', 'Seminar::print_surat/$1');
+
+
 
 // akhir dari route untuk seminar proposal
 

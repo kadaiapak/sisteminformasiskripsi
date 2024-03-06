@@ -15,6 +15,15 @@ class RuanganModel extends Model
     'ruangan_status',
     ];
 
+        public function getAllRuangan()
+        {
+            $builder = $this->db->table('penjadwalan_ruangan');
+            $builder->select('penjadwalan_ruangan.*,seminar_ruangan.ruangan_alias,seminar_ruangan.seminar_r_id');
+            $builder->join('seminar_ruangan', 'seminar_ruangan.seminar_r_id = penjadwalan_ruangan.ruangan_id');
+            $result = $builder->get();
+            return $result->getResultArray();
+        }
+
         public function getDaftarPemakaianRuangan()
         {
             $build = $this->db->query(

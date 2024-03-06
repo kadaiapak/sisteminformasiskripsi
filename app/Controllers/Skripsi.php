@@ -10,6 +10,7 @@ use App\Models\HistoriModel;
 use App\Models\ProfilModel;
 use App\Models\UjianSkripsiModel;
 use App\Models\MahasiswaStatusSkripsiModel;
+use App\Models\MengikutiSeminarModel;
 
 class Skripsi extends BaseController
 {
@@ -21,6 +22,7 @@ class Skripsi extends BaseController
     protected $profilModel;
     protected $ujianSkripsiModel;
     protected $mahasiswaStatusSkripsiModel;
+    protected $mengikutiSeminarModel;
 
 
     public function __construct()
@@ -34,11 +36,14 @@ class Skripsi extends BaseController
         $this->profilModel = new ProfilModel();
         $this->ujianSkripsiModel = new UjianSkripsiModel();
         $this->mahasiswaStatusSkripsiModel = new MahasiswaStatusSkripsiModel();
+        $this->mengikutiSeminarModel = new MengikutiSeminarModel();
     }
 
     // digunakan oleh mahasiswa untuk melihat skripsi mereka
     public function index()
     {
+        $nim = session()->get('username');
+        $mengikuti_seminar = $this->mengikutiSeminarModel->getAll($nim);
         $nim = session()->get('username');
         $semuaSkripsi = $this->skripsiModel->getAll($nim);
         $status_pengajuan_skripsi = array_column($semuaSkripsi, 'status_pengajuan_skripsi');
@@ -118,6 +123,7 @@ class Skripsi extends BaseController
             'bisaTambahBimbingan' => $bisaTambahBimbingan,
             'bisaTambahSeminar' => $bisaTambahSeminar,
             'progressAdalahFinal' => $progressAdalahFinal,
+            'mengikuti_seminar' => $mengikuti_seminar,
         ];
         return view('skripsi/v_skripsi', $data);
     }
