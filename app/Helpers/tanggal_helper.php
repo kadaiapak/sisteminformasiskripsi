@@ -50,7 +50,14 @@
         $tanggal_sekarang = new DateTime();
         $tanggal_pemakaian = new DateTime($tanggal);
         $diff = date_diff($tanggal_sekarang, $tanggal_pemakaian);
-        return $diff->days." Hari lagi";
+        if($tanggal_sekarang > $tanggal_pemakaian )
+        {
+            return 'sudah lewat';
+        }
+        if($tanggal_sekarang <= $tanggal_pemakaian )
+        {
+            return $diff->days." Hari lagi";
+        }
     }
 
     function countTotal(){
