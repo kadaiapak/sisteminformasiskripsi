@@ -24,7 +24,6 @@ class Skripsi extends BaseController
     protected $mahasiswaStatusSkripsiModel;
     protected $mengikutiSeminarModel;
 
-
     public function __construct()
     {
         helper('form');
@@ -36,7 +35,7 @@ class Skripsi extends BaseController
         $this->profilModel = new ProfilModel();
         $this->ujianSkripsiModel = new UjianSkripsiModel();
         $this->mahasiswaStatusSkripsiModel = new MahasiswaStatusSkripsiModel();
-        $this->mengikutiSeminarModel = new MengikutiSeminarModel();
+        $this->mengikutiSeminarModel = new MengikutiSeminarModel(); 
     }
 
     // digunakan oleh mahasiswa untuk melihat skripsi mereka

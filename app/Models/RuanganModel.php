@@ -62,4 +62,24 @@ class RuanganModel extends Model
         $result = $builder->get();
         return $result->getResultArray();
     }
+
+    public function semuaRuanganTerpakai()
+    {
+        $build = $this->db->query(
+            'SELECT smr_nim_m, smr_hari, hari.hari_nama as nama_hari, smr_tanggal, smr_sesi, seminar_sesi.jam_alias as nama_sesi, smr_ruangan, seminar_ruangan.ruangan_alias as nama_ruangan, "Seminar" AS jenis_pemakaian
+            FROM seminar
+            INNER JOIN hari ON seminar.smr_hari = hari.hari_id
+            INNER JOIN seminar_sesi ON seminar.smr_sesi = seminar_sesi.seminar_s_id
+            INNER JOIN seminar_ruangan ON seminar.smr_ruangan = seminar_ruangan.seminar_r_id
+            WHERE smr_status = 5
+            UNION ALL 
+            SELECT us_nim_m, us_hari, hari.hari_nama as nama_hari, us_tanggal, us_sesi, seminar_sesi.jam_alias as nama_sesi, us_ruangan, seminar_ruangan.ruangan_alias as nama_ruangan, "Ujian Skripsi" AS jenis_pemakaian
+            FROM ujian_skripsi 
+            INNER JOIN hari ON ujian_skripsi.us_hari = hari.hari_id
+            INNER JOIN seminar_sesi ON ujian_skripsi.us_sesi = seminar_sesi.seminar_s_id
+            INNER JOIN seminar_ruangan ON ujian_skripsi.us_ruangan = seminar_ruangan.seminar_r_id
+            WHERE us_status = 5');
+        $result = $build->getResultArray();
+        return $result;
+    }
 }

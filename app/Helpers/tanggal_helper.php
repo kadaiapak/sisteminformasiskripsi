@@ -45,6 +45,14 @@
         return date('d', strtotime($tanggal)).' '.$bulan.' '.date('Y', strtotime($tanggal));
     }
 
+    function perbedaan_hari($tanggal)
+    {
+        $tanggal_sekarang = new DateTime();
+        $tanggal_pemakaian = new DateTime($tanggal);
+        $diff = date_diff($tanggal_sekarang, $tanggal_pemakaian);
+        return $diff->days." Hari lagi";
+    }
+
     function countTotal(){
         $db =  \Config\Database::connect();
         $departemen = session()->get('departemen');

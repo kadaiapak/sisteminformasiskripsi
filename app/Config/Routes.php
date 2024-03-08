@@ -283,6 +283,10 @@ $routes->post('/auth/loginProcess', 'Auth::loginProcess');
      $routes->post('/ruangan/penjadwalan-ruangan/simpan', 'PenjadwalanRuangan::simpan', ['filter' => 'adminDanSuperAdminFilter']);
 // AKHIR ROUTES RUANGAN
 
+// ROUTES UNTUK LIST RUANGAN TERPAKAI
+    $routes->get('/daftar-ruangan-terpakai', 'Ruangan::daftar_ruangan_terpakai');
+// AKHIR DARI LIST RUANGNA TERPAKAI
+
 // ROUTES SESI
     // bisa di akses oleh admin dan super admin
     $routes->get('/sesi', 'Sesi::index' ,['filter' => 'adminDanSuperAdminFilter']);

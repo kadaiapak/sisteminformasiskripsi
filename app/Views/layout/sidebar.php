@@ -82,6 +82,7 @@
             <li><a href="<?= base_url('/dashboard'); ?>"><i class="fa fa-home"></i> Dashboard</a></li>
             <li><a href="<?= base_url('/dosen'); ?>"><i class="fa fa-graduation-cap"></i> Data Dosen</a></li>
             <li><a href="<?= base_url('/mahasiswa'); ?>"><i class="fa fa-user"></i> Data Mahasiswa</a></li>
+            <li><a href="<?= base_url('/daftar-ruangan-terpakai'); ?>"><i class="fa fa-home"></i> Ruangan Terpakai</a></li>
             <li><a><i class="fa fa-book"></i> Skripsi Mahasiswa <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                 <li><a href="<?= base_url('/skripsi/semua_skripsi'); ?>">Judul Skripsi</a></li>
@@ -184,6 +185,7 @@
             <li><a href="<?= base_url('/dashboard'); ?>"><i class="fa fa-home"></i> Dashboard</a></li>
             <li><a href="<?= base_url('/profil'); ?>"><i class="fa fa-user"></i> Profil</a></li>
             <li><a href="<?= base_url('/skripsi'); ?>"><i class="fa fa-book"></i> Skripsi</a></li>
+            <li><a href="<?= base_url('/daftar-ruangan-terpakai'); ?>"><i class="fa fa-home"></i> Ruangan Terpakai</a></li>
             <li><a><i class="fa fa-file-text-o"></i> Surat Akademik <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a href="<?= base_url('/izin-observasi-penelitian'); ?>">Izin Observasi Penelitian</a></li>
@@ -201,6 +203,7 @@
             <!-- menu yang bisa di akses oleh admin departemen-->
         <ul class="nav side-menu">
             <li><a href="<?= base_url('/dashboard'); ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+            <li><a href="<?= base_url('/daftar-ruangan-terpakai'); ?>"><i class="fa fa-home"></i> Ruangan Terpakai</a></li>
             <li><a><i class="fa fa-edit"></i> Skripsi Mahasiswa <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a href="<?= base_url('/seminar/semua-seminar'); ?>">Verifikasi Sempro</a></li>

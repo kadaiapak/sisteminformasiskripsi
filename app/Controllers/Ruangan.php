@@ -87,5 +87,16 @@ class Ruangan extends BaseController
         return view('ruangan/v_pemakaian_ruangan', $data);
     }
 
-    
+    // untuk lihat ruangan terpakai
+    // akses oleh mahasiswa, admin departemen, dan kepala departemen
+    // GET /daftar-ruangan-terpakai  
+    public function daftar_ruangan_terpakai()
+    {
+        $semuaRuanganTerpakai = $this->ruanganModel->semuaRuanganTerpakai();
+        $data = [
+            'judul' => 'Daftar Ruangan Terpakai',
+            'semua_ruangan_terpakai' => $semuaRuanganTerpakai
+        ];
+        return view('ruangan/v_ruangan_terpakai', $data);
+    }
 }
