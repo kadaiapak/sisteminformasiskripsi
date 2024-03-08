@@ -99,4 +99,11 @@ class Ruangan extends BaseController
         ];
         return view('ruangan/v_ruangan_terpakai', $data);
     }
+
+    public function cari()
+    {
+        $tanggal_pencarian_pemakaian_ruangan = $this->request->getVar('tanggal');
+        session()->set('tanggal_pencarian_pemakaian_ruangan', $tanggal_pencarian_pemakaian_ruangan);
+        return redirect()->to('daftar-ruangan-terpakai');
+    }
 }
