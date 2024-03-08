@@ -11,7 +11,7 @@
         </div>
         <div class="clearfix"></div>
         <div>
-            <form class="form-horizontal form-label-left" method="POST" action="<?= base_url('ruangan/cari'); ?>">
+            <form class="form-horizontal form-label-left" method="POST" action="<?= base_url('ruangan/cari');?>">
                 <?= csrf_field(); ?>
                 <div class="form-group row">
                     <div class="input-group date col-md-3 col-sm-3" style="padding-left: 0;">
@@ -21,14 +21,16 @@
                         <input placeholder="pilih tanggal" type="text" value="<?= old('tanggal'); ?>" class="form-control datepicker" name="tanggal">
                     </div>
                     <div class="col-md-2 col-sm-2">
-                        <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-search" style="margin-right: 5px;"></i>Cari</button>
+                        <button type="submit" class="btn btn-lg btn-primary"><i class="fa fa-search" style="margin-right: 5px;"></i>Cari</button>
                     </div>
                 </div>
             </form>
+            <form class="form-horizontal form-label-left" method="POST" action="<?= base_url('ruangan/hapus-cari'); ?>">
+                <?= csrf_field(); ?>
+                <button type="submit" class="btn btn-lg btn-success">Lihat Semua</button>
+            </form>
         </div>
-       
         <div class="row">
-            
             <div class="col-md-12 col-sm-12 ">
             <?php if(session()->getFlashdata('sukses')) : ?>
                     <div class="alert alert-success alert-dismissible " role="alert">

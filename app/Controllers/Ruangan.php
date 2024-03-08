@@ -100,10 +100,22 @@ class Ruangan extends BaseController
         return view('ruangan/v_ruangan_terpakai', $data);
     }
 
+    // untuk lihat pencarian ruangan berdasarkan tanggal
+    // akses oleh mahasiswa, admin departemen, dan kepala departemen
+    // GET /ruangan/cari
     public function cari()
     {
         $tanggal_pencarian_pemakaian_ruangan = $this->request->getVar('tanggal');
         session()->set('tanggal_pencarian_pemakaian_ruangan', $tanggal_pencarian_pemakaian_ruangan);
         return redirect()->to('daftar-ruangan-terpakai');
+    }
+
+    // untuk hapus pencarian ruangan berdasarkan tanggal
+    // akses oleh mahasiswa, admin departemen, dan kepala departemen
+    // GET /ruangan/hapus-cari
+    public function hapus_cari()
+    {
+        session()->remove('tanggal_pencarian_pemakaian_ruangan');
+        return redirect()->to('daftar-ruangan-terpakai');   
     }
 }

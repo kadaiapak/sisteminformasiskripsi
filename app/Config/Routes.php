@@ -286,6 +286,7 @@ $routes->post('/auth/loginProcess', 'Auth::loginProcess');
 // ROUTES UNTUK LIST RUANGAN TERPAKAI
     $routes->get('/daftar-ruangan-terpakai', 'Ruangan::daftar_ruangan_terpakai');
     $routes->post('/ruangan/cari', 'Ruangan::cari');
+    $routes->post('/ruangan/hapus-cari', 'Ruangan::hapus_cari');
 // AKHIR DARI LIST RUANGNA TERPAKAI
 
 // ROUTES SESI
