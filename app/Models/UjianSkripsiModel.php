@@ -273,4 +273,27 @@ class UjianSkripsiModel extends Model
         // $result = $build->getResultArray();
         // return $result;
       }
+
+    public function rekap($departemen = null)
+    {   
+        $build = $this->db->query(
+            "SELECT ujian_skripsi.us_tanggal, ujian_skripsi.us_status , ujian_skripsi.us_uuid, ujian_skripsi.nilai_p, ujian_skripsi.nilai_p_satu, ujian_skripsi.nilai_p_dua, ujian_skripsi.berita_acara,
+            seminar.smr_uuid, seminar.smr_nim_m, seminar.penguji_satu, seminar.penguji_dua, seminar.smr_status,
+            seminar.smr_tanggal, seminar.smr_hari, seminar.smr_sesi, seminar.smr_ruangan, seminar.sudah_terlaksana,
+            skripsi.judul_skripsi, skripsi.dosen_pembimbing,
+            seminar_ruangan.ruangan_alias as nama_ruangan, seminar_sesi.jam_alias as sesi,
+            profil.prf_nama_portal
+            FROM seminar
+            JOIN skripsi ON seminar.smr_s_uuid = skripsi.skripsi_uuid
+            JOIN ujian_skripsi ON seminar.smr_s_uuid = ujian_skripsi.us_s_uuid
+            JOIN profil ON seminar.smr_nim_m = profil.prf_nim_portal
+            JOIN seminar_ruangan ON ujian_skripsi.us_ruangan = seminar_ruangan.seminar_r_id
+            JOIN seminar_sesi ON ujian_skripsi.us_sesi = seminar_sesi.seminar_s_id
+            WHERE (seminar.smr_status = 5 OR seminar.smr_status = 6)
+            AND (ujian_skripsi.us_status = 5 OR ujian_skripsi.us_status = 6)
+            AND (ujian_skripsi.berita_acara = 1)
+            ORDER BY seminar.smr_tanggal ASC");
+        $result = $build->getResultArray();
+        return $result;
+    }
 }

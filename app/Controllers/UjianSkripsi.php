@@ -978,4 +978,42 @@ class UjianSkripsi extends BaseController
         $this->ujianSkripsiModel->where('us_uuid', $this->request->getVar('us_uuid'))->set($data)->update();
         return redirect()->to('/ujian-skripsi/pembimbing')->with('sukses','Berita Acara Sudah di Upload!');
     }
+
+    public function rekap()
+    {
+        $semuaSelesaiUjian = $this->ujianSkripsiModel->rekap();
+        $data = [
+            'judul' => 'Pembimbing Ujian Skripsi',
+            'semua_ujian_skripsi' => $semuaSelesaiUjian
+        ];
+        return view('ujian_skripsi/v_rekap_ujian_skripsi', $data);
+    }
+
+    public function detail_rekap($UUIDUjian)
+    {
+        if($UUIDUjian != null) {
+            $satu_ujian = $this->ujianSkripsiModel->getDetail($UUIDUjian);
+            $semua_nilai = $this->nilaiSkripsiModel->getNilaiByUjianId($UUIDUjian);
+            if (!$satu_ujian || count($semua_nilai) != 3) {
+                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            } else {
+                $value = array_sum(array_column($semua_nilai,'nilai_akhir'));
+                $rata = $value/3;
+                $round_rata = round($rata, 2);
+                $round_rata_huruf  = $round_rata >= 85 ? 'A' : ($round_rata >= 80 ? 'A-' : ($round_rata >= 75 ? 'B+' : ($round_rata >= 70 ? 'B' : ($round_rata >= 65 ? 'B-' : ($round_rata <= 64 ? 'C' : null)))));
+                $data = [
+                'judul' => 'Berita Acara Ujian Skripsi',
+                'satu_ujian' => $satu_ujian,
+                'semua_nilai' => $semua_nilai,
+                'total' => $value,
+                'rata' => $round_rata,
+                'round_rata_huruf' => $round_rata_huruf,
+                ];
+                return view('ujian_skripsi/v_detail_rekap_ujian_skripsi', $data);
+            }   
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    }
+    
 }

@@ -204,6 +204,8 @@ $routes->post('/auth/loginProcess', 'Auth::loginProcess');
     // digunakan untuk cetak surat ujian skripsi
     $routes->get('/ujian-skripsi/print-surat/(:any)', 'UjianSkripsi::print_surat/$1');
 
+    $routes->get('/ujian-skripsi/rekap', 'UjianSkripsi::rekap', ['filter' => 'adminDepartemenDanKadepFilter' ]);
+    $routes->get('/ujian-skripsi/detail-rekap/(:any)', 'UjianSkripsi::detail_rekap/$1', ['filter' => 'adminDepartemenDanKadepFilter' ]);
     // digunakan untuk cetak surat ujian skripsi
     $routes->get('/ujian-skripsi/detail-ujian/(:any)', 'UjianSkripsi::detail_ujian/$1');
 // akhir dari route untuk seminar proposal

@@ -159,28 +159,33 @@
                     </li>
                 </ul>
             </li>
+            <li><a><i class="fa fa-book"></i> Rekapitulasi <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                <li><a href="<?= base_url('/ujian-skripsi/rekap'); ?>">Selesai Ujian</a></li>
+                </ul>
+            </li>
         </ul>
         <!-- akhir dari kepala departemen -->
         <?php } ?>
 
         <?php if(session()->get('level') == '5') { ?>
-            <!-- menu yang bisa di akses oleh dosen -->
+        <!-- menu yang bisa di akses oleh dosen -->
         <ul class="nav side-menu">
             <li><a href="<?= base_url('/dashboard'); ?>"><i class="fa fa-home"></i> Dashboard</a></li>
             <li><a href="<?= base_url('/profil-dosen'); ?>"><i class="fa fa-user"></i> Profil</a></li>
             <li><a><i class="fa fa-edit"></i> Skripsi Mahasiswa <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                        <li><a href="<?= base_url('/bimbingan'); ?>">Bimbingan</a></li>
-                        <li><a href="<?= base_url('/seminar'); ?>">Seminar</a></li>
-                        <li><a href="<?= base_url('/ujian-skripsi/pembimbing'); ?>">Ujian Skripsi</a></li>
-                    </ul>
-                </li>
+                <ul class="nav child_menu">
+                    <li><a href="<?= base_url('/bimbingan'); ?>">Bimbingan</a></li>
+                    <li><a href="<?= base_url('/seminar'); ?>">Seminar</a></li>
+                    <li><a href="<?= base_url('/ujian-skripsi/pembimbing'); ?>">Ujian Skripsi</a></li>
+                </ul>
+            </li>
         </ul>
         <!-- akhir dari super admin -->
         <?php } ?>
 
         <?php if(session()->get('level') == '6') { ?>
-            <!-- menu yang bisa di akses oleh mahasiswa -->
+        <!-- menu yang bisa di akses oleh mahasiswa -->
         <ul class="nav side-menu">
             <li><a href="<?= base_url('/dashboard'); ?>"><i class="fa fa-home"></i> Dashboard</a></li>
             <li><a href="<?= base_url('/profil'); ?>"><i class="fa fa-user"></i> Profil</a></li>
@@ -200,7 +205,7 @@
         <?php } ?>
 
         <?php if(session()->get('level') == '7') { ?>
-            <!-- menu yang bisa di akses oleh admin departemen-->
+        <!-- menu yang bisa di akses oleh admin departemen-->
         <ul class="nav side-menu">
             <li><a href="<?= base_url('/dashboard'); ?>"><i class="fa fa-home"></i> Dashboard</a></li>
             <li><a href="<?= base_url('/daftar-ruangan-terpakai'); ?>"><i class="fa fa-home"></i> Ruangan Terpakai</a></li>
