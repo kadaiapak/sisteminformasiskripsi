@@ -104,7 +104,6 @@
                                                                         <thead>
                                                                             <tr>
                                                                                 <th>Tanggal</th>
-                                                                                <th>UUID Skripsi</th>
                                                                                 <th>Judul Skripsi</th>
                                                                                 <th>Dosen Pembimbing</th>
                                                                                 <th>Dosen PA</th>
@@ -116,7 +115,6 @@
                                                                             <?php foreach($semua_skripsi as $ss): ?>
                                                                             <tr>
                                                                                 <td><?= date('d-m-Y', strtotime($ss['created_at'])) ; ?></td>
-                                                                                <td><?= $ss['skripsi_uuid'] ?></td>
                                                                                 <td><?= $ss['judul_skripsi'] ?></td>
                                                                                 <td><?= $ss['d_pembimbing_peg_gel_dep']; ?> <?= $ss['d_pembimbing_peg_nama']; ?> <?= $ss['d_pembimbing_peg_gel_bel']; ?></td>
                                                                                 <td><?= $ss['d_pa_peg_gel_dep']; ?> <?= $ss['d_pa_peg_nama']; ?> <?= $ss['d_pa_peg_gel_bel']; ?></td>

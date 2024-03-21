@@ -5,7 +5,7 @@ use App\Models\ProfilModel;
 use App\Models\DepartemenModel;
 use App\Models\ProdiModel;
 use App\Models\JenjangModel;
-
+use App\Models\ProgresSkripsiModel;
 
 class Profil extends BaseController
 {
@@ -13,6 +13,7 @@ class Profil extends BaseController
     protected $departemenModel;
     protected $prodiModel;
     protected $jenjangModel;
+    protected $progresSkripsiModel;
     public function __construct()
     {
         helper('form');
@@ -20,6 +21,7 @@ class Profil extends BaseController
         $this->jenjangModel = new JenjangModel();
         $this->prodiModel = new ProdiModel();
         $this->departemenModel = new DepartemenModel();
+        $this->progresSkripsiModel = new ProgresSkripsiModel();
     }
 
     public function index()
@@ -36,70 +38,6 @@ class Profil extends BaseController
         ];
         return view('profil/v_profil', $data);
     }
-    
-    // public function tambah()
-    // {
-    //     $data = [
-    //         'judul' => 'Tambah Profil'
-    //     ];
-    //     return view('profil/v_tambah_profil', $data);
-    // }
-
-    // public function simpan()
-    // {
-    //     if(!$this->validate([
-    //         'profil_nama' => [
-    //             'rules' => 'required',
-    //             'errors' => [
-    //                 'required' => 'Inputkan nama profil'
-    //             ]
-    //         ],
-    //         'profil_email' => [
-    //             'rules' => 'required',
-    //             'errors' => [
-    //                 'required' => 'Inputkan email profil'
-    //             ]
-    //         ],
-    //         'profil_website' => [
-    //             'rules' => 'required',
-    //             'errors' => [
-    //                 'required' => 'Inputkan website profil'
-    //             ]
-    //         ],
-    //         'profil_kd_surat' => [
-    //             'rules' => 'required',
-    //             'errors' => [
-    //                 'required' => 'Inputkan kode surat profil, contoh : /UN35.4.3/AK/'
-    //             ]
-    //         ],
-    //         'profil_nm_kadep' => [
-    //             'rules' => 'required',
-    //             'errors' => [
-    //                 'required' => 'Tuliskan Nama Kepala Profil'
-    //             ]
-    //         ],
-    //         'profil_nip_kadep' => [
-    //             'rules' => 'required',
-    //             'errors' => [
-    //                 'required' => 'Tuliskan NIP Kepala Profil'
-    //             ]
-    //         ],
-    //     ])){
-    //         return redirect()->back()->withInput();
-    //     }
-    //     $data = array(
-    //         'profil_nama' => $this->request->getVar('profil_nama'),
-    //         'profil_alias' => $this->request->getVar('profil_alias'),
-    //         'profil_email' => $this->request->getVar('profil_email'),
-    //         'profil_website' => $this->request->getVar('profil_website'),
-    //         'profil_kd_surat' => $this->request->getVar('profil_kd_surat'),
-    //         'profil_nm_kadep' => $this->request->getVar('profil_nm_kadep'),
-    //         'profil_nip_kadep' => $this->request->getVar('profil_nip_kadep'),
-    //         'profil_status' => 1,
-    //     );
-    //     $this->profilModel->insert($data);
-    //     return redirect()->to('/profil')->with('sukses','Data berhasil disimpan!');
-    // }
 
     // akses oleh mahasiswa
     // digunakan untuk verifikasi awal mahasiswa yang baru login di aplikasi ini
@@ -233,9 +171,15 @@ class Profil extends BaseController
             'jjp_portal' => $this->request->getVar('jjp_portal'),
             'jjp_input' => $this->request->getVar('jjp_input'),
             'alamat_lengkap' => $this->request->getVar('alamat_lengkap'),
-            'sudah_edit' => 1
+            'sudah_edit' => 1,
+            'prf_status' => 1
+        );
+        $data_progres = array(
+            'nim' => $this->request->getVar('prf_nim_portal'),
+            'status' => 1,
         );
         $this->profilModel->updateVerifikasiProfil($data, $username);
+        $this->progresSkripsiModel->insert($data_progres);
         session()->set('verifikasi_mahasiswa', 1);
         return redirect()->to('/profil')->with('sukses','Profil berhasil disimpan!');
         }else {
@@ -322,4 +266,68 @@ class Profil extends BaseController
         $this->profilModel->update($id, $data);
         return redirect()->to('/profil')->with('sukses','Data berhasil diubah!');
     }
+
+        // public function tambah()
+    // {
+    //     $data = [
+    //         'judul' => 'Tambah Profil'
+    //     ];
+    //     return view('profil/v_tambah_profil', $data);
+    // }
+
+    // public function simpan()
+    // {
+    //     if(!$this->validate([
+    //         'profil_nama' => [
+    //             'rules' => 'required',
+    //             'errors' => [
+    //                 'required' => 'Inputkan nama profil'
+    //             ]
+    //         ],
+    //         'profil_email' => [
+    //             'rules' => 'required',
+    //             'errors' => [
+    //                 'required' => 'Inputkan email profil'
+    //             ]
+    //         ],
+    //         'profil_website' => [
+    //             'rules' => 'required',
+    //             'errors' => [
+    //                 'required' => 'Inputkan website profil'
+    //             ]
+    //         ],
+    //         'profil_kd_surat' => [
+    //             'rules' => 'required',
+    //             'errors' => [
+    //                 'required' => 'Inputkan kode surat profil, contoh : /UN35.4.3/AK/'
+    //             ]
+    //         ],
+    //         'profil_nm_kadep' => [
+    //             'rules' => 'required',
+    //             'errors' => [
+    //                 'required' => 'Tuliskan Nama Kepala Profil'
+    //             ]
+    //         ],
+    //         'profil_nip_kadep' => [
+    //             'rules' => 'required',
+    //             'errors' => [
+    //                 'required' => 'Tuliskan NIP Kepala Profil'
+    //             ]
+    //         ],
+    //     ])){
+    //         return redirect()->back()->withInput();
+    //     }
+    //     $data = array(
+    //         'profil_nama' => $this->request->getVar('profil_nama'),
+    //         'profil_alias' => $this->request->getVar('profil_alias'),
+    //         'profil_email' => $this->request->getVar('profil_email'),
+    //         'profil_website' => $this->request->getVar('profil_website'),
+    //         'profil_kd_surat' => $this->request->getVar('profil_kd_surat'),
+    //         'profil_nm_kadep' => $this->request->getVar('profil_nm_kadep'),
+    //         'profil_nip_kadep' => $this->request->getVar('profil_nip_kadep'),
+    //         'profil_status' => 1,
+    //     );
+    //     $this->profilModel->insert($data);
+    //     return redirect()->to('/profil')->with('sukses','Data berhasil disimpan!');
+    // }
 }

@@ -6,7 +6,7 @@ use App\Models\SkripsiModel;
 use App\Models\DosenModel;
 use App\Models\HistoriModel;
 use App\Models\BimbinganModel;
-
+use App\Models\ProgresSkripsiModel;
 
 class Bimbingan extends BaseController
 {
@@ -14,6 +14,7 @@ class Bimbingan extends BaseController
     protected $dosenModel;
     protected $historiModel;
     protected $bimbinganModel;
+    protected $progresSkripsiModel;
 
     public function __construct()
     {
@@ -22,6 +23,7 @@ class Bimbingan extends BaseController
         $this->bimbinganModel = new BimbinganModel();
         $this->dosenModel = new DosenModel();
         $this->historiModel = new HistoriModel();
+        $this->progresSkripsiModel = new ProgresSkripsiModel();
     }
 
     // menampilkan semua mahasiswa yang bimbingan dengan dosen bersangkutan
@@ -100,6 +102,10 @@ class Bimbingan extends BaseController
             'bb_data_dukung' => $nama_data_dukung,
             'is_verifikasi' => 0,
         );
+        $data_progres = array(
+            'status' => 4,
+        );
+        $this->progresSkripsiModel->where('nim', $nim)->set($data_progres)->update();
         $this->bimbinganModel->tambahBimbingan($data);
         return redirect()->to('/skripsi')->with('sukses','Data berhasil disimpan!');
     }

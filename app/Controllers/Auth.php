@@ -81,8 +81,6 @@ class Auth extends BaseController
                     $builder->set('is_login', '1');
                     $builder->where('username', $cek['username']);
                     $builder->update();
-
-                    
                     return redirect()->to('/dashboard')->with('sukses','Login berhasil!');
                 }else {
                     return redirect()->back()->with('gagal', 'Username atau Password salah!');   

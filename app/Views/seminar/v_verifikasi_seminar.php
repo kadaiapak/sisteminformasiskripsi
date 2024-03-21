@@ -66,6 +66,7 @@
                         <?php if(session()->get('level') == '4' && $satu_seminar->smr_status == '3') { ?>
                         <form action="<?= base_url('seminar/'.$satu_seminar->smr_uuid.'/verifikasi_kadep'); ?>" method="post" id="verifikasi_kadep">
                         <?= csrf_field(); ?>
+                        <input type="hidden" name="nim" value="<?= $satu_seminar->smr_nim_m; ?>">
                         <!-- jika verifikator adalah kadep maka munculkan menu pilih dosen penguji satu dan penguji dua -->
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3 ">Dosen Penguji 1</label>
@@ -266,6 +267,7 @@
                                 <form action="<?= base_url('seminar/'.$satu_seminar->smr_uuid.'/verifikasi_admin'); ?>" method="post" id="tolak_admin">
                                     <?= csrf_field(); ?>
                                     <input type="hidden" name="idSeminar" value="<?= $satu_seminar->smr_id; ?>">
+                                    <input type="hidden" name="nim" value="<?= $satu_seminar->smr_nim_m; ?>"> 
                                     <div class="modal-content">
                                         <div class="modal-body">
                                             <div class="form-group row ">

@@ -12,6 +12,7 @@ use App\Models\MahasiswaStatusSkripsiModel;
 use App\Models\FilePersyaratanUjianModel;
 use App\Models\DosenModel;
 use App\Models\NilaiSkripsiModel;
+use App\Models\ProgresSkripsiModel;
 
 use Endroid\QrCode\Color\Color;
 use Endroid\QrCode\Encoding\Encoding;
@@ -39,6 +40,7 @@ class UjianSkripsi extends BaseController
     protected $filePersyaratanUjianModel;
     protected $dosenModel;
     protected $nilaiSkripsiModel;
+    protected $progresSkripsiModel;
 
     public function __construct()
     {
@@ -54,6 +56,7 @@ class UjianSkripsi extends BaseController
         $this->filePersyaratanUjianModel = new FilePersyaratanUjianModel();
         $this->dosenModel = new DosenModel();
         $this->nilaiSkripsiModel = new NilaiSkripsiModel();
+        $this->progresSkripsiModel = new ProgresSkripsiModel();
     }
 
     // menampilkan semua skripsi yang akan di verifikasi oleh admin dan kadep
@@ -187,12 +190,16 @@ class UjianSkripsi extends BaseController
         $dataStatus = array(
             'status' => 4
         );
+        $data_progres = array(
+            'status' => 8,
+        );
+        $this->progresSkripsiModel->where('nim',  $this->request->getVar('us_nim_m'))->set($data_progres)->update();
         $this->ujianSkripsiModel->simpanUjian($data, $persyaratan);
         $this->mahasiswaStatusSkripsiModel->where('nim', $this->request->getVar('us_nim_m'))->set($dataStatus)->update();
         return redirect()->to('/skripsi')->with('sukses','Data berhasil disimpan!');
     }
 
-    // controller ini digunakan untuk menampilkan semua pengajuan ujian skripsi yang akan diverifikasi oleh admin dan kadep
+    // controller ini digunakan untuk menampilkan detail pengajuan ujian skripsi yang akan diverifikasi oleh admin dan kadep
     // akses oleh admin departemen dan kadep
     // routes : /ujian-skripsi/verifikasi/(:any)/(:num)
     public function verifikasi($UUIDUjian, $idUjian)
@@ -250,6 +257,10 @@ class UjianSkripsi extends BaseController
                     'tanggal_diproses_admin' => $tanggal_diproses_admin,
                     'sedang_diproses' => 1,
                 );
+                $data_progres = array(
+                    'status' => 9,
+                );
+                $this->progresSkripsiModel->where('nim',  $this->request->getVar('nim'))->set($data_progres)->update();
                 $idUjian = $this->request->getVar('idUjian');
                 $update = $this->ujianSkripsiModel->verifikasiUjian($UUIDUjian, $data);
                 if(!$update){
@@ -347,6 +358,10 @@ class UjianSkripsi extends BaseController
                     'kadep_verifikator' => session()->get('user_id'),
                     'qr_code' => $generate_qrcode 
                 );
+                $data_progres = array(
+                    'status' => 10,
+                );
+                $this->progresSkripsiModel->where('nim',  $this->request->getVar('nim'))->set($data_progres)->update();
                 $this->ujianSkripsiModel->where('us_uuid', $UUIDUjian)->set($data)->update();
                 return redirect()->to('/ujian-skripsi/semua-ujian')->with('sukses','Pengajuan seminar diterima oleh Kadep!');
             }   

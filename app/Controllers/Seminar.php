@@ -13,6 +13,7 @@ use App\Models\FilePersyaratanSeminarModel;
 use App\Models\HariModel;
 use App\Models\MahasiswaStatusSkripsiModel;
 use App\Models\MengikutiSeminarModel;
+use App\Models\ProgresSkripsiModel;
 
 use Endroid\QrCode\Color\Color;
 use Endroid\QrCode\Encoding\Encoding;
@@ -40,6 +41,7 @@ class Seminar extends BaseController
     protected $hariModel;
     protected $mahasiswaStatusSkripsiModel;
     protected $mengikutiSeminarModel;
+    protected $progresSkripsiModel;
 
     public function __construct()
     {
@@ -55,6 +57,7 @@ class Seminar extends BaseController
         $this->hariModel = new HariModel();
         $this->mahasiswaStatusSkripsiModel = new MahasiswaStatusSkripsiModel();
         $this->mengikutiSeminarModel = new MengikutiSeminarModel();
+        $this->progresSkripsiModel = new ProgresSkripsiModel();
     }
 
    // menampilkan semua seminar mahasiswa pembimbing penguji satu penguji dua dengan dosen bersangkutan
@@ -109,8 +112,6 @@ class Seminar extends BaseController
         ];
         return view('seminar/v_tambah_seminar', $data);
     }
-
-
 
     public function simpan($UUIDSkripsi)
     {
@@ -195,15 +196,17 @@ class Seminar extends BaseController
         $dataStatus = array(
             'status' => 3
         );
+        $data_progres = array(
+            'status' => 5,
+        );
+        $this->progresSkripsiModel->where('nim', $nim)->set($data_progres)->update();
         $this->seminarModel->simpanSeminar($data, $persyaratan);
         $this->mahasiswaStatusSkripsiModel->where('nim', $this->request->getVar('smr_nim_m'))->set($dataStatus)->update();
         return redirect()->to('/skripsi')->with('sukses','Data berhasil disimpan!');
     }
 
-
     public function mengikuti_seminar()
-    {
-      
+    {  
         $ruangan = $this->ruanganModel->getAllRuangan();
         $hari = $this->hariModel->getAllHari();
         $data = [
@@ -316,8 +319,7 @@ class Seminar extends BaseController
         }
     }
 
-   
-    // controller ini digunakan untuk admin melihat semua seminar yang akan diverifikasi
+    // controller ini digunakan untuk admin melihat detail seminar yang akan diverifikasi
     public function verifikasi($UUIDSeminar, $idSeminar)
     {
         if($UUIDSeminar != null) {
@@ -408,6 +410,10 @@ class Seminar extends BaseController
                     'tanggal_diproses_admin' => $tanggal_diproses_admin,
                     'sedang_diproses' => 1,
                 );
+                $data_progres = array(
+                    'status' => 6,
+                );
+                $this->progresSkripsiModel->where('nim',  $this->request->getVar('nim'))->set($data_progres)->update();
                 $idSeminar = $this->request->getVar('idSeminar');
                 $update = $this->seminarModel->verifikasiSeminar($UUIDSeminar, $data);
                 if(!$update){
@@ -482,9 +488,11 @@ class Seminar extends BaseController
                        'kadep_verifikator' => session()->get('user_id'),
                        'qr_code' => $generate_qrcode
                    );
-
+                    $data_progres = array(
+                        'status' => 7,
+                    );
+                    $this->progresSkripsiModel->where('nim',  $this->request->getVar('nim'))->set($data_progres)->update();
                    $this->seminarModel->where('smr_uuid', $UUIDSeminar)->set($data)->update();
-                   
                    return redirect()->to('/seminar/semua-seminar')->with('sukses','Pengajuan seminar diterima oleh Kadep!');
                }   
            } else {

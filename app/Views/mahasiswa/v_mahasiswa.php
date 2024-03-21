@@ -24,8 +24,10 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Nama Dosen</th>
                                                 <th>NIM</th>
+                                                <th>Nama</th>
+                                                <th>Departemen</th>
+                                                <th>Status</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -34,8 +36,10 @@
                                         <?php foreach($semua_mahasiswa as $sm): ?>
                                             <tr>
                                                 <td><?= $no; ?></td>
-                                                <td><?= $sm['prf_nim_portal']; ?></td>
-                                                <td><?= $sm['prf_nama_portal']; ?></td>
+                                                <td><?= $sm['nim']; ?></td>
+                                                <td><?= $sm['nama']; ?></td>
+                                                <td><?= $sm['prodi']; ?></td>
+                                                <td><?= ($sm['status'] == 1 ? "<span class='badge badge-danger'>Belum ada progres</span>" : ($sm['status'] == 2 ? "<span class='badge badge-warning'>Pengajuan Judul</span>" : ($sm['status'] == 3 ? "<span class='badge badge-success'>Judul diterima</span>" : ($sm['status'] == 4 ? "<span class='badge badge-info'>Bimbingan</span>" : ($sm['status'] == 5 ? "<span class='badge badge-primary'>Pengajuan Seminar Proposal</span>" : ($sm['status'] == 6 ? "<span class='badge badge-primary'>Seminar disetujui admin</span>" : ($sm['status'] == 7 ? "<span class='badge badge-success'>Seminar disetujui kadep</span>" : ($sm['status'] == 8 ? "<span class='badge badge-info'>Ujian Skripsi</span>" : ($sm['status'] == 9 ? "<span class='badge badge-info'>Ujian Skripsi Disetujui Admin</span>" : ($sm['status'] == 10 ? "<span class='badge badge-info'>Ujian Skripsi Disetujui Kadep</span>" : null)))))))))); ?></td>
                                                 <td>
                                                     <a href="" class="btn btn-primary btn-sm">Detail</a>
                                                 </td>

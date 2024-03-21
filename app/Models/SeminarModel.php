@@ -74,7 +74,7 @@ class SeminarModel extends Model
             $builder->groupEnd();
         }
         // end
-        $builder->orderBy('smr_status','desc');
+        $builder->orderBy('smr_status','asc');
         $query = $builder->get();
         return $query->getResultArray(); 
     }

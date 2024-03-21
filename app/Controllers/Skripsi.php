@@ -11,6 +11,7 @@ use App\Models\ProfilModel;
 use App\Models\UjianSkripsiModel;
 use App\Models\MahasiswaStatusSkripsiModel;
 use App\Models\MengikutiSeminarModel;
+use App\Models\ProgresSkripsiModel;
 
 class Skripsi extends BaseController
 {
@@ -23,6 +24,7 @@ class Skripsi extends BaseController
     protected $ujianSkripsiModel;
     protected $mahasiswaStatusSkripsiModel;
     protected $mengikutiSeminarModel;
+    protected $progresSkripsiModel;
 
     public function __construct()
     {
@@ -36,6 +38,7 @@ class Skripsi extends BaseController
         $this->ujianSkripsiModel = new UjianSkripsiModel();
         $this->mahasiswaStatusSkripsiModel = new MahasiswaStatusSkripsiModel();
         $this->mengikutiSeminarModel = new MengikutiSeminarModel(); 
+        $this->progresSkripsiModel = new ProgresSkripsiModel(); 
     }
 
     // digunakan oleh mahasiswa untuk melihat skripsi mereka
@@ -43,7 +46,6 @@ class Skripsi extends BaseController
     {
         $nim = session()->get('username');
         $mengikuti_seminar = $this->mengikutiSeminarModel->getAll($nim);
-        $nim = session()->get('username');
         $semuaSkripsi = $this->skripsiModel->getAll($nim);
         $status_pengajuan_skripsi = array_column($semuaSkripsi, 'status_pengajuan_skripsi');
         $adaJudulDiterima = in_array('3', $status_pengajuan_skripsi);
@@ -221,6 +223,11 @@ class Skripsi extends BaseController
             'data_dukung' => $nama_data_dukung,
             'status_pengajuan_skripsi' => 1,
         );
+
+        $data_progres = array(
+            'status' => 2,
+        );
+        $this->progresSkripsiModel->where('nim', $this->request->getVar('nim_mahasiswa'))->set($data_progres)->update();
         $this->skripsiModel->simpanSkripsi($data);
         $skripsi_id = $this->skripsiModel->getInsertID();
         $this->historiModel->save([
@@ -404,6 +411,11 @@ class Skripsi extends BaseController
                 'tanggal_diproses' => $tanggal_diproses_admin,
                 'nim_mahasiswa' => $this->request->getVar('nim_mahasiswa')
             ];
+
+            $data_progres = array(
+                'status' => 3,
+            );
+            $this->progresSkripsiModel->where('nim', $this->request->getVar('nim_mahasiswa'))->set($data_progres)->update();
             $this->skripsiModel->setujuiJudul($id, $data);
             $dataStatus = array(
                 'status' => 2

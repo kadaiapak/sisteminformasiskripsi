@@ -60,6 +60,7 @@
                         <?php if(session()->get('level') == '4' && $satu_ujian['us_status'] == '3') { ?>
                         <form action="<?= base_url('ujian-skripsi/'.$satu_ujian['us_uuid'].'/verifikasi_kadep'); ?>" method="post" id="verifikasi_kadep">
                         <?= csrf_field(); ?>
+                        <input type="hidden" value="<?= $satu_ujian['us_nim_m']; ?>" name="nim">
                         <!-- jika verifikator adalah kadep maka munculkan menu pilih dosen penguji satu dan penguji dua -->
                             <!-- <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3 ">Dosen Penguji 1</label>
@@ -248,6 +249,7 @@
                                 <form action="<?= base_url('ujian-skripsi/'.$satu_ujian['us_uuid'].'/verifikasi_admin'); ?>" method="post" id="tolak_admin">
                                     <?= csrf_field(); ?>
                                     <input type="hidden" name="idUjian" value="<?= $satu_ujian['us_id']; ?>">
+                                    <input type="hidden" value="<?= $satu_ujian['us_nim_m']; ?>" name="nim">
                                     <div class="modal-content">
                                         <div class="modal-body">
                                             <div class="form-group row ">

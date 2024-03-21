@@ -49,7 +49,7 @@
                                                 <td><?= $su['ujian_ruangan_alias']; ?></td>
                                                 <td><?= $su['ujian_sesi_alias']; ?></td>
                                                 <td><?= date('d-m-Y', strtotime($su['us_tanggal'])); ?></td>
-                                                <td><?= ($su['us_status'] == 1 ? "<span class='badge badge-warning'>Belum diproses Admin</span>" : ($su['us_status'] == 2 ? "<span class='badge badge-danger'>Seminar ditolak Admin</span>" : ($su['us_status'] == 3 ? "<span class='badge badge-success'>Menunggu Proses Kadep</span>" : ($su['us_status'] == 4 ? "<span class='badge badge-danger'>Seminar ditolak Kadep</span>" : ($su['us_status'] == 5 ? "<span class='badge badge-success'>Seminar disetujui Kadep</span>" : null))))); ?></td>
+                                                <td><?= ($su['us_status'] == 1 ? "<span class='badge badge-warning'>Belum diproses Admin</span>" : ($su['us_status'] == 2 ? "<span class='badge badge-danger'>ditolak Admin</span>" : ($su['us_status'] == 3 ? "<span class='badge badge-info'>Menunggu Proses Kadep</span>" : ($su['us_status'] == 4 ? "<span class='badge badge-danger'>ditolak Kadep</span>" : ($su['us_status'] == 5 ? "<span class='badge badge-success'>Disetujui</span>" : null))))); ?></td>
                                                 <td>
                                                     <?php if(session()->get('level') == '4' || session()->get('level') == '7') { ?>
                                                     <!-- jika level adalah admin atau kadep maka url nya -->
