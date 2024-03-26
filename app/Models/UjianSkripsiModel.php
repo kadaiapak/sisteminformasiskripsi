@@ -151,6 +151,40 @@ class UjianSkripsiModel extends Model
         return $query->getRowArray(); 
     }
 
+    // diakses oleh kadep untuk melihat detail mahasiswa dan detail ujian skripsi mahasiswa
+    public function getDetailByKadep($UUIDUjian = null)
+    {   
+        $builder = $this->db->table('ujian_skripsi');
+        $builder->select('ujian_skripsi.*,
+            profil.prf_nama_portal as nama_mahasiswa, 
+            profil.nohp_baru, profil.prodi_portal,
+            skripsi.judul_skripsi as judul_skripsi, 
+            skripsi.deskripsi_skripsi as deskripsi_skripsi,
+            seminar_sesi.jam_alias as ujian_skripsi_sesi_alias,
+            seminar_ruangan.ruangan_alias as ujian_skripsi_ruangan_alias,
+            seminar.penguji_satu, seminar.penguji_dua,
+            fip_dosen_pembimbing.nidn as d_pembimbing_nidn, fip_dosen_pembimbing.peg_gel_dep as d_pembimbing_peg_gel_dep, fip_dosen_pembimbing.peg_nama as d_pembimbing_peg_nama, fip_dosen_pembimbing.peg_gel_bel as d_pembimbing_peg_gel_bel,
+            fip_dosen_pa.nidn as d_pa_nidn, fip_dosen_pa.peg_gel_dep as d_pa_peg_gel_dep, fip_dosen_pa.peg_nama as d_pa_peg_nama, fip_dosen_pa.peg_gel_bel as d_pa_peg_gel_bel,
+            fip_penguji_satu.nidn as d_penguji_satu_nidn, fip_penguji_satu.peg_gel_dep as d_penguji_satu_peg_gel_dep, fip_penguji_satu.peg_nama as d_penguji_satu_peg_nama, fip_penguji_satu.peg_gel_bel as d_penguji_satu_peg_gel_bel,
+            fip_penguji_dua.nidn as d_penguji_dua_nidn, fip_penguji_dua.peg_gel_dep as d_penguji_dua_peg_gel_dep, fip_penguji_dua.peg_nama as d_penguji_dua_peg_nama, fip_penguji_dua.peg_gel_bel as d_penguji_dua_peg_gel_bel,
+        ');
+        $builder->join('seminar', 'ujian_skripsi.us_s_uuid = seminar.smr_s_uuid');
+        $builder->join('profil', 'ujian_skripsi.us_nim_m = profil.prf_nim_portal');
+        $builder->join('skripsi', 'ujian_skripsi.us_s_uuid = skripsi.skripsi_uuid');
+        $builder->join('seminar_sesi', 'ujian_skripsi.us_sesi = seminar_sesi.seminar_s_id');
+        $builder->join('seminar_ruangan', 'ujian_skripsi.us_ruangan = seminar_ruangan.seminar_r_id');
+        $builder->join('fip_dosen as fip_dosen_pembimbing', 'fip_dosen_pembimbing.nidn = skripsi.dosen_pembimbing', 'left');
+        $builder->join('fip_dosen as fip_dosen_pa', 'fip_dosen_pa.nidn = skripsi.dosen_pa', 'left');
+        $builder->join('fip_dosen as fip_penguji_satu', 'fip_penguji_satu.nidn = seminar.penguji_satu','left');
+        $builder->join('fip_dosen as fip_penguji_dua', 'fip_penguji_dua.nidn = seminar.penguji_dua','left');
+        if($UUIDUjian) {
+            $builder->where('us_uuid', $UUIDUjian);
+        }
+        $builder->where('seminar.smr_status', '5');
+        $query = $builder->get();
+        return $query->getRow(); 
+    }
+
      // used by seminar::print_surat
      public function getDetailSurat($UUIDUjian = null)
      {   

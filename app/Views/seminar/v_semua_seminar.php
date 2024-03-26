@@ -48,7 +48,7 @@
                                                 <td><?= $ssr['seminar_ruangan_alias']; ?></td>
                                                 <td><?= $ssr['seminar_sesi_alias']; ?></td>
                                                 <td><?= date('d-m-Y', strtotime($ssr['smr_tanggal'])); ?></td>
-                                                <td><?= ($ssr['smr_status'] == 1 ? "<span class='badge badge-warning'>Belum diproses Admin</span>" : ($ssr['smr_status'] == 2 ? "<span class='badge badge-danger'>Seminar ditolak Admin</span>" : ($ssr['smr_status'] == 3 ? "<span class='badge badge-success'>Menunggu Proses Kadep</span>" : ($ssr['smr_status'] == 4 ? "<span class='badge badge-danger'>Seminar ditolak Kadep</span>" : ($ssr['smr_status'] == 5 ? "<span class='badge badge-success'>Seminar disetujui Kadep</span>" : null))))); ?></td>
+                                                <td><?= ($ssr['smr_status'] == 1 ? "<span class='badge badge-warning'>Belum diproses Admin</span>" : ($ssr['smr_status'] == 2 ? "<span class='badge badge-danger'>Seminar ditolak Admin</span>" : ($ssr['smr_status'] == 3 ? "<span class='badge badge-info'>Menunggu Proses Kadep</span>" : ($ssr['smr_status'] == 4 ? "<span class='badge badge-danger'>Seminar ditolak Kadep</span>" : ($ssr['smr_status'] == 5 ? "<span class='badge badge-success'>Disetujui</span>" : null))))); ?></td>
                                                 <td>
                                                     <?php if(session()->get('level') == '4' || session()->get('level') == '7') { ?>
                                                     <!-- jika level adalah admin departemen atau kadep maka url nya -->

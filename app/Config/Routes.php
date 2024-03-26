@@ -49,6 +49,10 @@ $routes->post('/auth/loginProcess', 'Auth::loginProcess');
 // route untuk MAHASISWA
     // bisa di akses oleh kadep
     $routes->get('/mahasiswa', 'Mahasiswa::index', ['filter' => 'kadepFilter']);
+    $routes->get('/mahasiswa/detail-skripsi/(:num)', 'Mahasiswa::detail_skripsi/$1', ['filter' => 'kadepFilter']);
+    $routes->get('/mahasiswa/detail-seminar/(:any)/(:any)', 'Mahasiswa::detail_seminar/$1/$2', ['filter' => 'kadepFilter']);
+    $routes->get('/mahasiswa/detail-ujian-skripsi/(:any)', 'Mahasiswa::detail_ujian_skripsi/$1', ['filter' => 'kadepFilter']);
+    // akhir dari bisa di akses oleh kadep
 // akhir route MAHASISWA
 
     

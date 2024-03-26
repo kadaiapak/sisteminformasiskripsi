@@ -34,6 +34,7 @@ class ProfilModel extends Model
     'jjp_portal',
     'alamat_lengkap',
     'sudah_edit',
+    'prf_status'
     ];
 
     // digunakan oleh controller Mahasiswa::index()
