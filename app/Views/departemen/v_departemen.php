@@ -12,7 +12,6 @@
                         <h2>Daftar Departemen</h2>
                         <div class="clearfix"></div>
                     </div>
-					
                     <div class="x_content">
 						<div>
 							<a href="<?= base_url("departemen/tambah"); ?>" class="btn btn-success btn-sm"><i class="fa fa-plus-square" style="margin-right: 5px;"></i>Tambah Departemen</a>
