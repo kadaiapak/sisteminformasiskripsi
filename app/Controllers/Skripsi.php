@@ -12,6 +12,7 @@ use App\Models\UjianSkripsiModel;
 use App\Models\MahasiswaStatusSkripsiModel;
 use App\Models\MengikutiSeminarModel;
 use App\Models\ProgresSkripsiModel;
+use App\Models\JadwalPengajuanJudulModel;
 
 class Skripsi extends BaseController
 {
@@ -25,6 +26,7 @@ class Skripsi extends BaseController
     protected $mahasiswaStatusSkripsiModel;
     protected $mengikutiSeminarModel;
     protected $progresSkripsiModel;
+    protected $jadwalPengajuanJudulModel;
 
     public function __construct()
     {
@@ -39,12 +41,29 @@ class Skripsi extends BaseController
         $this->mahasiswaStatusSkripsiModel = new MahasiswaStatusSkripsiModel();
         $this->mengikutiSeminarModel = new MengikutiSeminarModel(); 
         $this->progresSkripsiModel = new ProgresSkripsiModel(); 
+        $this->jadwalPengajuanJudulModel = new JadwalPengajuanJudulModel();
     }
 
     // digunakan oleh mahasiswa untuk melihat skripsi mereka
     public function index()
     {
         $nim = session()->get('username');
+        $getDepartemen = $this->profilModel->getDepartemen($nim);
+        $jadwal_pengajuan_judul = $this->jadwalPengajuanJudulModel->getDetailByDepartemen($getDepartemen);
+         
+        // cek apakah pendaftaran judul dibuka
+        if ($jadwal_pengajuan_judul['apakah_buka'] == 0) {
+            $apakah_buka = false;
+        } else {
+            if(date('Y-m-d H:i:s') < $jadwal_pengajuan_judul['mulai_pengajuan_judul']){
+                $apakah_buka = false;
+            }elseif (date('Y-m-d H:i:s') > $jadwal_pengajuan_judul['akhir_pengajuan_judul']) {
+                $apakah_buka = false;
+            }else {
+                $apakah_buka = true;
+            }
+        }
+        // akhir dari cek apakah pendaftaran judul dibuka
         $mengikuti_seminar = $this->mengikutiSeminarModel->getAll($nim);
         $semuaSkripsi = $this->skripsiModel->getAll($nim);
         $status_pengajuan_skripsi = array_column($semuaSkripsi, 'status_pengajuan_skripsi');
@@ -114,6 +133,7 @@ class Skripsi extends BaseController
             'semua_ujian' => $semuaUjian,
             'UUIDSkripsi' => $UUIDSkripsiFinal,
             'progressAdalahJudul' => $progressAdalahJudul,
+            'apakah_buka_judul' => $apakah_buka,
             'bisaTambahJudul' => $bisaTambahJudul,
             'progressAdalahBimbingan' => $progressAdalahBimbingan,
             'progressAdalahSeminar' => $progressAdalahSeminar,

@@ -209,6 +209,7 @@
         <ul class="nav side-menu">
             <li><a href="<?= base_url('/dashboard'); ?>"><i class="fa fa-home"></i> Dashboard</a></li>
             <li><a href="<?= base_url('/daftar-ruangan-terpakai'); ?>"><i class="fa fa-home"></i> Ruangan Terpakai</a></li>
+            <li><a href="<?= base_url('/jadwal-pengajuan-judul'); ?>"><i class="fa fa-calendar"></i>Atur Jadwal Ajukan Judul</a></li>
             <li><a><i class="fa fa-edit"></i> Skripsi Mahasiswa <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a href="<?= base_url('/seminar/semua-seminar'); ?>">Verifikasi Sempro</a></li>

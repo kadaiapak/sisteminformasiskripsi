@@ -92,8 +92,13 @@
                                             <div class="col-md-12 col-sm-12 ">
                                                 <div class="x_panel">
                                                     <div class="x_title">
-                                                        <?php if($bisaTambahJudul) { ?>
-                                                            <a href="<?= base_url('skripsi/ajukan-judul'); ?>" class="btn btn-success btn-sm"><i class="fa fa-plus-square" style="margin-right: 5px;"></i>Ajukan judul</a>
+                                                        <?php if($apakah_buka_judul == true){ ?>
+                                                            <?php if($bisaTambahJudul) { ?>
+                                                                <a href="<?= base_url('skripsi/ajukan-judul'); ?>" class="btn btn-success btn-sm"><i class="fa fa-plus-square" style="margin-right: 5px;"></i>Ajukan judul</a>
+                                                            <?php } ?>
+                                                        <?php }else { ?>
+                                                            <h2><b>Jadwal Pengajuan Judul Masih ditutup</b></h2>
+                                                            <div class="clearfix"></div>
                                                         <?php } ?>
                                                     </div>
                                                     <div class="x_content">
