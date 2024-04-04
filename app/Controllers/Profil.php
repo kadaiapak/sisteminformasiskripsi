@@ -157,7 +157,7 @@ class Profil extends BaseController
             'agama' => $this->request->getVar('agama'),
             'nohp_portal' => $this->request->getVar('nohp_portal'),
             'nohp_baru' => $this->request->getVar('nohp_baru'),
-            'nowa' => $this->request->getVar('nowa'),
+            'nowa' => $this->request->getVar('no_wa'),
             'email' => $this->request->getVar('email'),
             'idpdpt' => $this->request->getVar('idpdpt'),
             'departemen_input' => $this->request->getVar('departemen_input'),

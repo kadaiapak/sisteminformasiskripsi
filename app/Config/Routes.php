@@ -10,8 +10,11 @@ $routes->get('/dashboard', 'Dashboard::index');
 
 // ROUTE LOGIN
 $routes->get('/auth/login', 'Auth::login');
+$routes->get('/auth/mahasiswa', 'Auth::login_mahasiswa');
 $routes->get('/auth/logout', 'Auth::logout');
-$routes->post('/auth/loginProcess', 'Auth::loginProcess');
+// $routes->post('/auth/loginProcess', 'Auth::loginProcess');
+$routes->post('/auth/login/proses', 'Auth::login_proses');
+$routes->post('/auth/mahasiswa/proses', 'Auth::login_mahasiswa_proses');
 // AKHIR ROUTE LOGIN
 
 // ROUTES UNTUK Surat
@@ -540,3 +543,10 @@ $routes->post('/auth/loginProcess', 'Auth::loginProcess');
      $routes->post('/validasi-instrumen/setujui-kadep/(:any)', 'ValidasiInstrumen::setujui_kadep/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
     // AKHIR ROUTE UNTUK ADMIN
 // AKHIR ROUTE VALIDASI INSTRUMEN
+
+// ROUTE UNTUK PENGATURAN
+    // diakses oleh admin departemen dan kepala departemen
+    $routes->get('/jadwal-pengajuan-judul', 'JadwalPengajuanJudul::index', ['filter' => 'adminDepartemenDanKadepFilter' ]);
+    $routes->get('/edit-jadwal-pengajuan-judul/(:num)', 'JadwalPengajuanJudul::edit/$1', ['filter' => 'adminDepartemenDanKadepFilter' ]);
+    $routes->post('/jadwal-pengajuan-judul/simpan-pembaruan', 'JadwalPengajuanJudul::simpan_pembaruan', ['filter' => 'adminDepartemenDanKadepFilter' ]);
+// AKHIR DARI ROUTE UNTUK PENGATURAN

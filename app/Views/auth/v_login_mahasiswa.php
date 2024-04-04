@@ -39,7 +39,7 @@
                     <strong>Gagal!</strong> <?= session()->getFlashdata('gagal'); ?>.
             </div>
         <?php endif; ?>
-            <form method="POST" action="<?= base_url('/auth/login/proses'); ?>">
+            <form method="POST" action="<?= base_url('/auth/mahasiswa/proses'); ?>">
             <?= csrf_field(); ?>
             <div>
               <img src="<?=base_url('template/');?>src/img/unpkopsuratm.jpg" alt="logo" width="50" class="shadow-light rounded-circle mb-1 mt-2" >
@@ -57,18 +57,6 @@
                   <?= validation_show_error('password'); ?>
                 </div>
               </div>
-              <div>
-                <?php $invalid_logo = base_url('template/src/img/invalid.svg') ?>
-                <select style="border-radius: 3px; box-shadow :0 1px 0 #fff, 0 -2px 5px rgba(0,0,0,0.08) inset; <?= validation_show_error('login_level') ? "background-image: url(".$invalid_logo."); border: 1px solid red; background-repeat: no-repeat; padding-right: calc(1.5em + .75rem); background-position: center right calc(.375em + .1875rem); background-size: calc(.75em + .375rem) calc(.75em + .375rem)" : "border: 1px solid #c8c8c8; color :#777;"; ?>" name="login_level" class="form-control" style="box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0,0,0,0.08) inset; border: 1px solid #c8c8c8; color: #777;">
-                    <option value="">-- Pilih level --</option>
-                    <option value="admin">Admin</option>
-                    <option value="dosen">Dosen</option>
-                    <option value="mahasiswa">Mahasiswa</option>
-                </select>
-            </div>
-            <div class="invalid-feedback" style="text-align: left; display: block;">
-                  <?= validation_show_error('login_level'); ?>
-                </div>
               <div style="margin-top: 20px; text-align: start;">
                 <button class="btn btn-primary" type="submit"><i class="fa fa-sign-in" style="margin-right: 5px;"></i>Log in</button>
               </div>

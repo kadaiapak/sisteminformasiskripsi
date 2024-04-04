@@ -4,20 +4,23 @@ namespace App\Controllers;
 use App\Models\AuthModel;
 use App\Models\ProfilModel;
 use App\Models\DosenModel;
-
+use App\Models\ApiModel;
 
 class Auth extends BaseController
 {
     protected $authModel;
     protected $profilModel;
     protected $dosenModel;
+    protected $apiModel;
     public function __construct()
     {
         helper('form');
         $this->authModel = new AuthModel();
         $this->profilModel = new ProfilModel();
         $this->dosenModel = new DosenModel();
+        $this->apiModel = new ApiModel();
     }
+    
     public function index()
     {
         return redirect()->to(site_url('/auth/login'));
@@ -34,7 +37,18 @@ class Auth extends BaseController
         return view('auth/v_login', $data);
     }
 
-    public function loginProcess()
+    public function login_mahasiswa()
+    {
+        if(session('log')) {
+            return redirect()->to(base_url('/dashboard'));
+        }
+        $data = [
+            'judul' => 'Login Mahasiswa',
+        ];
+        return view('auth/v_login_mahasiswa', $data);
+    }
+
+    public function login_proses()
     {
         if(!$this->validate([
             'username' => [
@@ -144,7 +158,51 @@ class Auth extends BaseController
                  return redirect()->back()->with('gagal', 'Username atau Password salah!');   
             }
         }
-        
+    }
+
+    public function login_mahasiswa_proses()
+    {
+        if(!$this->validate([
+            'username' => [
+                'rules' => 'required|alpha_numeric',
+                'errors' => [
+                    'required' => 'username tidak boleh kosong',
+                    'alpha_numeric' => 'Username hanya huruf dan angka tanpa spasi dan spesial karakter',
+                ]
+            ],
+            'password' => [
+                'rules' => 'required|cek_spasi',
+                'errors' => [
+                    'required' => 'password tidak boleh kosong',
+                    'cek_spasi' => 'Password tidak boleh ada spasi'
+                ]
+            ]
+        ])){
+            return redirect()->back()->withInput();
+        }
+        // jika login sebagai mahasiswa maka lakukan proses ini
+        $username = $this->request->getVar('username');
+        $password = $this->request->getVar('password');
+        $data = $this->apiModel->user_portal($username, $password);
+        $res=json_decode($data);
+        if($res->respon == 1) {
+            $rdt = $res->data;
+            if($rdt->idfak == 1){
+            $verifikasi = $this->profilModel->cekIsVerified($username);
+            session()->set('log', true); 
+            session()->set('nama_asli', $rdt->nama);
+            session()->set('username', $rdt->username);
+            session()->set('level', 6);
+            session()->set('user_foto', 'no-photo.jpg');
+            session()->set('verifikasi_mahasiswa', $verifikasi);
+            session()->set('user_level_nama', 'Mahasiswa');
+            return redirect()->to('/dashboard')->with('sukses','Login berhasil!');
+            }else {
+                return redirect()->back()->with('gagal', 'Username atau Password salah!');   
+            }
+        }else {
+            return redirect()->back()->with('gagal', 'Username atau Password salah!');   
+        }
     }
 
     public function logout()
