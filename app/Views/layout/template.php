@@ -125,18 +125,17 @@
 									<a class="dropdown-item" href="<?= base_url('/auth/logout'); ?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
 								</div>
 								</li>
-
 								<li role="presentation" class="nav-item dropdown open">
 									<a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
 										<i class="fa fa-envelope-o"></i>
-										<span class="badge bg-green"><?= countTotal(); ?></span>
+										<span class="badge bg-green"><?= countTotal	); ?></span>
 									</a>
 									<ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
 										<li class="nav-item">
 											<a class="dropdown-item" href="<?= base_url('/izin-observasi-penelitian/semua'); ?>">
 												<span>
 													<span>Observasi Penelitian</span>
-													<span class="time"><?= countObservasiPenelitian(); ?></span>
+													<span class="time"><?= countObservasiPenelitian(session()->get('level')); ?></span>
 												</span>
 											</a>
 										</li>
@@ -144,7 +143,7 @@
 											<a class="dropdown-item" href="<?= base_url('/validator-instrumen/semua'); ?>">
 												<span>
 													<span>Validator Instrumen</span>
-													<span class="time"><?= countValidatorInstrumen(); ?></span>
+													<span class="time"><?= countValidatorInstrumen(session()->get('level')); ?></span>
 												</span>
 											</a>
 										</li>
@@ -152,7 +151,7 @@
 											<a class="dropdown-item" href="<?= base_url('/izin-observasi-matakuliah/semua'); ?>">
 												<span>
 													<span>Observasi Matakuliah</span>
-													<span class="time"><?= countObservasiMatakuliah(); ?></span>
+													<span class="time"><?= countObservasiMatakuliah(session()->get('level')); ?></span>
 												</span>
 											</a>
 										</li>
@@ -160,7 +159,7 @@
 											<a class="dropdown-item" href="<?= base_url('/izin-penelitian/semua'); ?>">
 												<span>
 													<span>Izin Penelitian</span>
-													<span class="time"><?= countPenelitian(); ?></span>
+													<span class="time"><?= countPenelitian(session()->get('level')); ?></span>
 												</span>
 											</a>
 										</li>
@@ -168,7 +167,7 @@
 											<a class="dropdown-item" href="<?= base_url('/validasi-instrumen/semua'); ?>">
 												<span>
 													<span>Validasi Instrumen</span>
-													<span class="time"><?= countValidasiInstrumen(); ?></span>
+													<span class="time"><?= countValidasiInstrumen(session()->get('level')); ?></span>
 												</span>
 											</a>
 										</li>
