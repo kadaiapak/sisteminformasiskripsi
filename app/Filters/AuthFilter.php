@@ -12,7 +12,7 @@ class AuthFilter implements FilterInterface
     {
         // Do something here
         if(session()->get('log') != true){
-            return redirect()->to(base_url('/auth/login'));
+            return redirect()->to(base_url('/auth/mahasiswa'));
         }
     }
 
