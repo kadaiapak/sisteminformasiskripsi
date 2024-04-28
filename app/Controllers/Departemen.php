@@ -145,6 +145,7 @@ class Departemen extends BaseController
         }
 
         $data = array(
+            'departemen_kd' => $this->request->getVar('departemen_kd'),
             'departemen_nama' => $this->request->getVar('departemen_nama'),
             'departemen_alias' => $this->request->getVar('departemen_alias'),
             'departemen_email' => $this->request->getVar('departemen_email'),

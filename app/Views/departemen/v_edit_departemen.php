@@ -14,6 +14,15 @@
                         <form class="form-horizontal form-label-left" method="POST" action="<?= base_url('/departemen/'.$departemen_by_id['departemen_id'].'/update'); ?>">
                             <?= csrf_field(); ?>
                             <div class="form-group row ">
+                                <label class="control-label col-md-3 col-sm-3" for="departemen_kd">Kode Departemen</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input type="text" value="<?= $departemen_by_id['departemen_kd']; ?>"  name="departemen_kd" class="form-control <?= validation_show_error('departemen_kd') ? 'is-invalid' : null; ?>" id="departemen_kd">
+                                    <div class="invalid-feedback" style="text-align: left;">
+                                        <?= validation_show_error('departemen_kd'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row ">
                                 <label class="control-label col-md-3 col-sm-3" for="departemen_nama">Nama Departemen</label>
                                 <div class="col-md-9 col-sm-9 ">
                                     <input type="text" value="<?= $departemen_by_id['departemen_nama']; ?>"  name="departemen_nama" class="form-control <?= validation_show_error('departemen_nama') ? 'is-invalid' : null; ?>" id="departemen_nama">

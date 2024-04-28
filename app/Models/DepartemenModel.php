@@ -9,6 +9,7 @@ class DepartemenModel extends Model
     protected $table = 'departemen';
     protected $primaryKey = 'departemen_id';
     protected $allowedFields = [
+    'departemen_kd',
     'departemen_nama',
     'departemen_alias',
     'departemen_email',

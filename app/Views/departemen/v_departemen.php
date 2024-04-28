@@ -38,6 +38,7 @@
 										<thead>
 											<tr class="headings">
 												<th class="column-title">No </th>
+												<th class="column-title">Kode Departemen </th>
 												<th class="column-title">Nama Departemen </th>
 												<th class="column-title">Email Departemen</th>
 												<th class="column-title">Website Departemen</th>
@@ -56,6 +57,7 @@
 											<?php foreach($semua_departemen as $sd): ?>
 											<tr>
 												<td class=" "><?= $no; ?></td>
+												<td class=" "><?= $sd['departemen_kd']; ?></td>
 												<td class=" "><?= $sd['departemen_nama']; ?></td>
 												<td class=" "><?= $sd['departemen_email']; ?></td>
 												<td class=" "><?= $sd['departemen_website']; ?></td>
