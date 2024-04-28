@@ -124,24 +124,6 @@ class Profil extends BaseController
                     'required' => 'Tuliskan Alamat Lengkap'
                 ]
             ],
-            'departemen_input' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Pilih Departemen'
-                ]
-            ],
-            'prodi_input' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Pilih Prodi'
-                ]
-            ],
-            'jjp_input' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Pilih Jenjang Pendidikan'
-                ]
-            ],
         ])){
             return redirect()->back()->withInput();
         }
@@ -172,14 +154,13 @@ class Profil extends BaseController
             'jjp_input' => $this->request->getVar('jjp_input'),
             'alamat_lengkap' => $this->request->getVar('alamat_lengkap'),
             'sudah_edit' => 1,
-            'prf_status' => 1
         );
         $data_progres = array(
             'nim' => $this->request->getVar('prf_nim_portal'),
             'status' => 1,
         );
-        $this->profilModel->updateVerifikasiProfil($data, $username);
         $this->progresSkripsiModel->insert($data_progres);
+        $this->profilModel->updateVerifikasiProfil($data, $username);
         session()->set('verifikasi_mahasiswa', 1);
         return redirect()->to('/profil')->with('sukses','Profil berhasil disimpan!');
         }else {
@@ -267,7 +248,7 @@ class Profil extends BaseController
         return redirect()->to('/profil')->with('sukses','Data berhasil diubah!');
     }
 
-        // public function tambah()
+    // public function tambah()
     // {
     //     $data = [
     //         'judul' => 'Tambah Profil'
