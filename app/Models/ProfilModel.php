@@ -34,17 +34,54 @@ class ProfilModel extends Model
     'jjp_portal',
     'alamat_lengkap',
     'sudah_edit',
-    'prf_status'
+    'edit_by_admin',
+    'tanggal_edit_admin',
     ];
 
-    // digunakan oleh controller Mahasiswa::index()
+    // digunakan oleh controller MasterMahasiswa::index()
     // untuk menampilkan semua profil mahasiswa
     public function getAll()
     {
         $builder = $this->db->table('profil');
-        $builder->select('*');
+        $builder->select('profil.*,departemen.departemen_nama as nama_departemen');
+        $builder->join('departemen', 'departemen.departemen_kd = profil.idpdpt');
         $query = $builder->get();
         return $query->getResultArray();
+    }
+
+    // digunakan oleh controller MasterMahasiswa::bermasalah_idpdpt()
+    // untuk menampilkan semua profil mahasiswa yang tidak konek idpdptnya dengan nama departemen
+    public function getNullDepartemen()
+    {
+        $builder = $this->db->table('profil');
+        $builder->select('profil.*, departemen.departemen_nama as nama_departemen');
+        $builder->join('departemen', 'departemen.departemen_kd = profil.idpdpt', 'left');
+        $builder->where('departemen.departemen_nama', NULL, FALSE);
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    // digunakan oleh controller MasterMahasiswa::detail()
+    // untuk menampilkan detail semua profil mahasiswa
+    public function getDetailMahasiswa()
+    {
+        $builder = $this->db->table('profil');
+        $builder->select('profil.*,departemen.departemen_nama as nama_departemen');
+        $builder->join('departemen', 'departemen.departemen_kd = profil.idpdpt');
+        $query = $builder->get();
+        return $query->getRowArray();
+    }
+
+        // digunakan oleh controller MasterMahasiswa::edit()
+    // untuk menampilkan semua profil mahasiswa
+    public function getDetailUntukEditMahasiswa($nim)
+    {
+        $builder = $this->db->table('profil');
+        $builder->select('profil.*,departemen.departemen_nama as nama_departemen');
+        $builder->where('prf_nim_portal', $nim);
+        $builder->join('departemen', 'departemen.departemen_kd = profil.idpdpt','left');
+        $query = $builder->get();
+        return $query->getRowArray();
     }
 
     // digunakan sewaktu pertama kali login di aplikasi ini, untuk cek apakah mahasiswa tersebut sudah memperbaharui data profil
@@ -78,7 +115,7 @@ class ProfilModel extends Model
     public function getDepartemen($nim = null)
     {
         $builder = $this->db->table('profil');
-        $builder->select('departemen_input');
+        $builder->select('idpdpt');
         if($nim != null) {
             $builder->where('prf_nim_portal', $nim);
         }

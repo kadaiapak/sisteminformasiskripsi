@@ -41,6 +41,21 @@
                 <br />
                 <li><a href="<?= base_url('/dashboard'); ?>"><i class="fa fa-home"></i> Dashboard</a></li>
                 <br />
+                <h3>Master Data</h3>
+                <br />
+                <li><a><i class="fa fa-user"></i> Mahasiswa <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="<?= base_url('/master-mahasiswa'); ?>">Semua Mahasiswa</a></li>
+                        <li><a href="<?= base_url('/master-mahasiswa/bermasalah-idpdpt'); ?>">Mahasiswa error departemen</a></li>
+                    </ul>
+                </li>
+                <li><a><i class="fa fa-building"></i> Departemen <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="<?= base_url('/ruangan/pemakaian-ruangan'); ?>">Semua Departemen</a></li>
+                        <li><a href="<?= base_url('/ruangan/penjadwalan-ruangan'); ?>">Data yang tidak konek kode departemen</a></li>
+                    </ul>
+                </li>
+                <br />
                 <h3>Pengaturan</h3>
                 <br />
                 <li><a><i class="fa fa-building"></i> Ruangan <span class="fa fa-chevron-down"></span></a>
@@ -181,7 +196,7 @@
                 </ul>
             </li>
         </ul>
-        <!-- akhir dari super admin -->
+        <!-- akhir dari menu dosen -->
         <?php } ?>
 
         <?php if(session()->get('level') == '6') { ?>

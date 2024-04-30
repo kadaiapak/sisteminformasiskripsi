@@ -235,6 +235,10 @@ $routes->post('/auth/mahasiswa/proses', 'Auth::login_mahasiswa_proses');
 // ROUTE PROFIL DOSEN
     // diakses oleh dosen untuk meilhat detail profil mereka
     $routes->get('/profil-dosen', 'ProfilDosen::index', ['filter' => 'dosenFilter']);
+    // diakses oleh dosen untuk menambahkan data diri
+    $routes->get('/profil-dosen/tambah', 'ProfilDosen::tambah', ['filter' => 'dosenFilter']);
+    // diakses oleh dosen untuk menyimpan data yang sudah diisi
+    $routes->post('/profil-dosen/simpan', 'ProfilDosen::simpan', ['filter' => 'dosenFilter']);
    // diakses oleh dosen untuk melakukan verifikasi data pertama kali saat dia menggunakan aplikasi ini
    $routes->get('/profil-dosen/verifikasi', 'ProfilDosen::verifikasi', ['filter' => 'dosenFilter']);
    // diakses oleh dosen untuk melakukan verifikasi data pertama kali saat dia menggunakan aplikasi ini
@@ -550,3 +554,14 @@ $routes->post('/auth/mahasiswa/proses', 'Auth::login_mahasiswa_proses');
     $routes->get('/edit-jadwal-pengajuan-judul/(:num)', 'JadwalPengajuanJudul::edit/$1', ['filter' => 'adminDepartemenDanKadepFilter' ]);
     $routes->post('/jadwal-pengajuan-judul/simpan-pembaruan', 'JadwalPengajuanJudul::simpan_pembaruan', ['filter' => 'adminDepartemenDanKadepFilter' ]);
 // AKHIR DARI ROUTE UNTUK PENGATURAN
+
+// ROUTE UNTUK MASTER DATA
+    // diakses oleh admin dan super admin
+    $routes->get('/master-mahasiswa', 'MasterMahasiswa::index', ['filter' => 'adminDanSuperAdminFilter' ]);
+    $routes->get('/master-mahasiswa/detail/(:num)', 'MasterMahasiswa::detail/$1', ['filter' => 'adminDanSuperAdminFilter']);
+    $routes->get('/master-mahasiswa/edit/(:num)', 'MasterMahasiswa::edit/$1', ['filter' => 'adminDanSuperAdminFilter']);
+    $routes->post('/master-mahasiswa/update/(:num)', 'MasterMahasiswa::update/$1', ['filter' => 'adminDanSuperAdminFilter']);
+
+    // master maahssiwa untuk yang error
+    $routes->get('/master-mahasiswa/bermasalah-idpdpt', 'MasterMahasiswa::bermasalah_idpdpt', ['filter' => 'adminDanSuperAdminFilter' ]);
+// AKHIR DARI ROUTE UNTUK MASTER DATA
