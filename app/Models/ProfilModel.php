@@ -106,8 +106,9 @@ class ProfilModel extends Model
     public function getDetail($nim = '')
     {
         $builder = $this->db->table('profil');
-        $builder->select('*');
+        $builder->select('profil.*, departemen.departemen_nama as nama_departemen_input');
         $builder->where('prf_nim_portal', $nim);
+        $builder->join('departemen', 'departemen.departemen_id = profil.departemen_input');
         $query = $builder->get();
         return $query->getRowArray(); 
     }
