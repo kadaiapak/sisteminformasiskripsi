@@ -36,6 +36,10 @@ class ValidasiInstrumen extends BaseController
     public function index()
     {
         $nim = session()->get('username');
+        $status = $this->profilModel->cekIsVerified($nim);
+        if($status == null){
+            return redirect()->to('/profil/verifikasi')->with('gagal','Silahkan lengkapi data diri');
+        }
         $semuaValidasiInstrumen = $this->validasiInstrumenModel->getAll($nim);
         $data = [
             'judul' => 'Surat Validasi Instrumen',

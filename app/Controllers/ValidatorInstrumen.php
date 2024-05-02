@@ -33,22 +33,23 @@ class ValidatorInstrumen extends BaseController
     public function index()
     {
         $nim = session()->get('username');
+        $status = $this->profilModel->cekIsVerified($nim);
+        if($status == null){
+            return redirect()->to('/profil/verifikasi')->with('gagal','Silahkan lengkapi data diri');
+        }
         $semuaSuratValidatorInstrumen = $this->validatorInstrumenModel->getAll($nim);
         $data = [
             'judul' => 'Surat Validator Instrumen',
             'semua_validator_instrumen' => $semuaSuratValidatorInstrumen
         ];
-
         return view('validator_instrumen/v_validator_instrumen', $data);
     }
 
     public function tambah()
     {
-
         $nim = session()->get('username');
         $semuaDepartemen = $this->departemenModel->findAll();
         $user = $this->profilModel->getDetail($nim);
-        
         $data = [
             'judul' => 'Pengajuan Surat Izin Observasi Penelian',
             'semua_departemen' => $semuaDepartemen,

@@ -2,6 +2,7 @@
 namespace App\Controllers;
 use App\Models\IzinObservasiPenelitianModel;
 use App\Models\DepartemenModel;
+use App\Models\ProfilModel;
 
 use Endroid\QrCode\Color\Color;
 use Endroid\QrCode\Encoding\Encoding;
@@ -20,16 +21,22 @@ class IzinObservasiPenelitian extends BaseController
 {
     protected $izinObservasiPenelitianModel;
     protected $departemenModel;
+    protected $profilModel;
     public function __construct()
     {
         helper('form');
         $this->izinObservasiPenelitianModel = new IzinObservasiPenelitianModel();
         $this->departemenModel = new DepartemenModel();
+        $this->profilModel = new ProfilModel();
     }
 
     public function index()
     {
         $nim = session()->get('username');
+        $status = $this->profilModel->cekIsVerified($nim);
+        if($status == null){
+            return redirect()->to('/profil/verifikasi')->with('gagal','Silahkan lengkapi data diri');
+        }
         $semuaSuratIzinObservasiPenelitian = $this->izinObservasiPenelitianModel->getAll($nim);
         $data = [
             'judul' => 'Surat Izin Observasi Penelitian',
@@ -41,10 +48,13 @@ class IzinObservasiPenelitian extends BaseController
 
     public function tambah()
     {
+        $nim = session()->get('username');
+        $user = $this->profilModel->getDetail($nim);
         $semuaDepartemen = $this->departemenModel->findAll();
         $data = [
             'judul' => 'Pengajuan Surat Izin Observasi Penelian',
             'semua_departemen' => $semuaDepartemen,
+            'user' => $user
         ];
 
         return view('izin_observasi_penelitian/v_tambah_izin_observasi_penelitian', $data);
