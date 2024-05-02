@@ -10,6 +10,7 @@ class JadwalPengajuanJudulModel extends Model
     protected $primaryKey = 'jadwal_id';
     protected $allowedFields = [
     'departemen_id',
+    'departemen_kd',
     'apakah_buka',
     'mulai_pengajuan_judul',
     'akhir_pengajuan_judul',

@@ -115,7 +115,7 @@ class ProfilModel extends Model
     public function getDepartemen($nim = null)
     {
         $builder = $this->db->table('profil');
-        $builder->select('idpdpt');
+        $builder->select('departemen_input');
         if($nim != null) {
             $builder->where('prf_nim_portal', $nim);
         }

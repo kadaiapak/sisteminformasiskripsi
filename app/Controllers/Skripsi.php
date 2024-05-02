@@ -50,7 +50,6 @@ class Skripsi extends BaseController
         $nim = session()->get('username');
         $getDepartemen = $this->profilModel->getDepartemen($nim);
         $jadwal_pengajuan_judul = $this->jadwalPengajuanJudulModel->getDetailByDepartemen($getDepartemen);
-         
         // cek apakah pendaftaran judul dibuka
         if ($jadwal_pengajuan_judul['apakah_buka'] == 0) {
             $apakah_buka = false;
