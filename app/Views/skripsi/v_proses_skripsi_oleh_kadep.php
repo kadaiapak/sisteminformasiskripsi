@@ -138,7 +138,7 @@
                     <div class="x_panel">
                         <div class="x_content">
                             <?php if($single_skripsi['data_dukung'] != null) { ?>
-                                <div class="card" style="margin: 0; padding: 0; overflow: hidden; height: 75%;">
+                                <div class="card" style="margin: 0; padding: 0; overflow: hidden; height: 95vh;">
                                     <h2 class="card-header">Data dukung</h2>
                                     <div class="card-body" >
                                         <iframe src="/upload/data_dukung/<?= $single_skripsi['data_dukung']; ?>" frameborder="0" style="width: 100%; height: 100%; display: block;"></iframe>
