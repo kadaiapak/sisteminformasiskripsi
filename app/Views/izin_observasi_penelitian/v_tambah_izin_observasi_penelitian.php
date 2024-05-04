@@ -28,7 +28,6 @@
                                         <?= validation_show_error('nim_pengajuan'); ?>
                                     </div>
                                 </div>
-                                
                             </div>
                             <div class="form-group row ">
                                 <label class="control-label col-md-3 col-sm-3" for="nama_pengajuan">Nama Mahasiswa</label>
@@ -54,6 +53,15 @@
                                     <input type="text" value="" class="form-control <?= validation_show_error('tujuan_surat') ? 'is-invalid' : null; ?>" id="tujuan_surat" name="tujuan_surat" placeholder="Tuliskan Tujuan Surat">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('tujuan_surat'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row ">
+                                <label class="control-label col-md-3 col-sm-3" for="alamat_surat">Alamat Surat: </label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input type="text" value="" class="form-control <?= validation_show_error('alamat_surat') ? 'is-invalid' : null; ?>" id="alamat_surat" name="alamat_surat" placeholder="Di ....">
+                                    <div class="invalid-feedback" style="display: block;">
+                                        <?= validation_show_error('alamat_surat'); ?>
                                     </div>
                                 </div>
                             </div>

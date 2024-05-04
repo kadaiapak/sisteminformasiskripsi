@@ -83,6 +83,12 @@ class IzinObservasiPenelitian extends BaseController
                     'required' => 'Tuliskan Tujuan Surat',
                 ]
             ],
+            'alamat_surat' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Tuliskan Alamat Surat',
+                ]
+            ],
             'departemen_pengajuan' => [
                 'rules' => 'required',
                 'errors' => [
@@ -98,7 +104,7 @@ class IzinObservasiPenelitian extends BaseController
         ])){
             return redirect()->back()->withInput();
         }
-       
+
         $data = array(
             'user_pengajuan' => session()->get('username'),
             'nama_pengajuan' => $this->request->getVar('nama_pengajuan'),
@@ -106,6 +112,7 @@ class IzinObservasiPenelitian extends BaseController
             'departemen_pengajuan' => $this->request->getVar('departemen_pengajuan'),
             'judul' => $this->request->getVar('judul'),
             'tujuan_surat' => $this->request->getVar('tujuan_surat'),
+            'alamat_surat' => $this->request->getVar('alamat_surat'),
             'status' => 1,
         );
         $this->izinObservasiPenelitianModel->simpan($data);

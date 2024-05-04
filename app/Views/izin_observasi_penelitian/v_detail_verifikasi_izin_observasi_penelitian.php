@@ -49,6 +49,10 @@
                                 <td><?= $satu_observasi['tujuan_surat']; ?></td>
                             </tr>
                             <tr>
+                                <td class="font-weight-bold">Alamat Surat,</td>
+                                <td><?= $satu_observasi['alamat_surat']; ?></td>
+                            </tr>
+                            <tr>
                                 <td class="font-weight-bold">Judul</td>
                                 <td><?= $satu_observasi['judul']; ?></td>
                             </tr>

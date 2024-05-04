@@ -205,12 +205,15 @@ hr{
 			<table class="ttd_pejabat">
 				<tr>
 					<td width='300'>
+						Mengetahui,<br>
 					</td>
 					<td>
+					
 					</td>
 				</tr>
 				<tr>
 					<td width='300'>
+						Wakil Dekan I
 					</td>
 					<td>
 						Kepala Departemen
@@ -225,6 +228,8 @@ hr{
 				</tr>
 				<tr>
 					<td width='300'>
+						Dr. Hanif Al Kadri, M.Pd</br>
+						NIP. 19760921 200801 1 010
 					</td>
 					<td>
 						<?= $satu_observasi['nama_kadep_departemen']; ?></br>
