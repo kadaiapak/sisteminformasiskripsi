@@ -60,6 +60,40 @@ class SkripsiModel extends Model
         return $query->getResultArray(); 
     }
 
+    // akses oleh controller skripsi::semua_skripsi_export_excel
+    public function getAllExportExcel($departemen = null, $periode_pengajuan = null, $tahun_pengajuan = null)
+    {   
+        $builder = $this->db->table('skripsi');
+        $builder->select('skripsi.*, 
+        fip_dosen_pembimbing.nidn as d_pembimbing_nidn, fip_dosen_pembimbing.peg_gel_dep as d_pembimbing_peg_gel_dep, fip_dosen_pembimbing.peg_nama as d_pembimbing_peg_nama, fip_dosen_pembimbing.peg_gel_bel as d_pembimbing_peg_gel_bel,
+        fip_dosen_pa.nidn as d_pa_nidn, fip_dosen_pa.peg_gel_dep as d_pa_peg_gel_dep, fip_dosen_pa.peg_nama as d_pa_peg_nama, fip_dosen_pa.peg_gel_bel as d_pa_peg_gel_bel,
+        profil.departemen_input');
+        $builder->join('fip_dosen as fip_dosen_pembimbing', 'fip_dosen_pembimbing.nidn = skripsi.dosen_pembimbing');
+        $builder->join('fip_dosen as fip_dosen_pa', 'fip_dosen_pa.nidn = skripsi.dosen_pa');
+        $builder->join('profil', 'skripsi.nim_mahasiswa = profil.prf_nim_portal');
+
+        if($departemen && $departemen != 0){
+            $builder->where('profil.departemen_input', $departemen);
+        }
+        if($periode_pengajuan != ""){
+            $builder->where('periode_pengajuan', $periode_pengajuan);
+        }
+        if($tahun_pengajuan != ""){
+            $builder->where('tahun_pengajuan', $tahun_pengajuan);
+        }
+        $builder->groupStart();
+        $builder->where('status_pengajuan_skripsi', '1');
+        $builder->orWhere('status_pengajuan_skripsi', '2');
+        $builder->orWhere('status_pengajuan_skripsi', '3');
+        $builder->orWhere('status_pengajuan_skripsi', '4');
+        $builder->orWhere('status_pengajuan_skripsi', '5');
+        $builder->orWhere('status_pengajuan_skripsi', '6');
+        $builder->groupEnd();
+        $builder->orderBy('status_pengajuan_skripsi', 'desc');
+        $query = $builder->get();
+        return $query->getResultArray(); 
+    }
+
     // akses oleh controller skripsi::semua_skripsi
     public function getAllSkripsiByDosen($nidn = null)
     {   

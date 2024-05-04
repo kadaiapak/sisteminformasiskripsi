@@ -113,6 +113,10 @@ $routes->post('/auth/mahasiswa/proses', 'Auth::login_mahasiswa_proses');
     $routes->get('/skripsi/semua_skripsi', 'Skripsi::semua_skripsi', ['filter' => 'kadepFilter']);
 
     // akses oleh kadep
+    // route melihat semua skripsi mahasiswa
+    $routes->post('/skripsi/semua-skripsi/export-excel', 'Skripsi::semua_skripsi_export_excel', ['filter' => 'kadepFilter']);
+
+    // akses oleh kadep
     // route untuk lihat detail skripsi
     $routes->get('/skripsi/verifikasi/(:any)', 'Skripsi::proses_skripsi_oleh_kadep/$1', ['filter' => 'kadepFilter']);
 

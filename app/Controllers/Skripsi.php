@@ -14,6 +14,10 @@ use App\Models\MengikutiSeminarModel;
 use App\Models\ProgresSkripsiModel;
 use App\Models\JadwalPengajuanJudulModel;
 
+// library untuk export excel
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 class Skripsi extends BaseController
 {
     protected $skripsiModel;
@@ -383,6 +387,84 @@ class Skripsi extends BaseController
             'semua_skripsi' => $semuaSkripsi
         ];
         return view('skripsi/v_semua_skripsi_oleh_kadep', $data);
+    }
+
+    // export excel semua judul skripsi yang sedang di ajukan
+    // akses oleh kadep
+    public function semua_skripsi_export_excel()
+    {
+        $departemen = session()->get('departemen');
+        $periode_pengajuan = $this->request->getVar('periode_pengajuan');
+        $tahun_pengajuan = $this->request->getVar('tahun_pengajuan');
+        $semuaSkripsi = $this->skripsiModel->getAllExportExcel($departemen, $periode_pengajuan, $tahun_pengajuan);
+        $spreadsheet = new Spreadsheet();
+        $activeWorksheet = $spreadsheet->getActiveSheet();
+        $activeWorksheet->setCellValue('A1', 'Rekap Pengajuan Judul Skripsi');
+        $activeWorksheet->mergeCells('A1:L1');
+        $activeWorksheet->getStyle('A1')->getFont()->setBold(true);
+        $activeWorksheet->setCellValue('A3', 'No');
+        $activeWorksheet->setCellValue('B3', 'Nama Mahasiswa');
+        $activeWorksheet->setCellValue('C3', 'NIM');
+        $activeWorksheet->setCellValue('D3', 'Periode Pengajuan');
+        $activeWorksheet->setCellValue('E3', 'Tahun Pengajuan');
+        $activeWorksheet->setCellValue('F3', 'Judul Skripsi');
+        $activeWorksheet->setCellValue('G3', 'Deskripsi Skripsi');
+        $activeWorksheet->setCellValue('H3', 'Konsentrasi Bidang');
+        $activeWorksheet->setCellValue('I3', 'Dosen Pembimbing');
+        $activeWorksheet->setCellValue('J3', 'NIDN Dosen Pembimbing');
+        $activeWorksheet->setCellValue('K3', 'Dosen PA');
+        $activeWorksheet->setCellValue('L3', 'NIDN Dosen PA');
+
+        $column = 4;
+        foreach ($semuaSkripsi as $ss) {
+            $activeWorksheet->setCellValue('A'.$column ,($column-3));
+            $activeWorksheet->setCellValue('B'.$column , $ss['nama_mahasiswa']);
+            $activeWorksheet->setCellValue('C'.$column , $ss['nim_mahasiswa']);
+            $activeWorksheet->setCellValue('D'.$column , ($ss['periode_pengajuan'] == 1 ? 'Januari - Juni' : 'Juli - Desember'));
+            $activeWorksheet->setCellValue('E'.$column , $ss['tahun_pengajuan']);
+            $activeWorksheet->setCellValue('F'.$column , $ss['judul_skripsi']);
+            $activeWorksheet->setCellValue('G'.$column , $ss['deskripsi_skripsi']);
+            $activeWorksheet->setCellValue('H'.$column , $ss['konsentrasi_bidang']);
+            $activeWorksheet->setCellValue('I'.$column , $ss['d_pembimbing_peg_gel_dep'].' '.$ss['d_pembimbing_peg_nama'].''.$ss['d_pembimbing_peg_gel_bel']);
+            $activeWorksheet->setCellValue('J'.$column , $ss['d_pembimbing_nidn']);
+            $activeWorksheet->setCellValue('K'.$column , $ss['d_pa_peg_gel_dep'].' '.$ss['d_pa_peg_nama'].''.$ss['d_pa_peg_gel_bel']);
+            $activeWorksheet->setCellValue('L'.$column , $ss['d_pa_nidn']);
+            $column++;
+        }
+
+        $styleArray = [
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'],
+                ],
+            ],
+        ];
+        $activeWorksheet->getStyle('A3:L'.($column-1))->applyFromArray($styleArray);
+
+        $activeWorksheet->getDefaultRowDimension()->setRowHeight(-1);
+        $activeWorksheet->getStyle('F:H')->getAlignment()->setWrapText(true);
+        $activeWorksheet->getColumnDimension('F')->setWidth(60);
+        $activeWorksheet->getColumnDimension('G')->setWidth(60);
+        $activeWorksheet->getColumnDimension('H')->setWidth(40);
+
+        $activeWorksheet->getColumnDimension('A')->setAutoSize(true);
+        $activeWorksheet->getColumnDimension('B')->setAutoSize(true);
+        $activeWorksheet->getColumnDimension('C')->setAutoSize(true);
+        $activeWorksheet->getColumnDimension('D')->setAutoSize(true);
+        $activeWorksheet->getColumnDimension('E')->setAutoSize(true);
+        $activeWorksheet->getColumnDimension('I')->setAutoSize(true);
+        $activeWorksheet->getColumnDimension('J')->setAutoSize(true);
+        $activeWorksheet->getColumnDimension('K')->setAutoSize(true);
+        $activeWorksheet->getColumnDimension('L')->setAutoSize(true);
+
+
+        $writer = new Xlsx($spreadsheet);
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename=laporan_pengajuan_judul_skripsi.xlsx');
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+        exit();
     }
 
     public function proses_skripsi_oleh_kadep($id=null)
