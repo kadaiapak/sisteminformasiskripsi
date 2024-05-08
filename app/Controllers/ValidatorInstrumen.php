@@ -48,11 +48,9 @@ class ValidatorInstrumen extends BaseController
     public function tambah()
     {
         $nim = session()->get('username');
-        $semuaDepartemen = $this->departemenModel->findAll();
         $user = $this->profilModel->getDetail($nim);
         $data = [
             'judul' => 'Pengajuan Surat Izin Observasi Penelian',
-            'semua_departemen' => $semuaDepartemen,
             'user' => $user
         ];
 
@@ -91,7 +89,7 @@ class ValidatorInstrumen extends BaseController
         ])){
             return redirect()->back()->withInput();
         }
-       
+        
         $data = array(
             'user_pengajuan' => session()->get('username'),
             'nama_pengajuan' => $this->request->getVar('nama_pengajuan'),

@@ -73,7 +73,7 @@ br.jrk{
 
 hr{
 	border: 0;
-	border-top: 4px double #8c8b8b;
+	border-top: 4px double black;
 }
 
 .bordered {
@@ -117,7 +117,7 @@ hr{
 					<tr>
 						<td width='50'>Nomor</td>
 						<td width='10'>:</td>
-						<td width='320'><?= $nomor_surat; ?></td>
+						<td width='350'><?= $nomor_surat; ?></td>
 						<td><?= $tanggal_surat ?></td>
 					</tr>
 					<tr>
@@ -135,7 +135,7 @@ hr{
 					<tr><td></td></tr>
 					<tr><td></td></tr>
 					<tr>
-						<td>Kepada: Yth,. Bapak/Ibu</td>
+						<td>Yth,.</td>
 						<td></td>
 					</tr>
 				</table>
@@ -148,21 +148,18 @@ hr{
 					</tr>
 					<?php if($satu_instrumen['nama_dosen_validator_satu']) { ?>
 					<tr>
-						<td width="20px">1.</td>
 						<td width="250px"><?= $satu_instrumen['nama_dosen_validator_satu']; ?></td>
 						<td width="300px"><?= $satu_instrumen['bidang_dosen_validator_satu']; ?></td>
 					</tr>
 					<?php } ?>
 					<?php if($satu_instrumen['nama_dosen_validator_dua']) { ?>
 					<tr>
-						<td width="20px">2.</td>
 						<td width="250px"><?= $satu_instrumen['nama_dosen_validator_dua']; ?></td>
 						<td width="300px"><?= $satu_instrumen['bidang_dosen_validator_dua']; ?></td>
 					</tr>
 					<?php } ?>
 					<?php if($satu_instrumen['nama_dosen_validator_tiga']) { ?>
 					<tr>
-						<td width="20px">3.</td>
 						<td width="250px"><?= $satu_instrumen['nama_dosen_validator_tiga']; ?></td>
 						<td width="300px"><?= $satu_instrumen['bidang_dosen_validator_tiga']; ?></td>
 					</tr>
@@ -170,10 +167,7 @@ hr{
 				</table>
 				<table>
 					<tr>
-						<td>Di</td>
-					</tr>
-					<tr>
-						<td>Tempat</td>
+						<td></td>
 					</tr>
 				</table>
 				<br class="jrk">
@@ -226,7 +220,6 @@ hr{
 				<tr><td></td></tr>
 				<tr>
 					<td width='300'>
-						Mengetahui,<br>
 					</td>
 					<td>
 					
@@ -234,7 +227,6 @@ hr{
 				</tr>
 				<tr>
 					<td width='300'>
-						Wakil Dekan I
 					</td>
 					<td>
 						Kepala Departemen
@@ -249,8 +241,6 @@ hr{
 				</tr>
 				<tr>
 					<td width='300'>
-						Dr. Hanif Al Kadri, M.Pd</br>
-						NIP. 19760921 200801 1 010
 					</td>
 					<td>
 						<?= $satu_instrumen['nama_kadep_departemen']; ?></br>
