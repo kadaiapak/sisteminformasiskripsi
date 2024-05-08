@@ -20,7 +20,7 @@ class Auth extends BaseController
         $this->dosenModel = new DosenModel();
         $this->apiModel = new ApiModel();
     }
-
+    
     public function index()
     {
         return redirect()->to(site_url('/auth/login'));
@@ -104,13 +104,6 @@ class Auth extends BaseController
             }
         }else if($login_level == 'dosen'){
             $username = $this->request->getVar('username');
-            $dataDosen = $this->dosenModel->getDetail($username);
-            if($dataDosen == null) {
-                session()->set('log', true);
-                session()->set('detail_dosen', null);
-                session()->set('level', 5);
-                return redirect()->to('/dashboard')->with('sukses','Login berhasil, silahkan lengkapi data');
-            }
             $cekDosen = $this->authModel->loginDosen($username);
             if($cekDosen){
                 $password = $this->request->getVar('password');
@@ -130,6 +123,7 @@ class Auth extends BaseController
                     $builder->set('is_login', '1');
                     $builder->where('username', $cekDosen['username']);
                     $builder->update();
+
                     return redirect()->to('/dashboard')->with('sukses','Login berhasil!');
                 }else {
                     return redirect()->back()->with('gagal', 'Username atau Password salah!');   
@@ -163,7 +157,7 @@ class Auth extends BaseController
             }else {
                  return redirect()->back()->with('gagal', 'Username atau Password salah!');   
             }
-        }   
+        }
     }
 
     public function login_mahasiswa_proses()

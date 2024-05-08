@@ -20,7 +20,6 @@ class AuthFilter implements FilterInterface
     {
         // Do something here
         if (session()->get('log') == true) {
-            # code...
             return redirect()->to(base_url('/dashboard'));
         }
     }

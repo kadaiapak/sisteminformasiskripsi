@@ -60,7 +60,6 @@ class Profil extends BaseController
         $data = [
             'judul' => 'Verifikasi Profil',
             'mahasiswa_api' => $arrmhs,
-            'prodi' => $prodi,
             'departemen' => $departemen,
             'jenjang' => $jenjang
         ];
@@ -124,9 +123,23 @@ class Profil extends BaseController
                     'required' => 'Tuliskan Alamat Lengkap'
                 ]
             ],
+            'departemen_input' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Pilih Departemen'
+                ]
+            ],
+            'jjp_input' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Pilih Jenjang Pendidikan'
+                ]
+            ],
         ])){
             return redirect()->back()->withInput();
         }
+        date_default_timezone_set('ASIA/JAKARTA');
+        $tanggal_pendaftaran = date('Y-m-d H:i:s');
         $username = session()->get('username');
         if($username == $this->request->getVar('prf_nim_portal')){;
         $data = array(
@@ -154,6 +167,8 @@ class Profil extends BaseController
             'jjp_input' => $this->request->getVar('jjp_input'),
             'alamat_lengkap' => $this->request->getVar('alamat_lengkap'),
             'sudah_edit' => 1,
+            'created_at' => $tanggal_pendaftaran
+
         );
         $data_progres = array(
             'nim' => $this->request->getVar('prf_nim_portal'),

@@ -15,10 +15,11 @@ class Dashboard extends BaseController
     {
         $totalSuratBelumDiproses = $this->dashboardModel->totalSuratBelumDiproses();
         $totalSuratMasukHariIni = $this->dashboardModel->totalSuratMasukHariIni();
+        // dd($totalSuratMasukHariIni);
         if(session()->get('verifikasi') == '0' && session()->get('level') == '5') 
         {
             return redirect()->to('/profil-dosen/verifikasi')->with('sukses','Login berhasil!, silahkan edit profil');
-        }   
+        }
         if(session()->get('verifikasi_mahasiswa') == null && session()->get('level') == '6')
         {
             return redirect()->to('/profil/verifikasi')->with('sukses','Login berhasil!, silahkan edit profil');

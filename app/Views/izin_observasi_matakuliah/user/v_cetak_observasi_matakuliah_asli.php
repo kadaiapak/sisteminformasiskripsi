@@ -150,7 +150,7 @@ hr{
 			<tr>
 				<td>Hal</td>
 				<td>:</td>
-				<td>Observasi Matakuliah</td>	
+				<td>Validator Instrumen</td>	
 			</tr>	
 		</table>
 		<table>
@@ -214,12 +214,15 @@ hr{
 		<table class="ttd_pejabat">
 			<tr>
 				<td class="td_mengetahui">
+					Mengetahui,<br>
 				</td>
 				<td>
+				
 				</td>
 			</tr>
 			<tr>
 				<td>
+					Wakil Dekan I
 				</td>
 				<td>
 					Kepala Departemen
@@ -234,6 +237,8 @@ hr{
 			</tr>
 			<tr>
 				<td>
+					Dr. Hanif Al Kadri, M.Pd</br>
+					NIP. 19760921 200801 1 010
 				</td>
 				<td>
 					<?= $satu_observasi['nama_kadep_departemen']; ?></br>
@@ -322,6 +327,7 @@ hr{
 		<table class="ttd_pejabat">
 			<tr>
 				<td class="td_mengetahui">
+					Mengetahui,<br>
 				</td>
 				<td>
 				
@@ -329,6 +335,7 @@ hr{
 			</tr>
 			<tr>
 				<td>
+					Wakil Dekan I
 				</td>
 				<td>
 					Kepala Departemen
@@ -343,6 +350,8 @@ hr{
 			</tr>
 			<tr>
 				<td>
+					Dr. Hanif Al Kadri, M.Pd</br>
+					NIP. 19760921 200801 1 010
 				</td>
 				<td>
 					<?= $satu_observasi['nama_kadep_departemen']; ?></br>

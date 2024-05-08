@@ -46,9 +46,10 @@ class User extends BaseController
     {
         if(!$this->validate([
             'nama_asli' => [
-                'rules' => 'required',
+                'rules' => 'required|alpha_space',
                 'errors' => [
                     'required' => 'Tuliskan Nama Lengkap',
+                    'alpha_space' => 'Nama hanya boleh huruf dan spasi',
                 ]
             ],
             'username' => [

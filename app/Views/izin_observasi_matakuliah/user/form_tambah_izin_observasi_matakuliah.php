@@ -39,6 +39,16 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group row ">
+                                <label class="control-label col-md-3 col-sm-3" for="nama_pengajuan">Departemen</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input readonly type="text" value="<?= $user['nama_departemen_input']; ?>" class="form-control">
+                                    <div class="invalid-feedback" style="display: block;">
+                                        <?= validation_show_error('nama_pengajuan'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="departemen_pengajuan" value="<?= $user['departemen_input']; ?>">
                             <div class="form-group row">
                                 <label class="control-label col-lg-3 col-md-3 col-sm-3" for="jenis_kelamin">Jenis Kelamin</label>
                                 <div class="col-lg-4 col-md-4 col-sm-9 ">
@@ -49,20 +59,6 @@
                                     </select>
                                     <div class="invalid-feedback" style="text-align: left;">
                                         <?= validation_show_error('jenis_kelamin'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="control-label col-lg-3 col-md-3 col-sm-3" for="departemen_pengajuan">Departemen</label>
-                                <div class="col-lg-4 col-md-4 col-sm-9 ">
-                                    <select required class="form-control <?= validation_show_error('departemen_pengajuan') ? 'is-invalid' : null; ?>" name="departemen_pengajuan" id="departemen_pengajuan">
-                                        <option value="">-- Pilih Departemen --</option>
-                                        <?php foreach ($semua_departemen as $d) { ?>
-                                            <option value="<?= $d['departemen_id']; ?>"><?= $d['departemen_nama']; ?></option>
-                                        <?php } ?>
-                                    </select>
-                                    <div class="invalid-feedback" style="text-align: left;">
-                                        <?= validation_show_error('departemen_pengajuan'); ?>
                                     </div>
                                 </div>
                             </div>

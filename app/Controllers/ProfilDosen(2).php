@@ -2,18 +2,15 @@
 
 namespace App\Controllers;
 use App\Models\DosenModel;
-use App\Models\DepartemenModel;
 
 
 class ProfilDosen extends BaseController
 {
     protected $dosenModel;
-    protected $departemenModel;
     public function __construct()
     {
         helper('form');
         $this->dosenModel = new DosenModel();
-        $this->departemenModel = new DepartemenModel();
     }
 
     public function index()
@@ -26,101 +23,6 @@ class ProfilDosen extends BaseController
             'detail_profil' => $detailProfil
         ];
         return view('profil_dosen/v_profil_dosen', $data);
-    }
-
-    public function tambah()
-    {
-        $semuaDepartemen = $this->departemenModel->findAll();
-        $data = [
-            'judul' => 'Tambah Data Dosen',
-            'semua_departemen' => $semuaDepartemen,
-        ];
-        return view('profil_dosen/v_tambah_profil_dosen', $data);
-    }
-
-    public function simpan()
-    {
-        if(!$this->validate([
-            'nidn' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'NIDN harus diisikan'
-                ]
-            ],
-            'nama_lengkap' => [
-                'rules' => 'required|is_unique[fip_dosen.peg_nama]',
-                'errors' => [
-                    'required' => 'Tuliskan nama lengkap',
-                    'is_unique' => 'Nama sudah terdaftar'
-                ]
-            ],
-            'peg_status' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Pilih status kepegawaian'
-                ]
-            ],
-            'pex_sex' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Pilih jenis kelamin'
-                ]
-            ],
-            'alamat_baru' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Tuliskan Alamat Lengkap'
-                ]
-            ],
-            'no_wa' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Tuliskan Nomor Whatsapp'
-                ]
-            ],
-        ])){
-            return redirect()->back()->withInput();
-        }
-        if($this->request->getVar('peg_status') == "NONASN"){
-            $status_kepegawaian = null;
-        }else {
-            $status_kepegawaian = $this->request->getVar('peg_status');
-        }
-        $data = array(
-            'nidn' => $this->request->getVar('nidn'),
-            'peg_nip' => $this->request->getVar('nip'),
-            'peg_gel_dep' => $this->request->getVar('gelar_depan'),
-            'peg_nama' => $this->request->getVar('nama_lengkap'),
-            'peg_gel_bel' => $this->request->getVar('gelar_belakang'),
-            'peg_status' => $status_kepegawaian,
-            'peg_bidang' => $this->request->getVar('peg_bidang'),
-            'peg_pangkat' => $this->request->getVar('peg_pangkat'),
-            'peg_golongan' => $this->request->getVar('peg_golongan'),
-            'peg_jabatan' => $this->request->getVar('peg_jabatan'),
-            'peg_tmp_lahir' => $this->request->getVar('peg_tmp_lahir'),
-            'peg_tgl_lahir' => $this->request->getVar('peg_tgl_lahir'),
-            'peg_sex' => $this->request->getVar('peg_sex'),
-            'peg_agama' => $this->request->getVar('peg_agama'),
-            'peg_prodi' => $this->request->getVar('peg_prodi'),
-            'peg_pendidikan' => $this->request->getVar('peg_pendidikan'),
-            'peg_tmt' => $this->request->getVar('peg_tmt'),
-            'peg_no_sk' => $this->request->getVar('peg_no_sk'),
-            'peg_kota' => $this->request->getVar('peg_kota'),
-            'peg_prop' => $this->request->getVar('peg_prop'),
-            'peg_kawin' => $this->request->getVar('peg_kawin'),
-            'peg_telp' => $this->request->getVar('peg_telp'),
-            'peg_hp' => $this->request->getVar('peg_hp'),
-            'nohp_baru' => $this->request->getVar('peg_hp'),
-            'no_wa' => $this->request->getVar('no_wa'),
-            'peg_email' => $this->request->getVar('peg_email'),
-            'email_baru' => $this->request->getVar('peg_email'),
-            'peg_alamat' => $this->request->getVar('peg_alamat'),
-            'verifikasi' => 1
-        );
-        dd($data);
-        $this->dosenModel->insert($data);
-        session()->set('verifikasi', 1);
-        return redirect()->to('/dashboard')->with('sukses','Profil berhasil disimpan!');
     }
 
     // akses oleh mahasiswa
@@ -138,8 +40,6 @@ class ProfilDosen extends BaseController
         ];
         return view('profil_dosen/v_verifikasi_profil_dosen', $data);
     }
-
-    
     
     // public function simpan()
     // {

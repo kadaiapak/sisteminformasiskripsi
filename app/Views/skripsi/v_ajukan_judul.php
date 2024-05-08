@@ -78,10 +78,10 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="control-label col-md-3 col-sm-3" for="deskripsi_skripsi">Deskripsi skripsi<span class="required">*</span>
+                                <label class="control-label col-md-3 col-sm-3" for="deskripsi_skripsi">Deskripsi Judul<span class="required">*</span>
                                 </label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <textarea class="form-control <?= validation_show_error('deskripsi_skripsi') ? 'is-invalid' : null;; ?>" rows="3" name="deskripsi_skripsi" placeholder="Jelaskan singkat mengenai skripsi skripsi yang dipilih"></textarea>
+                                    <textarea class="form-control <?= validation_show_error('deskripsi_skripsi') ? 'is-invalid' : null;; ?>" rows="3" name="deskripsi_skripsi" placeholder="Jelaskan alasan saudara memilih judul skripsi ini!"></textarea>
                                     <div class="invalid-feedback" style="text-align: left;">
                                         <?= validation_show_error('deskripsi_skripsi'); ?>
                                     </div>

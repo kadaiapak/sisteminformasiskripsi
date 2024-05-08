@@ -163,6 +163,34 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group row has-error">
+                            <label class="control-label col-md-3 col-sm-3 ">Departemen</label>
+                            <div class="col-md-9 col-sm-9 has-error">
+                                <select class="form-control" id="departemen_input" tabindex="-1" name="departemen_input" <?= validation_show_error('departemen_input') ? "style='border: 1px solid red;'" : null; ?>>
+                                    <option value="">-- Pilih Departemen --</option>
+                                    <?php foreach($departemen as $d): ?>
+                                    <option value="<?= $d['departemen_id']; ?>"><?= $d['departemen_nama']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <h1 style="width: 100%; margin-top: 0.25rem; font-size: 80%; color: #dc3545;">
+                                    <?= validation_show_error('departemen_input'); ?>
+                                </h1>
+                            </div>
+                        </div>
+                        <div class="form-group row has-error">
+                            <label class="control-label col-md-3 col-sm-3 ">Jenjang Pendidikan</label>
+                            <div class="col-md-9 col-sm-9 has-error">
+                                <select class="form-control" id="jjp_input" tabindex="-1" name="jjp_input" <?= validation_show_error('jjp_input') ? "style='border: 1px solid red;'" : null; ?>>
+                                    <option value="">-- Pilih Jenjang Pendidikan --</option>
+                                    <?php foreach($jenjang as $jp): ?>
+                                    <option value="<?= $jp['jp_id']; ?>"><?= $jp['jp_nama']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <h1 style="width: 100%; margin-top: 0.25rem; font-size: 80%; color: #dc3545;">
+                                    <?= validation_show_error('jjp_input'); ?>
+                                </h1>
+                            </div>
+                        </div>
                         <div class="ln_solid"></div>
                     </div>
                 </div>

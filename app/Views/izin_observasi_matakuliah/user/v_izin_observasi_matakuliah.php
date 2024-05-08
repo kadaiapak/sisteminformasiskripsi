@@ -71,11 +71,11 @@
                                                     <?php } ?>
                                                     <?php if($iomk['status'] == 5) { ?>
                                                         <button class="btn btn-success" onclick="window.open('<?= base_url('izin-observasi-matakuliah/print-surat/'.$iomk['uuid']) ?>', 'blank')"><i class="fa fa-print" style="margin-right: 5px;"></i>Print</button>
-                                                        <form action="<?= base_url('/izin-observasi-matakuliah/cetak'); ?>" target="_blank" method="POST">
-                                                            <?= csrf_field(); ?>
-                                                            <input type="hidden" name="uuid" value="<?= $iomk['uuid']; ?>">
+                                                        <!-- <form action="< ?= base_url('/izin-observasi-matakuliah/cetak'); ?>" target="_blank" method="POST">
+                                                            < ?= csrf_field(); ?>
+                                                            <input type="hidden" name="uuid" value="< ?= $iomk['uuid']; ?>">
                                                             <button type="submit" class="btn btn-success"><i class="fa fa-print" style="margin-right: 5px;"></i>Cetak</button>
-                                                        </form>
+                                                        </form> -->
                                                     <?php }  ?>
                                                 </td>
                                                 <?php $no++ ?>
