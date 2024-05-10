@@ -42,12 +42,12 @@
                                         <thead>
                                             <tr>
                                                 <th width="1%">No</th>  
-                                                <th>Tanggal Pengajuan</th>
-                                                <th width="10%">Departemen</th>
-                                                <th width="33%">Tujuan Surat</th>
-                                                <th width="10%">Status</th>
+                                                <th width="10%">Tanggal Pengajuan</th>
+                                                <th width="30%">Departemen</th>
+                                                <th width="22%">Tujuan Surat</th>
+                                                <th width="9%">Status</th>
                                                 <th width="8%">Pesan</th>
-                                                <th width="12%">Aksi</th>
+                                                <th width="20%">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -55,7 +55,7 @@
                                         <?php foreach($semua_validasi_instrumen as $sip): ?>
                                             <tr>
                                                 <td><?= $no; ?></td>
-                                                <td><?= date('d-m-Y', strtotime($sip['created_at'])) ; ?></td>
+                                                <td><?= tanggal_indo($sip['created_at']); ?></td>
                                                 <td><?= $sip['nama_departemen']; ?></td>
                                                 <td><?= $sip['tujuan_surat']; ?></td>
                                                 <td><?= $sip["status"] == "1" ? "<span class='badge badge-warning'>Belum diproses Admin</span>" : ($sip["status"] == "2" ? "<span class='badge badge-danger'>Ditolak Admin</span>" : ($sip["status"] == "3" ? "<span class='badge badge-success'>Menunggu diproses Kadep</span>" : ($sip["status"] == "4" ? "<span class='badge badge-danger'>Ditolak Kadep</span>" : ($sip["status"] == "5" ? "<span class='badge badge-success'>Disetujui Kadep</span>" : null)))) ; ?></td>

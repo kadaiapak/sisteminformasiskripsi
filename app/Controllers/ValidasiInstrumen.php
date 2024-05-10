@@ -103,6 +103,12 @@ class ValidasiInstrumen extends BaseController
                     'required' => 'Tuliskan kepada siapa surat ditujukan',
                 ]
             ],
+            'alamat_tujuan_surat' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Tuliskan alamat kepada siapa surat ditujukan',
+                ]
+            ],
         ])){
             return redirect()->back()->withInput();
         }
@@ -114,6 +120,7 @@ class ValidasiInstrumen extends BaseController
             'departemen_pengajuan' => $this->request->getVar('departemen_pengajuan'),
             'judul' => $this->request->getVar('judul'),
             'tujuan_surat' => $this->request->getVar('tujuan_surat'),
+            'alamat_tujuan_surat' => $this->request->getVar('alamat_tujuan_surat'),
             'status' => 1,
         );
         $this->validasiInstrumenModel->simpan($data);
@@ -200,6 +207,12 @@ class ValidasiInstrumen extends BaseController
                     'required' => 'Tuliskan Tujuan Surat',
                 ]
             ],
+            'alamat_tujuan_surat' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Tuliskan Alamat Tujuan Surat',
+                ]
+            ],
         ])){
             return redirect()->back()->withInput();
         }
@@ -213,6 +226,7 @@ class ValidasiInstrumen extends BaseController
             'departemen_pengajuan' => $this->request->getVar('departemen_pengajuan'),
             'judul' => $this->request->getVar('judul'),
             'tujuan_surat' => $this->request->getVar('tujuan_surat'),
+            'alamat_tujuan_surat' => $this->request->getVar('alamat_tujuan_surat'),
             'status' => 1,
         );
 
@@ -335,7 +349,12 @@ class ValidasiInstrumen extends BaseController
                     'required' => 'Tuliskan Tujuan Surat',
                 ]
             ],
-          
+            'alamat_tujuan_surat' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Tuliskan Alamat Tujuan Surat',
+                ]
+            ],
         ])){
             return redirect()->back()->withInput();
         }
@@ -347,6 +366,7 @@ class ValidasiInstrumen extends BaseController
             'departemen_pengajuan' => $this->request->getVar('departemen_pengajuan'),
             'judul' => $this->request->getVar('judul'),
             'tujuan_surat' => $this->request->getVar('tujuan_surat'),
+            'alamat_tujuan_surat' => $this->request->getVar('alamat_tujuan_surat'),
             'admin_edit' => session()->get('user_id'),
         );
 

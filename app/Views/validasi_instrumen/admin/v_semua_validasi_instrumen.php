@@ -52,7 +52,7 @@
                                         <?php foreach($semua_validasi_instrumen as $siomk): ?>
                                             <tr>
                                                 <td><?= $no; ?></td>
-                                                <td><?= date('d-m-Y', strtotime($siomk['created_at'])) ; ?></td>
+                                                <td><?= tanggal_indo($siomk['created_at']); ?></td>
                                                 <td><?= $siomk['nim_pengajuan']; ?></td>
                                                 <td><?= $siomk['nama_pengajuan']; ?></td>
                                                 <td><?= $siomk['nama_departemen']; ?></td>

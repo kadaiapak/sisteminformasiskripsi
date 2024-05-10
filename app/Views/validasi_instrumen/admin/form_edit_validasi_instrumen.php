@@ -4,7 +4,7 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Izin Observasi Matakuliah</h3>
+                <h3>Validasi Instrumen</h3>
             </div>
         </div>
         <div class="clearfix"></div>
@@ -12,7 +12,7 @@
             <div class="col-md-12 col-sm-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Form Edit</h2>
+                        <h2>Form Edit oleh Admin</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -40,35 +40,40 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="control-label col-lg-3 col-md-3 col-sm-3" for="departemen_pengajuan">Departemen</label>
-                                <div class="col-lg-4 col-md-4 col-sm-9 ">
-                                    <select required class="form-control <?= validation_show_error('departemen_pengajuan') ? 'is-invalid' : null; ?>" name="departemen_pengajuan" id="departemen_pengajuan">
-                                        <option value="">-- Pilih Departemen --</option>
-                                        <?php foreach ($semua_departemen as $d) { ?>
-                                            <option value="<?= $d['departemen_id']; ?>" <?= $satu_penelitian['departemen_pengajuan'] == $d['departemen_id'] ? 'selected' : null; ?>><?= $d['departemen_nama']; ?></option>
-                                        <?php } ?>
-                                    </select>
-                                    <div class="invalid-feedback" style="text-align: left;">
-                                        <?= validation_show_error('departemen_pengajuan'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="control-label col-md-3 col-sm-3" for="judul">Judul</label>
+                            <div class="form-group row ">
+                                <label class="control-label col-md-3 col-sm-3">Departemen</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input required type="text" value="<?= $satu_penelitian['judul']; ?>" class="form-control <?= validation_show_error('judul') ? 'is-invalid' : null; ?>" id="judul" name="judul" placeholder="Tulis judul">
+                                    <input readonly type="text" value="<?= $satu_penelitian['nama_departemen']; ?>" class="form-control">
                                     <div class="invalid-feedback" style="display: block;">
-                                        <?= validation_show_error('judul'); ?>
+                                        <?= validation_show_error('nama_pengajuan'); ?>
                                     </div>
                                 </div>
                             </div>
+                            <input type="hidden" name="departemen_pengajuan" value="<?= $satu_penelitian['departemen_pengajuan']; ?>">
                             <div class="form-group row">
-                                <label class="control-label col-md-3 col-sm-3" for="tujuan_surat">Tujuan Surat</label>
+                                <label class="control-label col-md-3 col-sm-3" for="tujuan_surat">Tujuan Surat <b>(Kepada Yth: ?)</b></label>
                                 <div class="col-md-9 col-sm-9 ">
                                     <input required type="text" value="<?= $satu_penelitian['tujuan_surat']; ?>" class="form-control <?= validation_show_error('tujuan_surat') ? 'is-invalid' : null; ?>" id="tujuan_surat" name="tujuan_surat" placeholder="Kepada Yth ?">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('tujuan_surat'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3" for="alamat_tujuan_surat">Alamat Tujuan Surat <b>(Di ?)</b></label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input required type="text" value="<?= $satu_penelitian['alamat_tujuan_surat']; ?>" class="form-control <?= validation_show_error('alamat_tujuan_surat') ? 'is-invalid' : null; ?>" id="alamat_tujuan_surat" name="alamat_tujuan_surat" placeholder="Kepada Yth ?">
+                                    <div class="invalid-feedback" style="display: block;">
+                                        <?= validation_show_error('alamat_tujuan_surat'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3" for="judul">Judul Skripsi</label>
+                                <div class="col-md-9 col-sm-9" >
+                                    <textarea class="form-control <?= validation_show_error('judul') ? 'is-invalid' : null; ?>" rows="5" cols="100%" name="judul" id="judul" placeholder="Isikan judul skripsi"><?= $satu_penelitian['judul']; ?></textarea>
+                                    <div class="invalid-feedback" style="text-align: left;">
+                                        <?= validation_show_error('judul'); ?>
                                     </div>
                                 </div>
                             </div>

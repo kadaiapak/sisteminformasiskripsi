@@ -29,7 +29,7 @@
         }
 
 		.no_surat .nomor_surat {
-			width: 580px;
+			width: 550px;
 		}
 
 		p.footer {
@@ -90,7 +90,7 @@ hr{
 		<table size='100%' align='center'>
 			<tr>
 				<td><img src="<?= base_url('/unp.png'); ?>" width="90" height="90" alt=""></td>
-				<td width="650">
+				<td width="500">
 					<center>
 						<font size="4">KEMENTERIAN PENDIDIKAN, KEBUDAYAAN,</font><br>
 						<font size="4">RISET DAN TEKNOLOGI</font><br>
@@ -126,15 +126,15 @@ hr{
 			<tr><td></td></tr>
 			<tr><td></td></tr>
 			<tr>
-				<td>Yth,. <?= $satu_penelitian['tujuan_surat']; ?></td>
+				<td>Kepada: Yth,. <?= $satu_penelitian['tujuan_surat']; ?></td>
 				<td></td>
 			</tr>
 			<tr>
-				<td><?= $satu_penelitian['alamat_tujuan_surat']; ?></td>
+				<td>Di</td>
 				<td></td>
 			</tr>
 			<tr>
-				<td></td>
+				<td>Tempat</td>
 				<td></td>
 			</tr>
 		</table>
@@ -149,7 +149,7 @@ hr{
 		<br class="jrk">
 		<table class="isi">
 			<tr>
-				<td style="text-indent: 35px; text-align: justify;" >
+				<td style="text-indent: 35px;" >
 					Dalam rangka menunjang kelancaran pelaksanaan penelitian mahasiswa Departemen <?= $satu_penelitian['nama_departemen']; ?> FIP UNP, kami mohon bantuan bapak/ibu memberikan izin mahasiswa kami untuk melaksanakan validasi instrumen ditempat bapak/ibu pimpin, berikut data mahasiswa tersebut:
 				</td>
 			</tr>
@@ -159,22 +159,22 @@ hr{
 			<tr>
 				<td width='150'>Nama</td>
 				<td width='7'>:</td>
-				<td width='600'><?= $satu_penelitian['nama_pengajuan']; ?></td>	
+				<td width='380'><?= $satu_penelitian['nama_pengajuan']; ?></td>	
 			</tr>	
 			<tr>
 				<td width='150'>NIM</td>
 				<td width='7'>:</td>
-				<td width='600'><?= $satu_penelitian['nim_pengajuan']; ?></td>	
+				<td width='380'><?= $satu_penelitian['nim_pengajuan']; ?></td>	
 			</tr>	
 			<tr>
 				<td width='150'>Departemen</td>
 				<td width='7'>:</td>
-				<td width='600'><?= $satu_penelitian['nama_departemen']; ?></td>	
+				<td width='380'><?= $satu_penelitian['nama_departemen']; ?></td>	
 			</tr>	
 			<tr>
-				<td width='150' valign="top">Judul Skripsi</td>
-				<td width='7' valign="top">:</td>
-				<td width='600' align="justify"><?= $satu_penelitian['judul']; ?></td>	
+				<td width='150'>Judul</td>
+				<td width='7'>:</td>
+				<td width='380'><?= $satu_penelitian['judul']; ?></td>	
 			</tr>	
 		</table>
 		<table>
@@ -188,6 +188,7 @@ hr{
 		<table class="ttd_pejabat">
 			<tr>
 				<td class="td_mengetahui">
+					Mengetahui,<br>
 				</td>
 				<td>
 				
@@ -195,6 +196,7 @@ hr{
 			</tr>
 			<tr>
 				<td>
+					Wakil Dekan I
 				</td>
 				<td>
 					Kepala Departemen
@@ -209,6 +211,8 @@ hr{
 			</tr>
 			<tr>
 				<td>
+					Dr. Hanif Al Kadri, M.Pd</br>
+					NIP. 19760921 200801 1 010
 				</td>
 				<td>
 					<?= $satu_penelitian['nama_kadep_departemen']; ?></br>

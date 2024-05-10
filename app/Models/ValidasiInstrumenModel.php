@@ -18,6 +18,7 @@ class ValidasiInstrumenModel extends Model
         'departemen_pengajuan',
         'judul',
         'tujuan_surat',
+        'alamat_tujuan_surat',
         'pesan',
         'status',
         'admin_edit',

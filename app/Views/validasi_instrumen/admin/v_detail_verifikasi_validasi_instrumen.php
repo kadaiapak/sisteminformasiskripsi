@@ -4,7 +4,7 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Izin Penelitian</h3>
+                <h3>Validasi Instrumen</h3>
             </div>
         </div>
         <div class="clearfix"></div>
@@ -26,7 +26,7 @@
             <div class="col-md-12 col-sm-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Detail Izin Penelitian</h2>
+                        <h2>Verifikasi Validasi Instrumen</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -45,13 +45,18 @@
                                 <td><?= $satu_penelitian['nama_departemen']; ?></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold">Judul</td>
-                                <td><?= $satu_penelitian['judul']; ?></td>
-                            </tr>
-                            <tr>
                                 <td class="font-weight-bold">Tujuan Kepala Surat (Kepada Yth : ?)</td>
                                 <td><?= $satu_penelitian['tujuan_surat']; ?></td>
                             </tr>
+                            <tr>
+                                <td class="font-weight-bold">Alamat Tujuan Kepala Surat (Di : ?)</td>
+                                <td><?= $satu_penelitian['alamat_tujuan_surat']; ?></td>
+                            </tr>
+                            <tr>
+                                <td class="font-weight-bold">Judul</td>
+                                <td><?= $satu_penelitian['judul']; ?></td>
+                            </tr>
+                         
                             <tr>
                                 <td class="font-weight-bold">Status</td>
                                 <td><?= $satu_penelitian["status"] == "1" ? "<span class='badge badge-warning'>Belum diproses Admin</span>" : ($satu_penelitian["status"] == "2" ? "<span class='badge badge-danger'>Ditolak Admin</span>" : ($satu_penelitian["status"] == "3" ? "<span class='badge badge-success'>Disetujui Admin, Menunggu diproses Kadep</span>" : ($satu_penelitian["status"] == "4" ? "<span class='badge badge-danger'>Ditolak Kadep</span>" : ($satu_penelitian["status"] == "5" ? "<span class='badge badge-success'>Disetujui Kadep</span>" : null)))) ; ?></td>
