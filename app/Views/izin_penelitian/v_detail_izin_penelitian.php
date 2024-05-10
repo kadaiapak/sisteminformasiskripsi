@@ -31,32 +31,29 @@
                                 <td><?= $satu_penelitian['nama_departemen']; ?></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold">Judul</td>
-                                <td><?= $satu_penelitian['judul']; ?></td>
-                            </tr>
-                            <tr>
                                 <td class="font-weight-bold">Tujuan Kepala Surat (Kepada Yth : ?)</td>
                                 <td><?= $satu_penelitian['tujuan_surat']; ?></td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">Tempat Penelitian</td>
-                                <td><?= $satu_penelitian['tempat_penelitian']; ?></td>
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">Alamat Tempat Penelitian</td>
                                 <td><?= $satu_penelitian['alamat_tempat_penelitian']; ?></td>
                             </tr>
                             <tr>
+                                <td class="font-weight-bold">Judul</td>
+                                <td><?= $satu_penelitian['judul']; ?></td>
+                            </tr>
+                          
+                            <tr>
+                                <td class="font-weight-bold">Tempat Penelitian</td>
+                                <td><?= $satu_penelitian['tempat_penelitian']; ?></td>
+                            </tr>
+                            <tr>
+                                <td class="font-weight-bold">Tanggal Penelitian</td>
+                                <td><?= tanggal_indo($satu_penelitian['tanggal_mulai']); ?> s.d <?= tanggal_indo($satu_penelitian['tanggal_selesai']); ?></td>
+                            </tr>
+                            <tr>
                                 <td class="font-weight-bold">Objek Penelitian</td>
                                 <td><?= $satu_penelitian['objek_penelitian']; ?></td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">Tanggal Mulai Observasi</td>
-                                <td><?= date('d-m-Y', strtotime($satu_penelitian['tanggal_mulai'])) ; ?></td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">Tanggal Selesai Observasi</td>
-                                <td><?= date('d-m-Y', strtotime($satu_penelitian['tanggal_selesai'])) ; ?></td>
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">Status</td>

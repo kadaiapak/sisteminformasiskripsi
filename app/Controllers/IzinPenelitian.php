@@ -441,7 +441,6 @@ class IzinPenelitian extends BaseController
 
         $UUIDPenelitian = $this->request->getVar('uuid');
         $data = array(
-            'user_pengajuan' => session()->get('username'),
             'nama_pengajuan' => $this->request->getVar('nama_pengajuan'),
             'nim_pengajuan' => $this->request->getVar('nim_pengajuan'),
             'departemen_pengajuan' => $this->request->getVar('departemen_pengajuan'),

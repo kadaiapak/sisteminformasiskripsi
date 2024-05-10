@@ -4,7 +4,7 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Izin Observasi Matakuliah</h3>
+                <h3>Izin Penelitian</h3>
             </div>
         </div>
         <div class="clearfix"></div>
@@ -12,7 +12,7 @@
             <div class="col-md-12 col-sm-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Form Edit</h2>
+                        <h2>Form Edit oleh Admin</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -55,16 +55,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="control-label col-md-3 col-sm-3" for="judul">Judul</label>
-                                <div class="col-md-9 col-sm-9 ">
-                                    <input required type="text" value="<?= $satu_penelitian['judul']; ?>" class="form-control <?= validation_show_error('judul') ? 'is-invalid' : null; ?>" id="judul" name="judul" placeholder="Tulis judul">
-                                    <div class="invalid-feedback" style="display: block;">
-                                        <?= validation_show_error('judul'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="control-label col-md-3 col-sm-3" for="tujuan_surat">Tujuan Surat</label>
+                                <label class="control-label col-md-3 col-sm-3" for="tujuan_surat">Tujuan Surat <b>(Kepada Yth: ?)</b></label>
                                 <div class="col-md-9 col-sm-9 ">
                                     <input required type="text" value="<?= $satu_penelitian['tujuan_surat']; ?>" class="form-control <?= validation_show_error('tujuan_surat') ? 'is-invalid' : null; ?>" id="tujuan_surat" name="tujuan_surat" placeholder="Kepada Yth ?">
                                     <div class="invalid-feedback" style="display: block;">
@@ -72,6 +63,26 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3" for="alamat_tempat_penelitian">Alamat Tujuan Surat</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input required type="text" value="<?= $satu_penelitian['alamat_tempat_penelitian']; ?>" class="form-control <?= validation_show_error('alamat_tempat_penelitian') ? 'is-invalid' : null; ?>" id="alamat_tempat_penelitian" name="alamat_tempat_penelitian" placeholder="Tulis alamat lengkap">
+                                    <div class="invalid-feedback" style="display: block;">
+                                        <?= validation_show_error('alamat_tempat_penelitian'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3" for="judul">Judul Skripsi <span class="required">*</span>
+                                </label>
+                                <div class="col-md-9 col-sm-9" >
+                                    <textarea class="form-control <?= validation_show_error('judul') ? 'is-invalid' : null; ?>" rows="5" cols="100%" name="judul" id="judul" placeholder="Isikan judul skripsi"><?= $satu_penelitian['judul']; ?></textarea>
+                                    <div class="invalid-feedback" style="text-align: left;">
+                                        <?= validation_show_error('judul'); ?>
+                                    </div>
+                                </div>
+                            </div>  
+                     
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3" for="tempat_penelitian">Tempat Penelitian</label>
                                 <div class="col-md-9 col-sm-9 ">
@@ -81,15 +92,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="control-label col-md-3 col-sm-3" for="alamat_tempat_penelitian">Alamat Tempat Penelitian</label>
-                                <div class="col-md-9 col-sm-9 ">
-                                    <input required type="text" value="<?= $satu_penelitian['alamat_tempat_penelitian']; ?>" class="form-control <?= validation_show_error('alamat_tempat_penelitian') ? 'is-invalid' : null; ?>" id="alamat_tempat_penelitian" name="alamat_tempat_penelitian" placeholder="Tulis alamat lengkap">
-                                    <div class="invalid-feedback" style="display: block;">
-                                        <?= validation_show_error('alamat_tempat_penelitian'); ?>
-                                    </div>
-                                </div>
-                            </div>
+                       
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3" for="objek_penelitian">Objek Penelitian</label>
                                 <div class="col-md-9 col-sm-9 ">
@@ -99,7 +102,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3" for="tanggal_mulai">Tanggal Mulai <b>(*)</b> :</label>
                                 <div class="input-group date col-md-9 col-sm-9">
                                     <div class="input-group-addon">
@@ -111,7 +114,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3" for="tanggal_selesai">Tanggal Selesai <b>(*)</b> :</label>
                                 <div class="input-group date col-md-9 col-sm-9">
                                     <div class="input-group-addon">

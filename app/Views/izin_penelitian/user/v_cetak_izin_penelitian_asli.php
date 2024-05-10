@@ -20,7 +20,7 @@
 	}
     @page {
         size: A4;
-        margin: 10mm 30mm 20mm 20mm;
+        margin: 10mm 20mm 20mm 20mm;
     }
     @media print {
         html, body {
@@ -29,7 +29,7 @@
         }
 
 		.no_surat .nomor_surat {
-			width: 600px;
+			width: 550px;
 		}
 
 		p.footer {
@@ -38,11 +38,9 @@
 		width: 100%;
 		height: 1.6rem;
 		}
-
 		.ttd_pejabat .td_mengetahui {
 		width: 480px;
-		}
-
+	}
         .page {
             margin: 0;
             border: initial;
@@ -52,8 +50,9 @@
             box-shadow: initial;
             background: initial;
         }
-    }
 
+		
+    }
 
 br {
     line-height: 1px;
@@ -91,7 +90,7 @@ hr{
 		<table size='100%' align='center'>
 			<tr>
 				<td><img src="<?= base_url('/unp.png'); ?>" width="90" height="90" alt=""></td>
-				<td width="600">
+				<td width="500">
 					<center>
 						<font size="4">KEMENTERIAN PENDIDIKAN, KEBUDAYAAN,</font><br>
 						<font size="4">RISET DAN TEKNOLOGI</font><br>
@@ -150,47 +149,47 @@ hr{
 		<br class="jrk">
 		<table class="isi">
 			<tr>
-				<td style="text-indent: 35px; text-align: justify;" width="780">
+				<td style="text-indent: 35px;" >
 					Dalam rangka penyelesaian studi akhir mahasiswa, kami mohon kesediaan Bapak/Ibu memberikan izin melaksanakan penelitian kepada mahasiswa berikut:
 				</td>
 			</tr>
 		</table>
 		<br class="jrk">
-		<table >
+		<table>
 			<tr>
 				<td width='150'>Nama</td>
 				<td width='7'>:</td>
-				<td width='570'><?= $satu_penelitian['nama_pengajuan']; ?></td>	
+				<td width='400'><?= $satu_penelitian['nama_pengajuan']; ?></td>	
 			</tr>	
 			<tr>
 				<td width='150'>NIM</td>
 				<td width='7'>:</td>
-				<td width='570'><?= $satu_penelitian['nim_pengajuan']; ?></td>	
+				<td width='400'><?= $satu_penelitian['nim_pengajuan']; ?></td>	
 			</tr>	
 			<tr>
 				<td width='150'>Departemen</td>
 				<td width='7'>:</td>
-				<td width='570'><?= $satu_penelitian['nama_departemen']; ?></td>	
+				<td width='400'><?= $satu_penelitian['nama_departemen']; ?></td>	
 			</tr>	
 			<tr>
 				<td width='150' valign="top">Judul Penelitian/Skripsi</td>
 				<td width='7' valign="top">:</td>
-				<td width='570' style="text-align: justify;"><?= $satu_penelitian['judul']; ?></td>	
+				<td width='400' style="text-align: justify;"><?= $satu_penelitian['judul']; ?></td>	
 			</tr>	
 			<tr>
 				<td width='150'>Tempat Penelitian</td>
 				<td width='7'>:</td>
-				<td width='570'><?= $satu_penelitian['tempat_penelitian']; ?></td>	
+				<td width='400'><?= $satu_penelitian['tempat_penelitian']; ?></td>	
 			</tr>
 			<tr>
 				<td>Jadwal</td>
 				<td>:</td>
-				<td width="570"><?= tanggal_indo($satu_penelitian['tanggal_mulai']); ?> - <?= tanggal_indo($satu_penelitian['tanggal_selesai']) ; ?></td>	
+				<td><?= tanggal_indo($satu_penelitian['tanggal_mulai']); ?> - <?= tanggal_indo($satu_penelitian['tanggal_selesai']) ; ?></td>	
 			</tr>
 			<tr>
 				<td width='150'>Objek Penelitian</td>
 				<td width='7'>:</td>
-				<td width='570'><?= $satu_penelitian['objek_penelitian']; ?></td>	
+				<td width='400'><?= $satu_penelitian['objek_penelitian']; ?></td>	
 			</tr>
 		</table>
 		<table>
@@ -204,6 +203,7 @@ hr{
 		<table class="ttd_pejabat">
 			<tr>
 				<td class="td_mengetahui">
+					Mengetahui,<br>
 				</td>
 				<td>
 				
@@ -211,6 +211,7 @@ hr{
 			</tr>
 			<tr>
 				<td>
+					Wakil Dekan I
 				</td>
 				<td>
 					Kepala Departemen
@@ -225,6 +226,8 @@ hr{
 			</tr>
 			<tr>
 				<td>
+					Dr. Hanif Al Kadri, M.Pd</br>
+					NIP. 19760921 200801 1 010
 				</td>
 				<td>
 					<?= $satu_penelitian['nama_kadep_departemen']; ?></br>
