@@ -13,6 +13,7 @@ use App\Models\MahasiswaStatusSkripsiModel;
 use App\Models\MengikutiSeminarModel;
 use App\Models\ProgresSkripsiModel;
 use App\Models\JadwalPengajuanJudulModel;
+use App\Models\HistoriJudulSkripsiModel;
 
 // library untuk export excel
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -31,6 +32,7 @@ class Skripsi extends BaseController
     protected $mengikutiSeminarModel;
     protected $progresSkripsiModel;
     protected $jadwalPengajuanJudulModel;
+    protected $historiJudulSkripsiModel;
 
     public function __construct()
     {
@@ -46,6 +48,7 @@ class Skripsi extends BaseController
         $this->mengikutiSeminarModel = new MengikutiSeminarModel(); 
         $this->progresSkripsiModel = new ProgresSkripsiModel(); 
         $this->jadwalPengajuanJudulModel = new JadwalPengajuanJudulModel();
+        $this->historiJudulSkripsiModel = new HistoriJudulSkripsiModel();
     }
 
     // digunakan oleh mahasiswa untuk melihat skripsi mereka
@@ -87,6 +90,7 @@ class Skripsi extends BaseController
         $semuaUjian = $this->ujianSkripsiModel->getAll($nim, null, null);
         $status_berita_acara_ujian = array_column($semuaUjian, 'berita_acara');
         $adaUjianSelesaiBeritaAcara = in_array('1', $status_berita_acara_ujian);
+        $historiJudulSkripsi = $this->historiJudulSkripsiModel->getDetail($nim);
         // cek idSkripsi untuk melaukan bimbingan
         $UUIDSkripsi = $this->skripsiModel->getUUIDSkripsi($nim);
         // judul
@@ -152,6 +156,7 @@ class Skripsi extends BaseController
             'bisaTambahSeminar' => $bisaTambahSeminar,
             'progressAdalahFinal' => $progressAdalahFinal,
             'mengikuti_seminar' => $mengikuti_seminar,
+            'historiJudulSkripsi' => $historiJudulSkripsi
         ];
         return view('skripsi/v_skripsi', $data);
     }
@@ -520,16 +525,27 @@ class Skripsi extends BaseController
             $data_progres = array(
                 'status' => 3,
             );
+
+            $data_histori_judul = array(
+                'skripsi_uuid' => $this->request->getVar('skripsi_uuid'),
+                'nim_mahasiswa' => $this->request->getVar('nim_mahasiswa'),
+                'nama_mahasiswa' => $this->request->getVar('nama_mahasiswa'),
+                'periode_pengajuan' => $this->request->getVar('periode_pengajuan'),
+                'tahun_pengajuan' => $this->request->getVar('tahun_pengajuan'),
+                'judul_skripsi' => $this->request->getVar('judul_skripsi'),
+                'deskripsi_skripsi' => $this->request->getVar('deskripsi_skripsi'),
+                'konsentrasi_bidang' => $this->request->getVar('konsentrasi_bidang'),
+                'dosen_pembimbing' => $this->request->getVar('dosen_pembimbing'),
+                'dosen_pa' => $this->request->getVar('dosen_pa'),
+            );
             $this->progresSkripsiModel->where('nim', $this->request->getVar('nim_mahasiswa'))->set($data_progres)->update();
             $this->skripsiModel->setujuiJudul($id, $data);
             $dataStatus = array(
                 'status' => 2
             );
             $this->mahasiswaStatusSkripsiModel->where('nim', $this->request->getVar('nim_mahasiswa'))->set($dataStatus)->update();
+            $this->historiJudulSkripsiModel->simpanHistoriJudulSkripsi($data_histori_judul);
             return redirect()->to('/skripsi/semua_skripsi')->with('sukses','Data berhasil diubah!');
-        
-        
-        
         } else if (isset($_POST['tolak_judul'])) {
             if(!$this->validate([
                 'pesan' => [
@@ -569,6 +585,86 @@ class Skripsi extends BaseController
             );
             $this->skripsiModel->update($id, $data);
             return redirect()->to('/skripsi/semua_skripsi')->with('sukses','Data berhasil diubah!');
+        }
+    }
+
+    public function perbaikan_judul($id = null)
+    {
+        if($id != null) {
+            $nim = session()->get('username');
+            $singleSkripsi = $this->skripsiModel->getDetailPerbaikanJudul($id, $nim);
+            if (!$singleSkripsi) {
+                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            } else {
+                $departemen = session()->get('departemen');
+                $data = [
+                    'judul' => 'Edit Skripsi',
+                    'singleSkripsi' => $singleSkripsi,
+                    'dosen' => $this->dosenModel->getAll($departemen),
+                ];
+                return view('skripsi/v_perbaikan_judul', $data);
+            }
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    }
+
+    public function simpan_perbaikan_judul($id)
+    {
+        if($id != null) {
+            $nim = session()->get('username');
+            $singleSkripsi = $this->skripsiModel->getDetailPerbaikanJudul($id, $nim);
+            if (!$singleSkripsi) {
+                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            } else {
+                if(!$this->validate([
+                    'judul_skripsi' => [
+                        'rules' => 'required',
+                        'errors' => [
+                            'required' => 'judul skripsi tidak boleh kosong'
+                        ]
+                    ],
+                    'deskripsi_skripsi' => [
+                        'rules' => 'required',
+                        'errors' => [
+                            'required' => 'deskripsisi tidak boleh kosong'
+                        ]
+                    ],
+                    'konsentrasi_bidang' => [
+                        'rules' => 'required',
+                        'errors' => [
+                            'required' => 'konsentrasi bidang tidak boleh kosong'
+                        ]
+                    ],
+                ])){
+                    return redirect()->back()->withInput();
+                }
+                date_default_timezone_set('ASIA/JAKARTA');
+                $data = [
+                    'judul_skripsi' => $this->request->getVar('judul_skripsi'),
+                    'deskripsi_skripsi' => $this->request->getVar('deskripsi_skripsi'),
+                    'konsentrasi_bidang' => $this->request->getVar('konsentrasi_bidang'),
+                    'perbaikan_judul' => 1,
+                    'tanggal_perbaikan_judul' => date('Y-m-d H:i:s'),
+                ];
+                $data_histori_judul_skripsi = [
+                    'skripsi_uuid' => $id,
+                    'nama_mahasiswa' => $singleSkripsi['nama_mahasiswa'],
+                    'nim_mahasiswa' => $singleSkripsi['nim_mahasiswa'],
+                    'periode_pengajuan' => $singleSkripsi['periode_pengajuan'],
+                    'tahun_pengajuan' => $singleSkripsi['tahun_pengajuan'],
+                    'judul_skripsi' => $this->request->getVar('judul_skripsi'),
+                    'deskripsi_skripsi' => $this->request->getVar('deskripsi_skripsi'),
+                    'konsentrasi_bidang' => $this->request->getVar('konsentrasi_bidang'),
+                    'dosen_pembimbing' => $singleSkripsi['dosen_pembimbing'],
+                    'dosen_pa' => $singleSkripsi['dosen_pa'],
+                ];
+                $this->skripsiModel->update($id, $data);
+                $this->historiJudulSkripsiModel->insert($data_histori_judul_skripsi);
+                return redirect()->to('/skripsi')->with('sukses','Data berhasil diubah!');
+            }
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
     }
 }

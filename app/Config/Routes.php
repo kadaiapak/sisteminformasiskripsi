@@ -124,6 +124,14 @@ $routes->post('/auth/mahasiswa/proses', 'Auth::login_mahasiswa_proses');
     // route untuk memverifikasi atau menolak pengajuan judul skripsi mahasiswa oleh kadep
     $routes->post('/skripsi/(:any)/proses', 'Skripsi::update_skripsi_oleh_kadep/$1', ['filter' => 'kadepFilter'] );
 
+    // akses oleh mahasiswa
+    // route untuk perbaikan judul yang sudah di acc
+    $routes->get('/skripsi/perbaikan-judul/(:any)', 'Skripsi::perbaikan_judul/$1', ['filter' => 'mahasiswaFilter'] );
+
+    // akses oleh mahasiswa
+    // route untuk simpan perbaikan judul yang sudah di acc
+    $routes->post('/skripsi/simpan-perbaikan-judul/(:any)', 'Skripsi::simpan_perbaikan_judul/$1', ['filter' => 'mahasiswaFilter'] );
+
 // $routes->get('/skripsi/edit_skripsi', 'Skripsi::edit_skripsi');
 // $routes->get('/skripsi/edit_skripsi/(:num)', 'Skripsi::edit_skripsi/$1');
 // $routes->post('/skripsi/simpan_edit_skripsi/(:num)', 'Skripsi::update_skripsi/$1');

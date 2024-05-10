@@ -28,7 +28,10 @@ class SkripsiModel extends Model
     'status_keseluruhan',
     'catatan',
     'pesan',
-    'tanggal_diproses'];
+    'tanggal_diproses',
+    'perbaikan_judul',
+    'tanggal_perbaikan_judul',
+];
 
     // akses oleh controller skripsi::semua_skripsi
     public function getAll($nim = null, $departemen = null)
@@ -146,6 +149,19 @@ class SkripsiModel extends Model
         $builder->orWhere('status_pengajuan_skripsi', '6');
         $builder->groupEnd();
         $builder->orderBy('status_pengajuan_skripsi', 'asc');
+        $query = $builder->get();
+        return $query->getRowArray(); 
+    }
+
+     // digunakan oleh route Skripsi::perbaikan_judul()
+    // untuk melihat detail skripsi yang akan di perbaiki judulnya
+    public function getDetailPerbaikanJudul($id = null, $nim = null)
+    {
+        $builder = $this->db->table('skripsi');
+        $builder->select('*');
+        $builder->where('skripsi_uuid', $id);
+        $builder->where('status_pengajuan_skripsi', '3');
+        $builder->where('nim_mahasiswa', $nim);
         $query = $builder->get();
         return $query->getRowArray(); 
     }

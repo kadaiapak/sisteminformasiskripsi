@@ -114,17 +114,61 @@
                                                                                 <th>Dosen PA</th>
                                                                                 <th>Catatan</th>
                                                                                 <th>Status</th>
+                                                                                <th>Aksi</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
                                                                             <?php foreach($semua_skripsi as $ss): ?>
                                                                             <tr>
-                                                                                <td><?= date('d-m-Y', strtotime($ss['created_at'])) ; ?></td>
+                                                                                <td><?= tanggal_indo($ss['created_at']); ?></td>
                                                                                 <td><?= $ss['judul_skripsi'] ?></td>
                                                                                 <td><?= $ss['d_pembimbing_peg_gel_dep']; ?> <?= $ss['d_pembimbing_peg_nama']; ?> <?= $ss['d_pembimbing_peg_gel_bel']; ?></td>
                                                                                 <td><?= $ss['d_pa_peg_gel_dep']; ?> <?= $ss['d_pa_peg_nama']; ?> <?= $ss['d_pa_peg_gel_bel']; ?></td>
                                                                                 <td><?= $ss['pesan']; ?></td>
-                                                                                <td><?= ($ss['status_pengajuan_skripsi'] == 1 ? "<span class='badge badge-warning'>Menunggu diproses</span>" : ($ss['status_pengajuan_skripsi'] == 2 ? "<span class='badge badge-danger'>Judul ditolak</span>" : ($ss['status_pengajuan_skripsi'] == 3 ? "<span class='badge badge-success'>Judul diterima</span>" : ($ss['status_pengajuan_skripsi'] == 4 ? "<span class='badge badge-success'>Bimbingan</span>" : ($ss['status_pengajuan_skripsi'] == 5 ? "<span class='badge badge-success'>Seminar Proposal</span>" : null))))); ?></td>
+                                                                                <td>
+                                                                                    <?= ($ss['status_pengajuan_skripsi'] == 1 ? "<span class='badge badge-warning'>Menunggu diproses</span>" : ($ss['status_pengajuan_skripsi'] == 2 ? "<span class='badge badge-danger'>Judul ditolak</span>" : ($ss['status_pengajuan_skripsi'] == 3 ? "<span class='badge badge-success'>Judul diterima</span>" : ($ss['status_pengajuan_skripsi'] == 4 ? "<span class='badge badge-success'>Bimbingan</span>" : ($ss['status_pengajuan_skripsi'] == 5 ? "<span class='badge badge-success'>Seminar Proposal</span>" : null))))); ?>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <?php if ($ss['status_pengajuan_skripsi'] == 3) { ?>
+                                                                                        <a href="<?= base_url('skripsi/perbaikan-judul/'.$ss['skripsi_uuid']); ?>" class="btn btn-success btn-sm"><i class="fa fa-edit" style="margin-right: 5px;"></i>Perbaikan Judul</a>
+                                                                                    <?php } ?>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <?php endforeach; ?>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 ">
+                                                <div class="x_panel">
+                                                    <div class="x_title">
+                                                            <h2>Histori Perbaikan Judul</h2>
+                                                            <div class="clearfix"></div>
+                                                    </div>
+                                                    <div class="x_content">
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="card-box table-responsive">
+                                                                    <table class="table table-striped table-bordered" style="width:100%">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Tanggal</th>
+                                                                                <th>Judul Skripsi</th>
+                                                                                <th>Deskripsi Skripsi</th>
+                                                                                <th>Konsentrasi Bidang</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <?php foreach($historiJudulSkripsi as $hjs): ?>
+                                                                            <tr>
+                                                                                <td><?= tanggal_indo($hjs['created_at']); ?></td>
+                                                                                <td><?= $hjs['judul_skripsi'] ?></td>
+                                                                                <td><?= $hjs['deskripsi_skripsi'] ?></td>
+                                                                                <td><?= $hjs['konsentrasi_bidang'] ?></td>
                                                                             </tr>
                                                                             <?php endforeach; ?>
                                                                         </tbody>
