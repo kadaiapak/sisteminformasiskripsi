@@ -183,7 +183,7 @@ hr{
 					<tr>
 						<td width='100'>Nama</td>
 						<td width='7'>:</td>
-						<td width='380'><?= $satu_observasi['nama_pengajuan']; ?></td>	
+						<td width='360'><?= $satu_observasi['nama_pengajuan']; ?></td>	
 					</tr>
 					<tr>
 						<td>NIM </td>
@@ -198,7 +198,7 @@ hr{
 					<tr>
 						<td style="vertical-align: top;">Judul</td>
 						<td style="vertical-align: top;">:</td>
-						<td><?= $satu_observasi['judul']; ?></td>	
+						<td align="justify"><?= $satu_observasi['judul']; ?></td>	
 					</tr>
 				</table>
 						<p><span style='text-align:justify; font-size: 17px;'>Demikian permohonan ini kami sampaikan atas perhatian dan kerjasama Bapak/Ibu kami ucapkan terima kasih.</span></p><br><br>
