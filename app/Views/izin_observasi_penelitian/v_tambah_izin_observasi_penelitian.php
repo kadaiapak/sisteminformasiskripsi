@@ -93,7 +93,7 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        <img src="<?= base_url('/upload/contoh_surat/validasi_instrumen.jpg'); ?>" alt="" style="width: 100%;" >
+                        <img src="<?= base_url('/upload/contoh_surat/izin_observasi_penelitian.jpg'); ?>" alt="" style="width: 100%;" >
                     </div>
                 </div>
             </div>
