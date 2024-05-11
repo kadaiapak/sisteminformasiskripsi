@@ -52,25 +52,25 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3" for="tujuan_surat">Tujuan Surat <b>(Kepada Yth : ?)</b></label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input required type="text" value="" class="form-control <?= validation_show_error('tujuan_surat') ? 'is-invalid' : null; ?>" id="tujuan_surat" name="tujuan_surat" placeholder="Kepada Yth ?">
+                                    <input required type="text" value="" class="form-control <?= validation_show_error('tujuan_surat') ? 'is-invalid' : null; ?>" id="tujuan_surat" name="tujuan_surat" placeholder="Contoh: Kepala Sekolah SMA N 5 Padang">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('tujuan_surat'); ?>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="control-label col-md-3 col-sm-3" for="alamat_tempat_penelitian">Alamat Tujuan Surat</b></label>
+                                <label class="control-label col-md-3 col-sm-3" for="alamat_tempat_penelitian">Alamat Tujuan Surat <b>(Di ?)</b></label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input required type="text" value="" class="form-control <?= validation_show_error('alamat_tempat_penelitian') ? 'is-invalid' : null; ?>" id="alamat_tempat_penelitian" name="alamat_tempat_penelitian" placeholder="Di ..">
+                                    <input required type="text" value="" class="form-control <?= validation_show_error('alamat_tempat_penelitian') ? 'is-invalid' : null; ?>" id="alamat_tempat_penelitian" name="alamat_tempat_penelitian" placeholder="Contoh: Padang">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('alamat_tempat_penelitian'); ?>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="control-label col-md-3 col-sm-3" for="judul">Judul Penelitian</label>
+                                <label class="control-label col-md-3 col-sm-3" for="judul">Judul Skripsi</label>
                                 <div class="col-md-9 col-sm-9" >
-                                    <textarea class="form-control <?= validation_show_error('judul') ? 'is-invalid' : null; ?>" rows="5" cols="100%" name="judul" id="judul" placeholder="Isikan judul penelitian"></textarea>
+                                    <textarea class="form-control <?= validation_show_error('judul') ? 'is-invalid' : null; ?>" rows="5" cols="100%" name="judul" id="judul" placeholder="Isikan judul skripsi"></textarea>
                                     <div class="invalid-feedback" style="text-align: left;">
                                         <?= validation_show_error('judul'); ?>
                                     </div>
@@ -85,9 +85,8 @@
                                     </div>
                                 </div>
                             </div>
-                            
                             <div class="form-group row">
-                                <label class="control-label col-md-3 col-sm-3" for="tanggal_mulai">Tanggal Mulai <b>(*)</b> :</label>
+                                <label class="control-label col-md-3 col-sm-3" for="tanggal_mulai">Jadwal <b>(Tanggal Mulai )</b> :</label>
                                 <div class="input-group date col-md-9 col-sm-9">
                                     <div class="input-group-addon">
                                         <span class="glyphicon glyphicon-th"></span>
@@ -99,7 +98,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="control-label col-md-3 col-sm-3" for="tanggal_selesai">Tanggal Selesai <b>(*)</b> :</label>
+                                <label class="control-label col-md-3 col-sm-3" for="tanggal_selesai">Jadwal <b>(Tanggal Selesai )</b> :</label>
                                 <div class="input-group date col-md-9 col-sm-9">
                                     <div class="input-group-addon">
                                         <span class="glyphicon glyphicon-th"></span>
@@ -123,7 +122,7 @@
                             <div class="form-group">
                                 <div class="col-md-9 col-sm-9  offset-md-3">
                                     <a href="<?= base_url('/izin-penelitian'); ?>" class="btn btn-warning btn-sm"><i class="fa fa-chevron-circle-left" style="margin-right: 5px;"></i>Kembali</a>
-                                    <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-save" style="margin-right: 5px;"></i>Simpan</button>
+                                    <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-save" style="margin-right: 5px;"></i>Simpan</button>
                                 </div>
                             </div>
                         </form>

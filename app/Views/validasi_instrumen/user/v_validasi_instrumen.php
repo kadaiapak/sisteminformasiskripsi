@@ -63,10 +63,6 @@
                                                 <td><?= $sip["status"] == "1" ? "<span class='badge badge-warning'>Belum diproses Admin</span>" : ($sip["status"] == "2" ? "<span class='badge badge-danger'>Ditolak Admin</span>" : ($sip["status"] == "3" ? "<span class='badge badge-success'>Menunggu diproses Kadep</span>" : ($sip["status"] == "4" ? "<span class='badge badge-danger'>Ditolak Kadep</span>" : ($sip["status"] == "5" ? "<span class='badge badge-success'>Disetujui Kadep</span>" : null)))) ; ?></td>
                                                 <td><?= $sip['pesan']; ?></td>
                                                 <td>
-                                                    <a href="<?= base_url('validasi-instrumen/detail/'.$sip['uuid']); ?>" class="btn btn-primary btn-sm" ><i class="fa fa-file-text-o" style="margin-right: 5px;"></i>Detail</a>
-                                                    <?php if($sip['nim_pengajuan'] == session()->get('username') && $sip['status'] == 1) {  ?>
-                                                        <a href="<?= base_url('validasi-instrumen/edit/'.$sip['uuid']); ?>" class="btn btn-warning btn-sm" ><i class="fa fa-edit" style="margin-right: 5px;"></i>Edit</a>
-                                                    <?php } ?>
                                                     <?php if($sip['status'] == 5) { ?>
                                                         <form action="<?= base_url('/validasi-instrumen/cetak'); ?>" target="_blank" method="POST">
                                                             <?= csrf_field(); ?>
@@ -74,6 +70,10 @@
                                                             <button type="submit" class="btn btn-success"><i class="fa fa-print" style="margin-right: 5px;"></i>Cetak</button>
                                                         </form>
                                                     <?php }  ?>
+                                                    <a href="<?= base_url('validasi-instrumen/detail/'.$sip['uuid']); ?>" class="btn btn-primary btn-sm" ><i class="fa fa-file-text-o" style="margin-right: 5px;"></i>Detail</a>
+                                                    <?php if($sip['nim_pengajuan'] == session()->get('username') && $sip['status'] == 1) {  ?>
+                                                        <a href="<?= base_url('validasi-instrumen/edit/'.$sip['uuid']); ?>" class="btn btn-warning btn-sm" ><i class="fa fa-edit" style="margin-right: 5px;"></i>Edit</a>
+                                                    <?php } ?>
                                                 </td>
                                                 <?php $no++ ?>
                                             </tr>

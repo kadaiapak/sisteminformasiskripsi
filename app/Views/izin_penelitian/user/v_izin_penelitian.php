@@ -43,11 +43,10 @@
                                             <tr>
                                                 <th width="1%">No</th>  
                                                 <th>Tanggal Pengajuan</th>
-                                                <th width="10%">Departemen</th>
                                                 <th width="33%">Tujuan Surat</th>
-                                                <th width="33%">Tempat</th>
-                                                <th width="10%">Tanggal Observasi</th>
-                                                <th width="10%">Tanggal Selesai Observasi</th>
+                                                <th width="33%">Alamat Tujuan Surat</th>
+                                                <th width="33%">Tempat Penelitian</th>
+                                                <th width="10%">Jadwal</th>
                                                 <th width="10%">Status</th>
                                                 <th width="8%">Pesan</th>
                                                 <th width="12%">Aksi</th>
@@ -58,19 +57,14 @@
                                         <?php foreach($semua_izin_penelitian as $sip): ?>
                                             <tr>
                                                 <td><?= $no; ?></td>
-                                                <td><?= date('d-m-Y', strtotime($sip['created_at'])) ; ?></td>
-                                                <td><?= $sip['nama_departemen']; ?></td>
+                                                <td><?= tanggal_indo($sip['created_at']); ?></td>
                                                 <td><?= $sip['tujuan_surat']; ?></td>
+                                                <td><?= $sip['alamat_tempat_penelitian']; ?></td>
                                                 <td><?= $sip['tempat_penelitian']; ?></td>
-                                                <td><?= date('d-m-Y', strtotime($sip['tanggal_mulai'])) ; ?></td>
-                                                <td><?= date('d-m-Y', strtotime($sip['tanggal_selesai'])) ; ?></td>
+                                                <td><?= tanggal_indo($sip['tanggal_mulai']); ?> s.d <?= tanggal_indo($sip['tanggal_selesai']); ?></td>
                                                 <td><?= $sip["status"] == "1" ? "<span class='badge badge-warning'>Belum diproses Admin</span>" : ($sip["status"] == "2" ? "<span class='badge badge-danger'>Ditolak Admin</span>" : ($sip["status"] == "3" ? "<span class='badge badge-success'>Menunggu diproses Kadep</span>" : ($sip["status"] == "4" ? "<span class='badge badge-danger'>Ditolak Kadep</span>" : ($sip["status"] == "5" ? "<span class='badge badge-success'>Disetujui Kadep</span>" : null)))) ; ?></td>
                                                 <td><?= $sip['pesan']; ?></td>
                                                 <td>
-                                                    <a href="<?= base_url('izin-penelitian/detail/'.$sip['uuid']); ?>" class="btn btn-primary btn-sm" ><i class="fa fa-file-text-o" style="margin-right: 5px;"></i>Detail</a>
-                                                    <?php if($sip['nim_pengajuan'] == session()->get('username') && $sip['status'] == 1) {  ?>
-                                                        <a href="<?= base_url('izin-penelitian/edit/'.$sip['uuid']); ?>" class="btn btn-warning btn-sm" ><i class="fa fa-check-square-o" style="margin-right: 5px;"></i>Edit</a>
-                                                    <?php } ?>
                                                     <?php if($sip['status'] == 5) { ?>
                                                         <form action="<?= base_url('/izin-penelitian/cetak'); ?>" target="_blank" method="POST">
                                                             <?= csrf_field(); ?>
@@ -78,6 +72,10 @@
                                                             <button type="submit" class="btn btn-success"><i class="fa fa-print" style="margin-right: 5px;"></i>Cetak</button>
                                                         </form>
                                                     <?php }  ?>
+                                                    <a href="<?= base_url('izin-penelitian/detail/'.$sip['uuid']); ?>" class="btn btn-primary btn-sm" ><i class="fa fa-file-text-o" style="margin-right: 5px;"></i>Detail</a>
+                                                    <?php if($sip['nim_pengajuan'] == session()->get('username') && $sip['status'] == 1) {  ?>
+                                                        <a href="<?= base_url('izin-penelitian/edit/'.$sip['uuid']); ?>" class="btn btn-warning btn-sm" ><i class="fa fa-edit" style="margin-right: 5px;"></i>Edit</a>
+                                                    <?php } ?>
                                                 </td>
                                                 <?php $no++ ?>
                                             </tr>
