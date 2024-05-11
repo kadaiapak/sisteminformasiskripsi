@@ -9,7 +9,7 @@
         </div>
         <div class="clearfix"></div>
         <div class="row">
-            <div class="col-md-8 col-sm-12">
+            <div class="col-md-12 col-sm-12">
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Form Pengajuan</h2>
@@ -19,8 +19,8 @@
                         <br />
                         <!-- < ?= validation_list_errors(); ?> -->
                         <form class="form-horizontal form-label-left" method="POST" action="<?= base_url('izin-observasi-penelitian/simpan'); ?>" enctype="multipart/form-data">
-                            <?= csrf_field(); ?>
-                            <div class="form-group row">
+                        <?= csrf_field(); ?>
+                            <div class="form-group row ">
                                 <label class="control-label col-md-3 col-sm-3" for="nim_pengajuan">NIM</label>
                                 <div class="col-md-9 col-sm-9 ">
                                     <input readonly value="<?= $user['prf_nim_portal']; ?>" type="text" name="nim_pengajuan" class="form-control <?= validation_show_error('nim_pengajuan') ? 'is-invalid' : null; ?>" id="nim_pengajuan" placeholder="Tuliskan NIM">
@@ -83,17 +83,6 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-12">
-                <div class="x_panel">
-                    <div class="x_title">
-                        <h2>Contoh Surat</h2>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-                        <img src="<?= base_url('/upload/contoh_surat/validasi_instrumen.jpg'); ?>" alt="" style="width: 100%;" >
                     </div>
                 </div>
             </div>

@@ -156,7 +156,7 @@ hr{
 					<tr><td></td></tr>
 					<tr><td></td></tr>
 					<tr>
-						<td>Kepada: Yth, <?= $satu_observasi['tujuan_surat']; ?></td>
+						<td>Yth, <?= $satu_observasi['tujuan_surat']; ?></td>
 					</tr>
 					<tr>
 						<td><?= $satu_observasi['alamat_surat']; ?></td>

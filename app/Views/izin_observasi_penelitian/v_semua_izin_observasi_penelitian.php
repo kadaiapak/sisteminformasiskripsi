@@ -56,12 +56,17 @@
                                                 <td><?= $siop['nama_pengajuan']; ?></td>
                                                 <td><?= $siop['nama_departemen']; ?></td>
                                                 <td><?= $siop['judul']; ?></td>
-                                                <td><?= date('d-m-Y', strtotime($siop['created_at'])) ; ?></td>
+                                                <td><?= tanggal_indo($siop['created_at']); ?></td>
                                                 <td><?= $siop["status"] == "1" ? "<span class='badge badge-warning'>Belum diproses Admin</span>" : ($siop["status"] == "2" ? "<span class='badge badge-danger'>Ditolak Admin</span>" : ($siop["status"] == "3" ? "<span class='badge badge-success'>Menunggu diproses Kadep</span>" : ($siop["status"] == "4" ? "<span class='badge badge-danger'>Ditolak Kadep</span>" : ($siop["status"] == "5" ? "<span class='badge badge-success'>Disetujui Kadep</span>" : null)))) ; ?></td>
                                                 <td>
+                                                    <?php if(session()->get('level') == '7') { ?>
+                                                        <!-- jika level adalah admin departemen atau kadep maka url nya -->
+                                                        <a href="<?= base_url('izin-observasi-penelitian/edit-admin/'.$siop['uuid']); ?>" class="btn btn-warning btn-sm" ><i class="fa fa-edit" style="margin-right: 5px;"></i>Edit</a>
+                                                        <!-- end -->
+                                                    <?php } ?>
                                                     <?php if(session()->get('level') == '7' || session()->get('level') == '4') { ?>
                                                         <!-- jika level adalah admin departemen atau kadep maka url nya -->
-                                                        <a href="<?= base_url('izin-observasi-penelitian/detail-verifikasi/'.$siop['uuid']); ?>" class="btn btn-primary btn-sm" ><i class="fa fa-check-square-o" style="margin-right: 5px;"></i>Detail Verifikasi</a>
+                                                        <a href="<?= base_url('izin-observasi-penelitian/detail-verifikasi/'.$siop['uuid']); ?>" class="btn btn-primary btn-sm" ><i class="fa fa-check-square-o" style="margin-right: 5px;"></i>Verifikasi</a>
                                                         <!-- end -->
                                                     <?php } ?>
                                                 </td>

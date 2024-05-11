@@ -41,15 +41,15 @@
                                 <td><?= $satu_observasi['nama_pengajuan']; ?></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold">Prodi</td>
+                                <td class="font-weight-bold">Departemen</td>
                                 <td><?= $satu_observasi['nama_departemen']; ?></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold">Kepada: Yth,</td>
+                                <td class="font-weight-bold">Tujuan Surat <b>(Kepada Yth : ?)</b></td>
                                 <td><?= $satu_observasi['tujuan_surat']; ?></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold">Alamat Surat,</td>
+                                <td class="font-weight-bold">Alamat Tujuan Surat <b>(Di ?)</b></td>
                                 <td><?= $satu_observasi['alamat_surat']; ?></td>
                             </tr>
                             <tr>
@@ -62,11 +62,16 @@
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">Tanggal Pengajuan</td>
-                                <td><?= date('d-m-Y', strtotime($satu_observasi['created_at'])) ; ?></td>
+                                <td><?= tanggal_indo($satu_observasi['created_at']); ?></td>
                             </tr>
                         </table>
                         <br />
+                       
+
                         <?php if(session()->get('level') == '7' && $satu_observasi['status'] == '1') { ?>
+                            <?php if (session()->get('username')) { ?>
+                                <a href="<?= base_url("izin-observasi-penelitian/semua"); ?>" class="btn btn-warning"><i class="fa fa-arrow-circle-left" style="margin-right: 5px;"></i>Kembali</a>
+                            <?php } ?>
                              <!-- terima pengajuan jika status pengajuan belum di proses dan verifikator adalah admin departemen-->
                              <div class="button_container" style="display: inline-block;">
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".terima_pengajuan_admin"><i class="fa fa-check-square" style="margin-right: 5px;"></i>Setujui Admin</button>
@@ -95,8 +100,8 @@
                                     </form>
                                 </div>
                             </div>
-                        <!-- akhir terima pengajuan -->
-                        <!-- Tolak pengajuan jika status pengajuan belum di proses dan verifikator adalah admin departemen-->
+                            <!-- akhir terima pengajuan -->
+                            <!-- Tolak pengajuan jika status pengajuan belum di proses dan verifikator adalah admin departemen-->
                             <div class="button_container" style="display: inline-block;">
                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".tolak_pengajuan_admin"><i class="fa fa-times-circle" style="margin-right: 5px;"></i>Tolak Pengajuan</button>
                             </div>
@@ -123,13 +128,15 @@
                                     </form>
                                 </div>
                             </div>
-                        <!-- akhir tolak pengajuan -->
-                       
+                            <!-- akhir tolak pengajuan -->
                         <?php } ?>
 
                         <!-- jika admin verifikator adalah kadep -->
                         <?php if(session()->get('level') == '4' && $satu_observasi['status'] == '3') { ?>
                             <div style="display: flex;">
+                                <?php if (session()->get('username')) { ?>
+                                    <a href="<?= base_url("izin-observasi-penelitian/semua"); ?>" class="btn btn-warning"><i class="fa fa-arrow-circle-left" style="margin-right: 5px;"></i>Kembali</a>
+                                <?php } ?>
                                 <!-- terima pengajuan jika status pengajuan belum di proses dan verifikator adalah kepala departemen-->
                                 <form action="<?= base_url('izin-observasi-penelitian/setujui-kadep/'.$satu_observasi['uuid']); ?>" method="post" id="setujui_kadep">
                                     <?= csrf_field(); ?>

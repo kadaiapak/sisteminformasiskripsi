@@ -12,7 +12,7 @@
             <div class="col-md-12 col-sm-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Detail Verifikasi</h2>
+                        <h2>Detail Pengajuan</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -27,15 +27,19 @@
                                 <td><?= $satu_observasi['nama_pengajuan']; ?></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold">Prodi</td>
+                                <td class="font-weight-bold">Departemen</td>
                                 <td><?= $satu_observasi['nama_departemen']; ?></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold">Kepada: Yth,</td>
+                                <td class="font-weight-bold">Tujuan Surat <b>(Kepada Yth : ?)</b></td>
                                 <td><?= $satu_observasi['tujuan_surat']; ?></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold">Judul</td>
+                                <td class="font-weight-bold">Alamat Tujuan Surat <b>(Di ?)</b></td>
+                                <td><?= $satu_observasi['alamat_surat']; ?></td>
+                            </tr>
+                            <tr>
+                                <td class="font-weight-bold">Judul Skripsi</td>
                                 <td><?= $satu_observasi['judul']; ?></td>
                             </tr>
                             <tr>
@@ -44,10 +48,13 @@
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">Tanggal Pengajuan</td>
-                                <td><?= date('d-m-Y', strtotime($satu_observasi['created_at'])) ; ?></td>
+                                <td><?= tanggal_indo($satu_observasi['created_at']); ?></td>
                             </tr>
                         </table>
                         <br />
+                        <?php if (session()->get('username')) { ?>
+                            <a href="<?= base_url("izin-observasi-penelitian"); ?>" class="btn btn-warning btn-sm"><i class="fa fa-arrow-circle-left" style="margin-right: 5px;"></i>Kembali</a>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

@@ -356,6 +356,16 @@ $routes->post('/auth/mahasiswa/proses', 'Auth::login_mahasiswa_proses');
     $routes->post('/izin-observasi-penelitian/simpan', 'IzinObservasiPenelitian::simpan', ['filter' => 'mahasiswaFilter']);
     // bisa di akses oleh admin departemen dan kepala departemen untuk melihat semua pengajuan surat izin observasi penelitian yang digunakan untuk verifikasi
     $routes->get('/izin-observasi-penelitian/semua', 'IzinObservasiPenelitian::semua', ['filter' => 'adminDepartemenDanKadepFilter']);
+    // routes untuk detail
+    $routes->get('/izin-observasi-penelitian/detail/(:any)', 'IzinObservasiPenelitian::detail/$1', ['filter' => 'mahasiswaFilter']);
+    // routes untuk edit
+    $routes->get('/izin-observasi-penelitian/edit/(:any)', 'IzinObservasiPenelitian::edit/$1', ['filter' => 'mahasiswaFilter']);
+    // routes untuk edit oleh admin
+    $routes->get('/izin-observasi-penelitian/edit-admin/(:any)', 'IzinObservasiPenelitian::edit_admin/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
+    // routes untuk simpan edit
+    $routes->post('/izin-observasi-penelitian/update/(:any)', 'IzinObservasiPenelitian::update/$1', ['filter' => 'mahasiswaFilter']);
+    // routes untuk simpan edit oleh admin
+    $routes->post('/izin-observasi-penelitian/update-admin/(:any)', 'IzinObservasiPenelitian::update_admin/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
     // bisa di akses oleh admin departemen dan kepala departemen untuk melihat semua pengajuan surat izin observasi penelitian yang disetujui digunakan untuk verifikasi
     $routes->get('/izin-observasi-penelitian/disetujui', 'IzinObservasiPenelitian::disetujui', ['filter' => 'adminDepartemenDanKadepFilter']);
     // bisa di akses oleh admin departemen dan kepala departemen untuk melihat semua pengajuan surat izin observasi penelitian yang ditolak digunakan untuk verifikasi

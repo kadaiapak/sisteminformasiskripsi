@@ -46,6 +46,27 @@ class IzinObservasiPenelitian extends BaseController
         return view('izin_observasi_penelitian/v_izin_observasi_penelitian', $data);
     }
 
+    // fungsi untuk melihat detail pengajuan
+    // akses oleh mahasiswa
+    // GET /izin-penelitian/detail/(:any)
+    public function detail($UUIDPenelitian)
+    {
+        if($UUIDPenelitian != null) {
+            $satu_observasi = $this->izinObservasiPenelitianModel->getDetail($UUIDPenelitian);
+            if (!$satu_observasi) {
+                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            } else {
+                $data = [
+                    'judul' => 'Detail Surat Izin Observasi Penelitian',
+                    'satu_observasi' => $satu_observasi,
+                ];
+                return view('izin_observasi_penelitian/v_detail_izin_observasi_penelitian', $data);
+            }   
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    }
+
     public function tambah()
     {
         $nim = session()->get('username');
@@ -117,6 +138,127 @@ class IzinObservasiPenelitian extends BaseController
         );
         $this->izinObservasiPenelitianModel->simpan($data);
         return redirect()->to('/izin-observasi-penelitian')->with('sukses','Data berhasil disimpan!');
+    }
+
+    public function edit($id)
+    {
+        if($id != null) {
+            $nim = session()->get('username');
+            $singleIzinObservasiPenelitian = $this->izinObservasiPenelitianModel->getDetailForEdit($id, $nim);
+            if (!$singleIzinObservasiPenelitian) {
+                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            } else {
+                $data = [
+                    'judul' => 'Edit Surat Izin Observasi Penelitian',
+                    'singleIzinObservasiPenelitian' => $singleIzinObservasiPenelitian,
+                ];
+                return view('izin_observasi_penelitian/v_edit_izin_observasi_penelitian', $data);
+            }
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    }
+
+    public function update($id)
+    {
+        if(!$this->validate([
+            'tujuan_surat' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Tuliskan Tujuan Surat',
+                ]
+            ],
+            'alamat_surat' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Tuliskan Alamat Surat',
+                ]
+            ],
+            'judul' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Tuliskan Judul',
+                ]
+            ],
+        ])){
+            return redirect()->back()->withInput();
+        }
+
+        date_default_timezone_set('ASIA/JAKARTA');
+        $data = array(
+            'judul' => $this->request->getVar('judul'),
+            'tujuan_surat' => $this->request->getVar('tujuan_surat'),
+            'alamat_surat' => $this->request->getVar('alamat_surat'),
+            'updated_at' => date('Y-m-d H:i:s')
+        );
+
+        $where = array(
+            'uuid' => $id,
+            'nim_pengajuan' => session()->get('username'),
+            'status' => 1
+        );
+        $this->izinObservasiPenelitianModel->where($where)->set($data)->update();      
+        return redirect()->to('/izin-observasi-penelitian')->with('sukses','Data berhasil disimpan!');
+    }
+
+    public function edit_admin($id)
+    {
+        if($id != null) {
+            $nim = session()->get('username');
+            $singleIzinObservasiPenelitian = $this->izinObservasiPenelitianModel->getDetail($id);
+            if (!$singleIzinObservasiPenelitian) {
+                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            } else {
+                $data = [
+                    'judul' => 'Edit Surat Izin Observasi Penelitian',
+                    'singleIzinObservasiPenelitian' => $singleIzinObservasiPenelitian,
+                ];
+                return view('izin_observasi_penelitian/v_edit_admin_izin_observasi_penelitian', $data);
+            }
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    }
+
+    public function update_admin($id)
+    {
+        if(!$this->validate([
+            'tujuan_surat' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Tuliskan Tujuan Surat',
+                ]
+            ],
+            'alamat_surat' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Tuliskan Alamat Surat',
+                ]
+            ],
+            'judul' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Tuliskan Judul',
+                ]
+            ],
+        ])){
+            return redirect()->back()->withInput();
+        }
+
+        date_default_timezone_set('ASIA/JAKARTA');
+        $data = array(
+            'judul' => $this->request->getVar('judul'),
+            'tujuan_surat' => $this->request->getVar('tujuan_surat'),
+            'alamat_surat' => $this->request->getVar('alamat_surat'),
+            'updated_at' => date('Y-m-d H:i:s')
+        );
+
+        $where = array(
+            'uuid' => $id,
+            'status' => 1
+        );
+        $this->izinObservasiPenelitianModel->where($where)->set($data)->update();      
+        return redirect()->to('/izin-observasi-penelitian/semua')->with('sukses','Data berhasil disimpan!');
     }
 
     public function semua()
