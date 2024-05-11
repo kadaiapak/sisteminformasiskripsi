@@ -12,7 +12,7 @@
             <div class="col-md-12 col-sm-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Detail Validasi Instrumen</h2>
+                        <h2>Detail Pengajuan</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -31,15 +31,15 @@
                                 <td><?= $satu_penelitian['nama_departemen']; ?></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold">Tujuan Kepala Surat (Kepada Yth : ?)</td>
+                                <td class="font-weight-bold">Tujuan Kepala Surat <b>(Kepada Yth : ?)</b></td>
                                 <td><?= $satu_penelitian['tujuan_surat']; ?></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold">Alamat Tujuan Surat</td>
+                                <td class="font-weight-bold">Alamat Tujuan Surat <b>(Di ?)</b></td>
                                 <td><?= $satu_penelitian['alamat_tujuan_surat']; ?></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold">Judul</td>
+                                <td class="font-weight-bold">Judul Skripsi</td>
                                 <td><?= $satu_penelitian['judul']; ?></td>
                             </tr>
                             
@@ -49,7 +49,7 @@
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">Tanggal Pengajuan</td>
-                                <td><?= date('d-m-Y', strtotime($satu_penelitian['created_at'])) ; ?></td>
+                                <td><?= tanggal_indo($satu_penelitian['created_at']); ?></td>
                             </tr>
                             <?php if($satu_penelitian['pesan']) { ?>
                             <tr>
@@ -59,7 +59,7 @@
                             <?php } ?>
                         </table>
                         <?php if (session()->get('username')) { ?>
-                            <a href="<?= base_url("validasi-instrumen"); ?>" class="btn btn-primary btn-sm" style="margin-top: 10px;" ><i class="fa fa-arrow-circle-left" style="margin-right: 5px;"></i>Kembali</a>
+                            <a href="<?= base_url("validasi-instrumen"); ?>" class="btn btn-warning btn-sm" style="margin-top: 10px;" ><i class="fa fa-arrow-circle-left" style="margin-right: 5px;"></i>Kembali</a>
                         <?php } ?>
                     </div>
                 </div>

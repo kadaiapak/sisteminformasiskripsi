@@ -230,7 +230,7 @@ class ValidasiInstrumen extends BaseController
             'status' => 1,
         );
 
-        $this->validasiInstrumenModel->where('uuid', $UUIDPenelitian)->set($data)->update();
+        $this->validasiInstrumenModel->where('uuid', $UUIDPenelitian)->set($data)->update();      
         return redirect()->to('/validasi-instrumen')->with('sukses','Data berhasil disimpan!');
     }
 

@@ -43,8 +43,9 @@
                                             <tr>
                                                 <th width="1%">No</th>  
                                                 <th width="10%">Tanggal Pengajuan</th>
-                                                <th width="30%">Departemen</th>
                                                 <th width="22%">Tujuan Surat</th>
+                                                <th width="30%">Alamat Tujuan Surat</th>
+                                                <th width="30%">Judul</th>
                                                 <th width="9%">Status</th>
                                                 <th width="8%">Pesan</th>
                                                 <th width="20%">Aksi</th>
@@ -56,14 +57,15 @@
                                             <tr>
                                                 <td><?= $no; ?></td>
                                                 <td><?= tanggal_indo($sip['created_at']); ?></td>
-                                                <td><?= $sip['nama_departemen']; ?></td>
                                                 <td><?= $sip['tujuan_surat']; ?></td>
+                                                <td><?= $sip['alamat_tujuan_surat']; ?></td>
+                                                <td><?= $sip['judul']; ?></td>
                                                 <td><?= $sip["status"] == "1" ? "<span class='badge badge-warning'>Belum diproses Admin</span>" : ($sip["status"] == "2" ? "<span class='badge badge-danger'>Ditolak Admin</span>" : ($sip["status"] == "3" ? "<span class='badge badge-success'>Menunggu diproses Kadep</span>" : ($sip["status"] == "4" ? "<span class='badge badge-danger'>Ditolak Kadep</span>" : ($sip["status"] == "5" ? "<span class='badge badge-success'>Disetujui Kadep</span>" : null)))) ; ?></td>
                                                 <td><?= $sip['pesan']; ?></td>
                                                 <td>
                                                     <a href="<?= base_url('validasi-instrumen/detail/'.$sip['uuid']); ?>" class="btn btn-primary btn-sm" ><i class="fa fa-file-text-o" style="margin-right: 5px;"></i>Detail</a>
                                                     <?php if($sip['nim_pengajuan'] == session()->get('username') && $sip['status'] == 1) {  ?>
-                                                        <a href="<?= base_url('validasi-instrumen/edit/'.$sip['uuid']); ?>" class="btn btn-warning btn-sm" ><i class="fa fa-check-square-o" style="margin-right: 5px;"></i>Edit</a>
+                                                        <a href="<?= base_url('validasi-instrumen/edit/'.$sip['uuid']); ?>" class="btn btn-warning btn-sm" ><i class="fa fa-edit" style="margin-right: 5px;"></i>Edit</a>
                                                     <?php } ?>
                                                     <?php if($sip['status'] == 5) { ?>
                                                         <form action="<?= base_url('/validasi-instrumen/cetak'); ?>" target="_blank" method="POST">

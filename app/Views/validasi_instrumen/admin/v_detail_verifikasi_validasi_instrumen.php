@@ -26,7 +26,7 @@
             <div class="col-md-12 col-sm-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Verifikasi Validasi Instrumen</h2>
+                        <h2>Detail Verifikasi</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -45,15 +45,15 @@
                                 <td><?= $satu_penelitian['nama_departemen']; ?></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold">Tujuan Kepala Surat (Kepada Yth : ?)</td>
+                                <td class="font-weight-bold">Tujuan Surat <b>(Kepada Yth : ?)</b></td>
                                 <td><?= $satu_penelitian['tujuan_surat']; ?></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold">Alamat Tujuan Kepala Surat (Di : ?)</td>
+                                <td class="font-weight-bold">Alamat Tujuan Surat <b>(Di ?)</b></td>
                                 <td><?= $satu_penelitian['alamat_tujuan_surat']; ?></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold">Judul</td>
+                                <td class="font-weight-bold">Judul Skripsi</td>
                                 <td><?= $satu_penelitian['judul']; ?></td>
                             </tr>
                          
@@ -63,7 +63,7 @@
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">Tanggal Pengajuan</td>
-                                <td><?= date('d-m-Y', strtotime($satu_penelitian['created_at'])) ; ?></td>
+                                <td><?= tanggal_indo($satu_penelitian['created_at']); ?></td>
                             </tr>
                             <?php if($satu_penelitian['pesan']) { ?>
                             <tr>

@@ -50,6 +50,12 @@
                                 <td class="font-weight-bold">Tanggal Pengajuan</td>
                                 <td><?= tanggal_indo($satu_observasi['created_at']); ?></td>
                             </tr>
+                            <?php if($satu_observasi['pesan']) { ?>
+                            <tr>
+                                <td class="font-weight-bold">Pesan</td>
+                                <td><?= $satu_observasi['pesan'] ; ?></td>
+                            </tr>    
+                            <?php } ?>
                         </table>
                         <br />
                         <?php if (session()->get('username')) { ?>

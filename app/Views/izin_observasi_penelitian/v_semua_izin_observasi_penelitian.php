@@ -38,11 +38,11 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
+                                                <th>Tanggal Pengajuan</th>
                                                 <th>NIM</th>
                                                 <th>Nama Mahasiswa</th>
                                                 <th>Departemen</th>
                                                 <th>Judul</th>
-                                                <th>Tanggal Pengajuan</th>
                                                 <th>Status</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -52,11 +52,11 @@
                                         <?php foreach($semua_izin_observasi_penelitian as $siop): ?>
                                             <tr>
                                                 <td><?= $no; ?></td>
+                                                <td><?= tanggal_indo($siop['created_at']); ?></td>
                                                 <td><?= $siop['nim_pengajuan']; ?></td>
                                                 <td><?= $siop['nama_pengajuan']; ?></td>
                                                 <td><?= $siop['nama_departemen']; ?></td>
                                                 <td><?= $siop['judul']; ?></td>
-                                                <td><?= tanggal_indo($siop['created_at']); ?></td>
                                                 <td><?= $siop["status"] == "1" ? "<span class='badge badge-warning'>Belum diproses Admin</span>" : ($siop["status"] == "2" ? "<span class='badge badge-danger'>Ditolak Admin</span>" : ($siop["status"] == "3" ? "<span class='badge badge-success'>Menunggu diproses Kadep</span>" : ($siop["status"] == "4" ? "<span class='badge badge-danger'>Ditolak Kadep</span>" : ($siop["status"] == "5" ? "<span class='badge badge-success'>Disetujui Kadep</span>" : null)))) ; ?></td>
                                                 <td>
                                                     <?php if(session()->get('level') == '7') { ?>

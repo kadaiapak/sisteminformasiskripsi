@@ -41,11 +41,10 @@
                                         <thead>
                                             <tr>
                                                 <th width="2%">No</th>
-                                                <th width="10%">NIM</th>
-                                                <th width="10%">Nama Mahasiswa</th>
-                                                <th width="10%">Departemen</th>
-                                                <th width="23%">Judul</th>
                                                 <th width="10%">Tanggal Pengajuan</th>
+                                                <th width="10%">Tujuan Surat</th>
+                                                <th width="10%">Alamat Tujuan Surat</th>
+                                                <th width="23%">Judul</th>
                                                 <th width="10%">Status</th>
                                                 <th width="10%">Pesan</th>
                                                 <th width="15%">Aksi</th>
@@ -56,11 +55,10 @@
                                         <?php foreach($semua_izin_observasi_penelitian as $siop): ?>
                                             <tr>
                                                 <td><?= $no; ?></td>
-                                                <td><?= $siop['nim_pengajuan']; ?></td>
-                                                <td><?= $siop['nama_pengajuan']; ?></td>
-                                                <td><?= $siop['nama_departemen']; ?></td>
-                                                <td><?= $siop['judul']; ?></td>
                                                 <td><?= tanggal_indo($siop['created_at']); ?></td>
+                                                <td><?= $siop['tujuan_surat']; ?></td>
+                                                <td><?= $siop['alamat_surat']; ?></td>
+                                                <td><?= $siop['judul']; ?></td>
                                                 <td><?= $siop["status"] == "1" ? "<span class='badge badge-warning'>Belum diproses Admin</span>" : ($siop["status"] == "2" ? "<span class='badge badge-danger'>Ditolak Admin</span>" : ($siop["status"] == "3" ? "<span class='badge badge-success'>Menunggu diproses Kadep</span>" : ($siop["status"] == "4" ? "<span class='badge badge-danger'>Ditolak Kadep</span>" : ($siop["status"] == "5" ? "<span class='badge badge-success'>Disetujui Kadep</span>" : null)))) ; ?></td>
                                                 <td><?= $siop['pesan']; ?></td>
                                                 <td>
@@ -69,7 +67,7 @@
                                                     <?php }  ?>
                                                     <a href="<?= base_url('izin-observasi-penelitian/detail/'.$siop['uuid']); ?>" class="btn btn-primary btn-sm" ><i class="fa fa-file-text-o" style="margin-right: 5px;"></i>Detail</a>
                                                     <?php if($siop['nim_pengajuan'] == session()->get('username') && $siop['status'] == 1) {  ?>
-                                                        <a href="<?= base_url('izin-observasi-penelitian/edit/'.$siop['uuid']); ?>" class="btn btn-warning btn-sm" ><i class="fa fa-check-square-o" style="margin-right: 5px;"></i>Edit</a>
+                                                        <a href="<?= base_url('izin-observasi-penelitian/edit/'.$siop['uuid']); ?>" class="btn btn-warning btn-sm" ><i class="fa fa-edit" style="margin-right: 5px;"></i>Edit</a>
                                                     <?php } ?>
                                                 </td>
                                                 <?php $no++ ?>
