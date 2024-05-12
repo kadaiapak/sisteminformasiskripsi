@@ -71,10 +71,10 @@
                         </table>
                         <br />
                         <?php if(session()->get('level') == '7' && $satu_instrumen['status'] == '1') { ?>
-                            <a href="<?= base_url("validator-instrumen/semua"); ?>" class="btn btn-primary"><i class="fa fa-arrow-circle-left" style="margin-right: 5px;"></i>Kembali</a>
+                            <a href="<?= base_url("validator-instrumen/semua"); ?>" class="btn btn-warning"><i class="fa fa-arrow-circle-left" style="margin-right: 5px;"></i>Kembali</a>
                             <!-- terima pengajuan jika status pengajuan belum di proses dan verifikator adalah admin departemen-->
                             <div class="button_container" style="display: inline-block;">
-                                <button type="button" class="btn btn-success" data-toggle="modal" data-target=".terima_pengajuan_admin"><i class="fa fa-check-square" style="margin-right: 5px;"></i>Setujui Admin</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".terima_pengajuan_admin"><i class="fa fa-check-square" style="margin-right: 5px;"></i>Setujui Admin</button>
                             </div>
                             <div class="modal fade terima_pengajuan_admin" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog modal-sm" style="max-width: 500px;">
@@ -134,11 +134,11 @@
                         <!-- jika admin verifikator adalah kadep -->
                         <?php if(session()->get('level') == '4' && $satu_instrumen['status'] == '3') { ?>
                             <div style="display: flex;">
-                                <a href="<?= base_url("validator-instrumen/semua"); ?>" class="btn btn-primary btn-sm"><i class="fa fa-arrow-circle-left" style="margin-right: 5px;"></i>Kembali</a>
+                                <a href="<?= base_url("validator-instrumen/semua"); ?>" class="btn btn-warning btn-sm"><i class="fa fa-arrow-circle-left" style="margin-right: 5px;"></i>Kembali</a>
                                 <!-- terima pengajuan jika status pengajuan belum di proses dan verifikator adalah kepala departemen-->
                                 <form action="<?= base_url('validator-instrumen/setujui-kadep/'.$satu_instrumen['uuid']); ?>" method="post" id="setujui_kadep">
                                     <?= csrf_field(); ?>
-                                    <button type="submit" class="btn btn-success"><i class="fa fa-check-square" style="margin-right: 5px;"></i>Setujui kadep</button>
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-check-square" style="margin-right: 5px;"></i>Setujui kadep</button>
                                 </form>
                             <!-- akhir terima pengajuan -->
                             <!-- Tolak pengajuan jika status pengajuan belum di proses kadep verifikator adalah kadep-->

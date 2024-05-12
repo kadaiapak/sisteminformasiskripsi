@@ -4,7 +4,7 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Izin Observasi Penelitian</h3>
+                <h3>Validator Instrumen</h3>
             </div>
         </div>
         <div class="clearfix"></div>
@@ -12,7 +12,7 @@
             <div class="col-md-12 col-sm-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Detail Validator Instrumen</h2>
+                        <h2>Detail Pengajuan</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -27,7 +27,7 @@
                                 <td><?= $satu_instrumen['nama_pengajuan']; ?></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold">Prodi</td>
+                                <td class="font-weight-bold">Departemen</td>
                                 <td><?= $satu_instrumen['nama_departemen']; ?></td>
                             </tr>
                             <tr>
@@ -52,7 +52,7 @@
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">Tanggal Pengajuan</td>
-                                <td><?= date('d-m-Y', strtotime($satu_instrumen['created_at'])) ; ?></td>
+                                <td><?= tanggal_indo($satu_instrumen['created_at']); ?></td>
                             </tr>
                             <?php if($satu_instrumen['pesan']) { ?>
                             <tr>
@@ -63,7 +63,7 @@
                         </table>
                         <br />
                         <?php if (session()->get('username')) { ?>
-                            <a href="<?= base_url("validator-instrumen"); ?>" class="btn btn-primary btn-sm"><i class="fa fa-arrow-circle-left" style="margin-right: 5px;"></i>Kembali</a>
+                            <a href="<?= base_url("validator-instrumen"); ?>" class="btn btn-warning btn-sm"><i class="fa fa-arrow-circle-left" style="margin-right: 5px;"></i>Kembali</a>
                         <?php } ?>
                     </div>
                 </div>

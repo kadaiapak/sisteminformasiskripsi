@@ -5,7 +5,7 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Izin Observasi Penelitian</h3>
+                <h3>Validator Instrumen</h3>
             </div>
         </div>
         <div class="clearfix"></div>
@@ -38,11 +38,11 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
+                                                <th>Tanggal Pengajuan</th>
                                                 <th>NIM</th>
                                                 <th>Nama Mahasiswa</th>
                                                 <th>Departemen</th>
                                                 <th>Judul</th>
-                                                <th>Tanggal Pengajuan</th>
                                                 <th>Status</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -52,21 +52,21 @@
                                         <?php foreach($semua_validator_instrumen as $svi): ?>
                                             <tr>
                                                 <td><?= $no; ?></td>
+                                                <td><?= tanggal_indo($svi['created_at']); ?></td>
                                                 <td><?= $svi['nim_pengajuan']; ?></td>
                                                 <td><?= $svi['nama_pengajuan']; ?></td>
                                                 <td><?= $svi['nama_departemen']; ?></td>
                                                 <td><?= $svi['judul']; ?></td>
-                                                <td><?= date('d-m-Y', strtotime($svi['created_at'])) ; ?></td>
                                                 <td><?= $svi["status"] == "1" ? "<span class='badge badge-warning'>Belum diproses Admin</span>" : ($svi["status"] == "2" ? "<span class='badge badge-danger'>Ditolak Admin</span>" : ($svi["status"] == "3" ? "<span class='badge badge-success'>Menunggu diproses Kadep</span>" : ($svi["status"] == "4" ? "<span class='badge badge-danger'>Ditolak Kadep</span>" : ($svi["status"] == "5" ? "<span class='badge badge-success'>Disetujui Kadep</span>" : null)))) ; ?></td>
                                                 <td>
+                                                    <?php if(session()->get('level') == '7') { ?>
+                                                        <!-- jika level adalah admin departemen atau kadep maka url nya -->
+                                                        <a href="<?= base_url('validator-instrumen/edit-admin/'.$svi['uuid']); ?>" class="btn btn-warning btn-sm" ><i class="fa fa-edit" style="margin-right: 5px;"></i>Edit</a>
+                                                        <!-- end -->
+                                                    <?php } ?>
                                                     <?php if(session()->get('level') == '7' || session()->get('level') == '4') { ?>
                                                         <!-- jika level adalah admin departemen atau kadep maka url nya -->
                                                         <a href="<?= base_url('validator-instrumen/detail-verifikasi/'.$svi['uuid']); ?>" class="btn btn-primary btn-sm" ><i class="fa fa-check-square-o" style="margin-right: 5px;"></i>Verifikasi</a>
-                                                        <!-- end -->
-                                                    <?php } ?>
-                                                    <?php if(session()->get('level') == '7') { ?>
-                                                        <!-- jika level adalah admin departemen atau kadep maka url nya -->
-                                                        <a href="<?= base_url('validator-instrumen/edit-admin/'.$svi['uuid']); ?>" class="btn btn-warning btn-sm" ><i class="fa fa-check-square-o" style="margin-right: 5px;"></i>Edit</a>
                                                         <!-- end -->
                                                     <?php } ?>
                                                 </td>

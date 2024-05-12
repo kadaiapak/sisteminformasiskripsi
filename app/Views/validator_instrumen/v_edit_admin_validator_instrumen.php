@@ -9,10 +9,10 @@
         </div>
         <div class="clearfix"></div>
         <div class="row">
-            <div class="col-md-12 col-sm-12">
+            <div class="col-md-8 col-sm-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Form Edit Pengajuan</h2>
+                        <h2>Edit Pengajuan oleh Admin</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -29,7 +29,6 @@
                                         <?= validation_show_error('nim_pengajuan'); ?>
                                     </div>
                                 </div>
-                                
                             </div>
                             <div class="form-group row ">
                                 <label class="control-label col-md-3 col-sm-3" for="nama_pengajuan">Nama Mahasiswa</label>
@@ -40,20 +39,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="control-label col-lg-3 col-md-3 col-sm-3" for="departemen_pengajuan">Departemen</label>
-                                <div class="col-lg-4 col-md-4 col-sm-9 ">
-                                    <select class="form-control <?= validation_show_error('departemen_pengajuan') ? 'is-invalid' : null; ?>" name="departemen_pengajuan" id="departemen_pengajuan">
-                                        <option value="">-- Pilih Departemen --</option>
-                                        <?php foreach ($semua_departemen as $d) { ?>
-                                            <option value="<?= $d['departemen_id']; ?>" <?= $satu_instrumen['departemen_pengajuan'] == $d['departemen_id'] ? "selected" : null; ?>><?= $d['departemen_nama']; ?></option>
-                                        <?php } ?>
-                                    </select>
-                                    <div class="invalid-feedback" style="text-align: left;">
-                                        <?= validation_show_error('departemen_pengajuan'); ?>
-                                    </div>
+                            <div class="form-group row ">
+                                <label class="control-label col-md-3 col-sm-3">Departemen</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input readonly type="text" value="<?= $satu_instrumen['nama_departemen']; ?>" class="form-control">
                                 </div>
                             </div>
+                            <input type="hidden" name="departemen_pengajuan" value="<?= $satu_instrumen['departemen_pengajuan']; ?>">
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3" for="judul">Judul Skripsi</label>
                                 <div class="col-md-9 col-sm-9 ">
@@ -103,9 +95,9 @@
                                         <?= validation_show_error('nama_dosen_validator_tiga'); ?>
                                     </div>
                                 </div>
-                                <label class="control-label col-md-3 col-sm-3" for="nama_dosen_validator_tiga">Bidang</label>
+                                <label class="control-label col-md-3 col-sm-3" for="bidang_dosen_validator_tigan">Bidang</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input type="text" value="<?= $satu_instrumen['bidang_dosen_validator_satu']; ?>" class="form-control <?= validation_show_error('bidang_dosen_validator_tiga') ? 'is-invalid' : null; ?>" id="bidang_dosen_validator_tiga" name="bidang_dosen_validator_tiga" placeholder="Tuliskan bidang">
+                                    <input type="text" value="<?= $satu_instrumen['bidang_dosen_validator_tiga']; ?>" class="form-control <?= validation_show_error('bidang_dosen_validator_tiga') ? 'is-invalid' : null; ?>" id="bidang_dosen_validator_tiga" name="bidang_dosen_validator_tiga" placeholder="Tuliskan bidang">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('bidang_dosen_validator_tiga'); ?>
                                     </div>
@@ -114,11 +106,22 @@
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-9 col-sm-9  offset-md-3">
-                                    <a href="<?= base_url('/skripsi'); ?>" class="btn btn-warning btn-sm"><i class="fa fa-chevron-circle-left" style="margin-right: 5px;"></i>Kembali</a>
+                                    <a href="<?= base_url('/validator-instrumen/semua'); ?>" class="btn btn-warning btn-sm"><i class="fa fa-chevron-circle-left" style="margin-right: 5px;"></i>Kembali</a>
                                     <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-save" style="margin-right: 5px;"></i>Simpan</button>
                                 </div>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Contoh Surat</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <img src="<?= base_url('/upload/contoh_surat/validator_instrumen.jpg'); ?>" alt="" style="width: 100%;" >
                     </div>
                 </div>
             </div>

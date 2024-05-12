@@ -39,7 +39,7 @@ class ValidatorInstrumen extends BaseController
         }
         $semuaSuratValidatorInstrumen = $this->validatorInstrumenModel->getAll($nim);
         $data = [
-            'judul' => 'Surat Validator Instrumen',
+            'judul' => 'Validator Instrumen',
             'semua_validator_instrumen' => $semuaSuratValidatorInstrumen
         ];
         return view('validator_instrumen/v_validator_instrumen', $data);
@@ -50,10 +50,9 @@ class ValidatorInstrumen extends BaseController
         $nim = session()->get('username');
         $user = $this->profilModel->getDetail($nim);
         $data = [
-            'judul' => 'Pengajuan Surat Izin Observasi Penelian',
+            'judul' => 'Pengajuan Surat Validator Instrumen',
             'user' => $user
         ];
-
         return view('validator_instrumen/v_tambah_validator_instrumen', $data);
     }
 
@@ -119,7 +118,7 @@ class ValidatorInstrumen extends BaseController
             } else {
                 $semuaDepartemen = $this->departemenModel->findAll();
                 $data = [
-                    'judul' => 'Edit Izin Validator Instrumen',
+                    'judul' => 'Edit Pengajuan Validator Instrumen',
                     'satu_instrumen' => $satu_instrumen,
                     'semua_departemen' => $semuaDepartemen
                 ];
@@ -196,7 +195,7 @@ class ValidatorInstrumen extends BaseController
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             } else {
                 $data = [
-                    'judul' => 'Detail Izin Validator Instrumen',
+                    'judul' => 'Detail Surat Izin Validator Instrumen',
                     'satu_instrumen' => $satu_instrumen,
                 ];
                 return view('validator_instrumen/v_detail_validator_instrumen', $data);
@@ -283,10 +282,7 @@ class ValidatorInstrumen extends BaseController
         $UUIDInstrumen = $this->request->getVar('UUIDInstrumen');
        
         $data = array(
-            'nama_pengajuan' => $this->request->getVar('nama_pengajuan'),
-            'nim_pengajuan' => $this->request->getVar('nim_pengajuan'),
             'judul' => $this->request->getVar('judul'),
-            'departemen_pengajuan' => $this->request->getVar('departemen_pengajuan'),
             'nama_dosen_validator_satu' => $this->request->getVar('nama_dosen_validator_satu'),
             'bidang_dosen_validator_satu' => $this->request->getVar('bidang_dosen_validator_satu'),
             'nama_dosen_validator_dua' => $this->request->getVar('nama_dosen_validator_dua'),
@@ -311,7 +307,7 @@ class ValidatorInstrumen extends BaseController
         }
         $semuaValidatorInstrumen = $this->validatorInstrumenModel->getAllByAdminYangDisetujui($departemen, $level);
         $data = [
-            'judul' => 'Semua Pengajuan Izin Observasi Penelitian',
+            'judul' => 'Validator Instrumen Disetujui',
             'semua_validator_instrumen' => $semuaValidatorInstrumen
         ];
         return view('validator_instrumen/v_validator_instrumen_disetujui', $data);
@@ -328,7 +324,7 @@ class ValidatorInstrumen extends BaseController
         }
         $semuaValidatorInstrumen = $this->validatorInstrumenModel->getAllByAdminYangDitolak($departemen, $level);
         $data = [
-            'judul' => 'Semua Pengajuan Izin Observasi Penelitian',
+            'judul' => 'Validator Instrumen Ditolak',
             'semua_validator_instrumen' => $semuaValidatorInstrumen
         ];
         return view('validator_instrumen/v_validator_instrumen_ditolak', $data);

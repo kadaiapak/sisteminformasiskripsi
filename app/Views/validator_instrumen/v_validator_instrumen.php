@@ -41,11 +41,9 @@
                                         <thead>
                                             <tr>
                                                 <th width="1%">No</th>
-                                                <th width="6%">NIM</th>
-                                                <th width="10%">Nama Mahasiswa</th>
-                                                <th width="10%">Departemen</th>
-                                                <th width="33%">Judul</th>
                                                 <th width="10%">Tanggal Pengajuan</th>
+                                                <th width="33%">Judul</th>
+                                                <th width="20%">Dosen dan Bidang</th>
                                                 <th width="10%">Status</th>
                                                 <th width="10%">Pesan</th>
                                                 <th width="10%">Aksi</th>
@@ -56,21 +54,23 @@
                                         <?php foreach($semua_validator_instrumen as $svi): ?>
                                             <tr>
                                                 <td><?= $no; ?></td>
-                                                <td><?= $svi['nim_pengajuan']; ?></td>
-                                                <td><?= $svi['nama_pengajuan']; ?></td>
-                                                <td><?= $svi['nama_departemen']; ?></td>
+                                                <td><?= tanggal_indo($svi['created_at']); ?></td>
                                                 <td><?= $svi['judul']; ?></td>
-                                                <td><?= date('d-m-Y', strtotime($svi['created_at'])) ; ?></td>
+                                                <td>
+                                                    <?= $svi['nama_dosen_validator_satu']; ?>/<?= $svi['bidang_dosen_validator_satu']; ?> <br>
+                                                    <?= $svi['nama_dosen_validator_dua']; ?>/<?= $svi['bidang_dosen_validator_dua']; ?> <br>
+                                                    <?= $svi['nama_dosen_validator_tiga']; ?>/<?= $svi['bidang_dosen_validator_tiga']; ?>
+                                                </td>
                                                 <td><?= $svi["status"] == "1" ? "<span class='badge badge-warning'>Belum diproses Admin</span>" : ($svi["status"] == "2" ? "<span class='badge badge-danger'>Ditolak Admin</span>" : ($svi["status"] == "3" ? "<span class='badge badge-success'>Menunggu diproses Kadep</span>" : ($svi["status"] == "4" ? "<span class='badge badge-danger'>Ditolak Kadep</span>" : ($svi["status"] == "5" ? "<span class='badge badge-success'>Disetujui Kadep</span>" : null)))) ; ?></td>
                                                 <td><?= $svi['pesan']; ?></td>
                                                 <td>
+                                                    <?php if($svi['status'] == 5) { ?>
+                                                        <button class="btn btn-success" onclick="window.open('<?= base_url('validator-instrumen/print-surat/'.$svi['uuid']) ?>', 'blank')"><i class="fa fa-print" style="margin-right: 5px;"></i>Cetak</button>
+                                                    <?php }  ?>
                                                     <a href="<?= base_url('validator-instrumen/detail-validator-instrumen/'.$svi['uuid']); ?>" class="btn btn-primary btn-sm" ><i class="fa fa-file-text-o" style="margin-right: 5px;"></i>Detail</a>
                                                     <?php if($svi['nim_pengajuan'] == session()->get('username') && $svi['status'] == 1) {  ?>
-                                                        <a href="<?= base_url('validator-instrumen/edit/'.$svi['uuid']); ?>" class="btn btn-warning btn-sm" ><i class="fa fa-check-square-o" style="margin-right: 5px;"></i>Edit</a>
+                                                        <a href="<?= base_url('validator-instrumen/edit/'.$svi['uuid']); ?>" class="btn btn-warning btn-sm" ><i class="fa fa-edit" style="margin-right: 5px;"></i>Edit</a>
                                                     <?php } ?>
-                                                    <?php if($svi['status'] == 5) { ?>
-                                                        <button class="btn btn-success" onclick="window.open('<?= base_url('validator-instrumen/print-surat/'.$svi['uuid']) ?>', 'blank')"><i class="fa fa-print" style="margin-right: 5px;"></i>Cetak Surat</button>
-                                                    <?php }  ?>
                                                 </td>
                                                 <?php $no++ ?>
                                             </tr>
