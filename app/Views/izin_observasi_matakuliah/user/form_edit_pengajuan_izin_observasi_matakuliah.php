@@ -9,10 +9,10 @@
         </div>
         <div class="clearfix"></div>
         <div class="row">
-            <div class="col-md-12 col-sm-12">
+            <div class="col-md-8 col-sm-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Form Pengajuan</h2>
+                        <h2>Edit Pengajuan</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -29,7 +29,6 @@
                                         <?= validation_show_error('nim_pengajuan'); ?>
                                     </div>
                                 </div>
-                                
                             </div>
                             <div class="form-group row ">
                                 <label class="control-label col-md-3 col-sm-3" for="nama_pengajuan">Nama Mahasiswa</label>
@@ -40,9 +39,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group row ">
+                                <label class="control-label col-md-3 col-sm-3">Departemen</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input readonly type="text" value="<?= $satu_observasi['nama_departemen']; ?>" class="form-control">
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label class="control-label col-lg-3 col-md-3 col-sm-3" for="jk_pengajuan">Jenis Kelamin</label>
-                                <div class="col-lg-4 col-md-4 col-sm-9 ">
+                                <div class="col-lg-5 col-md-5 col-sm-9 ">
                                     <select required class="form-control <?= validation_show_error('jk_pengajuan') ? 'is-invalid' : null; ?>" name="jk_pengajuan" id="jk_pengajuan">
                                         <option value="">-- Jenis Kelamin --</option>
                                             <option value="L" <?= $satu_observasi['jk_pengajuan'] == 'L' ? 'selected' : null; ?>>Laki - laki</option>
@@ -50,20 +55,6 @@
                                     </select>
                                     <div class="invalid-feedback" style="text-align: left;">
                                         <?= validation_show_error('jk_pengajuan'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="control-label col-lg-3 col-md-3 col-sm-3" for="departemen_pengajuan">Departemen</label>
-                                <div class="col-lg-4 col-md-4 col-sm-9 ">
-                                    <select required class="form-control <?= validation_show_error('departemen_pengajuan') ? 'is-invalid' : null; ?>" name="departemen_pengajuan" id="departemen_pengajuan">
-                                        <option value="">-- Pilih Departemen --</option>
-                                        <?php foreach ($semua_departemen as $d) { ?>
-                                            <option value="<?= $d['departemen_id']; ?>" <?= $satu_observasi['departemen_pengajuan'] == $d['departemen_id'] ? 'selected' : null; ?>><?= $d['departemen_nama']; ?></option>
-                                        <?php } ?>
-                                    </select>
-                                    <div class="invalid-feedback" style="text-align: left;">
-                                        <?= validation_show_error('departemen_pengajuan'); ?>
                                     </div>
                                 </div>
                             </div>
@@ -77,6 +68,15 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3" for="alamat_tempat_observasi">Alamat Tujuan Surat <b>(Di ?)</b></label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input required type="text" value="<?= $satu_observasi['alamat_tempat_observasi']; ?>" class="form-control <?= validation_show_error('alamat_tempat_observasi') ? 'is-invalid' : null; ?>" id="alamat_tempat_observasi" name="alamat_tempat_observasi" placeholder="Tulis alamat lengkap">
+                                    <div class="invalid-feedback" style="display: block;">
+                                        <?= validation_show_error('alamat_tempat_observasi'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3" for="tempat_observasi">Tempat Observasi</label>
                                 <div class="col-md-9 col-sm-9 ">
                                     <input required type="text" value="<?= $satu_observasi['tempat_observasi']; ?>" class="form-control <?= validation_show_error('tempat_observasi') ? 'is-invalid' : null; ?>" id="tempat_observasi" name="tempat_observasi" placeholder="Nama instansi / tempat">
@@ -85,15 +85,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="control-label col-md-3 col-sm-3" for="alamat_tempat_observasi">Alamat Tempat Observasi</label>
-                                <div class="col-md-9 col-sm-9 ">
-                                    <input required type="text" value="<?= $satu_observasi['alamat_tempat_observasi']; ?>" class="form-control <?= validation_show_error('alamat_tempat_observasi') ? 'is-invalid' : null; ?>" id="alamat_tempat_observasi" name="alamat_tempat_observasi" placeholder="Tulis alamat lengkap">
-                                    <div class="invalid-feedback" style="display: block;">
-                                        <?= validation_show_error('alamat_tempat_observasi'); ?>
-                                    </div>
-                                </div>
-                            </div>
+            
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3" for="tujuan_observasi">Tujuan Observasi</label>
                                 <div class="col-md-9 col-sm-9 ">
@@ -112,8 +104,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3" for="tanggal_mulai">Tanggal Mulai <b>(*)</b> :</label>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3" for="tanggal_mulai">Jadwal <b>(Tanggal Mulai)</b> :</label>
                                 <div class="input-group date col-md-9 col-sm-9">
                                     <div class="input-group-addon">
                                         <span class="glyphicon glyphicon-th"></span>
@@ -124,8 +116,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3" for="tanggal_selesai">Tanggal Selesai <b>(*)</b> :</label>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3" for="tanggal_selesai">Jadwal <b>(Tanggal Selesai)</b> :</label>
                                 <div class="input-group date col-md-9 col-sm-9">
                                     <div class="input-group-addon">
                                         <span class="glyphicon glyphicon-th"></span>
@@ -140,10 +132,21 @@
                             <div class="form-group">
                                 <div class="col-md-9 col-sm-9  offset-md-3">
                                     <a href="<?= base_url('/izin-observasi-matakuliah/edit/'.$satu_observasi['uuid']); ?>" class="btn btn-warning btn-sm"><i class="fa fa-chevron-circle-left" style="margin-right: 5px;"></i>Kembali</a>
-                                    <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-save" style="margin-right: 5px;"></i>Simpan</button>
+                                    <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-save" style="margin-right: 5px;"></i>Simpan</button>
                                 </div>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Contoh Surat</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <img src="<?= base_url('/upload/contoh_surat/izin_observasi_penelitian.jpg'); ?>" alt="" style="width: 100%;" >
                     </div>
                 </div>
             </div>

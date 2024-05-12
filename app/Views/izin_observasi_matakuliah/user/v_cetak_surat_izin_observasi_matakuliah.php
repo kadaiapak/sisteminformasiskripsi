@@ -142,11 +142,11 @@ hr{
 						<td></td>
 					</tr>
 					<tr>
-						<td>Di</td>
+						<td><?= $satu_observasi['alamat_tempat_observasi']; ?></td>
 						<td></td>
 					</tr>
 					<tr>
-						<td>Tempat</td>
+						<td></td>
 						<td></td>
 					</tr>
 				</table>

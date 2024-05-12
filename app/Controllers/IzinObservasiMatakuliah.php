@@ -238,12 +238,6 @@ class IzinObservasiMatakuliah extends BaseController
                     'required' => 'Pilih jenis kelamin',
                 ]
             ],
-            'departemen_pengajuan' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Pilih Departemen',
-                ]
-            ],
             'tujuan_surat' => [
                 'rules' => 'required',
                 'errors' => [
@@ -291,13 +285,8 @@ class IzinObservasiMatakuliah extends BaseController
         }
 
         $UUIDObservasi = $this->request->getVar('uuid');
-       
         $data = array(
-            'user_pengajuan' => session()->get('username'),
-            'nama_pengajuan' => $this->request->getVar('nama_pengajuan'),
-            'nim_pengajuan' => $this->request->getVar('nim_pengajuan'),
             'jk_pengajuan' => $this->request->getVar('jk_pengajuan'),
-            'departemen_pengajuan' => $this->request->getVar('departemen_pengajuan'),
             'tujuan_surat' => $this->request->getVar('tujuan_surat'),
             'tempat_observasi' => $this->request->getVar('tempat_observasi'),
             'alamat_tempat_observasi' => $this->request->getVar('alamat_tempat_observasi'),
@@ -495,30 +484,10 @@ class IzinObservasiMatakuliah extends BaseController
     public function admin_simpan_pembaruan_pengajuan()
     {
         if(!$this->validate([
-            'nim_pengajuan' => [
-                'rules' => 'required|numeric',
-                'errors' => [
-                    'required' => 'Tuliskan NIM',
-                    'numeric' => 'NIM hanya boleh angka',
-                ]
-            ],
-            'nama_pengajuan' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Tuliskan Nama Lengkap',
-                    'alpha_space' => 'Nama hanya boleh huruf dan spasi',
-                ]
-            ],
             'jk_pengajuan' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Pilih jenis kelamin',
-                ]
-            ],
-            'departemen_pengajuan' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Pilih Departemen',
                 ]
             ],
             'tujuan_surat' => [
@@ -568,13 +537,9 @@ class IzinObservasiMatakuliah extends BaseController
         }
 
         $UUIDObservasi = $this->request->getVar('uuid');
-       
         $data = array(
             'admin_edit' => session()->get('user_id'),
-            'nama_pengajuan' => $this->request->getVar('nama_pengajuan'),
-            'nim_pengajuan' => $this->request->getVar('nim_pengajuan'),
             'jk_pengajuan' => $this->request->getVar('jk_pengajuan'),
-            'departemen_pengajuan' => $this->request->getVar('departemen_pengajuan'),
             'tujuan_surat' => $this->request->getVar('tujuan_surat'),
             'tempat_observasi' => $this->request->getVar('tempat_observasi'),
             'alamat_tempat_observasi' => $this->request->getVar('alamat_tempat_observasi'),

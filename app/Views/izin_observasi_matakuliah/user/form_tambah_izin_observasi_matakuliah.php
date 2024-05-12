@@ -9,7 +9,7 @@
         </div>
         <div class="clearfix"></div>
         <div class="row">
-            <div class="col-md-12 col-sm-12">
+            <div class="col-md-8 col-sm-12">
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Form Pengajuan</h2>
@@ -65,9 +65,18 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3" for="tujuan_surat">Tujuan Surat <b>(Kepada Yth : ?)</b></label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input required type="text" value="" class="form-control <?= validation_show_error('tujuan_surat') ? 'is-invalid' : null; ?>" id="tujuan_surat" name="tujuan_surat" placeholder="Kepada Yth ?">
+                                    <input required type="text" value="" class="form-control <?= validation_show_error('tujuan_surat') ? 'is-invalid' : null; ?>" id="tujuan_surat" name="tujuan_surat" placeholder="Contoh: Kepala Sekolah SMA N 5 Padang">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('tujuan_surat'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3" for="alamat_tempat_observasi">Alamat Tujuan Surat <b>(Di ?)</b></label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input required type="text" value="" class="form-control <?= validation_show_error('alamat_tempat_observasi') ? 'is-invalid' : null; ?>" id="alamat_tempat_observasi" name="alamat_tempat_observasi" placeholder="Contoh: Padang">
+                                    <div class="invalid-feedback" style="display: block;">
+                                        <?= validation_show_error('alamat_tempat_observasi'); ?>
                                     </div>
                                 </div>
                             </div>
@@ -80,15 +89,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="control-label col-md-3 col-sm-3" for="alamat_tempat_observasi">Alamat Tempat Observasi</b></label>
-                                <div class="col-md-9 col-sm-9 ">
-                                    <input required type="text" value="" class="form-control <?= validation_show_error('alamat_tempat_observasi') ? 'is-invalid' : null; ?>" id="alamat_tempat_observasi" name="alamat_tempat_observasi" placeholder="Tuliskan alamat tempat observasi">
-                                    <div class="invalid-feedback" style="display: block;">
-                                        <?= validation_show_error('alamat_tempat_observasi'); ?>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3" for="tujuan_observasi">Tujuan Observasi</label>
                                 <div class="col-md-9 col-sm-9 ">
@@ -108,7 +109,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3" for="tanggal_mulai">Tanggal Mulai <b>(*)</b> :</label>
+                                <label class="control-label col-md-3 col-sm-3" for="tanggal_mulai">Jadwal <b>(Tanggal Mulai)</b> :</label>
                                 <div class="input-group date col-md-9 col-sm-9">
                                     <div class="input-group-addon">
                                         <span class="glyphicon glyphicon-th"></span>
@@ -120,7 +121,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3" for="tanggal_selesai">Tanggal Selesai <b>(*)</b> :</label>
+                                <label class="control-label col-md-3 col-sm-3" for="tanggal_selesai">Jadwal <b>(Tanggal Selesai)</b> :</label>
                                 <div class="input-group date col-md-9 col-sm-9">
                                     <div class="input-group-addon">
                                         <span class="glyphicon glyphicon-th"></span>
@@ -159,10 +160,21 @@
                             <div class="form-group">
                                 <div class="col-md-9 col-sm-9  offset-md-3">
                                     <a href="<?= base_url('/izin-observasi-matakuliah'); ?>" class="btn btn-warning btn-sm"><i class="fa fa-chevron-circle-left" style="margin-right: 5px;"></i>Kembali</a>
-                                    <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-save" style="margin-right: 5px;"></i>Simpan</button>
+                                    <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-save" style="margin-right: 5px;"></i>Simpan</button>
                                 </div>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Contoh Surat</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <img src="<?= base_url('/upload/contoh_surat/izin_observasi_penelitian.jpg'); ?>" alt="" style="width: 100%;" >
                     </div>
                 </div>
             </div>

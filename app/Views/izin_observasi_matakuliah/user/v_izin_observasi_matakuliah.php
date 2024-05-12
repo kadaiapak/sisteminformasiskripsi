@@ -42,11 +42,11 @@
                                         <thead>
                                             <tr>
                                                 <th width="1%">No</th>  
-                                                <th>Tanggal Pengajuan</th>
-                                                <th width="10%">Departemen</th>
-                                                <th width="33%">Tujuan Observasi</th>
+                                                <th width="9%">Tanggal Pengajuan</th>
+                                                <th width="10%">Tempat Observasi</th>
+                                                <th width="10%">Tujuan Observasi</th>
+                                                <th width="10%">Matakuliah</th>
                                                 <th width="10%">Tanggal Observasi</th>
-                                                <th width="10%">Tanggal Selesai Observasi</th>
                                                 <th width="10%">Status</th>
                                                 <th width="8%">Pesan</th>
                                                 <th width="12%">Aksi</th>
@@ -57,26 +57,27 @@
                                         <?php foreach($semua_izin_observasi_matakuliah as $iomk): ?>
                                             <tr>
                                                 <td><?= $no; ?></td>
-                                                <td><?= date('d-m-Y', strtotime($iomk['created_at'])) ; ?></td>
-                                                <td><?= $iomk['nama_departemen']; ?></td>
+                                                <td><?= tanggal_indo($iomk['created_at']); ?></td>
+                                                <td><?= $iomk['tempat_observasi']; ?></td>
                                                 <td><?= $iomk['tujuan_observasi']; ?></td>
-                                                <td><?= date('d-m-Y', strtotime($iomk['tanggal_mulai'])) ; ?></td>
-                                                <td><?= date('d-m-Y', strtotime($iomk['tanggal_selesai'])) ; ?></td>
+                                                <td><?= $iomk['matakuliah']; ?></td>
+                                                <td><?= tanggal_indo($iomk['tanggal_mulai']); ?> s.d <?= tanggal_indo($iomk['tanggal_selesai']); ?></td>
                                                 <td><?= $iomk["status"] == "1" ? "<span class='badge badge-warning'>Belum diproses Admin</span>" : ($iomk["status"] == "2" ? "<span class='badge badge-danger'>Ditolak Admin</span>" : ($iomk["status"] == "3" ? "<span class='badge badge-success'>Menunggu diproses Kadep</span>" : ($iomk["status"] == "4" ? "<span class='badge badge-danger'>Ditolak Kadep</span>" : ($iomk["status"] == "5" ? "<span class='badge badge-success'>Disetujui Kadep</span>" : null)))) ; ?></td>
                                                 <td><?= $iomk['pesan']; ?></td>
                                                 <td>
-                                                    <a href="<?= base_url('izin-observasi-matakuliah/detail/'.$iomk['uuid']); ?>" class="btn btn-primary btn-sm" ><i class="fa fa-file-text-o" style="margin-right: 5px;"></i>Detail</a>
-                                                    <?php if($iomk['nim_pengajuan'] == session()->get('username') && $iomk['status'] == 1) {  ?>
-                                                        <a href="<?= base_url('izin-observasi-matakuliah/edit/'.$iomk['uuid']); ?>" class="btn btn-warning btn-sm" ><i class="fa fa-check-square-o" style="margin-right: 5px;"></i>Edit</a>
-                                                    <?php } ?>
                                                     <?php if($iomk['status'] == 5) { ?>
-                                                        <button class="btn btn-success" onclick="window.open('<?= base_url('izin-observasi-matakuliah/print-surat/'.$iomk['uuid']) ?>', 'blank')"><i class="fa fa-print" style="margin-right: 5px;"></i>Print</button>
+                                                        <button class="btn btn-success btn-sm" onclick="window.open('<?= base_url('izin-observasi-matakuliah/print-surat/'.$iomk['uuid']) ?>', 'blank')"><i class="fa fa-print" style="margin-right: 5px;"></i>Cetak</button>
                                                         <!-- <form action="< ?= base_url('/izin-observasi-matakuliah/cetak'); ?>" target="_blank" method="POST">
                                                             < ?= csrf_field(); ?>
                                                             <input type="hidden" name="uuid" value="< ?= $iomk['uuid']; ?>">
                                                             <button type="submit" class="btn btn-success"><i class="fa fa-print" style="margin-right: 5px;"></i>Cetak</button>
                                                         </form> -->
                                                     <?php }  ?>
+                                                    <a href="<?= base_url('izin-observasi-matakuliah/detail/'.$iomk['uuid']); ?>" class="btn btn-primary btn-sm" ><i class="fa fa-file-text-o" style="margin-right: 5px;"></i>Detail</a>
+                                                    <?php if($iomk['nim_pengajuan'] == session()->get('username') && $iomk['status'] == 1) {  ?>
+                                                        <a href="<?= base_url('izin-observasi-matakuliah/edit/'.$iomk['uuid']); ?>" class="btn btn-warning btn-sm" ><i class="fa fa-edit" style="margin-right: 5px;"></i>Edit</a>
+                                                    <?php } ?>
+                                                    
                                                 </td>
                                                 <?php $no++ ?>
                                             </tr>

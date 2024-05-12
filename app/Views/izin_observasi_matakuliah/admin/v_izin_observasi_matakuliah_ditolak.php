@@ -42,11 +42,9 @@
                                                 <th>NIM</th>
                                                 <th>Nama Mahasiswa</th>
                                                 <th>Departemen</th>
-                                                <th>Tujuan Observasi</th>
-                                                <th>Tanggal Mulai Observasi</th>
-                                                <th>Tanggal Selesai Observasi</th>
+                                                <th>Tempat Observasi</th>
+                                                <th>Jadwal</th>
                                                 <th>Status</th>
-                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -54,26 +52,13 @@
                                         <?php foreach($semua_izin_observasi_matakuliah as $siomk): ?>
                                             <tr>
                                                 <td><?= $no; ?></td>
-                                                <td><?= date('d-m-Y', strtotime($siomk['created_at'])) ; ?></td>
+                                                <td><?= tanggal_indo($siomk['created_at']); ?></td>
                                                 <td><?= $siomk['nim_pengajuan']; ?></td>
                                                 <td><?= $siomk['nama_pengajuan']; ?></td>
                                                 <td><?= $siomk['nama_departemen']; ?></td>
-                                                <td><?= $siomk['tujuan_observasi']; ?></td>
-                                                <td><?= date('d-m-Y', strtotime($siomk['tanggal_mulai'])) ; ?></td>
-                                                <td><?= date('d-m-Y', strtotime($siomk['tanggal_selesai'])) ; ?></td>
+                                                <td><?= $siomk['tempat_observasi']; ?></td>
+                                                <td><?= tanggal_indo($siomk['tanggal_mulai']); ?> s.d <?= tanggal_indo($siomk['tanggal_selesai']); ?></td>
                                                 <td><?= $siomk["status"] == "1" ? "<span class='badge badge-warning'>Belum diproses Admin</span>" : ($siomk["status"] == "2" ? "<span class='badge badge-danger'>Ditolak Admin</span>" : ($siomk["status"] == "3" ? "<span class='badge badge-success'>Menunggu diproses Kadep</span>" : ($siomk["status"] == "4" ? "<span class='badge badge-danger'>Ditolak Kadep</span>" : ($siomk["status"] == "5" ? "<span class='badge badge-success'>Disetujui Kadep</span>" : null)))) ; ?></td>
-                                                <td>
-                                                    <?php if(session()->get('level') == '7' || session()->get('level') == '4') { ?>
-                                                        <!-- jika level adalah admin departemen atau kadep maka url nya -->
-                                                        <a href="<?= base_url('izin-observasi-matakuliah/detail-verifikasi/'.$siomk['uuid']); ?>" class="btn btn-primary btn-sm" ><i class="fa fa-check-square-o" style="margin-right: 5px;"></i>Verifikasi</a>
-                                                        <!-- end -->
-                                                    <?php } ?>
-                                                    <?php if(session()->get('level') == '7') { ?>
-                                                        <!-- jika level adalah admin departemen atau kadep maka url nya -->
-                                                        <a href="<?= base_url('izin-observasi-matakuliah/edit-admin/'.$siomk['uuid']); ?>" class="btn btn-warning btn-sm" ><i class="fa fa-check-square-o" style="margin-right: 5px;"></i>Edit</a>
-                                                        <!-- end -->
-                                                    <?php } ?>
-                                                </td>
                                             <?php $no++ ?>
                                             </tr>
                                         <?php endforeach; ?>

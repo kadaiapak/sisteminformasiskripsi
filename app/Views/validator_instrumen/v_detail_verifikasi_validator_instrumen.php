@@ -66,7 +66,7 @@
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">Tanggal Pengajuan</td>
-                                <td><?= date('d-m-Y', strtotime($satu_instrumen['created_at'])) ; ?></td>
+                                <td><?= tanggal_indo($satu_instrumen['created_at']); ?></td>
                             </tr>
                         </table>
                         <br />

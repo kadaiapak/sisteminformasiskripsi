@@ -12,7 +12,7 @@
             <div class="col-md-12 col-sm-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Detail Izin Observasi Matakuliah</h2>
+                        <h2>Detail Pengajuan</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -35,17 +35,18 @@
                                 <td><?= $satu_observasi['nama_departemen']; ?></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold">Tujuan Kepala Surat (Kepada Yth : ?)</td>
+                                <td class="font-weight-bold">Tujuan Surat <b>(Kepada Yth : ?)</b></td>
                                 <td><?= $satu_observasi['tujuan_surat']; ?></td>
+                            </tr>
+                            <tr>
+                                <td class="font-weight-bold">Alamat Tujuan Surat <b>(Di ?)</b></td>
+                                <td><?= $satu_observasi['alamat_tempat_observasi']; ?></td>
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">Tempat Observasi</td>
                                 <td><?= $satu_observasi['tempat_observasi']; ?></td>
                             </tr>
-                            <tr>
-                                <td class="font-weight-bold">Alamat Tempat Observasi</td>
-                                <td><?= $satu_observasi['alamat_tempat_observasi']; ?></td>
-                            </tr>
+                            
                             <tr>
                                 <td class="font-weight-bold">Tujuan Observasi</td>
                                 <td><?= $satu_observasi['tujuan_observasi']; ?></td>
@@ -55,12 +56,8 @@
                                 <td><?= $satu_observasi['matakuliah']; ?></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold">Tanggal Mulai Observasi</td>
-                                <td><?= date('d-m-Y', strtotime($satu_observasi['tanggal_mulai'])) ; ?></td>
-                            </tr>
-                            <tr>
-                                <td class="font-weight-bold">Tanggal Selesai Observasi</td>
-                                <td><?= date('d-m-Y', strtotime($satu_observasi['tanggal_selesai'])) ; ?></td>
+                                <td class="font-weight-bold">Jadwal</td>
+                                <td><?= tanggal_indo($satu_observasi['tanggal_mulai']); ?> s.d <?= tanggal_indo($satu_observasi['tanggal_selesai']); ?></td>
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">Status</td>
@@ -68,8 +65,8 @@
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">Tanggal Pengajuan</td>
-                                <td><?= date('d-m-Y', strtotime($satu_observasi['created_at'])) ; ?></td>
-                            </tr>
+                                <td><?= tanggal_indo($satu_observasi['created_at']); ?></td>
+                            </tr>   
                             <?php if($satu_observasi['pesan']) { ?>
                             <tr>
                                 <td class="font-weight-bold">Pesan</td>
@@ -184,7 +181,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <button type="Simpan" class="btn btn-primary">Save changes</button>
+                <button type="Simpan" class="btn btn-primary">Simpan Perubahan</button>
             </div>
             </form>
         </div>
