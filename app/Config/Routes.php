@@ -601,4 +601,7 @@ $routes->post('/auth/mahasiswa/proses', 'Auth::login_mahasiswa_proses');
 // ROUTE UNTUK PENGATURAN MASTER DOSEN
     // diakses oleh admin dan superadmin 
     $routes->get('/master-dosen/pengaturan', 'MasterDosen::pengaturan', ['filter' => 'adminDanSuperAdminFilter' ]);
+    $routes->get('/master-dosen/pengaturan/edit/(:num)', 'MasterDosen::pengaturan_edit/$1', ['filter' => 'adminDanSuperAdminFilter']);
+    $routes->post('/master-dosen/pengaturan/update/(:num)', 'MasterDosen::pengaturan_update/$1', ['filter' => 'adminDanSuperAdminFilter']);
+
 // AKHIR DARI MASTER DATA DOSEN

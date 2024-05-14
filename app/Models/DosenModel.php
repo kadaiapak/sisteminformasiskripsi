@@ -205,8 +205,9 @@ class DosenModel extends Model
     public function getAllGelarDepan()
     {
         $build = $this->db->query(
-            "SELECT DISTINCT peg_gel_dep
+            "SELECT nidn, peg_gel_dep, peg_nama, peg_gel_bel, peg_gel_dep
             FROM fip_dosen
+            GROUP BY peg_gel_dep
             ORDER BY peg_gel_dep ASC");
         $result = $build->getResultArray();
         return $result;
@@ -215,8 +216,9 @@ class DosenModel extends Model
     public function getAllGelarBelakang()
     {
         $build = $this->db->query(
-            "SELECT DISTINCT peg_gel_bel
+            "SELECT nidn, peg_gel_dep, peg_nama, peg_gel_bel, peg_gel_bel
             FROM fip_dosen
+            GROUP BY peg_gel_bel
             ORDER BY peg_gel_bel ASC
             ");
         $result = $build->getResultArray();
@@ -226,8 +228,9 @@ class DosenModel extends Model
     public function getAllStatus()
     {
         $build = $this->db->query(
-            "SELECT DISTINCT peg_status
+            "SELECT nidn, peg_gel_dep, peg_nama, peg_gel_bel, peg_status
             FROM fip_dosen
+            GROUP BY peg_status
             ORDER BY peg_status ASC
             ");
         $result = $build->getResultArray();
@@ -237,8 +240,9 @@ class DosenModel extends Model
     public function getAllBidang()
     {
         $build = $this->db->query(
-            "SELECT DISTINCT peg_bidang
+            "SELECT nidn, peg_gel_dep, peg_nama, peg_gel_bel, peg_bidang
             FROM fip_dosen
+            GROUP BY peg_bidang
             ORDER BY peg_bidang ASC");
         $result = $build->getResultArray();
         return $result;
@@ -247,8 +251,9 @@ class DosenModel extends Model
     public function getAllPangkat()
     {
         $build = $this->db->query(
-            "SELECT DISTINCT peg_pangkat
+            "SELECT nidn, peg_gel_dep, peg_nama, peg_gel_bel, peg_pangkat
             FROM fip_dosen
+            GROUP BY peg_pangkat
             ORDER BY peg_pangkat ASC");
         $result = $build->getResultArray();
         return $result;
@@ -257,8 +262,9 @@ class DosenModel extends Model
     public function getAllGolongan()
     {
         $build = $this->db->query(
-            "SELECT DISTINCT peg_golongan
+            "SELECT nidn, peg_gel_dep, peg_nama, peg_gel_bel, peg_golongan
             FROM fip_dosen
+            GROUP BY peg_golongan
             ORDER BY peg_golongan ASC");
         $result = $build->getResultArray();
         return $result;
@@ -267,8 +273,9 @@ class DosenModel extends Model
     public function getAllJabatan()
     {
         $build = $this->db->query(
-            "SELECT DISTINCT peg_jabatan
+            "SELECT nidn, peg_gel_dep, peg_nama, peg_gel_bel, peg_jabatan
             FROM fip_dosen
+            GROUP BY peg_jabatan
             ORDER BY peg_jabatan ASC");
         $result = $build->getResultArray();
         return $result;
@@ -277,8 +284,9 @@ class DosenModel extends Model
     public function getAllJenisKelamin()
     {
         $build = $this->db->query(
-            "SELECT DISTINCT peg_sex
+            "SELECT nidn, peg_gel_dep, peg_nama, peg_gel_bel, peg_sex
             FROM fip_dosen
+            GROUP BY peg_sex
             ORDER BY peg_sex ASC");
         $result = $build->getResultArray();
         return $result;
@@ -287,8 +295,9 @@ class DosenModel extends Model
     public function getAllAgama()
     {
         $build = $this->db->query(
-            "SELECT DISTINCT peg_agama
+            "SELECT nidn, peg_gel_dep, peg_nama, peg_gel_bel, peg_agama
             FROM fip_dosen
+            GROUP BY peg_agama
             ORDER BY peg_agama ASC");
         $result = $build->getResultArray();
         return $result;
@@ -297,8 +306,9 @@ class DosenModel extends Model
     public function getAllPendidikan()
     {
         $build = $this->db->query(
-            "SELECT DISTINCT peg_pendidikan
+            "SELECT nidn, peg_gel_dep, peg_nama, peg_gel_bel, peg_pendidikan
             FROM fip_dosen
+            GROUP BY peg_pendidikan
             ORDER BY peg_pendidikan ASC");
         $result = $build->getResultArray();
         return $result;
@@ -307,8 +317,9 @@ class DosenModel extends Model
     public function getAllStatusPernikahan()
     {
         $build = $this->db->query(
-            "SELECT DISTINCT peg_kawin
+            "SELECT nidn, peg_gel_dep, peg_nama, peg_gel_bel, peg_kawin
             FROM fip_dosen
+            GROUP BY peg_kawin
             ORDER BY peg_kawin ASC");
         $result = $build->getResultArray();
         return $result;

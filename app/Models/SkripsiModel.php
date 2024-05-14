@@ -204,9 +204,11 @@ class SkripsiModel extends Model
         $builderdua = $this->db->table('skripsi');
         $builderdua->set('status_pengajuan_skripsi', '3');
         $builderdua->set('pesan', '');
+        $builderdua->set('dosen_pembimbing', $data['dosen_pembimbing']);
+        $builderdua->set('dosen_pa', $data['dosen_pa']);
+        $builderdua->set('tanggal_diproses', $data['tanggal_diproses']);
         $builderdua->where('skripsi_uuid', $id);
         $builderdua->update();
-       
     }
 
     // used by skripsi->index
