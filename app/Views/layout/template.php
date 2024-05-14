@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="images/favicon.ico" type="image/ico" />
 	
-    <title>SIPS | <?= $judul; ?></title>
+    <title>E-Office FIP | <?= $judul; ?></title>
     <link href="<?= base_url()?>template/src/css/customsendiri.css" rel="stylesheet" />
 
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -63,7 +63,7 @@
 					<div class="left_col scroll-view">
 						<div class="navbar nav_title" style="border: 0; display: inline-block; display: flex; justify-content: center;">
 							<img src="<?=base_url('template/');?>src/img/unpkopsuratm.jpg" alt="logo" width="50" class="shadow-light rounded-circle mb-1 mt-2" >
-							<a href="index.html" class="site_title" style="width: auto;"><span>SIPS</span></a>
+							<a href="index.html" class="site_title" style="width: auto;"><span>E-Office</span></a>
 						</div>
 						<div class="clearfix"></div>
 						<!-- menu profile quick info -->

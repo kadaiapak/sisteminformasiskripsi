@@ -11,6 +11,7 @@ class DosenModel extends Model
 
     protected $useTimestamps = true;
     protected $allowedFields = [
+    'nidn',
     'peg_nip',
     'peg_gel_dep',
     'peg_nama',
@@ -146,6 +147,31 @@ class DosenModel extends Model
        
     }
 
+    // untuk menampilkan semua dosen
+    // master-dosen/index
+    public function getAllDosen($departemen = null)
+    {
+        $build = $this->db->query(
+            "SELECT fip_dosen.*, departemen.departemen_nama as nama_departemen,
+            (SELECT COUNT(skripsi.dosen_pembimbing) FROM skripsi 
+                WHERE skripsi.dosen_pembimbing = fip_dosen.nidn 
+                AND skripsi.status_pengajuan_skripsi = 3) AS total_membimbing,
+            (SELECT COUNT(skripsi.dosen_pa) FROM skripsi
+                WHERE skripsi.dosen_pa = fip_dosen.nidn 
+                AND skripsi.status_pengajuan_skripsi = 3) AS total_menjadi_pa, 
+            (SELECT COUNT(seminar.penguji_satu) FROM seminar 
+                WHERE seminar.penguji_satu = fip_dosen.nidn  
+                AND seminar.smr_status = 5) AS total_menguji_satu, 
+            (SELECT COUNT(seminar.penguji_dua) FROM seminar 
+                WHERE seminar.penguji_dua = fip_dosen.nidn 
+                AND seminar.smr_status = 5) AS total_menguji_dua 
+            FROM fip_dosen 
+            LEFT JOIN departemen ON fip_dosen.peg_prodi = departemen.departemen_id
+            ORDER BY peg_nama ASC");
+        $result = $build->getResultArray();
+        return $result;
+    }
+
     // untuk menampilkan detail dosen
     // digunakan oleh ProfilDosen::verifikasi
     public function getDetail($nidn = null)
@@ -174,5 +200,117 @@ class DosenModel extends Model
         $builder->set($data);
         $builder->where('nidn', $username);
         $builder->update();
+    }
+
+    public function getAllGelarDepan()
+    {
+        $build = $this->db->query(
+            "SELECT DISTINCT peg_gel_dep
+            FROM fip_dosen
+            ORDER BY peg_gel_dep ASC");
+        $result = $build->getResultArray();
+        return $result;
+    }
+
+    public function getAllGelarBelakang()
+    {
+        $build = $this->db->query(
+            "SELECT DISTINCT peg_gel_bel
+            FROM fip_dosen
+            ORDER BY peg_gel_bel ASC
+            ");
+        $result = $build->getResultArray();
+        return $result;
+    }
+
+    public function getAllStatus()
+    {
+        $build = $this->db->query(
+            "SELECT DISTINCT peg_status
+            FROM fip_dosen
+            ORDER BY peg_status ASC
+            ");
+        $result = $build->getResultArray();
+        return $result;
+    }
+
+    public function getAllBidang()
+    {
+        $build = $this->db->query(
+            "SELECT DISTINCT peg_bidang
+            FROM fip_dosen
+            ORDER BY peg_bidang ASC");
+        $result = $build->getResultArray();
+        return $result;
+    }
+
+    public function getAllPangkat()
+    {
+        $build = $this->db->query(
+            "SELECT DISTINCT peg_pangkat
+            FROM fip_dosen
+            ORDER BY peg_pangkat ASC");
+        $result = $build->getResultArray();
+        return $result;
+    }
+
+    public function getAllGolongan()
+    {
+        $build = $this->db->query(
+            "SELECT DISTINCT peg_golongan
+            FROM fip_dosen
+            ORDER BY peg_golongan ASC");
+        $result = $build->getResultArray();
+        return $result;
+    }
+
+    public function getAllJabatan()
+    {
+        $build = $this->db->query(
+            "SELECT DISTINCT peg_jabatan
+            FROM fip_dosen
+            ORDER BY peg_jabatan ASC");
+        $result = $build->getResultArray();
+        return $result;
+    }
+
+    public function getAllJenisKelamin()
+    {
+        $build = $this->db->query(
+            "SELECT DISTINCT peg_sex
+            FROM fip_dosen
+            ORDER BY peg_sex ASC");
+        $result = $build->getResultArray();
+        return $result;
+    }
+
+    public function getAllAgama()
+    {
+        $build = $this->db->query(
+            "SELECT DISTINCT peg_agama
+            FROM fip_dosen
+            ORDER BY peg_agama ASC");
+        $result = $build->getResultArray();
+        return $result;
+    }
+
+    public function getAllPendidikan()
+    {
+        $build = $this->db->query(
+            "SELECT DISTINCT peg_pendidikan
+            FROM fip_dosen
+            ORDER BY peg_pendidikan ASC");
+        $result = $build->getResultArray();
+        return $result;
+    }
+
+    public function getAllStatusPernikahan()
+    {
+        $build = $this->db->query(
+            "SELECT DISTINCT peg_kawin
+            FROM fip_dosen
+            ORDER BY peg_kawin ASC");
+        $result = $build->getResultArray();
+        return $result;
     }
 } 

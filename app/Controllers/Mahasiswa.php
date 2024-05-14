@@ -39,7 +39,8 @@ class Mahasiswa extends BaseController
 
     public function index()
     {
-        $semuaMahasiswa = $this->progresSkripsiModel->getAll();
+        $departemen = session()->get('departemen');
+        $semuaMahasiswa = $this->progresSkripsiModel->getAll($departemen);
         $data = [
             'judul' => 'Data Mahasiswa',
             'semua_mahasiswa' => $semuaMahasiswa

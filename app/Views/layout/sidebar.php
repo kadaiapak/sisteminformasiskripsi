@@ -49,6 +49,12 @@
                         <li><a href="<?= base_url('/master-mahasiswa/bermasalah-idpdpt'); ?>">Mahasiswa error departemen</a></li>
                     </ul>
                 </li>
+                <li><a><i class="fa fa-user"></i> Dosen <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="<?= base_url('/master-dosen'); ?>">Semua Dosen</a></li>
+                        <li><a href="<?= base_url('/master-dosen/pengaturan'); ?>">Pengaturan Tambahan</a></li>
+                    </ul>
+                </li>
                 <li><a><i class="fa fa-building"></i> Departemen <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="<?= base_url('/ruangan/pemakaian-ruangan'); ?>">Semua Departemen</a></li>

@@ -17,7 +17,8 @@ class Dosen extends BaseController
 
     public function index()
     {
-        $semuaDosen = $this->dosenModel->getAll();
+        $departemen = session()->get('departemen');
+        $semuaDosen = $this->dosenModel->getAll($departemen);
         $data = [
             'judul' => 'Dosen Pembimbing',
             'semua_dosen' => $semuaDosen
