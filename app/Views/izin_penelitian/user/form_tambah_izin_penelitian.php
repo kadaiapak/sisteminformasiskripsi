@@ -9,7 +9,7 @@
         </div>
         <div class="clearfix"></div>
         <div class="row">
-            <div class="col-md-12 col-sm-12">
+            <div class="col-md-8 col-sm-12">
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Form Pengajuan</h2>
@@ -126,6 +126,17 @@
                                 </div>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Contoh Surat</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <img src="<?= base_url('/upload/contoh_surat/izin_penelitian.jpg'); ?>" alt="" style="width: 100%;" >
                     </div>
                 </div>
             </div>
