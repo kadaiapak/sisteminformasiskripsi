@@ -324,4 +324,27 @@ class DosenModel extends Model
         $result = $build->getResultArray();
         return $result;
     }
+
+    public function getAllNidnKosong()
+    {
+        $build = $this->db->query(
+            "SELECT nidn, peg_gel_dep, peg_nama, peg_gel_bel, peg_nip
+            FROM fip_dosen
+            WHERE nidn = ''
+            ORDER BY peg_nama ASC");
+        $result = $build->getResultArray();
+        return $result;
+    }
+
+    public function getAllNipKosong()
+    {
+        $build = $this->db->query(
+            "SELECT nidn, peg_gel_dep, peg_nama, peg_gel_bel, peg_nip
+            FROM fip_dosen
+            WHERE peg_nip IS NULL
+            OR peg_nip = ''
+            ORDER BY peg_nama ASC");
+        $result = $build->getResultArray();
+        return $result;
+    }
 } 

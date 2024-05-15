@@ -223,6 +223,8 @@ class MasterDosen extends BaseController
         $semuaAgama = $this->dosenModel->getAllAgama();
         $semuaPendidikan = $this->dosenModel->getAllPendidikan();
         $semuaStatusPernikahan = $this->dosenModel->getAllStatusPernikahan();
+        $semuaNidnKosong = $this->dosenModel->getAllNidnKosong();
+        $semuaNipKosong = $this->dosenModel->getAllNipKosong();
          $data = [
             'judul' => 'Data Pengaturan Tambahan Dosen',
             'semuaGelarDepan' => $semuaGelarDepan,
@@ -235,8 +237,9 @@ class MasterDosen extends BaseController
             'semuaJenisKelamin' => $semuaJenisKelamin,
             'semuaAgama' => $semuaAgama,
             'semuaPendidikan' => $semuaPendidikan,
-            'semuaStatusPernikahan' => $semuaStatusPernikahan
-
+            'semuaStatusPernikahan' => $semuaStatusPernikahan,
+            'semuaNidnKosong' => $semuaNidnKosong,
+            'semuaNipKosong' => $semuaNipKosong
         ];
         return view('master_dosen/v_pengaturan_tambahan', $data);
     }

@@ -27,6 +27,66 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
+                                                <th>Nidn = Kosong</th>
+                                                <th>NIP</th>
+                                                <th>Nama</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php $no = 1 ?>
+                                        <?php foreach($semuaNidnKosong as $snk): ?>
+                                            <tr>
+                                                <td><?= $no; ?></td>
+                                                <td><?= $snk['nidn']; ?></td>
+                                                <td><?= $snk['peg_nip']; ?></td>
+                                                <td><?= $snk['peg_gel_dep']; ?> <?= $snk['peg_nama']; ?> <?= $snk['peg_gel_bel']; ?></td>
+                                                <td>
+                                                    <a href="<?= base_url('master-dosen/pengaturan/edit/'.$snk['nidn']); ?>" class="btn btn-warning btn-sm"><i class="fa fa-edit" style="margin-right: 5px;"></i>Edit</a>
+                                                </td>
+                                            <?php $no++ ?> 
+                                            </tr>
+                                        <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="card-box table-responsive">
+                                    <table class="table table-striped table-bordered" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Nidn</th>
+                                                <th>NIP = kosong</th>
+                                                <th>Nama</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php $no = 1 ?>
+                                        <?php foreach($semuaNipKosong as $snk): ?>
+                                            <tr>
+                                                <td><?= $no; ?></td>
+                                                <td><?= $snk['nidn']; ?></td>
+                                                <td><?= $snk['peg_nip']; ?></td>
+                                                <td><?= $snk['peg_gel_dep']; ?> <?= $snk['peg_nama']; ?> <?= $snk['peg_gel_bel']; ?></td>
+                                                <td>
+                                                    <a href="<?= base_url('master-dosen/pengaturan/edit/'.$snk['nidn']); ?>" class="btn btn-warning btn-sm"><i class="fa fa-edit" style="margin-right: 5px;"></i>Edit</a>
+                                                </td>
+                                            <?php $no++ ?> 
+                                            </tr>
+                                        <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="card-box table-responsive">
+                                    <table class="table table-striped table-bordered" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
                                                 <th>NIDN</th>
                                                 <th>Nama</th>
                                                 <th>Gelar Depan</th>
