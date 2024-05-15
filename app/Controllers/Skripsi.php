@@ -379,7 +379,6 @@ class Skripsi extends BaseController
         ];
         return view('skripsi/v_upload_skripsi', $data);
     }
-
     
     // menampilkan list semua skripsi yang akan di acc oleh kadep 
     // skripsi yang ditampilkan berdasarkan departemen
@@ -408,32 +407,32 @@ class Skripsi extends BaseController
         $activeWorksheet->mergeCells('A1:L1');
         $activeWorksheet->getStyle('A1')->getFont()->setBold(true);
         $activeWorksheet->setCellValue('A3', 'No');
-        $activeWorksheet->setCellValue('B3', 'Nama Mahasiswa');
-        $activeWorksheet->setCellValue('C3', 'NIM');
-        $activeWorksheet->setCellValue('D3', 'Periode Pengajuan');
-        $activeWorksheet->setCellValue('E3', 'Tahun Pengajuan');
-        $activeWorksheet->setCellValue('F3', 'Judul Skripsi');
-        $activeWorksheet->setCellValue('G3', 'Deskripsi Skripsi');
-        $activeWorksheet->setCellValue('H3', 'Konsentrasi Bidang');
-        $activeWorksheet->setCellValue('I3', 'Dosen Pembimbing');
-        $activeWorksheet->setCellValue('J3', 'NIDN Dosen Pembimbing');
+        $activeWorksheet->setCellValue('B3', 'Tanggal Pengajuan');
+        $activeWorksheet->setCellValue('C3', 'Nama Mahasiswa');
+        $activeWorksheet->setCellValue('D3', 'NIM');
+        $activeWorksheet->setCellValue('E3', 'Periode Pengajuan');
+        $activeWorksheet->setCellValue('F3', 'Tahun Pengajuan');
+        $activeWorksheet->setCellValue('G3', 'Judul Skripsi');
+        $activeWorksheet->setCellValue('H3', 'Deskripsi Skripsi');
+        $activeWorksheet->setCellValue('I3', 'Konsentrasi Bidang');
+        $activeWorksheet->setCellValue('J3', 'Dosen Pembimbing');
         $activeWorksheet->setCellValue('K3', 'Dosen PA');
-        $activeWorksheet->setCellValue('L3', 'NIDN Dosen PA');
+        $activeWorksheet->setCellValue('L3', 'Status Pengajuan');
 
         $column = 4;
         foreach ($semuaSkripsi as $ss) {
             $activeWorksheet->setCellValue('A'.$column ,($column-3));
-            $activeWorksheet->setCellValue('B'.$column , $ss['nama_mahasiswa']);
-            $activeWorksheet->setCellValue('C'.$column , $ss['nim_mahasiswa']);
-            $activeWorksheet->setCellValue('D'.$column , ($ss['periode_pengajuan'] == 1 ? 'Januari - Juni' : 'Juli - Desember'));
-            $activeWorksheet->setCellValue('E'.$column , $ss['tahun_pengajuan']);
-            $activeWorksheet->setCellValue('F'.$column , $ss['judul_skripsi']);
-            $activeWorksheet->setCellValue('G'.$column , $ss['deskripsi_skripsi']);
-            $activeWorksheet->setCellValue('H'.$column , $ss['konsentrasi_bidang']);
-            $activeWorksheet->setCellValue('I'.$column , $ss['d_pembimbing_peg_gel_dep'].' '.$ss['d_pembimbing_peg_nama'].''.$ss['d_pembimbing_peg_gel_bel']);
-            $activeWorksheet->setCellValue('J'.$column , $ss['d_pembimbing_nidn']);
+            $activeWorksheet->setCellValue('B'.$column , (date('d-m-Y', strtotime($ss['created_at']))));
+            $activeWorksheet->setCellValue('C'.$column , $ss['nama_mahasiswa']);
+            $activeWorksheet->setCellValue('D'.$column , $ss['nim_mahasiswa']);
+            $activeWorksheet->setCellValue('E'.$column , ($ss['periode_pengajuan'] == 1 ? 'Januari - Juni' : 'Juli - Desember'));
+            $activeWorksheet->setCellValue('F'.$column , $ss['tahun_pengajuan']);
+            $activeWorksheet->setCellValue('G'.$column , $ss['judul_skripsi']);
+            $activeWorksheet->setCellValue('H'.$column , $ss['deskripsi_skripsi']);
+            $activeWorksheet->setCellValue('I'.$column , $ss['konsentrasi_bidang']);
+            $activeWorksheet->setCellValue('J'.$column , $ss['d_pembimbing_peg_gel_dep'].' '.$ss['d_pembimbing_peg_nama'].''.$ss['d_pembimbing_peg_gel_bel']);
             $activeWorksheet->setCellValue('K'.$column , $ss['d_pa_peg_gel_dep'].' '.$ss['d_pa_peg_nama'].''.$ss['d_pa_peg_gel_bel']);
-            $activeWorksheet->setCellValue('L'.$column , $ss['d_pa_nidn']);
+            $activeWorksheet->setCellValue('L'.$column , ($ss['status_pengajuan_skripsi'] == 1 ? 'Menunggu proses' : ($ss['status_pengajuan_skripsi'] == 2 ? 'Judul ditolak' : ($ss['status_pengajuan_skripsi'] == 3 ? 'Judul disetujui' : ''))));
             $column++;
         }
 
