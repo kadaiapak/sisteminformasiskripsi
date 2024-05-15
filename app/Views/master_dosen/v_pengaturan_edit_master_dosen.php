@@ -32,7 +32,7 @@
                             <div class="form-group row ">
                                 <label class="control-label col-md-12 col-sm-12" for="peg_nip">NIP</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input readonly type="text" value="<?= $satuDosen['peg_nip']; ?>" class="form-control <?= validation_show_error('peg_nip') ? 'is-invalid' : null; ?>" id="peg_nip" name="peg_nip" placeholder="Tuliskan Nama">
+                                    <input type="text" value="<?= $satuDosen['peg_nip']; ?>" class="form-control <?= validation_show_error('peg_nip') ? 'is-invalid' : null; ?>" id="peg_nip" name="peg_nip" placeholder="Tuliskan NIP">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('peg_nip'); ?>
                                     </div>
