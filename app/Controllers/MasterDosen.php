@@ -276,12 +276,6 @@ class MasterDosen extends BaseController
                     'required' => 'Tuliskan NIDN'
                 ]
             ],
-            'peg_nip' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Tuliskan NIP'
-                ]
-            ],
             'peg_nama' => [
                 'rules' => 'required',
                 'errors' => [
