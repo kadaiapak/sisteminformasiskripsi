@@ -63,6 +63,46 @@ class SkripsiModel extends Model
         return $query->getResultArray(); 
     }
 
+    // akses oleh admin dan superadmin
+    // GET MasterJudul->index;
+    // melihat semua judul yang diajukan oleh mahasiswa
+    public function getAllByAdmin()
+    {
+        $builder = $this->db->table('skripsi');
+        $builder->select('skripsi.*, 
+        fip_dosen_pembimbing.nidn as d_pembimbing_nidn, fip_dosen_pembimbing.peg_gel_dep as d_pembimbing_peg_gel_dep, fip_dosen_pembimbing.peg_nama as d_pembimbing_peg_nama, fip_dosen_pembimbing.peg_gel_bel as d_pembimbing_peg_gel_bel,
+        fip_dosen_pa.nidn as d_pa_nidn, fip_dosen_pa.peg_gel_dep as d_pa_peg_gel_dep, fip_dosen_pa.peg_nama as d_pa_peg_nama, fip_dosen_pa.peg_gel_bel as d_pa_peg_gel_bel,
+        profil.departemen_input,
+        departemen.departemen_nama as nama_departemen');
+        $builder->join('fip_dosen as fip_dosen_pembimbing', 'fip_dosen_pembimbing.nidn = skripsi.dosen_pembimbing');
+        $builder->join('fip_dosen as fip_dosen_pa', 'fip_dosen_pa.nidn = skripsi.dosen_pa');
+        $builder->join('profil', 'skripsi.nim_mahasiswa = profil.prf_nim_portal');
+        $builder->join('departemen', 'profil.departemen_input = departemen.departemen_id');
+        $builder->orderBy('created_at', 'desc');
+        $query = $builder->get();
+        return $query->getResultArray(); 
+    }
+
+    // akses oleh admin dan superadmin
+    // GET master-judul->pengajuan-bermasalah;
+    // GET MasterJudul->pengajuan_bermasalah;
+    // melihat semua pengajuan judul double
+    public function getAllJudulDouble()
+    {
+        $build = $this->db->query(
+            "SELECT nim_mahasiswa, nama_mahasiswa, departemen.departemen_nama as nama_departemen, COUNT(*) AS total_pengajuan
+            FROM 
+                skripsi
+            INNER JOIN profil ON skripsi.nim_mahasiswa = profil.prf_nim_portal
+            INNER JOIN departemen ON profil.departemen_input = departemen.departemen_id
+            GROUP BY 
+                nim_mahasiswa
+            HAVING
+                COUNT(*) > 1");
+        $result = $build->getResultArray();
+        return $result;
+    }
+
     // akses oleh controller skripsi::semua_skripsi_export_excel
     public function getAllExportExcel($departemen = null, $periode_pengajuan = null, $tahun_pengajuan = null)
     {   
@@ -151,6 +191,44 @@ class SkripsiModel extends Model
         $builder->orderBy('status_pengajuan_skripsi', 'asc');
         $query = $builder->get();
         return $query->getRowArray(); 
+    }
+
+    // digunakan oleh route MasterJudul::detail()
+    // untuk melihat detail skripsi yang diajukan
+    public function getDetailByUuidByAdmin($id = null)
+    {
+        $builder = $this->db->table('skripsi');
+        $builder->select('skripsi.*, 
+        fip_dosen_pembimbing.nidn as d_pembimbing_nidn, fip_dosen_pembimbing.peg_gel_dep as d_pembimbing_peg_gel_dep, fip_dosen_pembimbing.peg_nama as d_pembimbing_peg_nama, fip_dosen_pembimbing.peg_gel_bel as d_pembimbing_peg_gel_bel,
+        fip_dosen_pa.nidn as d_pa_nidn, fip_dosen_pa.peg_gel_dep as d_pa_peg_gel_dep, fip_dosen_pa.peg_nama as d_pa_peg_nama, fip_dosen_pa.peg_gel_bel as d_pa_peg_gel_bel,
+        profil.departemen_input, departemen.departemen_nama as nama_departemen');
+        $builder->join('fip_dosen as fip_dosen_pembimbing', 'fip_dosen_pembimbing.nidn = skripsi.dosen_pembimbing');
+        $builder->join('fip_dosen as fip_dosen_pa', 'fip_dosen_pa.nidn = skripsi.dosen_pa');
+        $builder->join('profil', 'skripsi.nim_mahasiswa = profil.prf_nim_portal');
+        $builder->join('departemen', 'profil.departemen_input = departemen.departemen_id');
+        $builder->where('skripsi_uuid', $id);
+        $query = $builder->get();
+        return $query->getRowArray(); 
+    }
+
+    // digunakan untuk melihat detail skripsi yang pengajuan judulnya lebih dari satu
+    // GET master-judul/detail/($nim)
+    // Controller MasterJudul/detail($nim)
+    public function getDetailByNim($nim = null)
+    {
+        $builder = $this->db->table('skripsi');
+        $builder->select('skripsi.*, 
+        fip_dosen_pembimbing.nidn as d_pembimbing_nidn, fip_dosen_pembimbing.peg_gel_dep as d_pembimbing_peg_gel_dep, fip_dosen_pembimbing.peg_nama as d_pembimbing_peg_nama, fip_dosen_pembimbing.peg_gel_bel as d_pembimbing_peg_gel_bel,
+        fip_dosen_pa.nidn as d_pa_nidn, fip_dosen_pa.peg_gel_dep as d_pa_peg_gel_dep, fip_dosen_pa.peg_nama as d_pa_peg_nama, fip_dosen_pa.peg_gel_bel as d_pa_peg_gel_bel,
+        profil.departemen_input, departemen.departemen_nama as nama_departemen');
+        $builder->join('fip_dosen as fip_dosen_pembimbing', 'fip_dosen_pembimbing.nidn = skripsi.dosen_pembimbing');
+        $builder->join('fip_dosen as fip_dosen_pa', 'fip_dosen_pa.nidn = skripsi.dosen_pa');
+        $builder->join('profil', 'skripsi.nim_mahasiswa = profil.prf_nim_portal');
+        $builder->join('departemen', 'profil.departemen_input = departemen.departemen_id');
+        $builder->where('skripsi.nim_mahasiswa', $nim);
+        $builder->orderBy('status_pengajuan_skripsi', 'asc');
+        $query = $builder->get();
+        return $query->getResultArray(); 
     }
 
      // digunakan oleh route Skripsi::perbaikan_judul()
@@ -285,6 +363,4 @@ class SkripsiModel extends Model
         $query = $builder->get();
         return $query->getRowArray(); 
     }
-   
-    
 }

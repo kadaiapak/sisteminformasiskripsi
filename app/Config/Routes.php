@@ -603,5 +603,23 @@ $routes->post('/auth/mahasiswa/proses', 'Auth::login_mahasiswa_proses');
     $routes->get('/master-dosen/pengaturan', 'MasterDosen::pengaturan', ['filter' => 'adminDanSuperAdminFilter' ]);
     $routes->get('/master-dosen/pengaturan/edit/(:num)', 'MasterDosen::pengaturan_edit/$1', ['filter' => 'adminDanSuperAdminFilter']);
     $routes->post('/master-dosen/pengaturan/update/(:num)', 'MasterDosen::pengaturan_update/$1', ['filter' => 'adminDanSuperAdminFilter']);
-
 // AKHIR DARI MASTER DATA DOSEN
+
+// ROUTE UNTUK MASTER DATA DOSEN
+    // diakses oleh admin dan superadmin 
+    $routes->get('/master-judul', 'MasterJudul::index', ['filter' => 'adminDanSuperAdminFilter' ]);
+    $routes->get('/master-judul/detail/(:any)', 'MasterJudul::detail/$1', ['filter' => 'adminDanSuperAdminFilter']);
+    $routes->get('/master-judul/edit/(:num)', 'MasterJudul::edit/$1', ['filter' => 'adminDanSuperAdminFilter']);
+    $routes->post('/master-judul/update/(:num)', 'MasterJudul::update/$1', ['filter' => 'adminDanSuperAdminFilter']);
+    $routes->get('/master-judul/tambah', 'MasterJudul::tambah', ['filter' => 'adminDanSuperAdminFilter']);
+    $routes->post('/master-judul/simpan', 'MasterJudul::simpan', ['filter' => 'adminDanSuperAdminFilter']);
+// AKHIR DARI MASTER DATA DOSEN
+
+// ROUTE UNTUK JUDUL DOUBLE
+    // diakses oleh admin dan superadmin 
+    $routes->get('/master-judul/pengajuan-bermasalah', 'MasterJudul::pengajuan_bermasalah', ['filter' => 'adminDanSuperAdminFilter' ]);
+    $routes->get('/master-judul/pengajuan-bermasalah/detail/(:num)', 'MasterJudul::detail_pengajuan_bermasalah/$1', ['filter' => 'adminDanSuperAdminFilter' ]);
+    $routes->get('/master-judul/pengajuan-bermasalah/edit/(:num)', 'MasterJudul::pengaturan_edit/$1', ['filter' => 'adminDanSuperAdminFilter']);
+    $routes->post('/master-judul/pengajuan-bermasalah/update/(:num)', 'MasterJudul::pengaturan_update/$1', ['filter' => 'adminDanSuperAdminFilter']);
+// AKHIR DARI JUDUL DOUBLE
+

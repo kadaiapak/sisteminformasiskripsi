@@ -43,16 +43,22 @@
                 <br />
                 <h3>Master Data</h3>
                 <br />
+                <li><a><i class="fa fa-user"></i> Dosen <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="<?= base_url('/master-dosen'); ?>">Semua Dosen</a></li>
+                        <li><a href="<?= base_url('/master-dosen/pengaturan'); ?>">Pengaturan Tambahan</a></li>
+                    </ul>
+                </li>
                 <li><a><i class="fa fa-user"></i> Mahasiswa <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="<?= base_url('/master-mahasiswa'); ?>">Semua Mahasiswa</a></li>
                         <li><a href="<?= base_url('/master-mahasiswa/bermasalah-idpdpt'); ?>">Mahasiswa error departemen</a></li>
                     </ul>
                 </li>
-                <li><a><i class="fa fa-user"></i> Dosen <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-user"></i> Judul Skripsi <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="<?= base_url('/master-dosen'); ?>">Semua Dosen</a></li>
-                        <li><a href="<?= base_url('/master-dosen/pengaturan'); ?>">Pengaturan Tambahan</a></li>
+                        <li><a href="<?= base_url('/master-judul'); ?>">Semua Judul</a></li>
+                        <li><a href="<?= base_url('/master-judul/pengajuan-bermasalah'); ?>">Pengajuan judul doubel</a></li>
                     </ul>
                 </li>
                 <li><a><i class="fa fa-building"></i> Departemen <span class="fa fa-chevron-down"></span></a>
