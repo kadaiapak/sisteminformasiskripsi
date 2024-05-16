@@ -78,7 +78,7 @@
                             <div class="form-group row ">
                                 <label class="control-label col-md-12 col-sm-12" for="peg_bidang">Bidang</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input readonly type="text" value="<?= $satuDosen['peg_bidang']; ?>" class="form-control <?= validation_show_error('peg_bidang') ? 'is-invalid' : null; ?>" id="peg_bidang" name="peg_bidang" placeholder="Tuliskan Nama">
+                                    <input type="text" value="<?= $satuDosen['peg_bidang']; ?>" class="form-control <?= validation_show_error('peg_bidang') ? 'is-invalid' : null; ?>" id="peg_bidang" name="peg_bidang" placeholder="Tuliskan Nama">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('peg_bidang'); ?>
                                     </div>
@@ -87,7 +87,7 @@
                             <div class="form-group row ">
                                 <label class="control-label col-md-12 col-sm-12" for="peg_pendidikan">Pendidikan</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input readonly type="text" value="<?= $satuDosen['peg_pendidikan']; ?>" class="form-control <?= validation_show_error('peg_pendidikan') ? 'is-invalid' : null; ?>" id="peg_pendidikan" name="peg_pendidikan" placeholder="Tuliskan Nama">
+                                    <input type="text" value="<?= $satuDosen['peg_pendidikan']; ?>" class="form-control <?= validation_show_error('peg_pendidikan') ? 'is-invalid' : null; ?>" id="peg_pendidikan" name="peg_pendidikan" placeholder="Tuliskan Nama">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('peg_pendidikan'); ?>
                                     </div>
@@ -105,7 +105,7 @@
                             <div class="form-group row ">
                                 <label class="control-label col-md-12 col-sm-12" for="peg_status">Status Kepegawaian</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input readonly type="text" value="<?= $satuDosen['peg_status']; ?>" class="form-control <?= validation_show_error('peg_status') ? 'is-invalid' : null; ?>" id="peg_status" name="peg_status" placeholder="Tuliskan Nama">
+                                    <input type="text" value="<?= $satuDosen['peg_status']; ?>" class="form-control <?= validation_show_error('peg_status') ? 'is-invalid' : null; ?>" id="peg_status" name="peg_status" placeholder="Tuliskan Nama">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('peg_status'); ?>
                                     </div>
@@ -141,7 +141,7 @@
                             <div class="form-group row ">
                                 <label class="control-label col-md-12 col-sm-12" for="peg_tmp_lahir">Tempat Lahir</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input readonly type="text" value="<?= $satuDosen['peg_tmp_lahir']; ?>" class="form-control <?= validation_show_error('peg_tmp_lahir') ? 'is-invalid' : null; ?>" id="peg_tmp_lahir" name="peg_tmp_lahir" placeholder="Tuliskan Nama">
+                                    <input type="text" value="<?= $satuDosen['peg_tmp_lahir']; ?>" class="form-control <?= validation_show_error('peg_tmp_lahir') ? 'is-invalid' : null; ?>" id="peg_tmp_lahir" name="peg_tmp_lahir" placeholder="Tuliskan Nama">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('peg_tmp_lahir'); ?>
                                     </div>
@@ -159,7 +159,7 @@
                             <div class="form-group row ">
                                 <label class="control-label col-md-12 col-sm-12" for="peg_sex">Jenis Kelamin</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input readonly type="text" value="<?= $satuDosen['peg_sex'] == 'P' ? 'Perempuan' : ($satuDosen['peg_sex'] == 'L' ? 'Laki - laki' : null); ?>" class="form-control <?= validation_show_error('peg_sex') ? 'is-invalid' : null; ?>" id="peg_sex" name="peg_sex" placeholder="Tuliskan Nama">
+                                    <input type="text" value="<?= $satuDosen['peg_sex'] == 'P' ? 'Perempuan' : ($satuDosen['peg_sex'] == 'L' ? 'Laki - laki' : null); ?>" class="form-control <?= validation_show_error('peg_sex') ? 'is-invalid' : null; ?>" id="peg_sex" name="peg_sex" placeholder="Tuliskan Nama">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('peg_sex'); ?>
                                     </div>
@@ -168,7 +168,7 @@
                             <div class="form-group row ">
                                 <label class="control-label col-md-12 col-sm-12" for="peg_agama">Agama</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input readonly type="text" value="<?= $satuDosen['peg_agama']; ?>" class="form-control <?= validation_show_error('peg_agama') ? 'is-invalid' : null; ?>" id="peg_agama" name="peg_agama" placeholder="Tuliskan Nama">
+                                    <input type="text" value="<?= $satuDosen['peg_agama']; ?>" class="form-control <?= validation_show_error('peg_agama') ? 'is-invalid' : null; ?>" id="peg_agama" name="peg_agama" placeholder="Tuliskan Nama">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('peg_agama'); ?>
                                     </div>
@@ -177,7 +177,7 @@
                             <div class="form-group row ">
                                 <label class="control-label col-md-12 col-sm-12" for="peg_alamat">Alamat</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input readonly type="text" value="<?= $satuDosen['peg_alamat']; ?>" class="form-control <?= validation_show_error('peg_alamat') ? 'is-invalid' : null; ?>" id="peg_alamat" name="peg_alamat" placeholder="Tuliskan Nama">
+                                    <input type="text" value="<?= $satuDosen['peg_alamat']; ?>" class="form-control <?= validation_show_error('peg_alamat') ? 'is-invalid' : null; ?>" id="peg_alamat" name="peg_alamat" placeholder="Tuliskan Nama">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('peg_alamat'); ?>
                                     </div>

@@ -341,8 +341,8 @@ class DosenModel extends Model
         $build = $this->db->query(
             "SELECT nidn, peg_gel_dep, peg_nama, peg_gel_bel, peg_nip
             FROM fip_dosen
-            WHERE peg_nip IS NULL
-            OR peg_nip = ''
+            WHERE (peg_nip IS NULL AND peg_status != 'Tetap Non PNS')
+            OR (peg_nip = '' AND peg_status != 'Tetap Non PNS')
             ORDER BY peg_nama ASC");
         $result = $build->getResultArray();
         return $result;
