@@ -335,7 +335,11 @@ class IzinObservasiMatakuliah extends BaseController
         );
         $UUIDObservasi = $this->request->getVar('UUIDObservasi');
         $this->anggotaObservasiMatakuliahModel->delete($where);
-        return redirect()->to('/izin-observasi-matakuliah/edit/'.$UUIDObservasi)->with('sukses','Data berhasil disimpan!');
+        if(session()->get('level') == 6){
+            return redirect()->to('/izin-observasi-matakuliah/edit/'.$UUIDObservasi)->with('sukses','Data berhasil disimpan!');
+        }else {
+            return redirect()->to('/izin-observasi-matakuliah/edit-admin/'.$UUIDObservasi)->with('sukses','Data berhasil disimpan!');
+        }
     }
 
     // untuk menambah anggota pengajuan izin observasi matakuliah

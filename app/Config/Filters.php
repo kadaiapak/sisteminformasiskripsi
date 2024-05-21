@@ -34,6 +34,7 @@ class Filters extends BaseConfig
         'adminDepartemenFilter' => \App\Filters\AdminDepartemenFilter::class,
         'adminDanSuperAdminFilter' => \App\Filters\AdminDanSuperAdminFilter::class,
         'adminDepartemenDanKadepFilter' => \App\Filters\AdminDepartemenDanKadepFilter::class,
+        'adminDepartemenDanMahasiswaFilter' => \App\Filters\AdminDepartemenDanMahasiswaFilter::class,
     ];
 
     /**

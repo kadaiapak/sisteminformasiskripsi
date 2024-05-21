@@ -47,6 +47,7 @@ $routes->post('/auth/mahasiswa/proses', 'Auth::login_mahasiswa_proses');
 // route untuk DOSEN
     // bisa di akses oleh kadep
     $routes->get('/dosen', 'Dosen::index', ['filter' => 'kadepFilter']);
+    $routes->get('/dosen/detail/(:num)', 'Dosen::detail/$1', ['filter' => 'kadepFilter']);
 // akhir route DOSEN
 
 // route untuk MAHASISWA
@@ -443,7 +444,7 @@ $routes->post('/auth/mahasiswa/proses', 'Auth::login_mahasiswa_proses');
     // bisa di akses oleh mahasiswa untuk memperbarui anggota
     $routes->post('/izin-observasi-matakuliah/simpan-pembaruan-anggota', 'IzinObservasiMatakuliah::simpan_pembaruan_anggota', ['filter' => 'mahasiswaFilter']);
     //  bisa di akses oleh mahasiswa untuk menghapus anggota
-    $routes->delete('/izin-observasi-matakuliah/hapus-anggota/(:num)', 'IzinObservasiMatakuliah::hapus_anggota/$1', ['filter' => 'mahasiswaFilter']);
+    $routes->delete('/izin-observasi-matakuliah/hapus-anggota/(:num)', 'IzinObservasiMatakuliah::hapus_anggota/$1', ['filter' => 'adminDepartemenDanMahasiswaFilter']);
     // menambahkan anggota izin observasi matakulia oleh mahasiswa
     $routes->post('/izin-observasi-matakuliah/tambah-anggota', 'IzinObservasiMatakuliah::tambah_anggota', ['filter' => 'mahasiswaFilter']);
     // routes untuk print surat oleh mahasiswa mahasiswa
