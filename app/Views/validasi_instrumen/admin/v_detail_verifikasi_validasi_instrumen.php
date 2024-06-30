@@ -32,7 +32,7 @@
                     <div class="x_content">
                         <br />
                         <table class="table table-striped table-bordered mb-0">
-                        <tr>
+                            <tr>
                                 <td class="font-weight-bold">Nomor Induk Mahasiswa (NIM)</td>
                                 <td><?= $satu_penelitian['nim_pengajuan']; ?></td>
                             </tr>
@@ -56,7 +56,6 @@
                                 <td class="font-weight-bold">Judul Skripsi</td>
                                 <td><?= $satu_penelitian['judul']; ?></td>
                             </tr>
-                         
                             <tr>
                                 <td class="font-weight-bold">Status</td>
                                 <td><?= $satu_penelitian["status"] == "1" ? "<span class='badge badge-warning'>Belum diproses Admin</span>" : ($satu_penelitian["status"] == "2" ? "<span class='badge badge-danger'>Ditolak Admin</span>" : ($satu_penelitian["status"] == "3" ? "<span class='badge badge-success'>Disetujui Admin, Menunggu diproses Kadep</span>" : ($satu_penelitian["status"] == "4" ? "<span class='badge badge-danger'>Ditolak Kadep</span>" : ($satu_penelitian["status"] == "5" ? "<span class='badge badge-success'>Disetujui Kadep</span>" : null)))) ; ?></td>

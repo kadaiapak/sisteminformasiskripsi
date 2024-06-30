@@ -9,25 +9,11 @@
             </div>
         </div>
         <div class="clearfix"></div>
-        <?php if(session()->getFlashdata('sukses')) : ?>
-            <div class="alert alert-success alert-dismissible " role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-                </button>
-                <strong>Sukses!</strong> <?= session()->getFlashdata('sukses'); ?>.
-            </div>
-        <?php endif; ?>
-        <?php if(session()->getFlashdata('gagal')) : ?>
-            <div class="alert alert-danger alert-dismissible " role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
-                </button>
-                <strong>Gagal!</strong> <?= session()->getFlashdata('gagal'); ?>.
-            </div>
-        <?php endif; ?>
         <div class="row">
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Semua Pengajuan Belum Verifikasi</h2>
+                        <h2>Semua Pengajuan Yang disetujui Kepala Departemen</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
