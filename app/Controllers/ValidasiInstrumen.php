@@ -49,6 +49,24 @@ class ValidasiInstrumen extends BaseController
         return view('validasi_instrumen/user/v_validasi_instrumen', $data);
     }
 
+    // fungsi untuk melihat semua surat validator instrumen yang sudah disetujui
+    // akses oleh admin departemen
+    // GET /validasi-instrumen/selesai
+    public function selesai()
+    {
+        $level = session()->get('level');
+        $departemen = session()->get('departemen');
+        if($departemen == '0'){
+            $departemen = null;
+        }
+        $semuaValidasiInstrumenSelesai = $this->validasiInstrumenModel->getAllByAdminYangSelesai($departemen, $level);
+        $data = [
+            'judul' => 'Semua Pengajuan Validasi Instrumen Selesai',
+            'semuaValidasiInstrumenSelesai' => $semuaValidasiInstrumenSelesai
+        ];
+        return view('validasi_instrumen/admin/v_semua_validasi_instrumen_selesai', $data);
+    }
+
     // fungsi untuk menampilkan form tambah
     // akses oleh mahasiswa
     // GET /validasi-instrumen/tambah

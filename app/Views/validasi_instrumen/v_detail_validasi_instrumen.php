@@ -59,7 +59,7 @@
                             <?php } ?>
                         </table>
                         <?php if (session()->get('username')) { ?>
-                            <a href="<?= base_url("validasi-instrumen"); ?>" class="btn btn-warning btn-sm" style="margin-top: 10px;" ><i class="fa fa-arrow-circle-left" style="margin-right: 5px;"></i>Kembali</a>
+                            <a href="javascript:history.back()" class="btn btn-warning btn-sm" style="margin-top: 10px;" ><i class="fa fa-arrow-circle-left" style="margin-right: 5px;"></i>Kembali</a>
                         <?php } ?>
                     </div>
                 </div>
