@@ -63,7 +63,11 @@
                         </table>
                         <br />
                         <?php if (session()->get('username')) { ?>
+                            <?php if(session()->get('level') == 7) { ?>
+                            <a href="<?= base_url("validator-instrumen/selesai"); ?>" class="btn btn-warning btn-sm"><i class="fa fa-arrow-circle-left" style="margin-right: 5px;"></i>Kembali</a>
+                            <?php } else { ?>
                             <a href="<?= base_url("validator-instrumen"); ?>" class="btn btn-warning btn-sm"><i class="fa fa-arrow-circle-left" style="margin-right: 5px;"></i>Kembali</a>
+                            <?php } ?>
                         <?php } ?>
                     </div>
                 </div>

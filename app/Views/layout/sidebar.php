@@ -91,6 +91,15 @@
                         <li><a href="<?= base_url('/persyaratan'); ?>">Persyaratan</a></li>
                     </ul>
                 </li>
+                <li><a><i class="fa fa-folder-o"></i> Surat Selesai <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="<?= base_url('/izin-observasi-penelitian/selesai'); ?>">Observasi Penelitian</a></li>
+                    <li><a href="<?= base_url('/validator-instrumen/selesai'); ?>">Validator Instrumen</a></li>
+                    <li><a href="<?= base_url('/izin-observasi-matakuliah/selesai'); ?>">Observasi Matakuliah</a></li>
+                    <li><a href="<?= base_url('/izin-penelitian/selesai'); ?>">Izin Penelitian</a></li>
+                    <li><a href="<?= base_url('/validasi-instrumen/selesai'); ?>">Validasi Instrumen</a></li>
+                </ul>
+            </li>
             </ul>
             <!-- akhir dari admin -->
         <?php } ?>

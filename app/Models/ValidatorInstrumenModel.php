@@ -124,6 +124,22 @@ class ValidatorInstrumenModel extends Model
         return $query->getResultArray();
     }
 
+    public function getAllByAdminYangSelesai($departemen = null, $level = null) 
+    {
+        $builder = $this->db->table('surat_validator_instrumen');
+        $builder->select('surat_validator_instrumen.*,departemen.departemen_nama as nama_departemen');
+        $builder->join('departemen', 'surat_validator_instrumen.departemen_pengajuan = departemen.departemen_id');
+        if($departemen != null){
+        $builder->where('departemen_pengajuan', $departemen);
+        }
+        $builder->groupStart();
+        $builder->orWhere('status', '5');
+        $builder->groupEnd();
+        $builder->orderBy('created_at', 'asc');
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
     public function getDetail($UUIDValidator = null)
     {
         $builder = $this->db->table('surat_validator_instrumen');

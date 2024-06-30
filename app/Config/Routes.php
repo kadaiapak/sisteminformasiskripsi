@@ -395,6 +395,8 @@ $routes->post('/auth/mahasiswa/proses', 'Auth::login_mahasiswa_proses');
 // AKHIR ROUTES SURAT AKADEMIK
     // bisa di akses oleh mahasiswa untuk menampilkan pengajuan surat yang telah mereka buat
     $routes->get('/validator-instrumen', 'ValidatorInstrumen::index', ['filter' => 'mahasiswaFilter']);
+    // bisa di akses oleh admin departemen dan kadep untuk melihat list validator instrumen yang sudah disetujui dan bisa di print
+    $routes->get('/validator-instrumen/selesai', 'ValidatorInstrumen::selesai', ['filter' => 'adminDepartemenDanKadepFilter']);
     // bisa di akses oleh mahasiswa untuk membuat surat validator instrumen
     $routes->get('/validator-instrumen/tambah', 'ValidatorInstrumen::tambah', ['filter' => 'mahasiswaFilter']);
     // bisa di akses oleh mahasiswa untuk menyimpan surat validator instrumen
