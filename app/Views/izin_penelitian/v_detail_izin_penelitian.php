@@ -42,7 +42,6 @@
                                 <td class="font-weight-bold">Judul Skripsi</td>
                                 <td><?= $satu_penelitian['judul']; ?></td>
                             </tr>
-                          
                             <tr>
                                 <td class="font-weight-bold">Tempat Penelitian</td>
                                 <td><?= $satu_penelitian['tempat_penelitian']; ?></td>
@@ -71,7 +70,7 @@
                             <?php } ?>
                         </table>
                         <?php if (session()->get('username')) { ?>
-                            <a href="<?= base_url("izin-penelitian"); ?>" class="btn btn-warning btn-sm" style="margin-top: 10px;" ><i class="fa fa-arrow-circle-left" style="margin-right: 5px;"></i>Kembali</a>
+                            <a href="javascript:history.back()" class="btn btn-warning btn-sm" style="margin-top: 10px;" ><i class="fa fa-arrow-circle-left" style="margin-right: 5px;"></i>Kembali</a>
                         <?php } ?>
                     </div>
                 </div>

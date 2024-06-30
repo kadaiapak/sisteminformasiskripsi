@@ -47,7 +47,8 @@ class Filters extends BaseConfig
     public array $globals = [
         'before' => [
             // 'honeypot',
-            'csrf',
+            // 'csrf', 
+            'csrf' => ['except' => ['/izin-penelitian/cetak']],
             'authFilter' => [
                 'except' => ['/auth/*','surat/*','izin-observasi-penelitian/detail-izin-observasi/*','seminar/detail-seminar/*', 'ujian-skripsi/detail-ujian/*','izin-penelitian/scan-barcode/*', 'izin-observasi-matakuliah/scan-barcode/*','validasi-instrumen/scan-barcode/*']
             ],

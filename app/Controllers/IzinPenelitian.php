@@ -49,6 +49,24 @@ class IzinPenelitian extends BaseController
         return view('izin_penelitian/user/v_izin_penelitian', $data);
     }
 
+    // fungsi untuk melihat semua surat izin penelitian yang sudah disetujui
+    // akses oleh admin departemen
+    // GET /izin-penelitian/selesai
+    public function selesai()
+    {
+        $level = session()->get('level');
+        $departemen = session()->get('departemen');
+        if($departemen == '0'){
+            $departemen = null;
+        }
+        $semuaIzinPenelitianSelesai = $this->izinPenelitianModel->getAllByAdminYangSelesai($departemen, $level);
+        $data = [
+            'judul' => 'Semua Pengajuan Izin Penelitian Selesai',
+            'semuaIzinPenelitianSelesai' => $semuaIzinPenelitianSelesai
+        ];
+        return view('izin_penelitian/admin/v_semua_izin_penelitian_selesai', $data);
+    }
+
     // fungsi untuk menampilkan form tambah
     // akses oleh mahasiswa
     // GET /izin-penelitian/tambah

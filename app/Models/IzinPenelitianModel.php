@@ -121,6 +121,22 @@ class IzinPenelitianModel extends Model
         return $query->getResultArray();
     }
 
+    public function getAllByAdminYangSelesai($departemen = null, $level = null) 
+    {
+        $builder = $this->db->table('surat_izin_penelitian');
+        $builder->select('surat_izin_penelitian.*,departemen.departemen_nama as nama_departemen');
+        $builder->join('departemen', 'surat_izin_penelitian.departemen_pengajuan = departemen.departemen_id');
+        if($departemen != null){
+        $builder->where('departemen_pengajuan', $departemen);
+        }
+        $builder->groupStart();
+        $builder->orWhere('status', '5');
+        $builder->groupEnd();
+        $builder->orderBy('created_at', 'asc');
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
     public function getDetail($UUIDValidator = null)
     {
         $builder = $this->db->table('surat_izin_penelitian');
