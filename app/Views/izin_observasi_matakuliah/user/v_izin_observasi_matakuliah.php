@@ -77,7 +77,6 @@
                                                     <?php if($iomk['nim_pengajuan'] == session()->get('username') && $iomk['status'] == 1) {  ?>
                                                         <a href="<?= base_url('izin-observasi-matakuliah/edit/'.$iomk['uuid']); ?>" class="btn btn-warning btn-sm" ><i class="fa fa-edit" style="margin-right: 5px;"></i>Edit</a>
                                                     <?php } ?>
-                                                    
                                                 </td>
                                                 <?php $no++ ?>
                                             </tr>

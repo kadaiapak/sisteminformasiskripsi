@@ -436,6 +436,8 @@ $routes->post('/auth/mahasiswa/proses', 'Auth::login_mahasiswa_proses');
     // AKSES OLEH MAHASISWA
     // bisa di akses oleh mahasiswa untuk menampilkan pengajuan surat yang telah mereka buat
     $routes->get('/izin-observasi-matakuliah', 'IzinObservasiMatakuliah::index', ['filter' => 'mahasiswaFilter']);
+    // bisa di akses oleh admin departemen dan kadep untuk melihat list izin observasi matakuliah yang sudah disetujui dan bisa di print
+    $routes->get('/izin-observasi-matakuliah/selesai', 'IzinObservasiMatakuliah::selesai', ['filter' => 'adminDepartemenDanKadepFilter']);
     // bisa di akses oleh mahasiswa untuk membuat surat validator instrumen
     $routes->get('/izin-observasi-matakuliah/tambah', 'IzinObservasiMatakuliah::tambah', ['filter' => 'mahasiswaFilter']);
     // bisa di akses oleh mahasiswa untuk menyimpan surat validator instrumen
@@ -455,7 +457,7 @@ $routes->post('/auth/mahasiswa/proses', 'Auth::login_mahasiswa_proses');
     // routes untuk print surat oleh mahasiswa mahasiswa
     $routes->get('/izin-observasi-matakuliah/print-surat/(:any)', 'IzinObservasiMatakuliah::print_surat/$1');
     // routes untuk scan barcode
-    $routes->get('/izin-observasi-matakuliah/detail/(:any)', 'IzinObservasiMatakuliah::detail/$1', ['filter' => 'mahasiswaFilter']);
+    $routes->get('/izin-observasi-matakuliah/detail/(:any)', 'IzinObservasiMatakuliah::detail/$1', ['filter' => 'mahasiswaDanAdminDepartemenFilter']);
     // routes untuk cetak surat oleh mahasiswa versi 2
     $routes->post('/izin-observasi-matakuliah/cetak', 'IzinObservasiMatakuliah::cetak');
 

@@ -39,7 +39,7 @@
                                 <td><?= $satu_observasi['tujuan_surat']; ?></td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold">Alamat Tujuan Surat <b>(Di ?)</b></td>
+                                <td class="font-weight-bold">Kabupaten / Kota <b>(?)</b></td>
                                 <td><?= $satu_observasi['alamat_tempat_observasi']; ?></td>
                             </tr>
                             <tr>

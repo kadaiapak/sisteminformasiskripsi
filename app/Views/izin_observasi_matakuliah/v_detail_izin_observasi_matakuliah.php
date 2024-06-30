@@ -105,7 +105,11 @@
                             <?php } ?>
                         <br />
                         <?php if (session()->get('username')) { ?>
-                            <a href="<?= base_url("izin-observasi-matakuliah"); ?>" class="btn btn-warning btn-sm"><i class="fa fa-arrow-circle-left" style="margin-right: 5px;"></i>Kembali</a>
+                            <?php if(session()->get('level') == 7){ ?>
+                            <a href="<?= base_url("izin-observasi-matakuliah/selesai"); ?>" class="btn btn-warning btn-sm"><i class="fa fa-arrow-circle-left" style="margin-right: 5px;"></i>Kembali</a>
+                            <?php }else { ?>
+                                <a href="<?= base_url("izin-observasi-matakuliah"); ?>" class="btn btn-warning btn-sm"><i class="fa fa-arrow-circle-left" style="margin-right: 5px;"></i>Kembali</a>
+                            <?php } ?>
                         <?php } ?>
                     </div>
                 </div>

@@ -52,6 +52,25 @@ class IzinObservasiMatakuliah extends BaseController
         return view('izin_observasi_matakuliah/user/v_izin_observasi_matakuliah', $data);
     }
 
+    // fungsi untuk melihat semua surat izin observasi matakuliah yang sudah disetujui
+    // akses oleh admin departemen
+    // GET /izin-observasi-matakuliah/selesai
+    public function selesai()
+    {
+        $level = session()->get('level');
+        $departemen = session()->get('departemen');
+        if($departemen == '0'){
+            $departemen = null;
+        }
+        $semuaSuratIzinObservasiMatakuliahSelesai = $this->izinObservasiMatakuliahModel->getAllByAdminYangSelesai($departemen, $level);
+        $data = [
+            'judul' => 'Semua Pengajuan Izin Observasi Matakuliah Selesai',
+            'semuaSuratIzinObservasiMatakuliahSelesai' => $semuaSuratIzinObservasiMatakuliahSelesai
+        ];
+        return view('izin_observasi_matakuliah/v_semua_izin_observasi_matakuliah_selesai', $data);
+    }
+
+
     // menampilkan form tambah pengajuan surat izin observasi matakuliah
     // akses oleh mahasiswa
     // GET /izin-observasi-matakuliah/tambah
