@@ -234,7 +234,12 @@
         <?php if(session()->get('level') == '7') { ?>
         <!-- menu yang bisa di akses oleh admin departemen-->
         <ul class="nav side-menu">
+            <h3>Umum</h3>
+            <br />
             <li><a href="<?= base_url('/dashboard'); ?>"><i class="fa fa-home"></i> Dashboard</a></li>
+            <br />
+            <h3>Skripsi</h3>
+            <br />
             <li><a href="<?= base_url('/daftar-ruangan-terpakai'); ?>"><i class="fa fa-home"></i> Ruangan Terpakai</a></li>
             <li><a href="<?= base_url('/jadwal-pengajuan-judul'); ?>"><i class="fa fa-calendar"></i>Atur Jadwal Ajukan Judul</a></li>
             <li><a><i class="fa fa-edit"></i> Skripsi Mahasiswa <span class="fa fa-chevron-down"></span></a>
@@ -243,6 +248,9 @@
                     <li><a href="<?= base_url('/ujian-skripsi/semua-ujian'); ?>">Verifikasi Ujian</a></li>
                 </ul>
             </li>
+            <br />
+            <h3>Surat</h3>
+            <br />
             <li><a><i class="fa fa-file-text-o"></i> Pengajuan Surat <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a>Observasi Penelitian<span class="fa fa-chevron-down"></span></a>
@@ -310,6 +318,15 @@
                             </li>
                         </ul>
                     </li>
+                </ul>
+            </li>
+            <li><a><i class="fa fa-folder-o"></i> Surat Selesai <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="<?= base_url('/izin-observasi-penelitian/selesai'); ?>">Observasi Penelitian</a></li>
+                    <li><a href="<?= base_url('/validator-instrumen/selesai'); ?>">Validator Instrumen</a></li>
+                    <li><a href="<?= base_url('/izin-observasi-matakuliah/selesai'); ?>">Observasi Matakuliah</a></li>
+                    <li><a href="<?= base_url('/izin-penelitian/selesai'); ?>">Izin Penelitian</a></li>
+                    <li><a href="<?= base_url('/validasi-instrumen/selesai'); ?>">Validasi Instrumen</a></li>
                 </ul>
             </li>
         </ul>

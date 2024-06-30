@@ -59,5 +59,16 @@ Langkah - langkah
 - Membuat Filter baru untuk mengamankan route bagi user yang tidak login atau di framework lain namanya middleware
 - Setting Config => Filter.php
 
-Yang dilakukan
-1. Membuat fitur pengajuan surat oleh mahasiswa
+# UPDATE
+## (Update 3) Pengajuan Surat
+Update dilakukan agar 
+- admin departemen bisa melihat surat yang sudah disetujui oleh kepala departemen
+- admin departemen bisa print surat yang sudah disetujui oleh kepala departemen
+
+Langkah - langkah
+- update sidebar.php
+- update routes.php
+- menambahkan filter
+- mendaftarkan filter yang sudah dibuat di config/filter
+
+

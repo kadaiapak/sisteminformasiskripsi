@@ -46,6 +46,24 @@ class IzinObservasiPenelitian extends BaseController
         return view('izin_observasi_penelitian/v_izin_observasi_penelitian', $data);
     }
 
+    // fungsi untuk melihat semua surat izin observasi penelitian yang sudah disetujui
+    // akses oleh admin departemen
+    // GET /izin-observasi-penelitian/selesai
+    public function selesai()
+    {
+        $level = session()->get('level');
+        $departemen = session()->get('departemen');
+        if($departemen == '0'){
+            $departemen = null;
+        }
+        $semuaIzinObservasiPenelitianSelesai = $this->izinObservasiPenelitianModel->getAllByAdminYangSelesai($departemen, $level);
+        $data = [
+            'judul' => 'Semua Pengajuan Izin Observasi Penelitian Selesai',
+            'semuaIzinObservasiPenelitianSelesai' => $semuaIzinObservasiPenelitianSelesai
+        ];
+        return view('izin_observasi_penelitian/v_semua_izin_observasi_penelitian_selesai', $data);
+    }
+
     // fungsi untuk melihat detail pengajuan
     // akses oleh mahasiswa
     // GET /izin-penelitian/detail/(:any)
