@@ -132,7 +132,7 @@ class IzinPenelitianModel extends Model
         $builder->groupStart();
         $builder->orWhere('status', '5');
         $builder->groupEnd();
-        $builder->orderBy('created_at', 'asc');
+        $builder->orderBy('created_at', 'desc');
         $query = $builder->get();
         return $query->getResultArray();
     }
