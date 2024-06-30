@@ -28,7 +28,6 @@
                                         <?= validation_show_error('nim_pengajuan'); ?>
                                     </div>
                                 </div>
-                                
                             </div>
                             <div class="form-group row ">
                                 <label class="control-label col-md-3 col-sm-3" for="nama_pengajuan">Nama Mahasiswa</label>
@@ -65,35 +64,34 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3" for="tujuan_surat">Tujuan Surat <b>(Kepada Yth : ?)</b></label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input required type="text" value="" class="form-control <?= validation_show_error('tujuan_surat') ? 'is-invalid' : null; ?>" id="tujuan_surat" name="tujuan_surat" placeholder="Contoh: Kepala Sekolah SMA N 5 Padang">
+                                    <input required type="text" value="" class="form-control <?= validation_show_error('tujuan_surat') ? 'is-invalid' : null; ?>" id="tujuan_surat" name="tujuan_surat" placeholder="Contoh: Kepala Sekolah SMA N 5 Solok Selatan/ TK Pembangunan UNP">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('tujuan_surat'); ?>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="control-label col-md-3 col-sm-3" for="alamat_tempat_observasi">Alamat Tujuan Surat <b>(Di ?)</b></label>
+                                <label class="control-label col-md-3 col-sm-3" for="alamat_tempat_observasi">Kabupaten / Kota <b>(?)</b></label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input required type="text" value="" class="form-control <?= validation_show_error('alamat_tempat_observasi') ? 'is-invalid' : null; ?>" id="alamat_tempat_observasi" name="alamat_tempat_observasi" placeholder="Contoh: Padang">
+                                    <input required type="text" value="" class="form-control <?= validation_show_error('alamat_tempat_observasi') ? 'is-invalid' : null; ?>" id="alamat_tempat_observasi" name="alamat_tempat_observasi" placeholder="Contoh: Solok Selatan/ Padang/ Solok/ Padang Panjang">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('alamat_tempat_observasi'); ?>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="control-label col-md-3 col-sm-3" for="tempat_observasi">Tempat Observasi</b></label>
+                                <label class="control-label col-md-3 col-sm-3" for="tempat_observasi">Nama Instansi / Sekolah <b>(?)</b></label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input required type="text" value="" class="form-control <?= validation_show_error('tempat_observasi') ? 'is-invalid' : null; ?>" id="tempat_observasi" name="tempat_observasi" placeholder="Tuliskan tempat observasi">
+                                    <input required type="text" value="" class="form-control <?= validation_show_error('tempat_observasi') ? 'is-invalid' : null; ?>" id="tempat_observasi" name="tempat_observasi" placeholder="Contoh: SMA N 5 Solok Selatan/ TK Pembangunan UNP">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('tempat_observasi'); ?>
                                     </div>
                                 </div>
                             </div>
-                            
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3" for="tujuan_observasi">Tujuan Observasi</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input required type="text" value="" class="form-control <?= validation_show_error('tujuan_observasi') ? 'is-invalid' : null; ?>" id="tujuan_observasi" name="tujuan_observasi" placeholder="Tujuan observasi">
+                                    <input required type="text" value="" class="form-control <?= validation_show_error('tujuan_observasi') ? 'is-invalid' : null; ?>" id="tujuan_observasi" name="tujuan_observasi" placeholder="Contoh: Mengambil Data">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('tujuan_observasi'); ?>
                                     </div>
@@ -102,7 +100,7 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3" for="matakuliah">Matakuliah</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input required type="text" value="" class="form-control <?= validation_show_error('matakuliah') ? 'is-invalid' : null; ?>" id="matakuliah" name="matakuliah" placeholder="Matakuliah">
+                                    <input required type="text" value="" class="form-control <?= validation_show_error('matakuliah') ? 'is-invalid' : null; ?>" id="matakuliah" name="matakuliah" placeholder="Contoh: Pendekatan Persuasif">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('matakuliah'); ?>
                                     </div>
@@ -133,7 +131,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-12 col-lg-12 col-sm-12" for="nama_anggota"><b>Inputkan Data Teman(jika berkelompok)</b>></label>
+                                <label class="control-label col-md-12 col-lg-12 col-sm-12" for="nama_anggota"><b>Inputkan Data Teman(jika berkelompok) ?</b></label>
                                 <div class="tambah-input" style="margin-bottom: 10px;">
                                     <div class="row" style="margin-bottom: 15px; border: 1px solid grey; padding: 5px;">
                                         <div class="col-lg-4 col-md-4 col-sm-4 row">
@@ -173,8 +171,8 @@
                         <h2>Contoh Surat</h2>
                         <div class="clearfix"></div>
                     </div>
-                    <div class="x_content">
-                        <img src="<?= base_url('/upload/contoh_surat/izin_observasi_penelitian.jpg'); ?>" alt="" style="width: 100%;" >
+                    <div class="x_content" style="height: 95vh;">
+                        <iframe src="/upload/contoh_surat/izin_observasi_matakuliah_pdf.pdf" frameborder="0" style="width: 100%; height: 100%; display: block;"></iframe>
                     </div>
                 </div>
             </div>
