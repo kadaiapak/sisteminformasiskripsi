@@ -347,6 +347,13 @@ $routes->post('/auth/mahasiswa/proses', 'Auth::login_mahasiswa_proses');
     $routes->post('/persyaratan-ujian/simpan_edit', 'PersyaratanUjian::simpan_edit',['filter' => 'adminDanSuperAdminFilter']);
 // AKHIR DARI ROUTE UNTUK PERSYARATAN SEMINAR
 
+// ROUTES UNTUK PERSYARATAN SURAT IZIN PENELITIAN
+    // bisa di akses oleh admin dan super admin
+    $routes->get('/persyaratan-surat-izin-penelitian', 'PersyaratanSuratIzinPenelitian::index',['filter' => 'adminDanSuperAdminFilter']);
+    $routes->get('/persyaratan-surat-izin-penelitian/detail/(:any)', 'PersyaratanSuratIzinPenelitian::detail/$1',['filter' => 'adminDanSuperAdminFilter']);
+    $routes->post('/persyaratan-surat-izin-penelitian/simpan_edit', 'PersyaratanSuratIzinPenelitian::simpan_edit',['filter' => 'adminDanSuperAdminFilter']);
+// AKHIR DARI ROUTE UNTUK PERSYARATAN SURAT IZIN PENELITIAN
+
 // ROUTES UNTUK SURAT AKADEMIK
 // surat izin observasi penelitian
     // bisa di akses oleh mahasiswa untuk menampilkan pengajuan surat yang telah mereka buat
@@ -634,4 +641,11 @@ $routes->post('/auth/mahasiswa/proses', 'Auth::login_mahasiswa_proses');
     $routes->get('/master-judul/pengajuan-bermasalah/edit/(:num)', 'MasterJudul::pengaturan_edit/$1', ['filter' => 'adminDanSuperAdminFilter']);
     $routes->post('/master-judul/pengajuan-bermasalah/update/(:num)', 'MasterJudul::pengaturan_update/$1', ['filter' => 'adminDanSuperAdminFilter']);
 // AKHIR DARI JUDUL DOUBLE
+
+// ROUTE UNTUK NOMOR SURAT
+    // diakses oleh admin, superadmin, admin departemen, dan Kepala departemen 
+    $routes->get('/nomor-surat', 'NomorSurat::index', ['filter' => 'adminSuperadminAdminDepartemenDanKadepFilter' ]);
+    $routes->get('/nomor-surat/tambah', 'NomorSurat::tambah', ['filter' => 'adminSuperadminAdminDepartemenDanKadepFilter']);
+
+// AKHIR DARI ROUTE UNTUK NOMOR SURAT
 

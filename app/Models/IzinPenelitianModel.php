@@ -11,6 +11,7 @@ class IzinPenelitianModel extends Model
 
     protected $useTimestamps = true;
     protected $allowedFields = [
+        'sip_id',
         'uuid',
         'user_pengajuan',
         'nama_pengajuan',
@@ -43,14 +44,41 @@ class IzinPenelitianModel extends Model
         return $query->getResultArray();
     }
 
-       public function simpan($data = null)
+       public function simpan($data = null, $nama = null)
     {
         date_default_timezone_set('ASIA/JAKARTA');
         $data['created_at'] = date('Y-m-d H:i:s');
         $builder = $this->db->table('surat_izin_penelitian');
         $builder->set('uuid', 'UUID()', FALSE);
         $builder->insert($data);
+
+        $insert_id = $this->db->insertID();
+        $builderdua = $this->db->table('file_syarat_surat_izin_penelitian');
+        $file_upload = array();
+        foreach ($nama as $nm) {
+            $file_uploaddua = array(
+                'sip_id' => $insert_id,
+                'persyaratan_id' => $nm['persyaratan_id'],
+                'judul' => $nm['judul'],
+                'judul_alias' => $nm['judul_alias'],
+                'nama_file' => $nm['nama_file']
+            );
+            array_push($file_upload, $file_uploaddua);
+        }
+        if(count($file_upload) != 0){
+            $builderdua->insertBatch($file_upload);
+        }
     }
+
+    // backup jika fitur simpan error setelah di update
+    // public function simpan($data = null)
+    // {
+    //     date_default_timezone_set('ASIA/JAKARTA');
+    //     $data['created_at'] = date('Y-m-d H:i:s');
+    //     $builder = $this->db->table('surat_izin_penelitian');
+    //     $builder->set('uuid', 'UUID()', FALSE);
+    //     $builder->insert($data);
+    // }
 
     public function getAllByAdmin($departemen = null, $level = null) 
     {

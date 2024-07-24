@@ -3,6 +3,8 @@ namespace App\Controllers;
 use App\Models\DepartemenModel;
 use App\Models\IzinPenelitianModel;
 use App\Models\ProfilModel;
+use App\Models\PersyaratanSuratIzinPenelitianModel;
+use App\Models\FilePersyaratanSuratIzinPenelitianModel;
 
 use Endroid\QrCode\Color\Color;
 use Endroid\QrCode\Encoding\Encoding;
@@ -22,12 +24,16 @@ class IzinPenelitian extends BaseController
     protected $departemenModel;
     protected $izinPenelitianModel;
     protected $profilModel;
+    protected $persyaratanSuratIzinPenelitianModel;
+    protected $filePersyaratanSuratIzinPenelitianModel;
     public function __construct()
     {
         helper('form');
         $this->departemenModel = new DepartemenModel();
         $this->izinPenelitianModel = new IzinPenelitianModel();
         $this->profilModel = new ProfilModel();
+        $this->persyaratanSuratIzinPenelitianModel = new PersyaratanSuratIzinPenelitianModel();
+        $this->filePersyaratanSuratIzinPenelitianModel = new FilePersyaratanSuratIzinPenelitianModel();
     }
 
     // fungsi untuk melihat semua pengajuan by userid
@@ -74,13 +80,15 @@ class IzinPenelitian extends BaseController
     {
         $nim = session()->get('username');
         $semuaDepartemen = $this->departemenModel->findAll();
+        $getDepartemen = $this->profilModel->getDepartemen($nim);
+        $persyaratanSuratIzinPenelitian = $this->persyaratanSuratIzinPenelitianModel->getAllPersyaratanSuratIzinPenelitianOlehMahasiswa($getDepartemen['departemen_input']);
         $user = $this->profilModel->getDetail($nim);
         $data = [
             'judul' => 'Pengajuan Surat Izin Penelitian',
             'semua_departemen' => $semuaDepartemen,
-            'user' => $user
+            'user' => $user,
+            'persyaratanSuratIzinPenelitian' => $persyaratanSuratIzinPenelitian
         ];
-
         return view('izin_penelitian/user/form_tambah_izin_penelitian', $data);
     }
 
@@ -89,7 +97,7 @@ class IzinPenelitian extends BaseController
     // POST /izin-penelitian/tambah
     public function simpan()
     {
-        if(!$this->validate([
+        $aturan_dua = [
             'nim_pengajuan' => [
                 'rules' => 'required|numeric',
                 'errors' => [
@@ -151,10 +159,43 @@ class IzinPenelitian extends BaseController
                     'required' => 'Tuliskan objek penelitian',
                 ]
             ],
-        ])){
-            return redirect()->back()->withInput();
+        ];
+        $nim = session()->get('username');
+        $getDepartemen = $this->profilModel->getDepartemen($nim);
+        $persyaratanSuratIzinPenelitian = $this->persyaratanSuratIzinPenelitianModel->getAllPersyaratanSuratIzinPenelitianOlehMahasiswa($getDepartemen['departemen_input']);
+        foreach($persyaratanSuratIzinPenelitian as $pu)
+            {
+                $id = $pu['persyaratan_id'];
+                // $alias = $pu['ps_alias'];
+                $nama = $pu['ps_nama'];
+                $aturan_dua[$id] = array(
+                    'rules' => "uploaded[$id]",
+                    'errors' => [
+                        'uploaded' => "Inputkan File $nama",
+                    ]
+                );
+            }
+            $validate = $this->validate($aturan_dua);
+            if(!$validate) {
+                return redirect()->back()->withInput();
+            }
+            $persyaratan = array();
+        foreach ($persyaratanSuratIzinPenelitian as $pu) {
+            $id = $pu['persyaratan_id'];
+            $alias = $pu['ps_alias'];
+            $namaasli = $pu['ps_nama'];
+            $alias2 = $this->request->getFile($id);
+            echo "Nama file: ".$alias2->getName();
+            $alias2->move('./upload/surat_izin_penelitian');
+            $alias2 = $alias2->getName();
+            $nama = [
+                'persyaratan_id' => $id,
+                'judul' => $namaasli,
+                'judul_alias' => $alias,
+                'nama_file' =>$alias2,
+            ];
+            array_push($persyaratan, $nama);
         }
-       
         $data = array(
             'user_pengajuan' => session()->get('username'),
             'nama_pengajuan' => $this->request->getVar('nama_pengajuan'),
@@ -169,9 +210,95 @@ class IzinPenelitian extends BaseController
             'objek_penelitian' => $this->request->getVar('objek_penelitian'),
             'status' => 1,
         );
-        $this->izinPenelitianModel->simpan($data);
+        $this->izinPenelitianModel->simpan($data, $persyaratan);
         return redirect()->to('/izin-penelitian')->with('sukses','Data berhasil disimpan!');
     }
+
+    // public function simpan()
+    // {
+    //     if(!$this->validate([
+    //         'nim_pengajuan' => [
+    //             'rules' => 'required|numeric',
+    //             'errors' => [
+    //                 'required' => 'Tuliskan NIM',
+    //                 'numeric' => 'NIM hanya boleh angka',
+    //             ]
+    //         ],
+    //         'nama_pengajuan' => [
+    //             'rules' => 'required',
+    //             'errors' => [
+    //                 'required' => 'Tuliskan Nama Lengkap',
+    //             ]
+    //         ],
+    //         'departemen_pengajuan' => [
+    //             'rules' => 'required',
+    //             'errors' => [
+    //                 'required' => 'Pilih Departemen',
+    //             ]
+    //         ],
+    //         'judul' => [
+    //             'rules' => 'required',
+    //             'errors' => [
+    //                 'required' => 'Tuliskan Judul',
+    //             ]
+    //         ],
+    //         'tujuan_surat' => [
+    //             'rules' => 'required',
+    //             'errors' => [
+    //                 'required' => 'Tuliskan kepada siapa surat ditujukan',
+    //             ]
+    //         ],
+    //         'tempat_penelitian' => [
+    //             'rules' => 'required',
+    //             'errors' => [
+    //                 'required' => 'Tuliskan tempat penelitian',
+    //             ]
+    //         ],
+    //         'alamat_tempat_penelitian' => [
+    //             'rules' => 'required',
+    //             'errors' => [
+    //                 'required' => 'Tuliskan alamat tempat',
+    //             ]
+    //         ],
+    //         'tanggal_mulai' => [
+    //             'rules' => 'required',
+    //             'errors' => [
+    //                 'required' => 'Tuliskan tanggal mulai',
+    //             ]
+    //         ],
+    //         'tanggal_selesai' => [
+    //             'rules' => 'required',
+    //             'errors' => [
+    //                 'required' => 'Tuliskan tanggal selesai penelitian',
+    //             ]
+    //         ],
+    //         'objek_penelitian' => [
+    //             'rules' => 'required',
+    //             'errors' => [
+    //                 'required' => 'Tuliskan objek penelitian',
+    //             ]
+    //         ],
+    //     ])){
+    //         return redirect()->back()->withInput();
+    //     }
+       
+    //     $data = array(
+    //         'user_pengajuan' => session()->get('username'),
+    //         'nama_pengajuan' => $this->request->getVar('nama_pengajuan'),
+    //         'nim_pengajuan' => $this->request->getVar('nim_pengajuan'),
+    //         'departemen_pengajuan' => $this->request->getVar('departemen_pengajuan'),
+    //         'judul' => $this->request->getVar('judul'),
+    //         'tujuan_surat' => $this->request->getVar('tujuan_surat'),
+    //         'tempat_penelitian' => $this->request->getVar('tempat_penelitian'),
+    //         'alamat_tempat_penelitian' => $this->request->getVar('alamat_tempat_penelitian'),
+    //         'tanggal_mulai' => $this->request->getVar('tanggal_mulai'),
+    //         'tanggal_selesai' => $this->request->getVar('tanggal_selesai'),
+    //         'objek_penelitian' => $this->request->getVar('objek_penelitian'),
+    //         'status' => 1,
+    //     );
+    //     $this->izinPenelitianModel->simpan($data);
+    //     return redirect()->to('/izin-penelitian')->with('sukses','Data berhasil disimpan!');
+    // }
 
     // fungsi untuk melihat detail pengajuan
     // akses oleh mahasiswa
@@ -180,12 +307,14 @@ class IzinPenelitian extends BaseController
     {
         if($UUIDPenelitian != null) {
             $satu_penelitian = $this->izinPenelitianModel->getDetail($UUIDPenelitian);
+            $filePersyaratan = $this->filePersyaratanSuratIzinPenelitianModel->getDetailPersyaratan($satu_penelitian['sip_id']);
             if (!$satu_penelitian) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             } else {
                 $data = [
                     'judul' => 'Detail Surat Izin Penelitian',
                     'satu_penelitian' => $satu_penelitian,
+                    'filePersyaratan' => $filePersyaratan,
                 ];
                 return view('izin_penelitian/v_detail_izin_penelitian', $data);
             }   
@@ -483,12 +612,14 @@ class IzinPenelitian extends BaseController
     {
         if($UUIDPenelitian != null) {
             $satu_penelitian = $this->izinPenelitianModel->getDetail($UUIDPenelitian);
+            $filePersyaratan = $this->filePersyaratanSuratIzinPenelitianModel->getDetailPersyaratan($satu_penelitian['sip_id']);
             if (!$satu_penelitian) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             } else {
                 $data = [
                     'judul' => 'Detail Verifikasi Izin Penelitian',
                     'satu_penelitian' => $satu_penelitian,
+                    'filePersyaratan' => $filePersyaratan
                 ];
                 return view('izin_penelitian/admin/v_detail_verifikasi_izin_penelitian', $data);
             }   

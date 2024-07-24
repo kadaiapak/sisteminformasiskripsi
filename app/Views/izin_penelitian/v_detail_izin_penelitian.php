@@ -75,6 +75,47 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Berkas Persyaratan Izin Penelitian</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <?php if($filePersyaratan != null) {?>
+                        <div class="x_content">
+                            <ul class="nav nav-tabs bar_tabs" id="myTab" role="tablist">
+                                <?php $n = 1; ?>
+                                <?php foreach ($filePersyaratan as $ps) { ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link <?= $n == 1 ? 'active' : ''; ?>" id="b<?= $ps['persyaratan_id'] ?>-tab" data-toggle="tab" href="#b<?= $ps['persyaratan_id'] ?>" role="tab" aria-controls="b<?= $ps['persyaratan_id'] ?>" aria-selected="true"><?= $ps['judul']; ?></a>
+                                    </li>
+                                    <?php $n++; ?>
+                                <?php } ?>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <?php $no = 1; ?>
+                                <?php foreach ($filePersyaratan as $ps) { ?>
+                                <div class="tab-pane fade <?= $no == 1 ? 'show active' : null; ?> " id="b<?= $ps['persyaratan_id'] ?>" role="tabpanel" aria-labelledby="b<?= $ps['persyaratan_id'] ?>-tab">
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 ">
+                                            <div class="card" style="margin: 0; padding: 0; overflow: hidden; height: 75%;">
+                                                <div class="card-body" >
+                                                    <iframe src="/upload/surat_izin_penelitian/<?= $ps['nama_file']; ?>" id="myframe" frameborder="0" style="width: 100%; height: 500px; display: block;"></iframe>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php $no++ ?>
+                                <?php } ?>
+                                <!-- akhir dari tab untuk pengajuan judul skripsi -->
+                            </div>
+                        </div>
+                        <?php }else { ?>
+                        <h4>Tidak ada Persyaratan</h4>
+                    <?php } ?>
+                </div>
+            </div>
         </div>
     </div>
 </div>

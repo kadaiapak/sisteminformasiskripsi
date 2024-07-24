@@ -52,7 +52,7 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3" for="tujuan_surat">Tujuan Surat <b>(Kepada Yth : ?)</b></label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input required type="text" value="" class="form-control <?= validation_show_error('tujuan_surat') ? 'is-invalid' : null; ?>" id="tujuan_surat" name="tujuan_surat" placeholder="Contoh: Kepala Sekolah SMA N 5 Padang">
+                                    <input required type="text" value="<?= old('tujuan_surat'); ?>" class="form-control <?= validation_show_error('tujuan_surat') ? 'is-invalid' : null; ?>" id="tujuan_surat" name="tujuan_surat" placeholder="Contoh: Kepala Sekolah SMA N 5 Padang">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('tujuan_surat'); ?>
                                     </div>
@@ -61,7 +61,7 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3" for="alamat_tempat_penelitian">Alamat Tujuan Surat <b>(Di ?)</b></label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input required type="text" value="" class="form-control <?= validation_show_error('alamat_tempat_penelitian') ? 'is-invalid' : null; ?>" id="alamat_tempat_penelitian" name="alamat_tempat_penelitian" placeholder="Contoh: Padang">
+                                    <input required type="text" value="<?= old('alamat_tempat_penelitian'); ?>" class="form-control <?= validation_show_error('alamat_tempat_penelitian') ? 'is-invalid' : null; ?>" id="alamat_tempat_penelitian" name="alamat_tempat_penelitian" placeholder="Contoh: Padang">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('alamat_tempat_penelitian'); ?>
                                     </div>
@@ -70,7 +70,7 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3" for="judul">Judul Skripsi</label>
                                 <div class="col-md-9 col-sm-9" >
-                                    <textarea class="form-control <?= validation_show_error('judul') ? 'is-invalid' : null; ?>" rows="5" cols="100%" name="judul" id="judul" placeholder="Isikan judul skripsi"></textarea>
+                                    <textarea class="form-control <?= validation_show_error('judul') ? 'is-invalid' : null; ?>" rows="5" cols="100%" name="judul" id="judul" placeholder="Isikan judul skripsi"><?= old('judul'); ?></textarea>
                                     <div class="invalid-feedback" style="text-align: left;">
                                         <?= validation_show_error('judul'); ?>
                                     </div>
@@ -79,7 +79,7 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3" for="tempat_penelitian">Tempat Penelitian</b></label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input required type="text" value="" class="form-control <?= validation_show_error('tempat_penelitian') ? 'is-invalid' : null; ?>" id="tempat_penelitian" name="tempat_penelitian" placeholder="Tuliskan tempat">
+                                    <input required type="text" value="<?= old('tempat_penelitian'); ?>" class="form-control <?= validation_show_error('tempat_penelitian') ? 'is-invalid' : null; ?>" id="tempat_penelitian" name="tempat_penelitian" placeholder="Tuliskan tempat">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('tempat_penelitian'); ?>
                                     </div>
@@ -112,12 +112,24 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3" for="objek_penelitian">Objek Penelitian</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input required type="text" value="" class="form-control <?= validation_show_error('objek_penelitian') ? 'is-invalid' : null; ?>" id="objek_penelitian" name="objek_penelitian" placeholder="Tuliskan Objek Penelitian">
+                                    <input required type="text" value="<?= old('objek_penelitian'); ?>" class="form-control <?= validation_show_error('objek_penelitian') ? 'is-invalid' : null; ?>" id="objek_penelitian" name="objek_penelitian" placeholder="Tuliskan Objek Penelitian">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('objek_penelitian'); ?>
                                     </div>
                                 </div>
                             </div>
+                            <?php foreach ($persyaratanSuratIzinPenelitian as $ps) { ?>
+                                <div class="form-group row">
+                                 <label class="control-label col-md-3 col-sm-3" for="<?= $ps['persyaratan_id']; ?>"><?= $ps['ps_nama']; ?></label>
+                                 <div class="col-md-9 col-sm-9 ">
+                                     <input class="form-control <?= validation_show_error($ps['persyaratan_id']) ? 'is-invalid' : null; ?>" type="file" id="<?= $ps['persyaratan_id']; ?>" name="<?= $ps['persyaratan_id']; ?>">
+                                     <div class="invalid-feedback" style="text-align: left;">
+                                         <?= validation_show_error($ps['persyaratan_id']); ?>
+                                     </div>
+                                 <small>Tipe file <?= $ps['ps_tipe_file']; ?>/ Ukuran Maksimal <?= $ps['ps_ukuran_file']; ?>Kb </small>
+                                 </div>
+                             </div>
+                            <?php } ?>
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-9 col-sm-9  offset-md-3">

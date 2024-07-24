@@ -80,6 +80,7 @@
                     <ul class="nav child_menu">
                         <li><a href="<?= base_url('/persyaratan-seminar'); ?>">Persyaratan Seminar</a></li>
                         <li><a href="<?= base_url('/persyaratan-ujian'); ?>">Persyaratan Ujian</a></li>
+                        <li><a href="<?= base_url('/persyaratan-surat-izin-penelitian'); ?>">Persyaratan Surat Izin Penelitian</a></li>
                     </ul>
                 </li>
                 <li><a><i class="fa fa-edit"></i> Tambahan <span class="fa fa-chevron-down"></span></a>
@@ -338,6 +339,7 @@
                     <li><a href="<?= base_url('/validasi-instrumen/selesai'); ?>">Validasi Instrumen</a></li>
                 </ul>
             </li>
+            <li><a href="<?= base_url('/nomor-surat'); ?>"><i class="fa fa-home"></i> Daftar Nomor Surat</a></li>
         </ul>
         <!-- akhir dari admin departemen -->
         <?php } ?>
