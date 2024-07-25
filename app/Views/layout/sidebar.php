@@ -61,15 +61,19 @@
                         <li><a href="<?= base_url('/master-judul/pengajuan-bermasalah'); ?>">Pengajuan judul doubel</a></li>
                     </ul>
                 </li>
-                <li><a><i class="fa fa-building"></i> Departemen <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-folder-o"></i> Surat Selesai <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="<?= base_url('/ruangan/pemakaian-ruangan'); ?>">Semua Departemen</a></li>
-                        <li><a href="<?= base_url('/ruangan/penjadwalan-ruangan'); ?>">Data yang tidak konek kode departemen</a></li>
+                        <li><a href="<?= base_url('/izin-observasi-penelitian/selesai'); ?>">Observasi Penelitian</a></li>
+                        <li><a href="<?= base_url('/validator-instrumen/selesai'); ?>">Validator Instrumen</a></li>
+                        <li><a href="<?= base_url('/izin-observasi-matakuliah/selesai'); ?>">Observasi Matakuliah</a></li>
+                        <li><a href="<?= base_url('/izin-penelitian/selesai'); ?>">Izin Penelitian</a></li>
+                        <li><a href="<?= base_url('/validasi-instrumen/selesai'); ?>">Validasi Instrumen</a></li>
                     </ul>
                 </li>
                 <br />
                 <h3>Pengaturan</h3>
                 <br />
+                <li><a href="<?= base_url('/departemen'); ?>"><i class="fa fa-building"></i> Departemen</a></li>
                 <li><a><i class="fa fa-building"></i> Ruangan <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="<?= base_url('/ruangan/pemakaian-ruangan'); ?>">Ruangan Terpakai</a></li>
@@ -85,20 +89,9 @@
                 </li>
                 <li><a><i class="fa fa-edit"></i> Tambahan <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="<?= base_url('/prodi'); ?>">Prodi</a></li>
-                        <li><a href="<?= base_url('/departemen'); ?>">Departemen</a></li>
                         <li><a href="<?= base_url('/ruangan'); ?>">Ruangan</a></li>
                         <li><a href="<?= base_url('/sesi'); ?>">Sesi</a></li>
                         <li><a href="<?= base_url('/persyaratan'); ?>">Persyaratan</a></li>
-                    </ul>
-                </li>
-                <li><a><i class="fa fa-folder-o"></i> Surat Selesai <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                        <li><a href="<?= base_url('/izin-observasi-penelitian/selesai'); ?>">Observasi Penelitian</a></li>
-                        <li><a href="<?= base_url('/validator-instrumen/selesai'); ?>">Validator Instrumen</a></li>
-                        <li><a href="<?= base_url('/izin-observasi-matakuliah/selesai'); ?>">Observasi Matakuliah</a></li>
-                        <li><a href="<?= base_url('/izin-penelitian/selesai'); ?>">Izin Penelitian</a></li>
-                        <li><a href="<?= base_url('/validasi-instrumen/selesai'); ?>">Validasi Instrumen</a></li>
                     </ul>
                 </li>
             </ul>
