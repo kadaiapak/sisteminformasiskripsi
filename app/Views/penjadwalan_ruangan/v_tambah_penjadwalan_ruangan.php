@@ -25,6 +25,7 @@
                                 <div class="col-lg-6 col-md-6 col-sm-9">
                                     <select class="form-control <?= validation_show_error('departemen_id') ? 'is-invalid' : null; ?>" name="departemen_id" id="departemen_id">
                                         <option value="">-- Pilih Departemen --</option>
+                                        <option value="@">Semua Departemen</option>
                                         <?php foreach($departemen as $d): ?>
                                             <option value="<?=$d['departemen_id'];?>"><?= $d['departemen_nama']; ?></option>
                                         <?php endforeach; ?>
@@ -53,6 +54,7 @@
                                 <div class="col-lg-6 col-md-6 col-sm-9">
                                     <select class="form-control <?= validation_show_error('hari_id') ? 'is-invalid' : null; ?>" name="hari_id" id="hari_id">
                                         <option value="">-- Pilih Hari --</option>
+                                        <option value="@">Setiap Hari</option>
                                         <option value="1">Senin</option>
                                         <option value="2">Selasa</option>
                                         <option value="3">Rabu</option>

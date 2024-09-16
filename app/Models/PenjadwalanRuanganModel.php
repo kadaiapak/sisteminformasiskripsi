@@ -19,18 +19,20 @@ class PenjadwalanRuanganModel extends Model
 
     public function getJadwalRuangan()
     {
-        $builder = $this->db->table('departemen');
+        $builder = $this->db->table('penjadwalan_ruangan');
         $builder->select('
         departemen.departemen_id,
         departemen.departemen_nama as nama_departemen,
         seminar_ruangan.ruangan_alias as nama_ruangan,
         hari.hari_nama as hari,
         seminar_sesi.jam_alias as sesi,
-        penjadwalan_ruangan.penjadwalan_ruangan_id
+        penjadwalan_ruangan.penjadwalan_ruangan_id,
+        penjadwalan_ruangan.departemen_id as penjadwalan_ruangan_departemen_id,
+        penjadwalan_ruangan.hari_id as penjadwalan_ruangan_hari_id,
        ');
-        $builder->join('penjadwalan_ruangan', 'departemen.departemen_id = penjadwalan_ruangan.departemen_id');
-        $builder->join('seminar_ruangan', 'penjadwalan_ruangan.ruangan_id = seminar_ruangan.seminar_r_id');
-        $builder->join('hari', 'penjadwalan_ruangan.hari_id = hari.hari_id');
+        $builder->join('departemen', 'departemen.departemen_id = penjadwalan_ruangan.departemen_id', 'left');
+        $builder->join('seminar_ruangan', 'penjadwalan_ruangan.ruangan_id = seminar_ruangan.seminar_r_id', 'left');
+        $builder->join('hari', 'penjadwalan_ruangan.hari_id = hari.hari_id', 'left');
         $builder->join('seminar_sesi', 'penjadwalan_ruangan.sesi_id = seminar_sesi.seminar_s_id', 'left');
         $query = $builder->get();
         return $query->getResultArray(); 

@@ -60,6 +60,27 @@ class RuanganModel extends Model
         $builder->select('penjadwalan_ruangan.*,seminar_ruangan.ruangan_alias,seminar_ruangan.seminar_r_id');
         $builder->join('seminar_ruangan', 'seminar_ruangan.seminar_r_id = penjadwalan_ruangan.ruangan_id');
         $builder->where('penjadwalan_ruangan.departemen_id', $idDepartemen);
+        $builder->orWhere('penjadwalan_ruangan.departemen_id', '@');
+        $result = $builder->get();
+        return $result->getResultArray();
+    }
+
+    public function getRuanganUntukPengajuanSeminar($search = null, $hari = null, $idDepartemen = null)
+    {
+        $builder = $this->db->table('penjadwalan_ruangan');
+        $builder->select('penjadwalan_ruangan.*,seminar_ruangan.ruangan_alias,seminar_ruangan.seminar_r_id');
+        $builder->join('seminar_ruangan', 'seminar_ruangan.seminar_r_id = penjadwalan_ruangan.ruangan_id');
+        $builder->groupStart();
+        $builder->where('penjadwalan_ruangan.departemen_id', $idDepartemen);
+        $builder->orWhere('penjadwalan_ruangan.departemen_id', '@');
+        $builder->groupEnd();
+        $builder->groupStart();
+        $builder->where('penjadwalan_ruangan.hari_id', $hari);
+        $builder->orWhere('penjadwalan_ruangan.hari_id', '@');
+        $builder->groupEnd();
+        if($search != null){
+            $builder->like('seminar_ruangan.ruangan_alias', $search);
+        }
         $result = $builder->get();
         return $result->getResultArray();
     }

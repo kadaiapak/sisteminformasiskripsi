@@ -1,5 +1,7 @@
 <?= $this->extend('layout/template'); ?>
 <?= $this->section('content'); ?>
+<link href="<?= base_url()?>template/src/css/select2.min.css" rel="stylesheet" />
+<script src="<?= base_url()?>template/src/js/select2.min.js"></script>
 <div class="right_col" role="main">
     <div class="">
         <div class="page-title">
@@ -49,9 +51,6 @@
                                 <div class="col-lg-4 col-md-4 col-sm-9 ">
                                     <select class="form-control <?= validation_show_error('smr_hari') ? 'is-invalid' : null; ?>" name="smr_hari" id="smr_hari">
                                         <option value="">-- Pilih Hari --</option>
-                                        <?php foreach ($hari as $hr) { ?>
-                                            <option value="<?= $hr['hari_id']; ?>"><?= $hr['hari_nama']; ?></option>
-                                        <?php } ?>
                                     </select>
                                     <div class="invalid-feedback" style="text-align: left;">
                                         <?= validation_show_error('smr_hari'); ?>
@@ -62,7 +61,7 @@
                                 <label class="control-label col-md-3 col-sm-3" for="smr_tanggal">Tanggal</span>
                                 </label>
                                 <div class="col-md-4 col-sm-4">
-                                    <input id="smr_tanggal" name="smr_tanggal" class="date-picker form-control <?= validation_show_error('smr_tanggal') ? 'is-invalid' : null; ?>" placeholder="dd-mm-yyyy" type="text" type="text" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
+                                    <input id="smr_tanggal" name="smr_tanggal" class="date-picker form-control <?= validation_show_error('smr_tanggal') ? 'is-invalid' : null; ?>" placeholder="dd/mm/yyyy" type="text" type="text" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
                                     <script>
                                         function timeFunctionLong(input) {
                                             setTimeout(function() {
@@ -76,6 +75,17 @@
                                 </div>
 							</div>
                             <div class="form-group row">
+                                <label class="control-label col-lg-3 col-md-3 col-sm-3" for="smr_ruangan">Ruangan</label>
+                                <div class="col-lg-4 col-md-4 col-sm-9">
+                                    <select class="form-control" id="smr_ruangan" name="smr_ruangan">
+                                        <option value="">--Pilih Ruangan--</option>
+                                    </select>
+                                    <div class="invalid-feedback" style="text-align: left;">
+                                        <?= validation_show_error('smr_ruangan'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="control-label col-lg-3 col-md-3 col-sm-3" for="smr_sesi">Sesi</label>
                                 <div class="col-lg-4 col-md-4 col-sm-9">
                                     <select class="form-control <?= validation_show_error('smr_sesi') ? 'is-invalid' : null; ?>" name="smr_sesi" id="smr_sesi">
@@ -88,107 +98,7 @@
                                         <?= validation_show_error('smr_sesi'); ?>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="control-label col-lg-3 col-md-3 col-sm-3" for="smr_ruangan">Ruangan</label>
-                                <div class="col-lg-4 col-md-4 col-sm-9">
-                                    <select class="form-control <?= validation_show_error('smr_ruangan') ? 'is-invalid' : null; ?>" name="smr_ruangan" id="smr_ruangan">
-                                        <option value="">-- Pilih Ruangan --</option>
-                                        <?php foreach($ruangan as $r): ?>
-                                            <option value="<?=$r['seminar_r_id'];?>"><?= $r['ruangan_alias']; ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <div class="invalid-feedback" style="text-align: left;">
-                                        <?= validation_show_error('smr_ruangan'); ?>
-                                    </div>
-                                </div>
-                                <!-- cek ketersediaan ruangan -->
-                                <div class="col-md-3 col-sm-3">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-xl">Klik untuk Cek Ruangan Terpakai</button>
-                                    <div class="modal fade bs-example-modal-xl" tabindex="-1" role="dialog" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title" id="myModalLabel">Daftar Ruangan yang Terpakai</h4>
-                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                <?php
-                                                    $db = db_connect();
-                                                    $query = "SELECT `seminar`.`smr_tanggal`, `seminar`.`smr_nim_m`,`seminar`.`smr_ruangan`,`seminar`.`created_at`,`seminar_sesi`.`jam_alias`,`seminar`.`smr_status` FROM `seminar` JOIN `seminar_sesi` ON `seminar_sesi`.`seminar_s_id` = `seminar`.`smr_sesi` ORDER BY `smr_id` ASC";
-                                                    $semua_seminar= $db->query($query)->getResultArray();
-                                                    ?>
-                                                    <?php
-                                                    $query = "SELECT `seminar_ruangan`.`seminar_r_id`, `seminar_ruangan`.`ruangan_alias`,`seminar_ruangan`.`ruangan_keterangan`,`seminar_ruangan`.`ruangan_status` FROM `seminar_ruangan` ORDER BY `seminar_r_id` ASC";
-                                                    $semua_ruangan = $db->query($query)->getResultArray();
-                                                    ?>
-                                                    <div class="row">
-                                                    <?php foreach ($semua_ruangan as $sr) { ?>
-                                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                                            <div class="x_panel">
-                                                                <div class="x_title">
-                                                                    <h2 style="display: flex; justify-content: center;"><?= $sr['ruangan_alias']; ?> <?= $sr['ruangan_status'] == 1 ? "<span class='badge badge-success ml-2'>Aktif</span>" : ($sr['ruangan_status'] == 0 ? "<span class='badge badge-danger ml-2'>Tidak Aktif</span>" : null) ; ?></h2>
-                                                                    <div class="clearfix"></div>
-                                                                </div>
-                                                                <div class="x_content">
-                                                                    <div class="row">
-                                                                        <div class="col-md-12">
-                                                                            <div class="card-box table-responsive">
-                                                                                <table class="table table-striped jambo_table bulk_action">
-                                                                                    <thead>
-                                                                                        <tr class="headings">
-                                                                                            <th class="column-title">Hari/Tanggal</th>
-                                                                                            <th class="column-title"><span class="nobr">Sesi</span>
-                                                                                            <th class="column-title"><span class="nobr">Tanggal Pengajuan</span>
-                                                                                            <th class="column-title"><span class="nobr">Status</span>
-                                                                                            </th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        <?php 
-                                                                                        $tanggal_sekarang = date('d-m-Y');
-                                                                                        $tanggal_sekarang_format = new DateTime($tanggal_sekarang);
-                                                                                        $tanggal_akhir =  date('d-m-Y', strtotime($tanggal_sekarang.'7days'));	
-                                                                                        $tanggal_akhir_format = new DateTime($tanggal_akhir);
-                                                                                        $interval = DateInterval::createFromDateString('1 day');
-                                                                                        $periode = new DatePeriod($tanggal_sekarang_format, $interval, $tanggal_akhir_format);
-                                                                                        foreach($periode as $pd){ ?>
-                                                                                            <?php foreach($semua_seminar as $sse) {?>
-                                                                                                <?php if($sse['smr_tanggal'] == $pd->format('Y-m-d') && $sse['smr_ruangan'] == $sr['seminar_r_id'] ) { ?>
-                                                                                                    <tr>
-                                                                                                        <td><?= $pd->format('d-m-Y'); ?></td>
-                                                                                                        <td><?= $sse['jam_alias']; ?></td>
-                                                                                                        <td><?= date('d-m-Y H:i:s', strtotime($sse['created_at'])) ; ?></td>
-                                                                                                        <?php if($sse['smr_status'] == 1) { ?>
-                                                                                                        <td class="badge badge-warning">Pengajuan</td>
-                                                                                                        <?php }elseif($sse['smr_status'] == 2 || $sse['smr_status'] == 3) {?>
-                                                                                                        <td class="badge badge-success">Terpakai</td>
-                                                                                                        <?php } ?>
-                                                                                                    </tr>
-                                                                                                <?php } ?>
-                                                                                            <?php } ?>
-                                                                                        <?php } ?>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    <?php } ?>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- akhir dari cek ketersediaan ruangan -->
-                            </div>
+                            </div>            
                             <?php foreach ($persyaratan_seminar as $ps) { ?>
                                  <div class="form-group row">
                                  <label class="control-label col-md-3 col-sm-3" for="<?= $ps['persyaratan_id']; ?>"><?= $ps['ps_nama']; ?></label>
@@ -214,12 +124,58 @@
         </div>
     </div>
 </div>
-<script>
-   $(document).ready(function() {
-    $('#nama_pembimbing').select2();
-});
-$(document).ready(function() {
-    $('#nama_dosen_pa').select2();
-});
-</script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // Inisialisasi Select2 untuk kategori
+            $('#smr_hari').select2({
+                placeholder: 'Pilih hari',
+                ajax: {
+                    url: '<?= site_url('seminar/getHari') ?>', // URL untuk mengambil data kategori
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function (data) {
+                        return {
+                            results: data
+                        };
+                    },
+                    cache: true
+                }
+            });
+
+            // Event listener ketika kategori dipilih
+            $('#smr_hari').on('change', function() {
+                var hari = $(this).val(); // Ambil ID kategori
+
+                if (hari) {
+                    // Aktifkan dropdown produk dan load produk yang sesuai dengan kategori
+                    $('#smr_ruangan').prop('disabled', false);
+
+                    // Inisialisasi Select2 untuk produk
+                    $('#smr_ruangan').select2({
+                        placeholder: 'Pilih Ruangan',
+                        ajax: {
+                            url: '<?= site_url('seminar/getRuangan') ?>', // URL untuk mengambil produk
+                            dataType: 'json',
+                            delay: 250,
+                            data: function (params) {
+                                return {
+                                    hari: hari, // Kirimkan ID kategori ke server
+                                    search : params.term
+                                };
+                            },
+                            processResults: function (data) {
+                                return {
+                                    results: data
+                                };
+                            },
+                            cache: true
+                        }
+                    });
+                } else {
+                    // Disable dropdown produk jika tidak ada kategori yang dipilih
+                    $('#smr_ruangan').prop('disabled', true);
+                }
+            });
+        });
+    </script>
 <?= $this->endSection(); ?>

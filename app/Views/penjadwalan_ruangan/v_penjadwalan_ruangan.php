@@ -54,10 +54,10 @@
 											<?php foreach($penjadwalan_ruangan as $pr) { ?>
 												<tr>
 													<td><?= $nomor; ?></td>
-													<td><?= $pr['nama_departemen']; ?></td>
+													<td><?= $pr['penjadwalan_ruangan_departemen_id'] == '@' ? 'Semua Departemen' : $pr['nama_departemen']; ?> </td>
 													<td><?= $pr['nama_ruangan']; ?></td>
-													<td><?= $pr['hari']; ?></td>
-													<td><?= $pr['sesi'] == null && $pr['hari'] != null ? 'Semua Sesi' : $pr['sesi']; ?></td>
+													<td><?= $pr['penjadwalan_ruangan_hari_id'] == '@' ? 'Setiap Hari' : $pr['hari']; ?></td>
+													<td><?= $pr['sesi'] == null ? 'Semua Sesi' : $pr['sesi']; ?></td>
 													<td><a href="<?= base_url('ruangan/penjadwalan-ruangan/edit/'.$pr['penjadwalan_ruangan_id']); ?>" class="btn btn-info btn-sm"><i class="fa fa-edit" style="margin-right: 5px;"></i>Ubah</a>
 													<a href="" class="btn btn-danger btn-sm"><i class="fa fa-trash" style="margin-right: 5px;"></i>Hapus</a></td>
 												</tr>

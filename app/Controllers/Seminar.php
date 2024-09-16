@@ -89,7 +89,6 @@ class Seminar extends BaseController
 
     public function tambah()
     {
-      
         $UUIDSkripsi = session()->get('UUIDSkripsi');
         $nim = session()->get('username');
         $nama = session()->get('nama_asli');
@@ -99,7 +98,7 @@ class Seminar extends BaseController
         $sesi = $this->sesiModel->findAll();
         $ruangan = $this->ruanganModel->getRuanganDepartemen($getDepartemen);
         $hari = $this->hariModel->getHariDepartemen($getDepartemen);
-        $data = [
+            $data = [
             'judul' => 'Seminar Proposal',
             'hari' => $hari,
             'nim' => $nim,
@@ -123,15 +122,16 @@ class Seminar extends BaseController
                         ]
                 ],
             'smr_hari' => [
-                        'rules' => 'required',
+                        'rules' => 'required|cek_hari[smr_hari, smr_tanggal]',
                         'errors' => [
-                            'required' => 'Pilih hari seminar'
+                            'required' => 'Pilih hari seminar',
+                            'cek_hari' => 'Hari dan tanggal yang dipilih tidak sesuai'
                         ]
                     ],
             'smr_tanggal' => [
                         'rules' => 'required',
                         'errors' => [
-                            'required' => 'Pilih tanggal seminar'
+                            'required' => 'Pilih tanggal seminar',
                         ]
                     ],
             'smr_sesi' => [
@@ -147,6 +147,7 @@ class Seminar extends BaseController
                     ]
                 ],
             ];
+
         $nim = session()->get('username');
         $getDepartemen = $this->profilModel->getDepartemen($nim);
         $persyaratanSeminar = $this->persyaratanSeminarModel->getAllPersyaratanSeminarOlehMahasiswa($getDepartemen['departemen_input']);
@@ -203,6 +204,53 @@ class Seminar extends BaseController
         $this->seminarModel->simpanSeminar($data, $persyaratan);
         $this->mahasiswaStatusSkripsiModel->where('nim', $this->request->getVar('smr_nim_m'))->set($dataStatus)->update();
         return redirect()->to('/skripsi')->with('sukses','Data berhasil disimpan!');
+    }
+
+    // digunakan oleh fitur select2 pada saat menambahkan seminar
+    // untuk memilih hari seminar secara dinamis
+    public function getHari ()
+    {
+        $hari = $this->hariModel->findAll();
+
+        // Menyusun data untuk response ke Select2
+        $data = [];
+        foreach ($hari as $h) {
+            $data[] = [
+                'id' => $h['hari_id'],
+                'text' => $h['hari_nama']
+            ];
+        }
+
+        return $this->response->setJSON($data);
+    }
+
+    public function getRuangan()
+    {  
+        $nim = session()->get('username');
+        $getDepartemen = $this->profilModel->getDepartemen($nim);
+        $hari = $this->request->getVar('hari');
+        // Ambil parameter query dari Select2
+        $search = $this->request->getVar('search');
+
+        // Query untuk mendapatkan produk berdasarkan pencarian
+        if ($search) {
+            // $products = $productModel->like('name', $search)->findAll();
+            // $products = $this->ruanganModel->getAllRuangan($search);
+            $ruangan = $this->ruanganModel->getRuanganUntukPengajuanSeminar($search, $hari, $getDepartemen);
+        } else {
+            $ruangan = $this->ruanganModel->getRuanganUntukPengajuanSeminar(null, $hari, $getDepartemen);
+        }
+        // Menyusun data untuk response ke Select2
+        $data = [];
+        foreach ($ruangan as $r) {
+            $data[] = [
+                'id' => $r['ruangan_id'],
+                'text' => $r['ruangan_alias']
+            ];
+        }
+
+        // Mengirimkan response JSON
+        return $this->response->setJSON($data);
     }
 
     public function mengikuti_seminar()

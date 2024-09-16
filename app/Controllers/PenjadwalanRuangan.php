@@ -24,9 +24,9 @@ class PenjadwalanRuangan extends BaseController
 
     public function index()
     {
-         $penjadwalan_ruangan = $this->penjadwalanRuanganModel->getJadwalRuangan();
+        $penjadwalan_ruangan = $this->penjadwalanRuanganModel->getJadwalRuangan();
         $data = [
-            'judul' => 'Persyaratan',
+            'judul' => 'Penjadwalan Ruangan',
             'penjadwalan_ruangan' => $penjadwalan_ruangan,
         ];
         return view('penjadwalan_ruangan/v_penjadwalan_ruangan', $data);

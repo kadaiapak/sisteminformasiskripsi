@@ -178,8 +178,8 @@ $routes->post('/auth/mahasiswa/proses', 'Auth::login_mahasiswa_proses');
     $routes->post('/seminar/(:any)/verifikasi_kadep', 'Seminar::verifikasi_kadep/$1', ['filter' => 'kadepFilter']);
     // routes untuk print surat oleh mahasiswa mahasiswa
     $routes->get('/seminar/print-surat/(:any)', 'Seminar::print_surat/$1');
-
-
+    $routes->get('/seminar/getRuangan', 'Seminar::getRuangan');
+    $routes->get('/seminar/getHari', 'Seminar::getHari');
 
 // akhir dari route untuk seminar proposal
 
