@@ -38,7 +38,7 @@
 									<!--  -->
 									<a href="<?= base_url('ruangan/penjadwalan-ruangan/tambah'); ?>" class="btn btn-success btn-sm"><i class="fa fa-plus-square" style="margin-right: 5px;"></i>Tambah</a>
 									<hr>
-									<table class="table table-bordered">
+									<table id="datatable" class="table table-striped table-bordered" style="width:100%">
 										<thead>
 											<tr class="headings">
 												<th class="column-title">No </th>
