@@ -305,8 +305,11 @@ $routes->post('/auth/mahasiswa/proses', 'Auth::login_mahasiswa_proses');
     $routes->get('/ruangan/penjadwalan-ruangan/edit/(:any)', 'PenjadwalanRuangan::edit/$1', ['filter' => 'adminDanSuperAdminFilter']);
     // bisa di akses oleh admin dan super admin
     $routes->get('/ruangan/penjadwalan-ruangan/tambah', 'PenjadwalanRuangan::tambah', ['filter' => 'adminDanSuperAdminFilter']);
-     // bisa di akses oleh admin dan super admin
-     $routes->post('/ruangan/penjadwalan-ruangan/simpan', 'PenjadwalanRuangan::simpan', ['filter' => 'adminDanSuperAdminFilter']);
+    // bisa di akses oleh admin dan super admin
+    $routes->post('/ruangan/penjadwalan-ruangan/simpan', 'PenjadwalanRuangan::simpan', ['filter' => 'adminDanSuperAdminFilter']);
+    // bisa di akses oleh admin dan super admin
+    $routes->delete('/ruangan/penjadwalan-ruangan/hapus/(:num)', 'PenjadwalanRuangan::hapus/$1', ['filter' => 'adminDanSuperAdminFilter']);
+
 // AKHIR ROUTES RUANGAN
 
 // ROUTES UNTUK LIST RUANGAN TERPAKAI

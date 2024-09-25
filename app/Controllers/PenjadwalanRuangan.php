@@ -158,6 +158,15 @@ class PenjadwalanRuangan extends BaseController
         return redirect()->to('/ruangan/penjadwalan-ruangan')->with('sukses','Data berhasil disimpan!');
     }
 
+    public function hapus($id)
+    {
+        $where = array(
+            'penjadwalan_ruangan_id' => $id,
+        );
+        $this->penjadwalanRuanganModel->delete($where);
+        return redirect()->to('/ruangan/penjadwalan-ruangan/')->with('sukses','Data berhasil dihapus!');
+    }
+
     // public function penjadwalan_ruangan()
     // {
     // $penjadwalan_ruangan = $this->penjadwalanRuanganModel->getJadwalRuangan();

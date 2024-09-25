@@ -59,7 +59,11 @@
 													<td><?= $pr['penjadwalan_ruangan_hari_id'] == '@' ? 'Setiap Hari' : $pr['hari']; ?></td>
 													<td><?= $pr['sesi'] == null ? 'Semua Sesi' : $pr['sesi']; ?></td>
 													<td><a href="<?= base_url('ruangan/penjadwalan-ruangan/edit/'.$pr['penjadwalan_ruangan_id']); ?>" class="btn btn-info btn-sm"><i class="fa fa-edit" style="margin-right: 5px;"></i>Ubah</a>
-													<a href="" class="btn btn-danger btn-sm"><i class="fa fa-trash" style="margin-right: 5px;"></i>Hapus</a></td>
+													<form class="d-inline" method="post" action="<?= base_url('ruangan/penjadwalan-ruangan/hapus/'.$pr['penjadwalan_ruangan_id']); ?>">
+													<?= csrf_field(); ?>
+														<input type="hidden" name="_method" value="DELETE">
+														<button type="submit" class="btn btn-danger btn-md" onclick="return confirm('apakah yakin dihapus?')"><i class="fa fa-trash-o" style="margin-right: 5px;"></i>Hapus</button>
+													</form>
 												</tr>
 												<?php $nomor++ ?>
 											<?php } ?>
