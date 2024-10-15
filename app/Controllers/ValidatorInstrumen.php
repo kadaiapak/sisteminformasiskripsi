@@ -45,7 +45,7 @@ class ValidatorInstrumen extends BaseController
         return view('validator_instrumen/v_validator_instrumen', $data);
     }
 
-   // fungsi untuk melihat semua surat validator instrumen yang sudah disetujui
+    // fungsi untuk melihat semua surat validator instrumen yang sudah disetujui
     // akses oleh admin departemen
     // GET /validator-instrumen/selesai
     public function selesai()
@@ -85,10 +85,9 @@ class ValidatorInstrumen extends BaseController
                 ]
             ],
             'nama_pengajuan' => [
-                'rules' => 'required|alpha_space',
+                'rules' => 'required',
                 'errors' => [
                     'required' => 'Tuliskan Nama Lengkap',
-                    'alpha_space' => 'Nama hanya boleh huruf dan spasi',
                 ]
             ],
             'departemen_pengajuan' => [

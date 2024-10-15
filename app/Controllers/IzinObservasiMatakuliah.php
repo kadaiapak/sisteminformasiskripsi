@@ -101,10 +101,9 @@ class IzinObservasiMatakuliah extends BaseController
                 ]
             ],
             'nama_pengajuan' => [
-                'rules' => 'required|alpha_space',
+                'rules' => 'required',
                 'errors' => [
                     'required' => 'Tuliskan Nama Lengkap',
-                    'alpha_space' => 'Nama hanya boleh huruf dan spasi',
                 ]
             ],
             'jenis_kelamin' => [
