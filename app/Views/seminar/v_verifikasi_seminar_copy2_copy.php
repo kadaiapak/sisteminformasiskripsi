@@ -225,9 +225,21 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
+                                                <label class="control-label col-lg-12 col-md-12 col-sm-12" for="smr_ganti_hari">Hari</label>
+                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                    <select class="form-control <?= validation_show_error('smr_ganti_hari') ? 'is-invalid' : null; ?>" name="smr_ganti_hari" id="smr_ganti_hari">
+                                                        <option value="">-- Pilih Hari --</option>
+                                                    </select>
+                                                    <div class="invalid-feedback" style="text-align: left;">
+                                                        <?= validation_show_error('smr_ganti_hari'); ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
                                                 <label class="control-label col-lg-12 col-md-12 col-sm-12" for="smr_ruangan">Ruangan</label>
                                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                                    <select class="form-control select2" id="smr_ruangan" name="smr_ruangan">
+                                                    <select class="form-control" id="smr_ruangan" name="smr_ruangan">
                                                         <option value="">--Pilih Ruangan--</option>
                                                     </select>
                                                     <div class="invalid-feedback" style="text-align: left;">
@@ -238,14 +250,17 @@
                                             <div class="form-group row">
                                                 <label class="control-label col-lg-12 col-md-12 col-sm-12" for="smr_sesi">Sesi</label>
                                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                                    <select class="form-control select2" id="smr_sesi" name="smr_sesi">
-                                                        <option value="">--Pilih Sesi--</option>
+                                                    <select class="form-control <?= validation_show_error('smr_sesi') ? 'is-invalid' : null; ?>" name="smr_sesi" id="smr_sesi">
+                                                        <option value="">-- Pilih Sesi --</option>
+                                                        <?php foreach($sesi as $s): ?>
+                                                            <option value="<?=$s['seminar_s_id'];?>"><?= $s['jam_alias']; ?></option>
+                                                        <?php endforeach; ?>
                                                     </select>
                                                     <div class="invalid-feedback" style="text-align: left;">
                                                         <?= validation_show_error('smr_sesi'); ?>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>          
                                         </div>
                                         <div class="modal-footer" style="border: none; justify-content: center;">
                                             <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fa fa-chevron-circle-left" style="margin-right: 5px;"></i> Batal</button>
@@ -394,7 +409,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $('#datepicker').datepicker({
-      format: 'dd-mm-yyyy',    // Format tanggal
+      format: 'dd/mm/yyyy',    // Format tanggal
       language: 'id',          // Bahasa Indonesia
       autoclose: true,         // Tutup otomatis setelah memilih tanggal
       todayHighlight: true     // Sorot tanggal hari ini
@@ -403,17 +418,32 @@
 </script>
 <script type="text/javascript">
         $(document).ready(function() {
-            // Event listener ketika kategori dipilih
-            $('#smr_ruangan').prop('disabled', true);
-            $('#smr_sesi').prop('disabled', true);
-            // disable properties yang tidak dipakai
+            // Inisialisasi Select2 untuk kategori
+            $('#smr_ganti_hari').select2({
+                placeholder: 'Pilih hari',
+                ajax: {
+                    url: '<?= site_url('seminar/getHari') ?>', // URL untuk mengambil data kategori
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function (data) {
+                        return {
+                            results: data
+                        };
+                    },
+                    cache: true
+                }
+            });
+            
 
+            // Event listener ketika kategori dipilih
             $('#smr_ganti_tanggal').on('change', function() {
-                var tanggal = $('#smr_ganti_tanggal').val(); // Ambil ID kategori
+                var hari = $(this).val(); // Ambil ID kategori
+                var tanggal = $('#smr_ganti_tanggal').val();
                 if (tanggal) {
                     // Aktifkan dropdown produk dan load produk yang sesuai dengan kategori
                     $('#smr_ruangan').prop('disabled', false);
-                    // Inisialisasi Select2 untuk ruangan
+
+                    // Inisialisasi Select2 untuk produk
                     $('#smr_ruangan').select2({
                         placeholder: 'Pilih Ruangan',
                         ajax: {
@@ -422,6 +452,7 @@
                             delay: 250,
                             data: function (params) {
                                 return {
+                                    hari: hari,
                                     tanggal: tanggal, // Kirimkan ID kategori ke server
                                     search : params.term
                                 };
@@ -437,43 +468,7 @@
                 } else {
                     // Disable dropdown produk jika tidak ada kategori yang dipilih
                     $('#smr_ruangan').prop('disabled', true);
-                    $('#smr_sesi').prop('disabled', true);
                 }
-            });
-
-            $('#smr_ruangan').on('change', function() {
-                var ruangan = $('#smr_ruangan').val(); // Ambil ID kategori
-                var tanggal = $('#smr_ganti_tanggal').val();
-                if (ruangan) {
-                    // Aktifkan dropdown produk dan load produk yang sesuai dengan kategori
-                    $('#smr_sesi').prop('disabled', false);
-
-                    // Inisialisasi Select2 untuk produk
-                    $('#smr_sesi').select2({
-                        placeholder: 'Pilih Sesi',
-                        ajax: {
-                            url: '<?= site_url('seminar/getSesiBisaDipakai') ?>', // URL untuk mengambil produk
-                            dataType: 'json',
-                            delay: 250,
-                            data: function (params) {
-                                return {
-                                    ruangan: ruangan, 
-                                    tanggal: tanggal,// Kirimkan ID kategori ke server
-                                };
-                            },
-                            processResults: function (data) {
-                                return {
-                                    results: data
-                                };
-                            },
-                            cache: true
-                        }
-                    });
-                } else {
-                    // Disable dropdown produk jika tidak ada kategori yang dipilih
-                    $('#smr_sesi').prop('disabled', true);
-                }
-
             });
         });
     </script>

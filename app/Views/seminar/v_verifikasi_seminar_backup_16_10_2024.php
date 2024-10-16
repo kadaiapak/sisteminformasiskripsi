@@ -227,7 +227,7 @@
                                             <div class="form-group row">
                                                 <label class="control-label col-lg-12 col-md-12 col-sm-12" for="smr_ruangan">Ruangan</label>
                                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                                    <select class="form-control select2" id="smr_ruangan" name="smr_ruangan">
+                                                    <select class="form-control" id="smr_ruangan" name="smr_ruangan">
                                                         <option value="">--Pilih Ruangan--</option>
                                                     </select>
                                                     <div class="invalid-feedback" style="text-align: left;">
@@ -238,7 +238,7 @@
                                             <div class="form-group row">
                                                 <label class="control-label col-lg-12 col-md-12 col-sm-12" for="smr_sesi">Sesi</label>
                                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                                    <select class="form-control select2" id="smr_sesi" name="smr_sesi">
+                                                    <select class="form-control" id="smr_sesi" name="smr_sesi">
                                                         <option value="">--Pilih Sesi--</option>
                                                     </select>
                                                     <div class="invalid-feedback" style="text-align: left;">
@@ -404,16 +404,13 @@
 <script type="text/javascript">
         $(document).ready(function() {
             // Event listener ketika kategori dipilih
-            $('#smr_ruangan').prop('disabled', true);
-            $('#smr_sesi').prop('disabled', true);
-            // disable properties yang tidak dipakai
-
             $('#smr_ganti_tanggal').on('change', function() {
-                var tanggal = $('#smr_ganti_tanggal').val(); // Ambil ID kategori
+                var tanggal = $(this).val(); // Ambil ID kategori
                 if (tanggal) {
                     // Aktifkan dropdown produk dan load produk yang sesuai dengan kategori
                     $('#smr_ruangan').prop('disabled', false);
-                    // Inisialisasi Select2 untuk ruangan
+
+                    // Inisialisasi Select2 untuk produk
                     $('#smr_ruangan').select2({
                         placeholder: 'Pilih Ruangan',
                         ajax: {
@@ -437,13 +434,13 @@
                 } else {
                     // Disable dropdown produk jika tidak ada kategori yang dipilih
                     $('#smr_ruangan').prop('disabled', true);
-                    $('#smr_sesi').prop('disabled', true);
                 }
+
             });
 
             $('#smr_ruangan').on('change', function() {
                 var ruangan = $('#smr_ruangan').val(); // Ambil ID kategori
-                var tanggal = $('#smr_ganti_tanggal').val();
+                var tanggal = $('#smr_tanggal').val
                 if (ruangan) {
                     // Aktifkan dropdown produk dan load produk yang sesuai dengan kategori
                     $('#smr_sesi').prop('disabled', false);

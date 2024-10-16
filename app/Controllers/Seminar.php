@@ -28,6 +28,8 @@ use Endroid\QrCode\Writer\ValidationException;
 
 use Dompdf\Dompdf;
 use Dompdf\Options;
+
+use DateTime;
 class Seminar extends BaseController
 {
     protected $skripsiModel;
@@ -211,7 +213,6 @@ class Seminar extends BaseController
     public function getHari ()
     {
         $hari = $this->hariModel->findAll();
-
         // Menyusun data untuk response ke Select2
         $data = [];
         foreach ($hari as $h) {
@@ -220,7 +221,6 @@ class Seminar extends BaseController
                 'text' => $h['hari_nama']
             ];
         }
-
         return $this->response->setJSON($data);
     }
 
@@ -251,6 +251,107 @@ class Seminar extends BaseController
 
         // Mengirimkan response JSON
         return $this->response->setJSON($data);
+    }
+
+    public function getRuanganBisaDipakai()
+    {  
+        $departemen = session()->get('departemen');
+        $tanggal = $this->request->getVar('tanggal');
+        $namaHari = date('l', strtotime($tanggal));
+        $idHari = $this->mencariIdHari($namaHari);
+        $formattedDate = $this->convertDateFormat($tanggal);
+
+        // Ambil parameter query dari Select2
+        $search = $this->request->getVar('search');
+        // Query untuk mendapatkan produk berdasarkan pencarian
+        if ($search) {
+            $ruangan = $this->ruanganModel->getRuanganBisaDipakaiUntukPengajuanSeminar($search, $idHari, $departemen, $formattedDate);
+        } else {
+            $ruangan = $this->ruanganModel->getRuanganBisaDipakaiUntukPengajuanSeminar(null, $idHari, $departemen, $formattedDate);
+        }
+
+        // Menyusun data untuk response ke Select2
+        $data = [];
+
+        // echo '<pre>';
+        // print_r($ruangan);
+        // echo '</pre>';
+        // die;
+        foreach ($ruangan as $r) {
+            $data[] = [
+                'id' => $r['seminar_r_id'],
+                'text' => $r['ruangan_alias']
+            ];
+        }
+        // Mengirimkan response JSON
+        return $this->response->setJSON($data);
+    }
+
+    public function getSesiBisaDipakai()
+    {  
+        $departemen = session()->get('departemen');
+        $tanggal = $this->request->getVar('tanggal');
+        $idRuangan = $this->request->getVar('ruangan');
+        // echo '<pre>';
+        // print_r($departemen);
+        // print_r($tanggal);
+        // print_r($ruangan);
+        // echo '</pre>';
+        // die;
+        $namaHari = date('l', strtotime($tanggal));
+        $idHari = $this->mencariIdHari($namaHari);
+        $formattedDate = $this->convertDateFormat($tanggal);
+
+        // Query untuk mendapatkan produk berdasarkan pencarian
+        $sesi = $this->ruanganModel->getSesiBisaDipakaiUntukPengajuanSeminar($idHari, $departemen, $formattedDate, $idRuangan);
+
+        // Menyusun data untuk response ke Select2
+        $data = [];
+
+        foreach ($sesi as $s) {
+            $data[] = [
+                'id' => $s['seminar_s_id'],
+                'text' => $s['jam_alias']
+            ];
+        }
+        // Mengirimkan response JSON
+        return $this->response->setJSON($data);
+    }
+
+    function mencariIdHari($hari){
+        switch ($hari) {
+            case 'Monday':
+                $idHari = '1';
+                break;
+            case 'Tuesday':
+                $idHari = '2';
+                break;
+            case 'Wednesday':
+                $idHari = '3';
+                break;
+            case 'Thursday':
+                $idHari = '4';
+                break;
+            case 'Friday':
+                $idHari = '5';
+                break;
+            case 'Saturday':
+                $idHari = '6';
+                break;
+            case 'Sunday':
+                $idHari = '7';
+                break;
+            default:
+            $idHari = NULL;
+                break;
+        }
+
+        return $idHari;
+    }
+    
+    function convertDateFormat($dateString) {
+        $dateObject = DateTime::createFromFormat('d-m-Y', $dateString);
+        return $dateObject->format('Y-m-d'); // Mengembalikan dalam format yyyy-mm-dd
     }
 
     public function mengikuti_seminar()
@@ -378,15 +479,70 @@ class Seminar extends BaseController
                 $departemen = session()->get('departemen');
                 $level = session()->get('level');
                 $persyaratan = $this->filePersyaratanSeminarModel->getDetailPersyaratan($idSeminar);
+                $sesi = $this->sesiModel->findAll();
+
                 $data = [
-                    'judul' => 'Edit Skripsi',
+                    'judul' => 'Verifikasi Seminar',
                     'satu_seminar' => $satu_seminar,
                     'level' => $level,
                     'dosen' => $this->dosenModel->getAll($departemen),
                     'persyaratan' => $persyaratan,
-                    'idSeminar' => $idSeminar
+                    'idSeminar' => $idSeminar,
+                    'sesi' => $sesi,
                 ];
                 return view('seminar/v_verifikasi_seminar', $data);
+            }   
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    }
+
+    // controller ini digunakan oleh admin untuk mengganti jadwal seminar yang diajukan mahasiswa
+    public function ganti_jadwal_oleh_admin($UUIDSeminar)
+    {
+        if($UUIDSeminar != null) {
+            $satu_seminar = $this->seminarModel->getDetail($UUIDSeminar);
+            if (!$satu_seminar) {
+                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            } else {
+                if(!$this->validate([
+                    'smr_ganti_tanggal' => [
+                                'rules' => 'required',
+                                'errors' => [
+                                    'required' => 'Pilih tanggal seminar',
+                                ]
+                    ],
+                    'smr_sesi' => [
+                        'rules' => 'required',
+                        'errors' => [
+                            'required' => 'Pilih sesi seminar'
+                        ]
+                    ],
+                    'smr_ruangan' => [
+                            'rules' => 'required',
+                            'errors' => [
+                                'required' => 'Pilih ruangan seminar'
+                            ]
+                    ],
+                ])){
+                    session()->setFlashdata('gagal', 'Isikan data penggantian jadwal dengan lengkap');
+                    return redirect()->back()->withInput();
+                }
+
+                $tanggal = $this->request->getVar('smr_ganti_tanggal');
+                $namaHari = date('l', strtotime($tanggal));
+                $idHari = $this->mencariIdHari($namaHari);
+                $formattedDate = $this->convertDateFormat($tanggal);
+
+                $data_seminar = array(
+                    'smr_hari' => $idHari,
+                    'smr_tanggal' => $formattedDate,
+                    'smr_sesi' => $this->request->getVar('smr_sesi'),
+                    'smr_ruangan' => $this->request->getVar('smr_ruangan'),
+                );
+                $idSeminar = $this->request->getVar('idSeminar');
+                $this->seminarModel->where('smr_uuid', $UUIDSeminar)->set($data_seminar)->update();
+                    return redirect()->to('/seminar/verifikasi/'.$UUIDSeminar.'/'.$idSeminar)->with('sukses','Perubahan jadwal dan ruangan seminar berhasil');
             }   
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();

@@ -41,6 +41,7 @@
         <?php endif; ?>
             <form method="POST" action="<?= base_url('/auth/login/proses'); ?>">
             <?= csrf_field(); ?>
+            <h1><?= CodeIgniter\CodeIgniter::CI_VERSION ?>Welcome to CodeIgniter</h1>
             <div>
               <img src="<?=base_url('template/');?>src/img/unpkopsuratm.jpg" alt="logo" width="50" class="shadow-light rounded-circle mb-1 mt-2" >
             </div>

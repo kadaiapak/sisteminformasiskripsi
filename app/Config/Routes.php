@@ -164,6 +164,8 @@ $routes->post('/auth/mahasiswa/proses', 'Auth::login_mahasiswa_proses');
     $routes->get('/seminar/detail-seminar/(:any)', 'Seminar::detail_seminar/$1');
     // bisa di akses oleh admin departemen dan kadep
     $routes->get('/seminar/verifikasi/(:any)/(:num)', 'Seminar::verifikasi/$1/$2', ['filter' => 'adminDepartemenDanKadepFilter' ]);
+    // bisa di akses oleh admin untuk mengganti jadwal seminar yang diajukan oleh mahasiswa
+    $routes->post('/seminar/(:any)/rubah_jadwal_oleh_admin', 'Seminar::ganti_jadwal_oleh_admin/$1', ['filter' => 'adminDepartemenFilter']);
     // bisa di akses oleh admin untuk menolak pengajuan seminar oleh mahasiswa
     $routes->post('/seminar/(:any)/tolak_admin', 'Seminar::tolak_admin/$1', ['filter' => 'adminDepartemenFilter']);
     // bisa di akses oleh admin untuk menyetujui pengajuan seminar oleh mahasiswa
@@ -179,6 +181,8 @@ $routes->post('/auth/mahasiswa/proses', 'Auth::login_mahasiswa_proses');
     // routes untuk print surat oleh mahasiswa mahasiswa
     $routes->get('/seminar/print-surat/(:any)', 'Seminar::print_surat/$1');
     $routes->get('/seminar/getRuangan', 'Seminar::getRuangan');
+    $routes->get('/seminar/getRuanganBisaDipakai', 'Seminar::getRuanganBisaDipakai');
+    $routes->get('/seminar/getSesiBisaDipakai', 'Seminar::getSesiBisaDipakai');
     $routes->get('/seminar/getHari', 'Seminar::getHari');
 
 // akhir dari route untuk seminar proposal

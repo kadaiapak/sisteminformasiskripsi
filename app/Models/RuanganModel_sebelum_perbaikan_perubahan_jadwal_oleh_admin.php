@@ -171,9 +171,66 @@ class RuanganModel extends Model
 
     public function getRuanganBisaDipakaiUntukPengajuanSeminar($search = null, $hari = null, $idDepartemen = null, $tanggal = null)
     {
+        // date_default_timezone_set('Asia/Jakarta');
+        // date($tanggal);
+        // echo '<pre>';
+        // print_r($idDepartemen);
+        // echo '<pre>';
+        // die;
+        // subquery mencari ruangan yang sudah terpakai
+
+        // $subquery = $this->db->table('seminar')
+        // ->select('smr_ruangan, smr_sesi')
+        // ->groupStart()
+        // ->where('smr_status', 3)
+        // ->orWhere('smr_status', 5)
+        // ->groupEnd()
+        // ->where('smr_hari', $hari)
+        // ->where('smr_tanggal', $tanggal)
+        // ->getCompiledSelect();
+
+        // $subquerydua = $this->db->table('seminar');
+
+        // echo '<pre>';
+        // print_r($subquery);
+        // echo '<pre>';
+        // die;    
+
+        // $subquery = $this->db->table('seminar')
+        // ->select('smr_ruangan')
+        // ->groupStart()
+        // ->where('smr_status', 3)
+        // ->orWhere('smr_status', 5)
+        // ->groupEnd()
+        // ->where('smr_hari', $hari)
+        // ->where('smr_tanggal', $tanggal)
+        // ->get();
+
+       
+
+        // $builder = $this->db->table('seminar_ruangan');
+        // $builder->select('seminar_r_id, ruangan_alias');
+        // $builder->join('penjadwalan_ruangan', 'penjadwalan_ruangan.ruangan_id = seminar_ruangan.seminar_r_id');
+        // $builder->groupStart();
+        // $builder->where('penjadwalan_ruangan.departemen_id', $idDepartemen);
+        // $builder->orWhere('penjadwalan_ruangan.departemen_id', '@');
+        // $builder->groupEnd();
+        // $builder->groupStart();
+        // $builder->where('penjadwalan_ruangan.hari_id', $hari);
+        // $builder->orWhere('penjadwalan_ruangan.hari_id', '@');
+        // $builder->groupEnd();
+        // $builder->groupStart();
+        // $builder->where("seminar_ruangan.seminar_r_id NOT IN ($subquery)", null, false);
+        // $builder->groupEnd();
+        // if($search != null){
+        //     $builder->like('seminar_ruangan.ruangan_alias', $search);
+        // }
+        // $result = $builder->get();
+
+
         // Membangun query untuk mendapatkan ruangan dan sesi yang tersedia
         $builder = $this->db->table('seminar_ruangan r');
-        $builder->select('DISTINCT(r.seminar_r_id), r.ruangan_alias');
+        $builder->select('r.seminar_r_id, r.ruangan_alias, s.seminar_s_id, s.jam_alias  , penjadwalan_ruangan.hari_id');
         $builder->join('seminar_sesi s', '1=1'); // Menggabungkan semua ruangan dengan semua sesi
         $builder->join('seminar sm', "sm.smr_ruangan = r.seminar_r_id AND sm.smr_sesi = s.seminar_s_id AND sm.smr_tanggal = '$tanggal' AND (sm.smr_status = 3 OR sm.smr_status = 5)", 'left');
         $builder->join('penjadwalan_ruangan', 'penjadwalan_ruangan.ruangan_id = r.seminar_r_id');
@@ -187,51 +244,49 @@ class RuanganModel extends Model
         $builder->groupEnd();
         $builder->where('sm.smr_id IS NULL');
         $builder->orderBy('ruangan_alias', 'ASC');
-        return $builder->get()->getResultArray();
-    }
 
-    public function getSesiBisaDipakaiUntukPengajuanSeminar($hari = null, $idDepartemen = null, $tanggal = null, $idRuangan = null)
-    {
-        // Membangun query untuk mendapatkan ruangan dan sesi yang tersedia
-        $builder = $this->db->table('seminar_ruangan r');
-        $builder->select('s.seminar_s_id, s.jam_alias');
-        $builder->join('seminar_sesi s', '1=1'); // Menggabungkan semua ruangan dengan semua sesi
-        $builder->join('seminar sm', "sm.smr_ruangan = r.seminar_r_id AND sm.smr_sesi = s.seminar_s_id AND sm.smr_tanggal = '$tanggal' AND (sm.smr_status = 3 OR sm.smr_status = 5)", 'left');
-        $builder->join('penjadwalan_ruangan', 'penjadwalan_ruangan.ruangan_id = r.seminar_r_id');
-        $builder->groupStart();
-        $builder->where('penjadwalan_ruangan.departemen_id', $idDepartemen);
-        $builder->orWhere('penjadwalan_ruangan.departemen_id', '@');
-        $builder->groupEnd();
-        $builder->groupStart();
-        $builder->where('penjadwalan_ruangan.hari_id', $hari);
-        $builder->orWhere('penjadwalan_ruangan.hari_id', '@');
-        $builder->groupEnd();
-        $builder->where('sm.smr_id IS NULL');
-        $builder->where('r.seminar_r_id', $idRuangan);
-        $builder->orderBy('ruangan_alias', 'ASC');
-        return $builder->get()->getResultArray();
-    }
+        echo '<pre>';
+        print_r($builder->get()->getResultArray());
+        echo '</pre>';
+        die;
+        
+        // Subquery untuk memastikan ruangan hanya muncul jika ada sesi yang tersedia
+        $subquery = $this->db->table('seminar_ruangan r2')
+            ->select('r2.seminar_r_id')
+            ->join('seminar_sesi s2', '1=1')
+            ->join('seminar sm2', 'sm2.smr_ruangan = r2.seminar_r_id AND sm2.smr_sesi = s2.seminar_s_id AND sm2.smr_tanggal = ? AND sm2.smr_status = 3', 'left')
+            ->where('sm2.smr_id IS NULL')
+            ->getCompiledSelect();
 
-    // public function getRuanganBisaDipakaiUntukPengajuanSeminar($search = null, $hari = null, $idDepartemen = null, $tanggal = null)
-    // {
-    //     // Membangun query untuk mendapatkan ruangan dan sesi yang tersedia
-    //     $builder = $this->db->table('seminar_ruangan r');
-    //     $builder->select('r.seminar_r_id, r.ruangan_alias, s.seminar_s_id, s.jam_alias  , penjadwalan_ruangan.hari_id');
-    //     $builder->join('seminar_sesi s', '1=1'); // Menggabungkan semua ruangan dengan semua sesi
-    //     $builder->join('seminar sm', "sm.smr_ruangan = r.seminar_r_id AND sm.smr_sesi = s.seminar_s_id AND sm.smr_tanggal = '$tanggal' AND (sm.smr_status = 3 OR sm.smr_status = 5)", 'left');
-    //     $builder->join('penjadwalan_ruangan', 'penjadwalan_ruangan.ruangan_id = r.seminar_r_id');
-    //     $builder->groupStart();
-    //     $builder->where('penjadwalan_ruangan.departemen_id', $idDepartemen);
-    //     $builder->orWhere('penjadwalan_ruangan.departemen_id', '@');
-    //     $builder->groupEnd();
-    //     $builder->groupStart();
-    //     $builder->where('penjadwalan_ruangan.hari_id', $hari);
-    //     $builder->orWhere('penjadwalan_ruangan.hari_id', '@');
-    //     $builder->groupEnd();
-    //     $builder->where('sm.smr_id IS NULL');
-    //     $builder->orderBy('ruangan_alias', 'ASC');
-    //     return $builder->get()->getResultArray();
-    // }
+        $builder->where("r.seminar_r_id IN ($subquery)", [$tanggal, $tanggal]);
+
+        $builder->orderBy('r.ruangan_alias, s.jam_alias');
+     
+        return $builder->get()->getResultArray();
+
+        // $result = $builder->getCompiledSelect();
+        
+
+        // return $result->getResultArray();
+
+        // $builder = $this->db->table('penjadwalan_ruangan');
+        // $builder->select('penjadwalan_ruangan.*,seminar_ruangan.ruangan_alias,seminar_ruangan.seminar_r_id');
+        // $builder->join('seminar_ruangan', 'seminar_ruangan.seminar_r_id = penjadwalan_ruangan.ruangan_id');
+        // $builder->groupStart();
+        // $builder->where('penjadwalan_ruangan.departemen_id', $idDepartemen);
+        // $builder->orWhere('penjadwalan_ruangan.departemen_id', '@');
+        // $builder->groupEnd();
+        // $builder->groupStart();
+        // $builder->where('penjadwalan_ruangan.hari_id', $hari);
+        // $builder->orWhere('penjadwalan_ruangan.hari_id', '@');
+        // $builder->groupEnd(); 
+        // $builder->groupStart();
+        // $builder->where('seminar.smr_ruangan')
+        // if($search != null){
+        //     $builder->like('seminar_ruangan.ruangan_alias', $search);
+        // }
+        // $result = $builder->get();
+    }
 
     public function semuaRuanganTerpakai()
     {
