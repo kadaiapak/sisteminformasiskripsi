@@ -30,11 +30,13 @@ class Filters extends BaseConfig
         'kadepFilter' => \App\Filters\KadepFilter::class,
         'dosenFilter' => \App\Filters\DosenFilter::class,
         'mahasiswaFilter' => \App\Filters\MahasiswaFilter::class,
+        'mahasiswaDanAdminFilter' => \App\Filters\MahasiswaDanAdminFilter::class,
         'superAdminFilter' => \App\Filters\SuperAdminFilter::class,
         'adminDepartemenFilter' => \App\Filters\AdminDepartemenFilter::class,
         'adminDanSuperAdminFilter' => \App\Filters\AdminDanSuperAdminFilter::class,
         'adminDepartemenDanKadepFilter' => \App\Filters\AdminDepartemenDanKadepFilter::class,
         'mahasiswaDanAdminDepartemenFilter' => \App\Filters\MahasiswaDanAdminDepartemenFilter::class,
+        'adminSuperadminAdminDepartemenDanKadepFilter' => \App\Filters\AdminSuperadminAdminDepartemenDanKadepFilter::class,
     ];
 
     /**

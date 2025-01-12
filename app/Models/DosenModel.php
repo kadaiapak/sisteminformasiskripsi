@@ -177,8 +177,9 @@ class DosenModel extends Model
     public function getDetail($nidn = null)
     {
         $builder = $this->db->table('fip_dosen');
-        $builder->select('*');
+        $builder->select('fip_dosen.*, departemen.departemen_nama as nama_departemen');
         $builder->where('nidn', $nidn);
+        $builder->join('departemen', 'fip_dosen.peg_prodi = departemen.departemen_id');
         $query = $builder->get();
         return $query->getRowArray();
     }

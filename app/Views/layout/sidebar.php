@@ -61,6 +61,23 @@
                         <li><a href="<?= base_url('/master-judul/pengajuan-bermasalah'); ?>">Pengajuan judul doubel</a></li>
                     </ul>
                 </li>
+                <li><a><i class="fa fa-file-text-o"></i> Pengajuan Surat <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a>Observasi Matakuliah Fakultas<span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li class="sub_menu">
+                                    <a href="<?= base_url('/izin-observasi-matakuliah-fakultas/semua'); ?>">Surat Masuk</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url('/izin-observasi-matakuliah-fakultas/disetujui'); ?>">Observasi Diterima</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url('/izin-observasi-matakuliah-fakultas/ditolak'); ?>">Observasi Ditolak</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
                 <li><a><i class="fa fa-folder-o"></i> Surat Selesai <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="<?= base_url('/izin-observasi-penelitian/selesai'); ?>">Observasi Penelitian</a></li>
@@ -74,7 +91,7 @@
                 <h3>Pengaturan</h3>
                 <br />
                 <li><a href="<?= base_url('/departemen'); ?>"><i class="fa fa-building"></i> Departemen</a></li>
-                <li><a><i class="fa fa-building"></i> Ruangan <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-home"></i> Ruangan <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="<?= base_url('/ruangan/pemakaian-ruangan'); ?>">Ruangan Terpakai</a></li>
                         <li><a href="<?= base_url('/ruangan/penjadwalan-ruangan'); ?>">Penjadwalan Ruangan</a></li>
@@ -228,6 +245,7 @@
                     <li><a href="<?= base_url('/izin-observasi-matakuliah'); ?>">Izin Observasi Matakuliah</a></li>
                     <li><a href="<?= base_url('/izin-penelitian'); ?>">Izin Penelitian</a></li>
                     <li><a href="<?= base_url('/validasi-instrumen'); ?>">Validasi Instrumen</a></li>
+                    <li><a href="<?= base_url('/izin-observasi-matakuliah-fakultas'); ?>">Observasi Matakuliah Fakultas</a></li>
                 </ul>
             </li>
         </ul>

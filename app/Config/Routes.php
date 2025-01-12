@@ -504,6 +504,66 @@ $routes->post('/auth/mahasiswa/proses', 'Auth::login_mahasiswa_proses');
     $routes->get('/izin-observasi-matakuliah/scan-barcode/(:any)', 'IzinObservasiMatakuliah::scan_barcode/$1');
 
 
+// IZIN OBSERVASI MATAKULIAH FAKULTAS
+$routes->get('/izin-observasi-matakuliah-fakultas', 'IzinObservasiMatakuliahFakultas::index', ['filter' => 'mahasiswaFilter']);
+// bisa di akses oleh admin departemen dan kadep untuk melihat list izin observasi matakuliah yang sudah disetujui dan bisa di print
+$routes->get('/izin-observasi-matakuliah-fakultas/selesai', 'IzinObservasiMatakuliahFakultas::selesai', ['filter' => 'adminDanSuperAdminFilter']);
+// bisa di akses oleh mahasiswa untuk membuat surat validator instrumen
+$routes->get('/izin-observasi-matakuliah-fakultas/tambah', 'IzinObservasiMatakuliahFakultas::tambah', ['filter' => 'mahasiswaFilter']);
+// bisa di akses oleh mahasiswa untuk menyimpan surat validator instrumen
+$routes->post('/izin-observasi-matakuliah-fakultas/simpan', 'IzinObservasiMatakuliahFakultas::simpan', ['filter' => 'mahasiswaFilter']);
+// bisa di akses oleh mahasiswa untuk menampilkan detail pengajuan surat izin observasi matakuliah yang akan di edit
+$routes->get('/izin-observasi-matakuliah-fakultas/edit/(:any)', 'IzinObservasiMatakuliahFakultas::edit/$1', ['filter' => 'mahasiswaFilter']);
+// bisa di akses oleh mahasiswa untuk menampilkan form edit data izin observasi matakuliah
+$routes->get('/izin-observasi-matakuliah-fakultas/edit-pengajuan/(:any)', 'IzinObservasiMatakuliahFakultas::edit_pengajuan/$1', ['filter' => 'mahasiswaFilter']);
+// bisa di akses oleh mahasiswa untuk memperbarui surat validator instrumen
+$routes->post('/izin-observasi-matakuliah-fakultas/edit-pengajuan/ganti-dosen-pembimbing', 'IzinObservasiMatakuliahFakultas::ganti_dosen_pembimbing', ['filter' => 'mahasiswaFilter']);
+
+$routes->post('/izin-observasi-matakuliah-fakultas/simpan-pembaruan-pengajuan', 'IzinObservasiMatakuliahFakultas::simpan_pembaruan_pengajuan', ['filter' => 'mahasiswaFilter']);
+// bisa di akses oleh mahasiswa untuk memperbarui anggota
+$routes->post('/izin-observasi-matakuliah-fakultas/simpan-pembaruan-anggota', 'IzinObservasiMatakuliahFakultas::simpan_pembaruan_anggota', ['filter' => 'mahasiswaFilter']);
+//  bisa di akses oleh mahasiswa untuk menghapus anggota
+$routes->delete('/izin-observasi-matakuliah-fakultas/hapus-anggota/(:num)', 'IzinObservasiMatakuliahFakultas::hapus_anggota/$1', ['filter' => 'mahasiswaDanAdminFilter']);
+// menambahkan anggota izin observasi matakulia oleh mahasiswa
+$routes->post('/izin-observasi-matakuliah-fakultas/tambah-anggota', 'IzinObservasiMatakuliahFakultas::tambah_anggota', ['filter' => 'mahasiswaFilter']);
+// routes untuk print surat oleh mahasiswa mahasiswa
+$routes->get('/izin-observasi-matakuliah-fakultas/print-surat/(:any)', 'IzinObservasiMatakuliahFakultas::print_surat/$1');
+// routes untuk scan barcode
+$routes->get('/izin-observasi-matakuliah-fakultas/detail/(:any)', 'IzinObservasiMatakuliahFakultas::detail/$1', ['filter' => 'mahasiswaDanAdminDepartemenFilter']);
+// routes untuk cetak surat oleh mahasiswa versi 2
+$routes->post('/izin-observasi-matakuliah-fakultas/cetak', 'IzinObservasiMatakuliahFakultas::cetak');
+
+// AKSES OLEH ADMIN
+// bisa di akses oleh admin departemen dan kepala departemen untuk melihat semua pengajuan validator instrumen yang digunakan untuk verifikasi
+$routes->get('/izin-observasi-matakuliah-fakultas/semua', 'IzinObservasiMatakuliahFakultas::semua', ['filter' => 'adminDanSuperAdminFilter']);
+// bisa di akses oleh admin untuk edit validator instrumen
+$routes->get('/izin-observasi-matakuliah-fakultas/edit-admin/(:any)', 'IzinObservasiMatakuliahFakultas::edit_admin/$1', ['filter' => 'adminDanSuperAdminFilter']);
+// bisa di akses oleh mahasiswa untuk menampilkan form edit data izin observasi matakuliah
+$routes->get('/izin-observasi-matakuliah-fakultas/admin-edit-pengajuan/(:any)', 'IzinObservasiMatakuliahFakultas::admin_edit_pengajuan/$1', ['filter' => 'adminDanSuperAdminFilter']);
+// bisa di akses oleh mahasiswa untuk memperbarui surat validator instrumen
+$routes->post('/izin-observasi-matakuliah-fakultas/admin-simpan-pembaruan-pengajuan', 'IzinObservasiMatakuliahFakultas::admin_simpan_pembaruan_pengajuan', ['filter' => 'adminDanSuperAdminFilter']);
+// bisa di akses oleh mahasiswa untuk memperbarui anggota
+$routes->post('/izin-observasi-matakuliah-fakultas/admin-simpan-pembaruan-anggota', 'IzinObservasiMatakuliahFakultas::admin_simpan_pembaruan_anggota', ['filter' => 'adminDanSuperAdminFilter']);
+$routes->post('/izin-observasi-matakuliah-fakultas/edit-pengajuan/ganti-dosen-pembimbing-oleh-admin', 'IzinObservasiMatakuliahFakultas::ganti_dosen_pembimbing_oleh_admin', ['filter' => 'adminDanSuperAdminFilter']);
+
+// bisa di akses oleh admin departemen dan kepala departemen untuk melihat semua pengajuan surat izin validator yang disetujui digunakan untuk verifikasi
+$routes->get('/izin-observasi-matakuliah-fakultas/disetujui', 'IzinObservasiMatakuliahFakultas::disetujui', ['filter' => 'adminDanSuperAdminFilter']);
+// bisa di akses oleh admin departemen dan kepala departemen untuk melihat semua pengajuan surat izin validator yang ditolak digunakan untuk verifikasi
+$routes->get('/izin-observasi-matakuliah-fakultas/ditolak', 'IzinObservasiMatakuliahFakultas::ditolak', ['filter' => 'adminDanSuperAdminFilter']);
+// bisa di akses oleh admin departemen dan kepala departemen untuk melihat detail pengajuan surat izin validator instrumen yang akan digunakan untuk verifikasi
+$routes->get('/izin-observasi-matakuliah-fakultas/detail-verifikasi/(:any)', 'IzinObservasiMatakuliahFakultas::detail_verifikasi/$1', ['filter' => 'adminDanSuperAdminFilter']);
+// bisa di akses oleh admin departemen dan kadep untuk menolak semua pengajuan surat validator instrumen
+$routes->post('/izin-observasi-matakuliah-fakultas/tolak-admin/(:any)', 'IzinObservasiMatakuliahFakultas::tolak_admin/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
+// bisa di akses oleh admin departemen dan kadep untuk menyetujui semua pengajuan surat validator instrumen
+$routes->post('/izin-observasi-matakuliah-fakultas/setujui-admin/(:any)', 'IzinObservasiMatakuliahFakultas::setujui_admin/$1', ['filter' => 'adminDanSuperAdminFilter']);
+// bisa di akses oleh admin departemen dan kepala departemen untuk menolak semua pengajuan surat validator instrumen
+$routes->post('/izin-observasi-matakuliah-fakultas/tolak-kadep/(:any)', 'IzinObservasiMatakuliahFakultas::tolak_kadep/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
+// bisa di akses oleh admin departemen dan kepala departemen untuk menyetujui semua pengajuan surat izin observasi matakuliah
+$routes->post('/izin-observasi-matakuliah-fakultas/setujui-kadep/(:any)', 'IzinObservasiMatakuliahFakultas::setujui_kadep/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
+// routes untuk scan barcode
+$routes->get('/izin-observasi-matakuliah-fakultas/scan-barcode/(:any)', 'IzinObservasiMatakuliahFakultas::scan_barcode/$1');
+
+
 // ROUTES UNTUK IZIN PENELITIAN
     // AKSES OLEH MAHASISWA
     // bisa di akses oleh mahasiswa untuk menampilkan pengajuan surat yang telah mereka buat
