@@ -58,7 +58,7 @@
                                                 <td><?= $siomk['nama_departemen']; ?></td>
                                                 <td><?= $siomk['tempat_observasi']; ?></td>
                                                 <td><?= tanggal_indo($siomk['tanggal_mulai']); ?> s.d <?= tanggal_indo($siomk['tanggal_selesai']); ?></td>
-                                                <td><?= $siomk["status"] == "1" ? "<span class='badge badge-warning'>Belum diproses Admin</span>" : ($siomk["status"] == "2" ? "<span class='badge badge-danger'>Ditolak Admin</span>" : ($siomk["status"] == "3" ? "<span class='badge badge-success'>Menunggu diproses Kadep</span>" : ($siomk["status"] == "4" ? "<span class='badge badge-danger'>Ditolak Kadep</span>" : ($siomk["status"] == "5" ? "<span class='badge badge-success'>Disetujui Kadep</span>" : null)))) ; ?></td>
+                                                <td><?= $siomk["status"] == "1" ? "<span class='badge badge-warning'>Belum diproses Admin</span>" : ($siomk["status"] == "2" ? "<span class='badge badge-danger'>Ditolak Admin</span>" : ($siomk["status"] == "3" ? "<span class='badge badge-success'>Menunggu diproses Kadep</span>" : ($siomk["status"] == "4" ? "<span class='badge badge-danger'>Ditolak Kadep</span>" : ($siomk["status"] == "5" ? "<span class='badge badge-success'>Disetujui</span>" : null)))) ; ?></td>
                                             <?php $no++ ?>
                                             </tr>
                                         <?php endforeach; ?>

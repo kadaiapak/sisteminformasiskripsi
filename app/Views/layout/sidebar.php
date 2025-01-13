@@ -69,10 +69,10 @@
                                     <a href="<?= base_url('/izin-observasi-matakuliah-fakultas/semua'); ?>">Surat Masuk</a>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url('/izin-observasi-matakuliah-fakultas/disetujui'); ?>">Observasi Diterima</a>
+                                    <a href="<?= base_url('/izin-observasi-matakuliah-fakultas/disetujui'); ?>">Disetujui</a>
                                 </li>
                                 <li>
-                                    <a href="<?= base_url('/izin-observasi-matakuliah-fakultas/ditolak'); ?>">Observasi Ditolak</a>
+                                    <a href="<?= base_url('/izin-observasi-matakuliah-fakultas/ditolak'); ?>">Ditolak</a>
                                 </li>
                             </ul>
                         </li>
