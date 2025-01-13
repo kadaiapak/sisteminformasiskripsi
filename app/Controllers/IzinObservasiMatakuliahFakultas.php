@@ -679,7 +679,7 @@ class IzinObservasiMatakuliahFakultas extends BaseController
                     'satu_observasi' => $satu_observasi,
                     'anggota' => $data_anggota
                 ];
-                return view('izin_observasi_matakuliah_fakultas/admin/v_detail_verifikasi_izin_observasi_matakuliah', $data);
+                return view('izin_observasi_matakuliah_fakultas/admin/v_detail_verifikasi_izin_observasi_matakuliah_fakultas', $data);
             }   
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
@@ -745,6 +745,8 @@ class IzinObservasiMatakuliahFakultas extends BaseController
                 }
                 date_default_timezone_set('ASIA/JAKARTA');
                 $tanggal_diproses_admin = date('Y-m-d H:i:s');
+                // print_r($tanggal_diproses_admin);
+                // die;
                 $generate_qrcode = $this->generate_qrcode($UUIDObservasi);
                 date_default_timezone_set('ASIA/JAKARTA');
                 $tahun = date('Y', strtotime($satu_observasi['created_at']));
@@ -754,6 +756,7 @@ class IzinObservasiMatakuliahFakultas extends BaseController
                     'tanggal_diproses_admin' => $tanggal_diproses_admin,
                     'qr_code' => $generate_qrcode
                 );
+              
                 $this->izinObservasiMatakuliahFakultasModel->where('uuid', $UUIDObservasi)->set($data)->update();
                 return redirect()->to('/izin-observasi-matakuliah-fakultas/semua')->with('sukses','Pengajuan izin observasi diterima oleh Admin!');
             }   
@@ -761,6 +764,7 @@ class IzinObservasiMatakuliahFakultas extends BaseController
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
     }
+
 
     // fungsi untuk membuat barcode dan ditempel pada surat
     // akses oleh fungsi setujui kadep
@@ -778,10 +782,8 @@ class IzinObservasiMatakuliahFakultas extends BaseController
             ->setBackgroundColor(new Color(255, 255, 255));
 
             // Create generic logo
-            $logo = Logo::create('logo_untuk_barcode.png')
-            ->setResizeToWidth(50)
-            ->setPunchoutBackground(true)
-            ;
+            $logo = Logo::create('logo_unp_barcode.png')    
+            ->setResizeToWidth(70);
 
             // Create generic label
             $label = Label::create('')
@@ -799,8 +801,6 @@ class IzinObservasiMatakuliahFakultas extends BaseController
     {
         if($UUIDObservasi != null) {
             $satu_observasi = $this->izinObservasiMatakuliahFakultasModel->getDetail($UUIDObservasi);
-           
-            die;
             if (!$satu_observasi) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             } else {
@@ -821,7 +821,7 @@ class IzinObservasiMatakuliahFakultas extends BaseController
      public function print_surat($UUIDObservasi)
     {
         if($UUIDObservasi != null) {
-            $satu_observasi = $this->izinObservasiMatakuliahFakultasModel->getDetail($UUIDObservasi); 
+            $satu_observasi = $this->izinObservasiMatakuliahFakultasModel->getDetail($UUIDObservasi);
             if (!$satu_observasi) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             } else {
