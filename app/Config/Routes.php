@@ -553,7 +553,7 @@ $routes->get('/izin-observasi-matakuliah-fakultas/ditolak', 'IzinObservasiMataku
 // bisa di akses oleh admin departemen dan kepala departemen untuk melihat detail pengajuan surat izin validator instrumen yang akan digunakan untuk verifikasi
 $routes->get('/izin-observasi-matakuliah-fakultas/detail-verifikasi/(:any)', 'IzinObservasiMatakuliahFakultas::detail_verifikasi/$1', ['filter' => 'adminDanSuperAdminFilter']);
 // bisa di akses oleh admin departemen dan kadep untuk menolak semua pengajuan surat validator instrumen
-$routes->post('/izin-observasi-matakuliah-fakultas/tolak-admin/(:any)', 'IzinObservasiMatakuliahFakultas::tolak_admin/$1', ['filter' => 'adminDepartemenDanKadepFilter']);
+$routes->post('/izin-observasi-matakuliah-fakultas/tolak-admin/(:any)', 'IzinObservasiMatakuliahFakultas::tolak_admin/$1', ['filter' => 'adminDanSuperAdminFilter']);
 // bisa di akses oleh admin departemen dan kadep untuk menyetujui semua pengajuan surat validator instrumen
 $routes->post('/izin-observasi-matakuliah-fakultas/setujui-admin/(:any)', 'IzinObservasiMatakuliahFakultas::setujui_admin/$1', ['filter' => 'adminDanSuperAdminFilter']);
 // bisa di akses oleh admin departemen dan kepala departemen untuk menolak semua pengajuan surat validator instrumen
