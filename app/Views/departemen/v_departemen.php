@@ -12,6 +12,7 @@
                         <h2>Daftar Departemen</h2>
                         <div class="clearfix"></div>
                     </div>
+					
                     <div class="x_content">
 						<div>
 							<a href="<?= base_url("departemen/tambah"); ?>" class="btn btn-success btn-sm"><i class="fa fa-plus-square" style="margin-right: 5px;"></i>Tambah Departemen</a>
@@ -66,6 +67,7 @@
 												<td class=" "><?= $sd['departemen_status'] == 1 ? "<span class='badge badge-success'>Aktif</span>" : ($sd['departemen_status'] ==  0 ? "<span class='badge badge-warning'>Tidak Aktif</span>" : null)  ?></td>
 												<td class=" last">
 													<a href="<?= base_url('/departemen/'.$sd['departemen_id'].'/edit'); ?>" class="btn btn-warning">Ubah</a>
+													<a href="<?= base_url('/departemen/'.$sd['departemen_id'].'/detail'); ?>" class="btn btn-info">Detail</a>
 													<a href="#" class="btn btn-danger">Hapus</a>
 												</td>
 												<?php $no++ ?>

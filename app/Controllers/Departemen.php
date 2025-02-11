@@ -74,6 +74,7 @@ class Departemen extends BaseController
             return redirect()->back()->withInput();
         }
         $data = array(
+            'departemen_kd' => $this->request->getVar('departemen_kd'),
             'departemen_nama' => $this->request->getVar('departemen_nama'),
             'departemen_alias' => $this->request->getVar('departemen_alias'),
             'departemen_email' => $this->request->getVar('departemen_email'),
@@ -144,6 +145,7 @@ class Departemen extends BaseController
             return redirect()->back()->withInput();
         }
 
+
         $data = array(
             'departemen_kd' => $this->request->getVar('departemen_kd'),
             'departemen_nama' => $this->request->getVar('departemen_nama'),
@@ -153,10 +155,26 @@ class Departemen extends BaseController
             'departemen_kd_surat' => $this->request->getVar('departemen_kd_surat'),
             'departemen_nm_kadep' => $this->request->getVar('departemen_nm_kadep'),
             'departemen_nip_kadep' => $this->request->getVar('departemen_nip_kadep'),
+            'judul_kop_surat' => $this->request->getVar('judul_kop_surat'),
+            'jabatan_penanda_tangan' => $this->request->getVar('jabatan_penanda_tangan'),
+            'nama_penanda_tangan' => $this->request->getVar('nama_penanda_tangan'),
+            'nip_penanda_tangan' => $this->request->getVar('nip_penanda_tangan'),
             'departemen_status' => 1,
         );
         $this->departemenModel->update($id, $data);
         return redirect()->to('/departemen')->with('sukses','Data berhasil diubah!');
+    }
+
+    public function detail($id = '')
+    {
+        if($id == '') {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+        $data = [
+            'judul' => 'Detail Departemen',
+            'departemen_by_id' => $this->departemenModel->find($id)
+        ];
+        return view('departemen/v_detail_departemen', $data);
     }
 
 }

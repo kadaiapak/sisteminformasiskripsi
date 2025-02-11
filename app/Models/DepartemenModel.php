@@ -17,6 +17,10 @@ class DepartemenModel extends Model
     'departemen_nm_kadep',
     'departemen_kd_surat',
     'departemen_nip_kadep',
+    'judul_kop_surat',
+    'jabatan_penanda_tangan',
+    'nama_penanda_tangan',
+    'nip_penanda_tangan',
     'departemen_status',
     ];
 }

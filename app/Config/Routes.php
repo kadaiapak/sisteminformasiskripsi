@@ -275,6 +275,8 @@ $routes->post('/auth/mahasiswa/proses', 'Auth::login_mahasiswa_proses');
     $routes->get('/departemen/(:any)/edit', 'Departemen::edit/$1',['filter' => 'adminDanSuperAdminFilter']);
     // bisa di akses oleh admin dan super admin untuk update departemen
     $routes->post('/departemen/(:any)/update', 'Departemen::update/$1',['filter' => 'adminDanSuperAdminFilter']);
+    // bisa di akses oleh admin dan super admin untuk update departemen
+    $routes->get('/departemen/(:any)/detail', 'Departemen::detail/$1',['filter' => 'adminDanSuperAdminFilter']);
 // AKHIR ROUTE DEPARTEMEN
 
 // ROUTE PRODI
