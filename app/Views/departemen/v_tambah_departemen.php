@@ -67,6 +67,42 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3 ">Dosen Yang dipilih dari departemen?</label>
+                                <div class="col-md-9 col-sm-9">
+                                    <select class="form-control" id="dosen_yang_bisa_dipilih" tabindex="-1" name="dosen_yang_bisa_dipilih">
+                                        <option value="">-- Pilih Departemen --</option>
+                                        <option value="@">Semua Departemen</option>
+                                        <?php foreach($semuaDepartemen as $d): ?>
+                                        <option value="<?= $d['departemen_id']; ?>"><?= $d['departemen_nama']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3" for="judul_kop_surat">Judul Kop Surat</label>
+                                <div class="col-md-9 col-sm-9" >
+                                    <textarea class="form-control" rows="5" cols="100%" name="judul_kop_surat" id="judul_kop_surat" placeholder="Tuliskan kop surat yang akan di pakai pada surat"><?= old('judul_kop_surat'); ?></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3" for="jabatan_penanda_tangan">Jabatan Penanda Tangan</label>
+                                <div class="col-md-9 col-sm-9" >
+                                    <textarea class="form-control" rows="5" cols="100%" name="jabatan_penanda_tangan" id="jabatan_penanda_tangan" placeholder="Tuliskan jabatan yang menandatangani surat"><?= old('jabatan_penanda_tangan'); ?></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3" for="nama_penanda_tangan">Nama Penanda Tangan</label>
+                                <div class="col-md-9 col-sm-9" >
+                                    <textarea class="form-control" rows="5" cols="100%" name="nama_penanda_tangan" id="nama_penanda_tangan" placeholder="Tuliskan nama pimpinan yang menandatangani surat"><?= old('nama_penanda_tangan'); ?></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row ">
+                                <label class="control-label col-md-3 col-sm-3" for="nip_penanda_tangan">NIP Penandatangan</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <input placeholder="Tuliskan nip pimpinan yang akan menandatangani surat" value="<?= old('nip_penanda_tangan') ?>" type="text" name="nip_penanda_tangan" class="form-control <?= validation_show_error('nip_penanda_tangan') ? 'is-invalid' : null; ?>" id="nip_penanda_tangan">
+                                </div>
+                            </div>
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-9 col-sm-9  offset-md-3">

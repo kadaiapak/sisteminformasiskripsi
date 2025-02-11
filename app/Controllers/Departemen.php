@@ -25,8 +25,11 @@ class Departemen extends BaseController
     
     public function tambah()
     {
+        $semuaDepartemen = $this->departemenModel->getAllOnly();
+
         $data = [
-            'judul' => 'Tambah Departemen'
+            'judul' => 'Tambah Departemen',
+            'semuaDepartemen' => $semuaDepartemen
         ];
         return view('departemen/v_tambah_departemen', $data);
     }
@@ -82,6 +85,11 @@ class Departemen extends BaseController
             'departemen_kd_surat' => $this->request->getVar('departemen_kd_surat'),
             'departemen_nm_kadep' => $this->request->getVar('departemen_nm_kadep'),
             'departemen_nip_kadep' => $this->request->getVar('departemen_nip_kadep'),
+            'judul_kop_surat' => $this->request->getVar('judul_kop_surat'),
+            'jabatan_penanda_tangan' => $this->request->getVar('jabatan_penanda_tangan'),
+            'nama_penanda_tangan' => $this->request->getVar('nama_penanda_tangan'),
+            'nip_penanda_tangan' => $this->request->getVar('nip_penanda_tangan'),
+            'dosen_yang_bisa_dipilih' => $this->request->getVar('dosen_yang_bisa_dipilih'),
             'departemen_status' => 1,
         );
         $this->departemenModel->insert($data);
@@ -93,9 +101,11 @@ class Departemen extends BaseController
         if($id == '') {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
+        $semuaDepartemen = $this->departemenModel->getAllOnly();
         $data = [
             'judul' => 'Edit Departemen',
-            'departemen_by_id' => $this->departemenModel->find($id)
+            'departemen_by_id' => $this->departemenModel->find($id),
+            'semuaDepartemen' => $semuaDepartemen
         ];
         return view('departemen/v_edit_departemen', $data);
     }
@@ -145,7 +155,6 @@ class Departemen extends BaseController
             return redirect()->back()->withInput();
         }
 
-
         $data = array(
             'departemen_kd' => $this->request->getVar('departemen_kd'),
             'departemen_nama' => $this->request->getVar('departemen_nama'),
@@ -159,6 +168,7 @@ class Departemen extends BaseController
             'jabatan_penanda_tangan' => $this->request->getVar('jabatan_penanda_tangan'),
             'nama_penanda_tangan' => $this->request->getVar('nama_penanda_tangan'),
             'nip_penanda_tangan' => $this->request->getVar('nip_penanda_tangan'),
+            'dosen_yang_bisa_dipilih' => $this->request->getVar('dosen_yang_bisa_dipilih'),
             'departemen_status' => 1,
         );
         $this->departemenModel->update($id, $data);
@@ -170,9 +180,14 @@ class Departemen extends BaseController
         if($id == '') {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
+        // $detail = $this->departemenModel->getDetail($id);
+        // echo '<pre>';
+        // print_r($detail);   
+        // echo '</pre>';
+        // die;
         $data = [
             'judul' => 'Detail Departemen',
-            'departemen_by_id' => $this->departemenModel->find($id)
+            'departemen_by_id' => $this->departemenModel->getDetail($id)
         ];
         return view('departemen/v_detail_departemen', $data);
     }

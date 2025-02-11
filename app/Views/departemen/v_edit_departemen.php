@@ -88,6 +88,18 @@
                         <div class="x_content">
                             <br />
                             <div class="form-group row">
+                                <label class="control-label col-md-3 col-sm-3 ">Dosen Yang dipilih dari departemen?</label>
+                                <div class="col-md-9 col-sm-9">
+                                    <select class="form-control" id="dosen_yang_bisa_dipilih" tabindex="-1" name="dosen_yang_bisa_dipilih">
+                                        <option value="">-- Pilih Departemen --</option>
+                                        <option value="@">Semua Departemen</option>
+                                        <?php foreach($semuaDepartemen as $d): ?>
+                                        <option value="<?= $d['departemen_id']; ?>"><?= $d['departemen_nama']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3" for="judul_kop_surat">Judul Kop Surat</label>
                                 <div class="col-md-9 col-sm-9" >
                                     <textarea class="form-control" rows="5" cols="100%" name="judul_kop_surat" id="judul_kop_surat" placeholder="Tuliskan kop surat yang akan di pakai pada surat"><?= $departemen_by_id['judul_kop_surat']; ?></textarea>
@@ -106,7 +118,7 @@
                                 </div>
                             </div>
                             <div class="form-group row ">
-                                <label class="control-label col-md-3 col-sm-3" for="nip_penanda_tangan">NIP Kepala Departemen</label>
+                                <label class="control-label col-md-3 col-sm-3" for="nip_penanda_tangan">NIP Penandatangan</label>
                                 <div class="col-md-9 col-sm-9 ">
                                     <input placeholder="Tuliskan nip pimpinan yang akan menandatangani surat" value="<?= $departemen_by_id['nip_penanda_tangan']; ?>" type="text" name="nip_penanda_tangan" class="form-control <?= validation_show_error('nip_penanda_tangan') ? 'is-invalid' : null; ?>" id="nip_penanda_tangan">
                                 </div>
