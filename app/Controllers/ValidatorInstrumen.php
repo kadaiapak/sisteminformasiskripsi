@@ -63,12 +63,13 @@ class ValidatorInstrumen extends BaseController
         return view('validator_instrumen/v_semua_validator_instrumen_selesai', $data);
     }
 
+
     public function tambah()
     {
         $nim = session()->get('username');
         $user = $this->profilModel->getDetail($nim);
         $data = [
-            'judul' => 'Pengajuan Surat Validator Instrumen',
+            'judul' => 'Pengajuan Validator Instrumen',
             'user' => $user
         ];
         return view('validator_instrumen/v_tambah_validator_instrumen', $data);
@@ -105,7 +106,7 @@ class ValidatorInstrumen extends BaseController
         ])){
             return redirect()->back()->withInput();
         }
-        
+       
         $data = array(
             'user_pengajuan' => session()->get('username'),
             'nama_pengajuan' => $this->request->getVar('nama_pengajuan'),
@@ -212,7 +213,7 @@ class ValidatorInstrumen extends BaseController
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             } else {
                 $data = [
-                    'judul' => 'Detail Surat Izin Validator Instrumen',
+                    'judul' => 'Detail Validator Instrumen',
                     'satu_instrumen' => $satu_instrumen,
                 ];
                 return view('validator_instrumen/v_detail_validator_instrumen', $data);
@@ -497,10 +498,8 @@ class ValidatorInstrumen extends BaseController
             ->setBackgroundColor(new Color(255, 255, 255));
 
             // Create generic logo
-            $logo = Logo::create('logo_untuk_barcode.png')
-            ->setResizeToWidth(50)
-            ->setPunchoutBackground(true)
-            ;
+            $logo = Logo::create('logo_unp_barcode.png')
+            ->setResizeToWidth(70);
 
             // Create generic label
             $label = Label::create('')
@@ -518,14 +517,18 @@ class ValidatorInstrumen extends BaseController
     public function print_surat($UUIDInstrumen)
     {
         if($UUIDInstrumen != null) {
-            $satu_instrumen = $this->validatorInstrumenModel->getDetail($UUIDInstrumen);
+            $satu_instrumen = $this->validatorInstrumenModel->getDetailForCetak($UUIDInstrumen);
+            // echo '<pre>';
+            // print_r($satu_instrumen);
+            // echo '</pre>';
+            // die;
             if (!$satu_instrumen) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             } else {
             $options = new Options();
             $dompdf = new Dompdf($options);
             $tahun = date('Y', strtotime($satu_instrumen['created_at']));
-            $nomor_surat = $satu_instrumen['no_surat'] .'/'. $satu_instrumen['kd_surat'] .''. $tahun;
+            $nomor_surat = $satu_instrumen['no_surat'] .'/'. $satu_instrumen['kode_surat'] .''. $tahun;
             $tanggal_seminar = tanggal_indo($satu_instrumen['created_at']);
             $tanggal_surat = tanggal_indo($satu_instrumen['updated_at']);
             $data = array(

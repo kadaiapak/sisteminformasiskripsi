@@ -73,7 +73,7 @@ class ValidatorInstrumenModel extends Model
             $builder->where('status', '3');
             $builder->groupEnd();
         }
-        $builder->orderBy('created_at', 'asc');
+        $builder->orderBy('created_at', 'desc');
         $query = $builder->get();
         return $query->getResultArray();
     }
@@ -124,11 +124,13 @@ class ValidatorInstrumenModel extends Model
         return $query->getResultArray();
     }
 
+    
     public function getAllByAdminYangSelesai($departemen = null, $level = null) 
     {
         $builder = $this->db->table('surat_validator_instrumen');
-        $builder->select('surat_validator_instrumen.*,departemen.departemen_nama as nama_departemen');
+        $builder->select('surat_validator_instrumen.*,departemen.departemen_nama as nama_departemen, profil.nowa as nowa');
         $builder->join('departemen', 'surat_validator_instrumen.departemen_pengajuan = departemen.departemen_id');
+        $builder->join('profil', 'surat_validator_instrumen.user_pengajuan = profil.prf_nim_portal', 'left');
         if($departemen != null){
         $builder->where('departemen_pengajuan', $departemen);
         }
@@ -147,6 +149,17 @@ class ValidatorInstrumenModel extends Model
         departemen.departemen_nama as nama_departemen, departemen.departemen_kd_surat as kd_surat, departemen.departemen_email as email_departemen, departemen.departemen_website as website_departemen, departemen.departemen_nm_kadep as nama_kadep_departemen, departemen.departemen_nip_kadep as nip_kadep_departemen');
         $builder->join('departemen', 'surat_validator_instrumen.departemen_pengajuan = departemen.departemen_id');
         $builder->where('uuid', $UUIDValidator);
+        $query = $builder->get();
+        return $query->getRowArray();
+    }
+
+    public function getDetailForCetak($UUIDObservasi = null)
+    {
+        $builder = $this->db->table('surat_validator_instrumen svi');
+        $builder->select('svi.nama_pengajuan, svi.nim_pengajuan, svi.departemen_pengajuan, svi.nama_dosen_validator_satu, svi.bidang_dosen_validator_satu, svi.nama_dosen_validator_dua, svi.bidang_dosen_validator_dua, svi.nama_dosen_validator_tiga, svi.bidang_dosen_validator_tiga, svi.judul, svi.no_surat, svi.created_at, svi.updated_at, svi.qr_code,
+        departemen.departemen_nama as nama_departemen, departemen.departemen_email as email_departemen, departemen.departemen_website as website_departemen, departemen.departemen_kd_surat as kode_surat, departemen.judul_kop_surat as judul_kop_surat, departemen.jabatan_penanda_tangan as jabatan_penanda_tangan, departemen.nama_penanda_tangan as nama_penanda_tangan, departemen.nip_penanda_tangan as nip_penanda_tangan');
+        $builder->join('departemen', 'svi.departemen_pengajuan = departemen.departemen_id');
+        $builder->where('uuid', $UUIDObservasi);
         $query = $builder->get();
         return $query->getRowArray();
     }

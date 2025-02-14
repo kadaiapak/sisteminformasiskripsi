@@ -27,7 +27,7 @@
                                                 <th>Tanggal Pengajuan</th>
                                                 <th>NIM</th>
                                                 <th>Nama Mahasiswa</th>
-                                                <th>Departemen</th>
+                                                <th>No Hp</th>
                                                 <th>Judul</th>
                                                 <th>Status</th>
                                                 <th>Aksi</th>
@@ -41,7 +41,7 @@
                                                 <td><?= tanggal_indo($svi['created_at']); ?></td>
                                                 <td><?= $svi['nim_pengajuan']; ?></td>
                                                 <td><?= $svi['nama_pengajuan']; ?></td>
-                                                <td><?= $svi['nama_departemen']; ?></td>
+                                                <td><?= $svi['nowa']; ?></td>
                                                 <td><?= $svi['judul']; ?></td>
                                                 <td><?= $svi["status"] == "1" ? "<span class='badge badge-warning'>Belum diproses Admin</span>" : ($svi["status"] == "2" ? "<span class='badge badge-danger'>Ditolak Admin</span>" : ($svi["status"] == "3" ? "<span class='badge badge-success'>Menunggu diproses Kadep</span>" : ($svi["status"] == "4" ? "<span class='badge badge-danger'>Ditolak Kadep</span>" : ($svi["status"] == "5" ? "<span class='badge badge-success'>Disetujui Kadep</span>" : null)))) ; ?></td>
                                                 <td>
