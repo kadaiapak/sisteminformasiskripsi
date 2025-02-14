@@ -66,7 +66,7 @@ class ValidasiInstrumenModel extends Model
             $builder->where('status', '3');
             $builder->groupEnd();
         }
-        $builder->orderBy('created_at', 'asc');
+        $builder->orderBy('created_at', 'desc');
         $query = $builder->get();
         return $query->getResultArray();
     }
@@ -140,6 +140,17 @@ class ValidasiInstrumenModel extends Model
         departemen.departemen_nama as nama_departemen, departemen.departemen_kd_surat as kd_surat, departemen.departemen_email as email_departemen, departemen.departemen_website as website_departemen, departemen.departemen_nm_kadep as nama_kadep_departemen, departemen.departemen_nip_kadep as nip_kadep_departemen');
         $builder->join('departemen', 'surat_validasi_instrumen.departemen_pengajuan = departemen.departemen_id');
         $builder->where('uuid', $UUIDValidator);
+        $query = $builder->get();
+        return $query->getRowArray();
+    }
+
+    public function getDetailForCetak($UUIDObservasi = null)
+    {
+        $builder = $this->db->table('surat_validasi_instrumen svi');
+        $builder->select('svi.no_surat, svi.tujuan_surat, svi.alamat_tujuan_surat, svi.nama_pengajuan, svi.nim_pengajuan, svi.judul, svi.created_at, svi.updated_at, svi.qr_code,
+        departemen.departemen_nama as nama_departemen, departemen.departemen_email as email_departemen, departemen.departemen_website as website_departemen, departemen.departemen_kd_surat as kd_surat, departemen.judul_kop_surat as judul_kop_surat, departemen.jabatan_penanda_tangan as jabatan_penanda_tangan, departemen.nama_penanda_tangan as nama_penanda_tangan, departemen.nip_penanda_tangan as nip_penanda_tangan');
+        $builder->join('departemen', 'svi.departemen_pengajuan = departemen.departemen_id');
+        $builder->where('uuid', $UUIDObservasi);
         $query = $builder->get();
         return $query->getRowArray();
     }

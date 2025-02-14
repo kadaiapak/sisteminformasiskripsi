@@ -12,7 +12,7 @@
     }
 
 	.no_surat .nomor_surat {
-		width: 350px;
+		width: 320px;
 	}
 
 	.ttd_pejabat .td_mengetahui {
@@ -29,7 +29,7 @@
         }
 
 		.no_surat .nomor_surat {
-			width: 580px;
+			width: 530px;
 		}
 
 		p.footer {
@@ -89,14 +89,14 @@ hr{
 	<div class='page'>
 		<table size='100%' align='center'>
 			<tr>
-				<td><img src="<?= base_url('/unp.png'); ?>" width="90" height="90" alt=""></td>
+				<td><img src="<?= base_url('/tutwuri.png'); ?>" width="120" height="120" alt=""></td>
 				<td width="650">
 					<center>
-						<font size="4">KEMENTERIAN PENDIDIKAN, KEBUDAYAAN,</font><br>
-						<font size="4">RISET DAN TEKNOLOGI</font><br>
+						<font size="4">KEMENTERIAN PENDIDIKAN TINGGI, SAINS,</font><br>
+						<font size="4">DAN TEKNOLOGI</font><br>
 						<font size="4">UNIVERSITAS NEGERI PADANG</font><br>
 						<font size="4">FAKULTAS ILMU PENDIDIKAN</font><br>
-						<font size="4"><b>DEPARTEMEN <?= strtoupper($satu_penelitian['nama_departemen']); ?></b></font><br>
+						<font size="4"><b><?= $satu_penelitian['judul_kop_surat'];?></b></font><br>
 						<font size="2">Jl. Prof.Dr. Hamka Kampus UNP Air Tawar Padang 25131, Telp.7058693</font><br>
 						<font size="2">Website: <?= $satu_penelitian['website_departemen']; ?> email: <?= $satu_penelitian['email_departemen']; ?></font>
 					</center>
@@ -197,7 +197,7 @@ hr{
 				<td>
 				</td>
 				<td>
-					Kepala Departemen
+					<?= $satu_penelitian['jabatan_penanda_tangan']; ?>
 				</td>
 			</tr>
 			<tr>
@@ -211,8 +211,8 @@ hr{
 				<td>
 				</td>
 				<td>
-					<?= $satu_penelitian['nama_kadep_departemen']; ?></br>
-					NIP. <?= $satu_penelitian['nip_kadep_departemen']; ?></br>
+					<?= $satu_penelitian['nama_penanda_tangan']; ?></br>
+					NIP. <?= $satu_penelitian['nip_penanda_tangan']; ?></br>
 					</td>
 			</tr>
 		</table>

@@ -85,7 +85,7 @@
                         </div>
                         <div class="form-group row">
                             <label class="control-label col-md-3 col-sm-3">Nama Penanda Tangan</label>
-                            <div class="col-md-9 col-sm-9" >
+                            <div clas s="col-md-9 col-sm-9" >
                                 <textarea readonly class="form-control" rows="5" cols="100%" placeholder="Tuliskan nama pimpinan yang menandatangani surat"><?= $departemen_by_id['nama_penanda_tangan']; ?></textarea>
                             </div>
                         </div>

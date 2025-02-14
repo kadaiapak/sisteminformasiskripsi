@@ -12,18 +12,19 @@
             <div class="col-md-8 col-sm-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Form Pengajuan</h2>
+                        <h2>Edit Pengajuan</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
                         <br />
                         <!-- < ?= validation_list_errors(); ?> -->
-                        <form class="form-horizontal form-label-left" method="POST" action="<?= base_url('izin-penelitian/simpan'); ?>" enctype="multipart/form-data">
+                        <form class="form-horizontal form-label-left" method="POST" action="<?= base_url('izin-penelitian/simpan-pembaruan'); ?>" enctype="multipart/form-data">
                         <?= csrf_field(); ?>
                             <div class="form-group row ">
+                                <input hidden type="text" name="uuid" value="<?= $satu_penelitian['uuid']; ?>">
                                 <label class="control-label col-md-3 col-sm-3" for="nim_pengajuan">NIM</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input readonly type="text" name="nim_pengajuan" value="<?= $user['prf_nim_portal']; ?>" class="form-control <?= validation_show_error('nim_pengajuan') ? 'is-invalid' : null; ?>" id="nim_pengajuan" placeholder="Tuliskan NIM">
+                                    <input readonly type="text" name="nim_pengajuan" value="<?= $satu_penelitian['nim_pengajuan']; ?>" class="form-control <?= validation_show_error('nim_pengajuan') ? 'is-invalid' : null; ?>" id="nim_pengajuan" placeholder="Tuliskan NIM">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('nim_pengajuan'); ?>
                                     </div>
@@ -33,26 +34,25 @@
                             <div class="form-group row ">
                                 <label class="control-label col-md-3 col-sm-3" for="nama_pengajuan">Nama Mahasiswa</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input readonly type="text" value="<?= $user['prf_nama_portal']; ?>" class="form-control <?= validation_show_error('nama_pengajuan') ? 'is-invalid' : null; ?>" id="nama_pengajuan" name="nama_pengajuan" placeholder="Tuliskan Nama">
+                                    <input readonly type="text" value="<?= $satu_penelitian['nama_pengajuan']; ?>" class="form-control <?= validation_show_error('nama_pengajuan') ? 'is-invalid' : null; ?>" id="nama_pengajuan" name="nama_pengajuan" placeholder="Tuliskan Nama">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('nama_pengajuan'); ?>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row ">
-                                <label class="control-label col-md-3 col-sm-3" for="nama_pengajuan">Departemen</label>
+                                <label class="control-label col-md-3 col-sm-3">Departemen</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input readonly type="text" value="<?= $user['nama_departemen_input']; ?>" class="form-control">
+                                    <input readonly type="text" value="<?= $satu_penelitian['nama_departemen']; ?>" class="form-control">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('nama_pengajuan'); ?>
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="departemen_pengajuan" value="<?= $user['departemen_input']; ?>">
                             <div class="form-group row">
-                                <label class="control-label col-md-3 col-sm-3" for="tujuan_surat">Tujuan Surat <b>(Kepada Yth : ?)</b></label>
+                                <label class="control-label col-md-3 col-sm-3" for="tujuan_surat">Tujuan Surat <b>(Kepada Yth : ? )</b></label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input required type="text" value="<?= old('tujuan_surat'); ?>" class="form-control <?= validation_show_error('tujuan_surat') ? 'is-invalid' : null; ?>" id="tujuan_surat" name="tujuan_surat" placeholder="Contoh: Kepala Sekolah SMA N 5 Padang">
+                                    <input required type="text" value="<?= $satu_penelitian['tujuan_surat']; ?>" class="form-control <?= validation_show_error('tujuan_surat') ? 'is-invalid' : null; ?>" id="tujuan_surat" name="tujuan_surat" placeholder="Contoh: Kepala Sekolah SMA N 5 Padang">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('tujuan_surat'); ?>
                                     </div>
@@ -61,25 +61,27 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3" for="alamat_tempat_penelitian">Alamat Tujuan Surat <b>(Di ?)</b></label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input required type="text" value="<?= old('alamat_tempat_penelitian'); ?>" class="form-control <?= validation_show_error('alamat_tempat_penelitian') ? 'is-invalid' : null; ?>" id="alamat_tempat_penelitian" name="alamat_tempat_penelitian" placeholder="Contoh: Padang">
+                                    <input required type="text" value="<?= $satu_penelitian['alamat_tempat_penelitian']; ?>" class="form-control <?= validation_show_error('alamat_tempat_penelitian') ? 'is-invalid' : null; ?>" id="alamat_tempat_penelitian" name="alamat_tempat_penelitian" placeholder="Contoh: Padang">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('alamat_tempat_penelitian'); ?>
                                     </div>
                                 </div>
                             </div>
+                            <input type="hidden" name="departemen_pengajuan" value="<?= $satu_penelitian['departemen_pengajuan']; ?>">
                             <div class="form-group row">
-                                <label class="control-label col-md-3 col-sm-3" for="judul">Judul Skripsi</label>
+                                <label class="control-label col-md-3 col-sm-3" for="judul">Judul Skripsi <span class="required">*</span>
+                                </label>
                                 <div class="col-md-9 col-sm-9" >
-                                    <textarea class="form-control <?= validation_show_error('judul') ? 'is-invalid' : null; ?>" rows="5" cols="100%" name="judul" id="judul" placeholder="Isikan judul skripsi"><?= old('judul'); ?></textarea>
+                                    <textarea class="form-control <?= validation_show_error('judul') ? 'is-invalid' : null; ?>" rows="5" cols="100%" name="judul" id="judul" placeholder="Isikan judul skripsi"><?= $satu_penelitian['judul']; ?></textarea>
                                     <div class="invalid-feedback" style="text-align: left;">
                                         <?= validation_show_error('judul'); ?>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="control-label col-md-3 col-sm-3" for="tempat_penelitian">Tempat Penelitian</b></label>
+                                <label class="control-label col-md-3 col-sm-3" for="tempat_penelitian">Tempat Penelitian</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input required type="text" value="<?= old('tempat_penelitian'); ?>" class="form-control <?= validation_show_error('tempat_penelitian') ? 'is-invalid' : null; ?>" id="tempat_penelitian" name="tempat_penelitian" placeholder="Tuliskan tempat">
+                                    <input required type="text" value="<?= $satu_penelitian['tempat_penelitian']; ?>" class="form-control <?= validation_show_error('tempat_penelitian') ? 'is-invalid' : null; ?>" id="tempat_penelitian" name="tempat_penelitian" placeholder="Tuliskan tempat">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('tempat_penelitian'); ?>
                                     </div>
@@ -91,7 +93,7 @@
                                     <div class="input-group-addon">
                                         <span class="glyphicon glyphicon-th"></span>
                                     </div>
-                                    <input required <?= validation_show_error('tanggal_mulai') ? "style='border : 1px solid red'" : null?> placeholder="tanggal mulai penelitian" type="text" value="<?= old('tanggal_mulai'); ?>" class="form-control datepicker" name="tanggal_mulai">
+                                    <input required <?= validation_show_error('tanggal_mulai') ? "style='border : 1px solid red'" : null?> placeholder="tanggal mulai penelitian" type="text" value="<?= old('tanggal_mulai') ? old('tanggal_mulai') : $satu_penelitian['tanggal_mulai']; ?>" class="form-control datepicker" name="tanggal_mulai">
                                     <div class="invalid-feedback" style="text-align: left; display: block;">
                                         <?= validation_show_error('tanggal_mulai'); ?>
                                     </div>
@@ -103,7 +105,7 @@
                                     <div class="input-group-addon">
                                         <span class="glyphicon glyphicon-th"></span>
                                     </div>
-                                    <input required <?= validation_show_error('tanggal_selesai') ? "style='border : 1px solid red'" : null?> placeholder="sampai tanggal berapa" type="text" value="<?= old('tanggal_selesai'); ?>" class="form-control datepicker" name="tanggal_selesai">
+                                    <input required <?= validation_show_error('tanggal_selesai') ? "style='border : 1px solid red'" : null?> placeholder="sampai tanggal berapa" type="text" value="<?= old('tanggal_selesai') ? old('tanggal_selesai') : $satu_penelitian['tanggal_selesai']; ?>" class="form-control datepicker" name="tanggal_selesai">
                                     <div class="invalid-feedback" style="text-align: left; display: block;">
                                         <?= validation_show_error('tanggal_selesai'); ?>
                                     </div>
@@ -112,24 +114,12 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3 col-sm-3" for="objek_penelitian">Objek Penelitian</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <input required type="text" value="<?= old('objek_penelitian'); ?>" class="form-control <?= validation_show_error('objek_penelitian') ? 'is-invalid' : null; ?>" id="objek_penelitian" name="objek_penelitian" placeholder="Tuliskan Objek Penelitian">
+                                    <input required type="text" value="<?= $satu_penelitian['objek_penelitian']; ?>" class="form-control <?= validation_show_error('objek_penelitian') ? 'is-invalid' : null; ?>" id="objek_penelitian" name="objek_penelitian" placeholder="Tuliskan Objek Penelitian">
                                     <div class="invalid-feedback" style="display: block;">
                                         <?= validation_show_error('objek_penelitian'); ?>
                                     </div>
                                 </div>
                             </div>
-                            <?php foreach ($persyaratanSuratIzinPenelitian as $ps) { ?>
-                            <div class="form-group row">
-                                 <label class="control-label col-md-3 col-sm-3" for="<?= $ps['persyaratan_id']; ?>"><?= $ps['ps_nama']; ?></label>
-                                 <div class="col-md-9 col-sm-9 ">
-                                     <input class="form-control <?= validation_show_error($ps['persyaratan_id']) ? 'is-invalid' : null; ?>" type="file" id="<?= $ps['persyaratan_id']; ?>" name="<?= $ps['persyaratan_id']; ?>">
-                                     <div class="invalid-feedback" style="text-align: left;">
-                                         <?= validation_show_error($ps['persyaratan_id']); ?>
-                                     </div>
-                                 <small>Tipe file <?= $ps['ps_tipe_file']; ?>/ Ukuran Maksimal <?= $ps['ps_ukuran_file']; ?>Kb </small>
-                                 </div>
-                             </div>
-                            <?php } ?>
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-9 col-sm-9  offset-md-3">
@@ -163,5 +153,15 @@
       todayHighlight: true,
   });
  });
+</script>
+<script>
+    $(document).ready(function(){
+        var number = 1;
+        $(".btn-tambah").on("click", function(){
+            number ++;
+            $(".tambah-input").append(`<div class='row' style='margin-bottom: 15px; border: 1px solid grey; padding: 5px;'><div class='col-lg-4 col-md-4 col-sm-4 row'>
+            <label class='control-label col-md-1 col-lg-1 col-sm-1'><b>${number}</b></label><input required type='text' class='form-control col-md-11 col-lg-11 col-sm-11' name='data[${number}][nim_anggota]' placeholder='Tuliskan NIM'></div><div class='col-lg-5 col-md-5 col-sm-5'><input type='text' required class='form-control' name='data[${number}][nama_anggota]' placeholder='Tuliskan Nama'></div><div class='col-lg-3 col-md-3 col-sm-3'><select required class='form-control' name='data[${number}][jenis_kelamin]'><option value=''>-- Jenis Kelamin --</option><option value='L'>Laki - Laki</option><option value='P'>Perempuan</option></select></div></div>`);   
+        })
+    })
 </script>
 <?= $this->endSection(); ?>

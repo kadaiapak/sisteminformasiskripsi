@@ -248,7 +248,7 @@ class ValidasiInstrumen extends BaseController
             'status' => 1,
         );
 
-        $this->validasiInstrumenModel->where('uuid', $UUIDPenelitian)->set($data)->update();      
+        $this->validasiInstrumenModel->where('uuid', $UUIDPenelitian)->set($data)->update();
         return redirect()->to('/validasi-instrumen')->with('sukses','Data berhasil disimpan!');
     }
 
@@ -555,7 +555,7 @@ class ValidasiInstrumen extends BaseController
         // 
         $UUIDPenelitian = $this->request->getVar('uuid');
         if($UUIDPenelitian != null) {
-            $satu_penelitian = $this->validasiInstrumenModel->getDetail($UUIDPenelitian);
+            $satu_penelitian = $this->validasiInstrumenModel->getDetailForCetak($UUIDPenelitian);
             if (!$satu_penelitian) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             } else {
@@ -611,10 +611,8 @@ class ValidasiInstrumen extends BaseController
             ->setBackgroundColor(new Color(255, 255, 255));
 
             // Create generic logo
-            $logo = Logo::create('logo_untuk_barcode.png')
-            ->setResizeToWidth(50)
-            ->setPunchoutBackground(true)
-            ;
+            $logo = Logo::create('logo_unp_barcode.png')
+            ->setResizeToWidth(70);
 
             // Create generic label
             $label = Label::create('')

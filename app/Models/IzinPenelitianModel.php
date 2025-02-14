@@ -51,7 +51,7 @@ class IzinPenelitianModel extends Model
         $builder = $this->db->table('surat_izin_penelitian');
         $builder->set('uuid', 'UUID()', FALSE);
         $builder->insert($data);
-
+        
         $insert_id = $this->db->insertID();
         $builderdua = $this->db->table('file_syarat_surat_izin_penelitian');
         $file_upload = array();
@@ -98,7 +98,7 @@ class IzinPenelitianModel extends Model
             $builder->where('status', '3');
             $builder->groupEnd();
         }
-        $builder->orderBy('created_at', 'asc');
+        $builder->orderBy('created_at', 'desc');
         $query = $builder->get();
         return $query->getResultArray();
     }
@@ -164,7 +164,7 @@ class IzinPenelitianModel extends Model
         $query = $builder->get();
         return $query->getResultArray();
     }
-
+    
     public function getDetail($UUIDValidator = null)
     {
         $builder = $this->db->table('surat_izin_penelitian');
@@ -172,6 +172,17 @@ class IzinPenelitianModel extends Model
         departemen.departemen_nama as nama_departemen, departemen.departemen_kd_surat as kd_surat, departemen.departemen_email as email_departemen, departemen.departemen_website as website_departemen, departemen.departemen_nm_kadep as nama_kadep_departemen, departemen.departemen_nip_kadep as nip_kadep_departemen');
         $builder->join('departemen', 'surat_izin_penelitian.departemen_pengajuan = departemen.departemen_id');
         $builder->where('uuid', $UUIDValidator);
+        $query = $builder->get();
+        return $query->getRowArray();
+    }
+
+    public function getDetailForCetak($UUIDObservasi = null)
+    {
+        $builder = $this->db->table('surat_izin_penelitian sip');
+        $builder->select('sip.no_surat, sip.tujuan_surat, sip.alamat_tempat_penelitian, sip.nama_pengajuan, sip.nim_pengajuan, sip.judul, sip.tempat_penelitian, sip.tanggal_mulai, tanggal_selesai, sip.objek_penelitian, sip.created_at, sip.updated_at, sip.qr_code,
+        departemen.departemen_nama as nama_departemen, departemen.departemen_email as email_departemen, departemen.departemen_website as website_departemen, departemen.departemen_kd_surat as kd_surat, departemen.judul_kop_surat as judul_kop_surat, departemen.jabatan_penanda_tangan as jabatan_penanda_tangan, departemen.nama_penanda_tangan as nama_penanda_tangan, departemen.nip_penanda_tangan as nip_penanda_tangan');
+        $builder->join('departemen', 'sip.departemen_pengajuan = departemen.departemen_id');
+        $builder->where('uuid', $UUIDObservasi);
         $query = $builder->get();
         return $query->getRowArray();
     }

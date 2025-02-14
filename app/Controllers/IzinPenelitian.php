@@ -80,9 +80,9 @@ class IzinPenelitian extends BaseController
     {
         $nim = session()->get('username');
         $semuaDepartemen = $this->departemenModel->findAll();
+        $user = $this->profilModel->getDetail($nim);
         $getDepartemen = $this->profilModel->getDepartemen($nim);
         $persyaratanSuratIzinPenelitian = $this->persyaratanSuratIzinPenelitianModel->getAllPersyaratanSuratIzinPenelitianOlehMahasiswa($getDepartemen['departemen_input']);
-        $user = $this->profilModel->getDetail($nim);
         $data = [
             'judul' => 'Pengajuan Surat Izin Penelitian',
             'semua_departemen' => $semuaDepartemen,
@@ -214,7 +214,7 @@ class IzinPenelitian extends BaseController
         return redirect()->to('/izin-penelitian')->with('sukses','Data berhasil disimpan!');
     }
 
-    // public function simpan()
+     // public function simpan()
     // {
     //     if(!$this->validate([
     //         'nim_pengajuan' => [
@@ -770,7 +770,7 @@ class IzinPenelitian extends BaseController
         // 
         $UUIDPenelitian = $this->request->getVar('uuid');
         if($UUIDPenelitian != null) {
-            $satu_penelitian = $this->izinPenelitianModel->getDetail($UUIDPenelitian);
+            $satu_penelitian = $this->izinPenelitianModel->getDetailForCetak($UUIDPenelitian);
             if (!$satu_penelitian) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             } else {
@@ -826,10 +826,8 @@ class IzinPenelitian extends BaseController
             ->setBackgroundColor(new Color(255, 255, 255));
 
             // Create generic logo
-            $logo = Logo::create('logo_untuk_barcode.png')
-            ->setResizeToWidth(50)
-            ->setPunchoutBackground(true)
-            ;
+            $logo = Logo::create('logo_unp_barcode.png')
+            ->setResizeToWidth(70);
 
             // Create generic label
             $label = Label::create('')

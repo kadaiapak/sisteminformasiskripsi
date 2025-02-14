@@ -119,7 +119,7 @@
                                 </div>
                             </div>
                             <?php foreach ($persyaratanSuratIzinPenelitian as $ps) { ?>
-                            <div class="form-group row">
+                                <div class="form-group row">
                                  <label class="control-label col-md-3 col-sm-3" for="<?= $ps['persyaratan_id']; ?>"><?= $ps['ps_nama']; ?></label>
                                  <div class="col-md-9 col-sm-9 ">
                                      <input class="form-control <?= validation_show_error($ps['persyaratan_id']) ? 'is-invalid' : null; ?>" type="file" id="<?= $ps['persyaratan_id']; ?>" name="<?= $ps['persyaratan_id']; ?>">
