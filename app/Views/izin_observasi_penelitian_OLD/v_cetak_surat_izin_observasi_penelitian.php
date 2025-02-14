@@ -125,7 +125,7 @@ hr{
 								<font size="4">DAN TEKNOLOGI</font><br>
 								<font size="4">UNIVERSITAS NEGERI PADANG</font><br>
 								<font size="4">FAKULTAS ILMU PENDIDIKAN</font><br>
-								<font size="4"><b><?= strtoupper($satu_observasi['judul_kop_surat']); ?></b></font><br>
+								<font size="4"><b>DEPARTEMEN <?= strtoupper($satu_observasi['nama_departemen']); ?></b></font><br>
 								<font size="2">Jl. Prof.Dr. Hamka Kampus UNP Air Tawar Padang 25131, Telp.7058693</font><br>
 								<font size="2">Website: <?= $satu_observasi['website_departemen']; ?> email: <?= $satu_observasi['email_departemen']; ?></font>
 							</center>
@@ -209,17 +209,11 @@ hr{
 					<td>
 					</td>
 				</tr>
-				<!-- < ?php 
-					echo '<pre>';
-					print_r($satu_observasi);
-					echo '</pre>';
-					die;
-					?> -->
 				<tr>
 					<td width='300'>
 					</td>
 					<td>
-						<?= $satu_observasi['jabatan_penanda_tangan']; ?>
+						Kepala Departemen
 					</td>
 				</tr>
 				<tr>
@@ -232,10 +226,11 @@ hr{
 				<tr>
 					<td width='300'>
 					</td>
-				
 					<td>
-						<?= $satu_observasi['nama_penanda_tangan']; ?></br>
-						<?= $satu_observasi['nip_penanda_tangan']; ?></br>
+						<?= $satu_observasi['nama_kadep_departemen']; ?></br>
+						NIP. <?= $satu_observasi['nip_kadep_departemen']; ?></br>
+						<font size='1px'>testing</font></br>
+						<font size='1px'>testing</font></br>
 						</td>
 				</tr>
 			</table>

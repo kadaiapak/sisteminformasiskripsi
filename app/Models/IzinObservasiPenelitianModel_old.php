@@ -48,17 +48,6 @@ class IzinObservasiPenelitianModel extends Model
         return $query->getRowArray();
     }
 
-    public function getDetailForCetak($UUIDObservasi = null)
-    {
-        $builder = $this->db->table('surat_izin_observasi_penelitian siop');
-        $builder->select('siop.nama_pengajuan, siop.nim_pengajuan, siop.departemen_pengajuan, siop.judul, siop.tujuan_surat, siop.alamat_surat, siop.no_surat, siop.created_at, siop.updated_at, siop.qr_code,
-        departemen.departemen_nama as nama_departemen, departemen.departemen_email as email_departemen, departemen.departemen_website as website_departemen, departemen.departemen_kd_surat as kode_surat, departemen.judul_kop_surat as judul_kop_surat, departemen.jabatan_penanda_tangan as jabatan_penanda_tangan, departemen.nama_penanda_tangan as nama_penanda_tangan, departemen.nip_penanda_tangan as nip_penanda_tangan');
-        $builder->join('departemen', 'siop.departemen_pengajuan = departemen.departemen_id');
-        $builder->where('uuid', $UUIDObservasi);
-        $query = $builder->get();
-        return $query->getRowArray();
-    }
-
     public function getDetailForEdit($id = null, $nim = null)
     {
         $builder = $this->db->table('surat_izin_observasi_penelitian');

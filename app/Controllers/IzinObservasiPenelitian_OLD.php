@@ -458,7 +458,7 @@ class IzinObservasiPenelitian extends BaseController
     public function print_surat($UUIDObservasi)
     {
         if($UUIDObservasi != null) {
-            $satu_observasi = $this->izinObservasiPenelitianModel->getDetailForCetak($UUIDObservasi);
+            $satu_observasi = $this->izinObservasiPenelitianModel->getDetail($UUIDObservasi);
             if (!$satu_observasi) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             } else {

@@ -80,6 +80,10 @@
                                     <td><?= $detail_profil['prodi_portal']; ?></td>
                                 </tr>
                                 <tr>
+                                    <td class="font-weight-bold">Departemen yang diinput di e-office</td>
+                                    <td><?= $detail_profil['nama_departemen_input']; ?></td>
+                                </tr>
+                                <tr>
                                     <td class="font-weight-bold">Fakultas</td>
                                     <td><?= $detail_profil['nama_fakultas_portal']; ?></td>
                                 </tr>

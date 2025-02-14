@@ -79,7 +79,7 @@ class ProfilModel extends Model
         $builder = $this->db->table('profil');
         $builder->select('profil.*,departemen.departemen_nama as nama_departemen');
         $builder->where('prf_nim_portal', $nim);
-        $builder->join('departemen', 'departemen.departemen_kd = profil.idpdpt','left');
+        $builder->join('departemen', 'departemen.departemen_kd = profil.departemen_input');
         $query = $builder->get();
         return $query->getRowArray();
     }
