@@ -109,7 +109,6 @@
                                                 data-toggle="modal" 
                                                 data-target=".bs-example-modal-lg_<?= $a['anggota_observasi_matakuliah_id']; ?>"><i class="fa fa-pencil-square-o" style="margin-right: 5px;"></i>Edit
                                             </button>
-                                            <!--  -->
                                             <form class="d-inline" method="post" action="<?= base_url('/izin-observasi-matakuliah/hapus-anggota/'.$a['anggota_observasi_matakuliah_id']); ?>">
                                                 <?= csrf_field(); ?>
                                                 <input type="hidden" name="_method" value="DELETE">
@@ -117,7 +116,6 @@
                                                 <input type="hidden" name="UUIDObservasi" value="<?= $satu_observasi['uuid']; ?>">
                                                 <button type="submin" class="btn btn-danger btn-md" onclick="return confirm('apakah yakin dihapus?')"><i class="fa fa-trash-o" style="margin-right: 5px;"></i>Hapus</button>
                                             </form>
-                                            <!--  -->
                                         </td>
                                     </tr>
                                     <?php $no++ ?>

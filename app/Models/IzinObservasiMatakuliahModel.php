@@ -80,6 +80,19 @@ class IzinObservasiMatakuliahModel extends Model
         return $query->getRowArray();
     }
 
+    public function getDetailForCetak($UUIDObservasi = null)
+    {
+        $builder = $this->db->table('surat_izin_observasi_matakuliah siom');
+        $builder->select('siom.surat_izin_observasi_matakuliah_id,siom.nim_pengajuan, siom.no_surat, siom.nama_pengajuan, siom.tujuan_surat, siom.alamat_tempat_observasi, siom.tujuan_observasi, siom.matakuliah, siom.tanggal_mulai, siom.tanggal_selesai, siom.created_at, siom.updated_at, siom.qr_code,
+        departemen.departemen_nama as nama_departemen, departemen.departemen_email as email_departemen, departemen.departemen_website as website_departemen, departemen.departemen_kd_surat as kd_surat, departemen.judul_kop_surat as judul_kop_surat, departemen.jabatan_penanda_tangan as jabatan_penanda_tangan, departemen.nama_penanda_tangan as nama_penanda_tangan, departemen.nip_penanda_tangan as nip_penanda_tangan,
+        aom.nim_anggota as nim_anggota, aom.nama_anggota as nama_anggota, aom.jenis_kelamin as jenis_kelamin');
+        $builder->join('departemen', 'siom.departemen_pengajuan = departemen.departemen_id');
+        $builder->join('anggota_observasi_matakuliah aom', 'siom.surat_izin_observasi_matakuliah_id = aom.id_izin_observasi', 'left');
+        $builder->where('uuid', $UUIDObservasi);
+        $query = $builder->get();
+        return $query->getRowArray();
+    }
+
     // digunakan untuk mengecek apakah ada izin observasi dengan ID dan UUID berikut
     // conroller IzinObservasiMatakuliah method tambah_anggota
     public function getDetailByUUIDandId($UUIDObservasi = null, $idSuratIzin = null)

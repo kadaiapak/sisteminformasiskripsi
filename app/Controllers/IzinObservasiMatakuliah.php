@@ -70,7 +70,6 @@ class IzinObservasiMatakuliah extends BaseController
         return view('izin_observasi_matakuliah/v_semua_izin_observasi_matakuliah_selesai', $data);
     }
 
-
     // menampilkan form tambah pengajuan surat izin observasi matakuliah
     // akses oleh mahasiswa
     // GET /izin-observasi-matakuliah/tambah
@@ -809,10 +808,8 @@ class IzinObservasiMatakuliah extends BaseController
             ->setBackgroundColor(new Color(255, 255, 255));
 
             // Create generic logo
-            $logo = Logo::create('logo_untuk_barcode.png')
-            ->setResizeToWidth(50)
-            ->setPunchoutBackground(true)
-            ;
+            $logo = Logo::create('logo_unp_barcode.png')
+            ->setResizeToWidth(50);
 
             // Create generic label
             $label = Label::create('')
@@ -850,7 +847,7 @@ class IzinObservasiMatakuliah extends BaseController
      public function print_surat($UUIDObservasi)
     {
         if($UUIDObservasi != null) {
-            $satu_observasi = $this->izinObservasiMatakuliahModel->getDetail($UUIDObservasi);
+            $satu_observasi = $this->izinObservasiMatakuliahModel->getDetailForCetak($UUIDObservasi);
             if (!$satu_observasi) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             } else {

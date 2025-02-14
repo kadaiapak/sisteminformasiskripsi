@@ -120,11 +120,11 @@ hr{
 	<div class='page'>
 		<table size='100%' align='center'>
 			<tr>
-				<td><img src="<?= base_url('/unp.png'); ?>" width="90" height="90" alt=""></td>
+				<td><img src="<?= base_url('/tutwuri.png'); ?>" width="120" height="120" alt=""></td>
 				<td width="500">
 					<center>
-						<font size="4">KEMENTERIAN PENDIDIKAN, KEBUDAYAAN,</font><br>
-						<font size="4">RISET DAN TEKNOLOGI</font><br>
+						<font size="4">KEMENTERIAN PENDIDIKAN TINGGI, SAINS</font><br>
+						<font size="4">DAN TEKNOLOGI</font><br>
 						<font size="4">UNIVERSITAS NEGERI PADANG</font><br>
 						<font size="4">FAKULTAS ILMU PENDIDIKAN</font><br>
 						<font size="4"><b>DEPARTEMEN <?= strtoupper($satu_observasi['nama_departemen']); ?></b></font><br>
@@ -249,8 +249,8 @@ hr{
 				<td><img src="<?= base_url('/unp.png'); ?>" width="90" height="90" alt=""></td>
 				<td width="500">
 					<center>
-						<font size="4">KEMENTERIAN PENDIDIKAN, KEBUDAYAAN,</font><br>
-						<font size="4">RISET DAN TEKNOLOGI</font><br>
+						<font size="4">KEMENTERIAN PENDIDIKAN TINGGI, SAINS</font><br>
+						<font size="4">DAN TEKNOLOGI</font><br>
 						<font size="4">UNIVERSITAS NEGERI PADANG</font><br>
 						<font size="4">FAKULTAS ILMU PENDIDIKAN</font><br>
 						<font size="4"><b>DEPARTEMEN <?= strtoupper($satu_observasi['nama_departemen']); ?></b></font><br>
